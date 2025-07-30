@@ -157,6 +157,9 @@
     <Filter Include="Source Files\Objects\Networks\Security">
       <UniqueIdentifier>{20593cf2-8857-42c6-9b59-754457c1142c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Entrypoint">
+      <UniqueIdentifier>{6f714367-74ce-4831-b75c-9a2c943ffe82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interface\remoteinterface\academicscreen_interface.h">
@@ -1380,9 +1383,6 @@
     <ClCompile Include="version.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="uplink.cpp">
-      <Filter>Source Files\Objects\Uplink</Filter>
-    </ClCompile>
     <ClCompile Include="world\computer\gatewaydef.cpp">
       <Filter>Source Files\Objects\Networks</Filter>
     </ClCompile>
@@ -1412,6 +1412,9 @@
     </ClCompile>
     <ClCompile Include="world\vlocation.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="uplink.cpp">
+      <Filter>Source Files\Core\Entrypoint</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
