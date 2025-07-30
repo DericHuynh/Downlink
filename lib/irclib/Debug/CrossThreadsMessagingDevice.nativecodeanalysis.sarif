@@ -1,0 +1,43 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/crossthreadsmessagingdevice.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "eaaa93227f2f9e126b6ef1215c02eb533e24c474791ebf354cabdf1e68cafc55"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/crossthreadsmessagingdevice.h"
+          },
+          "hashes": {
+            "sha-256": "e519eb57738835e81cbbaa2d4e81f3d5cad23304d40e1fdbc071d355ed002029"
+          }
+        }
+      ]
+    }
+  ]
+}

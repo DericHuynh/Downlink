@@ -1,0 +1,922 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C28159",
+          "message": {
+            "text": "Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem"
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+                },
+                "region": {
+                  "startLine": 485,
+                  "startColumn": 21,
+                  "endLine": 485,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "_GciGetAccurateTime",
+                  "decoratedName": "?_GciGetAccurateTime@@YAIXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C28159",
+          "message": {
+            "text": "Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem"
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+                },
+                "region": {
+                  "startLine": 496,
+                  "startColumn": 10,
+                  "endLine": 496,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "_GciGetAccurateTime",
+                  "decoratedName": "?_GciGetAccurateTime@@YAIXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "Buffer overrun while writing to 'temparray':  the writable size is 'arraysize*4' bytes, but '8' bytes might be written."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                },
+                "region": {
+                  "startLine": 95,
+                  "startColumn": 4,
+                  "endLine": 95,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DArray<GciScreenMode *>::SetSize",
+                  "decoratedName": "?SetSize@?$DArray@PAUGciScreenMode@@@@QAEXH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 72,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 83,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 85,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 87,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 88,
+                            "startColumn": 6
+                          }
+                        },
+                        "message": {
+                          "text": "'temparray' is an array of 1 elements (4 bytes)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 91,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume 'a<oldarraysize')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 95,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 96,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 34
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "'a' may be NULL (Continue this loop)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 95,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Invalid write to 'temparray[1]', (writable range is 0 to 0)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "Buffer overrun while writing to 'tempshadow':  the writable size is 'arraysize*1' bytes, but '2' bytes might be written."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                },
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 4,
+                  "endLine": 96,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DArray<GciScreenMode *>::SetSize",
+                  "decoratedName": "?SetSize@?$DArray@PAUGciScreenMode@@@@QAEXH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 72,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 83,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 85,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 87,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 88,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "'tempshadow' is an array of 1 elements (1 bytes)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 91,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume 'a<oldarraysize')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 95,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 96,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 34
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 93,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "'a' may be NULL (Continue this loop)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 95,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+                          },
+                          "region": {
+                            "startLine": 96,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "Invalid write to 'tempshadow[1]', (writable range is 0 to 0)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_sdl.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "e0a7bdd08b43fcf106ddb5ad252ec06d9df66cf14faa56e6f9425ff015799824"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "29f9c4a51c7eaf072a220e7a6f930647382c49f694e8233af378001f4214f196"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl.h"
+          },
+          "hashes": {
+            "sha-256": "a10517cba09ea91b5b2ba89fa35e68943d9917d2fdade598d1493e7b92afe5d4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_main.h"
+          },
+          "hashes": {
+            "sha-256": "26efa1ab34df19d154f21170830e7a6736fb99a716957c8e6f9ef043fb9a79a7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_stdinc.h"
+          },
+          "hashes": {
+            "sha-256": "1476863b8a8b9917fd67515a3bcb9f9d1033856b9a3a7658778730d62c230c49"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_config.h"
+          },
+          "hashes": {
+            "sha-256": "7600e01a9d6d602d2dab2c6f9f25603e5b87e74d821b1e1a360b4fcf77433737"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_platform.h"
+          },
+          "hashes": {
+            "sha-256": "e81b3349130a60c8a76893009840cfebf8768ad5d8767127595206490af7ac67"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_config_win32.h"
+          },
+          "hashes": {
+            "sha-256": "eccdae375980847514830799f667e89a83ec191018c030cd08e80b5096245b53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/begin_code.h"
+          },
+          "hashes": {
+            "sha-256": "0b67e4842c72e8b52909e259a453498c0d32fdf1a34cadf3b94af6bf1fdae107"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/close_code.h"
+          },
+          "hashes": {
+            "sha-256": "e37d567f7894cdbdbab6100ae68ac71bca8d036b192108d2c4d68583b25fcf0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_audio.h"
+          },
+          "hashes": {
+            "sha-256": "1218b1fa5f6fe2024cb3538914c24c433b17012bad772de065fabe9ed9f8b463"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_error.h"
+          },
+          "hashes": {
+            "sha-256": "9357e7f724f541aa4ccbef9b2b936894f173224f151bdd565107279c5be25da6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_endian.h"
+          },
+          "hashes": {
+            "sha-256": "705890bec44e4162fe9ceeff4cd842bd0f51e9fac2808be01500cc9a802ea588"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_mutex.h"
+          },
+          "hashes": {
+            "sha-256": "676857b595f29e44b9c999bbe2ea16afd377a3b1d95a19f233232b45647bc10f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_thread.h"
+          },
+          "hashes": {
+            "sha-256": "bf356361bc41ff27349ab76d9acd4c93f4f8d48a619ee02c4b4b8d2e6d5a8264"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_rwops.h"
+          },
+          "hashes": {
+            "sha-256": "504acfebdd40e52399abaec6d7996a43a6ee460d259bb59d2972d0c744c2a0b7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_cdrom.h"
+          },
+          "hashes": {
+            "sha-256": "c43ccde5262b43449db607837236a45af230c21860297d1d5c379e4aefb34550"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_cpuinfo.h"
+          },
+          "hashes": {
+            "sha-256": "4ec3cfd8a61e0c43197c23308820330a2458e9785e4c176f3c896eb98b04ce10"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_events.h"
+          },
+          "hashes": {
+            "sha-256": "88d4ee19a9f4832bdc9ded92f8b3a0709bd75503143b6665a6c2cf14b64960ba"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_active.h"
+          },
+          "hashes": {
+            "sha-256": "c0cec76bf38147be4b730abb934bc9beb4f52c176f9b5f32d66de4e4e92025c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_keyboard.h"
+          },
+          "hashes": {
+            "sha-256": "fe734b7eb6c9dc6881751d6c4a6d7a6a3242a836aaa16855b51a5c4c8d1eea92"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_keysym.h"
+          },
+          "hashes": {
+            "sha-256": "ca5621b6edfcdc9a37b536f1174e293b84d35d2bd6bbb53a4276c1c904caaef2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_mouse.h"
+          },
+          "hashes": {
+            "sha-256": "7cce55cb4289e4d643a4002f6f7715d938bd639f55dc1125fbca03f91098d744"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_video.h"
+          },
+          "hashes": {
+            "sha-256": "4b7f12d0dd0117a7ddd91974fbeb34437e84ab2ab59b8f54830e3abac73faecb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_joystick.h"
+          },
+          "hashes": {
+            "sha-256": "de5111e9d53e273201174fedd7eeeaf867b4f3fa723079a7fd7a7373bf1e86fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_quit.h"
+          },
+          "hashes": {
+            "sha-256": "5ee2d105ec97cbea26f39810b280817eab2ddf46f7b0ba8b9623afdca088198d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_loadso.h"
+          },
+          "hashes": {
+            "sha-256": "9c43701cf5d28bd9dcf590ce23f2f32c76e1b32ef8d32161290cc95f3eee76dc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_timer.h"
+          },
+          "hashes": {
+            "sha-256": "e449d8c001f1632050d36c43527e86d4a34e525c26b92683bf6239e21adda33e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/contrib/sdl-1.2.11/include/sdl/sdl_version.h"
+          },
+          "hashes": {
+            "sha-256": "5aecda2b5644cca3196f9b5d7198dcf69a651fc888eae4e2d48cb82df3948f0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci.h"
+          },
+          "hashes": {
+            "sha-256": "9bb0693da79027747e08f26ecdfae7ffcf9a5ed6ddb740e57961d980ca13d002"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/tosser.h"
+          },
+          "hashes": {
+            "sha-256": "9ac9d48424fec11dd166de97bc352ce6c15e45542a7611149a7b458ead40f7a7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/llist.cpp"
+          },
+          "hashes": {
+            "sha-256": "a9f20df76a759bf94bf469939f2fa2ae58e7f752d7acd1779e175ab7e767b2e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/btree.cpp"
+          },
+          "hashes": {
+            "sha-256": "fea9baae53aac2549de4303c091c8f4203da31d9dcab774526de8307721d6cfb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/nommgr.h"
+          },
+          "hashes": {
+            "sha-256": "066b4f6461b8ab29e6620a313d638ed750de5040daba3641542f280162181404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/image.h"
+          },
+          "hashes": {
+            "sha-256": "781233edcee03ed0adc294036aad6aadcf7ca04da42a2c488018c6fbbbde8cf0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci_internal.h"
+          },
+          "hashes": {
+            "sha-256": "c8f6e0914e31249ec3841fbdf91b0917a6f2715e94ba547322f150eb28b44b3b"
+          }
+        }
+      ]
+    }
+  ]
+}

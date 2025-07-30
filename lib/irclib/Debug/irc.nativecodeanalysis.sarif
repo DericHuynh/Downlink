@@ -1,0 +1,289 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6258",
+          "message": {
+            "text": "Using TerminateThread does not allow proper thread clean up."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                },
+                "region": {
+                  "startLine": 248,
+                  "startColumn": 4,
+                  "endLine": 248,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "irc::CIrcSession::Disconnect",
+                  "decoratedName": "?Disconnect@CIrcSession@irc@@QAEXPBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6258",
+          "message": {
+            "text": "Using TerminateThread does not allow proper thread clean up."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                },
+                "region": {
+                  "startLine": 448,
+                  "startColumn": 4,
+                  "endLine": 448,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "irc::CIrcIdentServer::Stop",
+                  "decoratedName": "?Stop@CIrcIdentServer@irc@@QAEXXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "String 'szHostName' might not be zero-terminated."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                },
+                "region": {
+                  "startLine": 606,
+                  "startColumn": 3,
+                  "endLine": 606,
+                  "endColumn": 34
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "irc::CIrcDefaultMonitor::OnIrc_YOURHOST",
+                  "decoratedName": "?OnIrc_YOURHOST@CIrcDefaultMonitor@irc@@IAE_NPBVCIrcMessage@2@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 603,
+                            "startColumn": 21
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 604,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "This expression may not zero-terminate 'szHostName'"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 604,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 605,
+                            "startColumn": 76
+                          }
+                        },
+                        "message": {
+                          "text": "'szHostName' is an Output from 'sscanf' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stdio.h:2240)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 605,
+                            "startColumn": 76
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '<branch condition>')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 606,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "'szHostName' is an Input to 'std::basic_string<char,std::char_traits<char>,std::allocator<char> >::=' (declared at c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.44.35207\\include\\xstring:1445)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+                          },
+                          "region": {
+                            "startLine": 606,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "'szHostName' is required to be zero-terminated by a SAL annotation on '='"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "57d88a6faa91d94504719e4eb61339a13effb73e9828d6a0c1c6d19f147a25b4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/irc.h"
+          },
+          "hashes": {
+            "sha-256": "c4e2ef5ab166a022043ac77f2659e355c29145cc1928ff86ebd8d576aba2a898"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/socket.h"
+          },
+          "hashes": {
+            "sha-256": "92d505d807b656220451f96ae261a2d13b18655ac9ba958ccca7bd16f33770ff"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/irclib/crossthreadsmessagingdevice.h"
+          },
+          "hashes": {
+            "sha-256": "e519eb57738835e81cbbaa2d4e81f3d5cad23304d40e1fdbc071d355ed002029"
+          }
+        }
+      ]
+    }
+  ]
+}

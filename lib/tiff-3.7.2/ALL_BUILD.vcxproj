@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C522667E-6926-3B3F-A6FF-72FD3B1E5640}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 -BD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 --check-stamp-file D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.15\Modules\FindGLUT.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindJPEG.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindLibLZMA.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestEndianess.c.in;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCXXCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeRCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeSystem.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int16.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int32.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int8.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff-4.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 -BD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 --check-stamp-file D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.15\Modules\FindGLUT.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindJPEG.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindLibLZMA.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestEndianess.c.in;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCXXCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeRCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeSystem.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int16.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int32.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int8.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff-4.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 -BD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 --check-stamp-file D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.15\Modules\FindGLUT.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindJPEG.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindLibLZMA.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestEndianess.c.in;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCXXCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeRCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeSystem.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int16.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int32.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int8.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff-4.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 -BD:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2 --check-stamp-file D:/Projekte/C++/uplink-source-code/contrib/tiff-3.7.2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.15\Modules\FindGLUT.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindJPEG.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindLibLZMA.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\TestEndianess.c.in;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeCXXCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeRCCompiler.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\3.15.4\CMakeSystem.cmake;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_SHORT.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int16.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int32.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\CheckTypeSize\int8.c;D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff-4.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\ZERO_CHECK.vcxproj">
+      <Project>{7D67D2B9-00D0-32B4-85A4-83090F799572}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\addtiffo\addtiffo.vcxproj">
+      <Project>{6C721215-CD84-3E13-B146-F1E4335DA78D}</Project>
+      <Name>addtiffo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\ascii_tag.vcxproj">
+      <Project>{E757E948-817F-30EC-A312-518739C5211D}</Project>
+      <Name>ascii_tag</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\custom_dir.vcxproj">
+      <Project>{847896DD-5573-384F-AEEE-75FE2FEC16A6}</Project>
+      <Name>custom_dir</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\fax2ps.vcxproj">
+      <Project>{88605838-1846-3A05-A3D9-F43530663742}</Project>
+      <Name>fax2ps</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\fax2tiff.vcxproj">
+      <Project>{40E73568-BEAD-335C-BC4F-4807CBE56FF7}</Project>
+      <Name>fax2tiff</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\iptcutil\iptcutil.vcxproj">
+      <Project>{203E0AEB-703C-39B3-9725-A85575AF9ADE}</Project>
+      <Name>iptcutil</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\long_tag.vcxproj">
+      <Project>{A0876E83-0D2C-3151-B978-898A1C182AF8}</Project>
+      <Name>long_tag</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\pal2rgb.vcxproj">
+      <Project>{313ED39D-3728-3E57-9802-6644DF77C728}</Project>
+      <Name>pal2rgb</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\port\port.vcxproj">
+      <Project>{861173F8-C34F-3FD0-8C35-179C4DD6D58E}</Project>
+      <Name>port</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\ppm2tiff.vcxproj">
+      <Project>{FA632B86-7F82-3E0B-A590-E962E7C4C339}</Project>
+      <Name>ppm2tiff</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\raw2tiff.vcxproj">
+      <Project>{2416FA6C-EF49-3C9B-8F78-32B92E99E921}</Project>
+      <Name>raw2tiff</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\rewrite.vcxproj">
+      <Project>{71F7D6A4-18B0-30D4-9F59-D941877A64E6}</Project>
+      <Name>rewrite</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\rgb2ycbcr.vcxproj">
+      <Project>{5E39A5D8-0FA9-3575-81FC-C075524C79EE}</Project>
+      <Name>rgb2ycbcr</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\short_tag.vcxproj">
+      <Project>{B71625E6-FB52-33F7-8065-D400ECF1E246}</Project>
+      <Name>short_tag</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\strip_rw.vcxproj">
+      <Project>{86B24D85-A4FD-385F-B68E-296097E86D0A}</Project>
+      <Name>strip_rw</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\thumbnail.vcxproj">
+      <Project>{ED3DE6A1-0579-3DEE-9043-9065E9CF66A7}</Project>
+      <Name>thumbnail</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff\tiff.vcxproj">
+      <Project>{24372E6E-55E7-36A5-B948-ECFF4023D116}</Project>
+      <Name>tiff</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\dbs\tiff-bi.vcxproj">
+      <Project>{7E240944-B520-3BD5-9C72-69A770B36A82}</Project>
+      <Name>tiff-bi</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\dbs\tiff-grayscale.vcxproj">
+      <Project>{00BEE7E1-6FEC-3461-85FD-89E18A65808C}</Project>
+      <Name>tiff-grayscale</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\dbs\tiff-palette.vcxproj">
+      <Project>{4AE0A087-6DEB-32FB-AB80-3BD856B4CE44}</Project>
+      <Name>tiff-palette</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\contrib\dbs\tiff-rgb.vcxproj">
+      <Project>{658B0BB1-30FF-30D9-96AB-1760266930DA}</Project>
+      <Name>tiff-rgb</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiff2bw.vcxproj">
+      <Project>{D7FEEC76-CBD5-3985-AF6A-D02FCE8A04E7}</Project>
+      <Name>tiff2bw</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiff2pdf.vcxproj">
+      <Project>{6CD777A3-3DEF-37B8-8F93-918B8D72FB36}</Project>
+      <Name>tiff2pdf</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiff2ps.vcxproj">
+      <Project>{59AD873D-883E-3571-9DD9-A105CA56764E}</Project>
+      <Name>tiff2ps</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiff2rgba.vcxproj">
+      <Project>{AF0FAF6B-A8AF-3FCB-B14E-FF0C4C4E0012}</Project>
+      <Name>tiff2rgba</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffcmp.vcxproj">
+      <Project>{66A81AD9-5686-3BD5-ADA6-3FAA5AA2777C}</Project>
+      <Name>tiffcmp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffcp.vcxproj">
+      <Project>{0248FB86-2271-314A-811C-1B4392FA67FC}</Project>
+      <Name>tiffcp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffcrop.vcxproj">
+      <Project>{DC117879-2A4C-3FBF-8751-F076AD97CDD0}</Project>
+      <Name>tiffcrop</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffdither.vcxproj">
+      <Project>{AE00B9ED-7E2D-3DC6-AF7A-DDFB14F67430}</Project>
+      <Name>tiffdither</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffdump.vcxproj">
+      <Project>{1677F876-0A2B-3269-BF24-D202E93B669D}</Project>
+      <Name>tiffdump</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffinfo.vcxproj">
+      <Project>{CC61CC18-CD3E-3706-868A-C241598FEC55}</Project>
+      <Name>tiffinfo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffmedian.vcxproj">
+      <Project>{2B715ADB-77E7-339F-ABDD-B539A966D5B9}</Project>
+      <Name>tiffmedian</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffset.vcxproj">
+      <Project>{658C9856-1EA4-3D32-BE18-F458918B6DE2}</Project>
+      <Name>tiffset</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\tools\tiffsplit.vcxproj">
+      <Project>{07FFE2A3-FD63-3975-BD80-3268E5722A58}</Project>
+      <Name>tiffsplit</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\libtiff\tiffxx.vcxproj">
+      <Project>{7096949D-458E-3671-AD90-F964673A5DD4}</Project>
+      <Name>tiffxx</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

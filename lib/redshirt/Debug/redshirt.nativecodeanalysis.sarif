@@ -1,0 +1,561 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '16400' bytes of stack.  Consider moving some data to heap."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 6
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "filterStream",
+                  "decoratedName": "?filterStream@@YA_NPAU_iobuf@@0P6AXPAEI@Z@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '16404' bytes of stack.  Consider moving some data to heap."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RsFileCheckSum",
+                  "decoratedName": "?RsFileCheckSum@@YAIPAU_iobuf@@PAEI@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "String 'newmarker' might not be zero-terminated."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 8,
+                  "endLine": 135,
+                  "endColumn": 41
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "readRsEncryptedHeader",
+                  "decoratedName": "?readRsEncryptedHeader@@YA_NPAU_iobuf@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 131,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 133,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "This expression may not zero-terminate 'newmarker'"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 134,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is an Output from 'fread' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stdio.h:239)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 134,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '<branch condition>')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 135,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is an Input to 'strcmp' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\string.h:100)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 135,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is required to be zero-terminated by a SAL annotation on 'strcmp'"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "String 'newmarker' might not be zero-terminated."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 197,
+                  "startColumn": 8,
+                  "endLine": 197,
+                  "endColumn": 41
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RsFileEncrypted",
+                  "decoratedName": "?RsFileEncrypted@@YA_NPAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 190,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 191,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 193,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 195,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "This expression may not zero-terminate 'newmarker'"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 196,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is an Output from 'fread' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stdio.h:239)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 196,
+                            "startColumn": 50
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '<branch condition>')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 197,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is an Input to 'strcmp' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\string.h:100)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                          },
+                          "region": {
+                            "startLine": 197,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "'newmarker' is required to be zero-terminated by a SAL annotation on 'strcmp'"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'rename'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 311,
+                  "startColumn": 3,
+                  "endLine": 311,
+                  "endColumn": 24
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "filterFileInPlace",
+                  "decoratedName": "?filterFileInPlace@@YA_NPAD0P6A_NPAU_iobuf@@@Z22P6AXPAEI@Z@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: '_rmdir'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+                },
+                "region": {
+                  "startLine": 578,
+                  "startColumn": 5,
+                  "endLine": 578,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RsDeleteDirectory",
+                  "decoratedName": "?RsDeleteDirectory@@YAXPBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ffa60a4fdbfd85cffd13e578874c08dfd98194ddcf8518a2fd0baec338e69d9b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/bungle/bungle.h"
+          },
+          "hashes": {
+            "sha-256": "7d15716487292af3fb83665f15a7497e618e5c219ffd77a74832745ee59e9eb6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/tosser.h"
+          },
+          "hashes": {
+            "sha-256": "9ac9d48424fec11dd166de97bc352ce6c15e45542a7611149a7b458ead40f7a7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/llist.cpp"
+          },
+          "hashes": {
+            "sha-256": "a9f20df76a759bf94bf469939f2fa2ae58e7f752d7acd1779e175ab7e767b2e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+          },
+          "hashes": {
+            "sha-256": "29f9c4a51c7eaf072a220e7a6f930647382c49f694e8233af378001f4214f196"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/btree.cpp"
+          },
+          "hashes": {
+            "sha-256": "fea9baae53aac2549de4303c091c8f4203da31d9dcab774526de8307721d6cfb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/nommgr.h"
+          },
+          "hashes": {
+            "sha-256": "066b4f6461b8ab29e6620a313d638ed750de5040daba3641542f280162181404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.h"
+          },
+          "hashes": {
+            "sha-256": "89a7794922f99027f7fee550e6187fd65085ffb1f2e129c1b2dfd16138c58675"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/hash.h"
+          },
+          "hashes": {
+            "sha-256": "f1f843c58d5c4f49897cd312ce2807952cf7e93853f25d729eb69732b3a58fc6"
+          }
+        }
+      ]
+    }
+  ]
+}

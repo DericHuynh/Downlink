@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\CMakeFiles\ec7961f62a1b18015184cb84649b3a2b\htmldoc.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\html\man\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\html\man\CMakeFiles\htmldoc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EB8296C5-ECCF-34C3-9282-449E3D8ED252}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

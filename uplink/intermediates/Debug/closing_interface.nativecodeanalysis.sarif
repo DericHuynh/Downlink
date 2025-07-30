@@ -1,0 +1,211 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/mainmenu/closing_interface.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "7dbb365909c4c5facc701036eb4be3c6de76e7e141ff4a1f22efa0867ff0a50c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/eclipse.h"
+          },
+          "hashes": {
+            "sha-256": "73b103f611f98d1797e889a0a2d4eddd15c2c1e0ef23e11985d8bd017d64fe15"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/button.h"
+          },
+          "hashes": {
+            "sha-256": "cd834f7b1c11e23e33e075ab634d5d6fbba056253266cd8da51136fbfa4fcdc7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci.h"
+          },
+          "hashes": {
+            "sha-256": "9bb0693da79027747e08f26ecdfae7ffcf9a5ed6ddb740e57961d980ca13d002"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/tosser.h"
+          },
+          "hashes": {
+            "sha-256": "9ac9d48424fec11dd166de97bc352ce6c15e45542a7611149a7b458ead40f7a7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/llist.cpp"
+          },
+          "hashes": {
+            "sha-256": "a9f20df76a759bf94bf469939f2fa2ae58e7f752d7acd1779e175ab7e767b2e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+          },
+          "hashes": {
+            "sha-256": "29f9c4a51c7eaf072a220e7a6f930647382c49f694e8233af378001f4214f196"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/btree.cpp"
+          },
+          "hashes": {
+            "sha-256": "fea9baae53aac2549de4303c091c8f4203da31d9dcab774526de8307721d6cfb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/nommgr.h"
+          },
+          "hashes": {
+            "sha-256": "066b4f6461b8ab29e6620a313d638ed750de5040daba3641542f280162181404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/image.h"
+          },
+          "hashes": {
+            "sha-256": "781233edcee03ed0adc294036aad6aadcf7ca04da42a2c488018c6fbbbde8cf0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/animation.h"
+          },
+          "hashes": {
+            "sha-256": "568c2fb2b7129698e20a81753f1cab7d218e107ce14a3eb17a3352fdcb6fa1bb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/soundgarden/soundgarden.h"
+          },
+          "hashes": {
+            "sha-256": "7f33ae68810a30797e9a4a7bc5e65428a511ecfc681a0c6477cc416ba61bb530"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.h"
+          },
+          "hashes": {
+            "sha-256": "89a7794922f99027f7fee550e6187fd65085ffb1f2e129c1b2dfd16138c58675"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/app.h"
+          },
+          "hashes": {
+            "sha-256": "91663f0e4791e87911ab63e001a9a867197b605484325b74a0741b0394415692"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/uplinkobject.h"
+          },
+          "hashes": {
+            "sha-256": "b1e06e79dc4801e166d8e669c63475110977bac83c2654c707d77fedbd9aced9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/globals.h"
+          },
+          "hashes": {
+            "sha-256": "5734780065c8dbe13006a2dec117ae8578edb831c428d331f8601dcd5d0c05ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/globals_defines.h"
+          },
+          "hashes": {
+            "sha-256": "8eef951a55424c55fb784add644c8b4148f690be6a5bcf22dd2889384704af5b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/opengl_interface.h"
+          },
+          "hashes": {
+            "sha-256": "7a6129f46fc9784ed6dc9d308d165830a81315ff7d9d9089ea3519daea747abb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/mainmenu/mainmenu.h"
+          },
+          "hashes": {
+            "sha-256": "fd0ad8c6f295685fc5db01954be8acdcbfb30a994d9d49ee84c49d728178961f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/mainmenu/closing_interface.h"
+          },
+          "hashes": {
+            "sha-256": "0e42ad678154bebdf3f6cf336ad3f4deae51165bdb5b80996621a18e5d8b6299"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/mainmenu/mainmenuscreen.h"
+          },
+          "hashes": {
+            "sha-256": "94656793ca84fa0e484de7928ec2bd414687576ad3c8ee067cd28c752dfe489d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/numbergenerator.h"
+          },
+          "hashes": {
+            "sha-256": "f3dc8f2842ee60c6687ed5df64c16809fff1a4bacc6aab8f961e2bfe629908c0"
+          }
+        }
+      ]
+    }
+  ]
+}

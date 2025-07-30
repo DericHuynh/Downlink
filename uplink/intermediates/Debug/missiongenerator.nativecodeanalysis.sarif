@@ -1,0 +1,1872 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'person'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 1626,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::Generate_ChangeData_SocialSecurity",
+                  "decoratedName": "?Generate_ChangeData_SocialSecurity@MissionGenerator@@SAPAVMission@@PAVCompany@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1516,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1518,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1519,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1521,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1522,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1528,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1532,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1533,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1535,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1536,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1538,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1541,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1542,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1544,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1545,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1546,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1551,
+                            "startColumn": 4
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1557,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1559,
+                            "startColumn": 10
+                          }
+                        },
+                        "message": {
+                          "text": "'person' is NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1561,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1562,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1563,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1564,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1565,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1568,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1575,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'missiontype==1' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1597,
+                            "startColumn": 24
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'missiontype==2' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1625,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '1')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1626,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '1')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1626,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "'person' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'person'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 1836,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::Generate_ChangeData_CriminalRecord",
+                  "decoratedName": "?Generate_ChangeData_CriminalRecord@MissionGenerator@@SAPAVMission@@PAVCompany@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1683,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1685,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1686,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1688,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1689,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1695,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1699,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1700,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1702,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1703,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1705,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1709,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1710,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1712,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1713,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1714,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1719,
+                            "startColumn": 4
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1725,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1727,
+                            "startColumn": 10
+                          }
+                        },
+                        "message": {
+                          "text": "'person' is NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1729,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1730,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1731,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1732,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1733,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1735,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1737,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1745,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'missiontype==1' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1772,
+                            "startColumn": 24
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'missiontype==2' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1802,
+                            "startColumn": 24
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'missiontype==3' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1835,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '1')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1836,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume '1')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 1836,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "'person' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 2940,
+                  "startColumn": 2,
+                  "endLine": 2940,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_StealAllFiles",
+                  "decoratedName": "?IsMissionComplete_StealAllFiles@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3008,
+                  "startColumn": 7,
+                  "endLine": 3008,
+                  "endColumn": 39
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_StealAllFiles",
+                  "decoratedName": "?IsMissionComplete_StealAllFiles@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3227,
+                  "startColumn": 2,
+                  "endLine": 3227,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_FindFinancial",
+                  "decoratedName": "?IsMissionComplete_FindFinancial@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3548,
+                  "startColumn": 2,
+                  "endLine": 3548,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_ChangeAccount",
+                  "decoratedName": "?IsMissionComplete_ChangeAccount@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3549,
+                  "startColumn": 2,
+                  "endLine": 3549,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_ChangeAccount",
+                  "decoratedName": "?IsMissionComplete_ChangeAccount@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3550,
+                  "startColumn": 2,
+                  "endLine": 3550,
+                  "endColumn": 40
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_ChangeAccount",
+                  "decoratedName": "?IsMissionComplete_ChangeAccount@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3551,
+                  "startColumn": 2,
+                  "endLine": 3551,
+                  "endColumn": 40
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_ChangeAccount",
+                  "decoratedName": "?IsMissionComplete_ChangeAccount@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3552,
+                  "startColumn": 2,
+                  "endLine": 3552,
+                  "endColumn": 40
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_ChangeAccount",
+                  "decoratedName": "?IsMissionComplete_ChangeAccount@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3712,
+                  "startColumn": 2,
+                  "endLine": 3712,
+                  "endColumn": 53
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_PayFine",
+                  "decoratedName": "?IsMissionComplete_PayFine@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3715,
+                  "startColumn": 2,
+                  "endLine": 3715,
+                  "endColumn": 40
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_PayFine",
+                  "decoratedName": "?IsMissionComplete_PayFine@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3735,
+                  "startColumn": 5,
+                  "endLine": 3735,
+                  "endColumn": 53
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_PayFine",
+                  "decoratedName": "?IsMissionComplete_PayFine@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+                },
+                "region": {
+                  "startLine": 3852,
+                  "startColumn": 9,
+                  "endLine": 3852,
+                  "endColumn": 57
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MissionGenerator::IsMissionComplete_Special",
+                  "decoratedName": "?IsMissionComplete_Special@MissionGenerator@@SA_NPAVMission@@PAVPerson@@PAVMessage@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "8fcddd8079c71328f253c0469ee0583f1ae1c9ada02fdcdd48809307e8a2660d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/soundgarden/soundgarden.h"
+          },
+          "hashes": {
+            "sha-256": "7f33ae68810a30797e9a4a7bc5e65428a511ecfc681a0c6477cc416ba61bb530"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/redshirt/redshirt.h"
+          },
+          "hashes": {
+            "sha-256": "89a7794922f99027f7fee550e6187fd65085ffb1f2e129c1b2dfd16138c58675"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/tosser.h"
+          },
+          "hashes": {
+            "sha-256": "9ac9d48424fec11dd166de97bc352ce6c15e45542a7611149a7b458ead40f7a7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/llist.cpp"
+          },
+          "hashes": {
+            "sha-256": "a9f20df76a759bf94bf469939f2fa2ae58e7f752d7acd1779e175ab7e767b2e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/darray.cpp"
+          },
+          "hashes": {
+            "sha-256": "29f9c4a51c7eaf072a220e7a6f930647382c49f694e8233af378001f4214f196"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tosser/btree.cpp"
+          },
+          "hashes": {
+            "sha-256": "fea9baae53aac2549de4303c091c8f4203da31d9dcab774526de8307721d6cfb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/nommgr.h"
+          },
+          "hashes": {
+            "sha-256": "066b4f6461b8ab29e6620a313d638ed750de5040daba3641542f280162181404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/app.h"
+          },
+          "hashes": {
+            "sha-256": "91663f0e4791e87911ab63e001a9a867197b605484325b74a0741b0394415692"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/uplinkobject.h"
+          },
+          "hashes": {
+            "sha-256": "b1e06e79dc4801e166d8e669c63475110977bac83c2654c707d77fedbd9aced9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/globals.h"
+          },
+          "hashes": {
+            "sha-256": "5734780065c8dbe13006a2dec117ae8578edb831c428d331f8601dcd5d0c05ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/globals_defines.h"
+          },
+          "hashes": {
+            "sha-256": "8eef951a55424c55fb784add644c8b4148f690be6a5bcf22dd2889384704af5b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/gucci.h"
+          },
+          "hashes": {
+            "sha-256": "9bb0693da79027747e08f26ecdfae7ffcf9a5ed6ddb740e57961d980ca13d002"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/gucci/image.h"
+          },
+          "hashes": {
+            "sha-256": "781233edcee03ed0adc294036aad6aadcf7ca04da42a2c488018c6fbbbde8cf0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/probability.h"
+          },
+          "hashes": {
+            "sha-256": "b94529f6a522cd9f1e87d2dec5fa176faf7d3cff1af0ae3f9b526177fe0403cb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/serialise.h"
+          },
+          "hashes": {
+            "sha-256": "96eafbe3ada026aa90aebaeb59c68cc81dce4a984c5c4fc9428a1c5f9a008c9a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/app/miscutils.h"
+          },
+          "hashes": {
+            "sha-256": "13016c03be79ddf95c63764a53706706c2d1ee8003232aec1c35d0087a1a2443"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/game/game.h"
+          },
+          "hashes": {
+            "sha-256": "53fd7de27fed619d0b1f4dfbda244344b36b25ac7d13fb530a5bf8419a4cfc32"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/game/scriptlibrary.h"
+          },
+          "hashes": {
+            "sha-256": "452d114bc295b5e9970aaf77fe325955efe4b5254bdbe9fa45bbd8e800e74c2e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/eclipse.h"
+          },
+          "hashes": {
+            "sha-256": "73b103f611f98d1797e889a0a2d4eddd15c2c1e0ef23e11985d8bd017d64fe15"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/button.h"
+          },
+          "hashes": {
+            "sha-256": "cd834f7b1c11e23e33e075ab634d5d6fbba056253266cd8da51136fbfa4fcdc7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/eclipse/animation.h"
+          },
+          "hashes": {
+            "sha-256": "568c2fb2b7129698e20a81753f1cab7d218e107ce14a3eb17a3352fdcb6fa1bb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/game/data/data.h"
+          },
+          "hashes": {
+            "sha-256": "9b31003feca90233caa58ec0795d21175b08603ecb468de8ac1dc48283ef5547"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/world.h"
+          },
+          "hashes": {
+            "sha-256": "a05179399448dcbc7005f90b9b0803c40eca0dc7b582d4c0336d9cc20643338e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/date.h"
+          },
+          "hashes": {
+            "sha-256": "904b11383863b7d59382b254e2584abfb6f1f692caee57c3aafa2667b671618d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/scheduler/eventscheduler.h"
+          },
+          "hashes": {
+            "sha-256": "53a0882fe7f41c411c5601116e921318a53a699a3982207b30591446a475aeb5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/scheduler/uplinkevent.h"
+          },
+          "hashes": {
+            "sha-256": "b846663fd08313c149a4205c3a0dc108225f85a5a371008beaea99da95615e9f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/plotgenerator.h"
+          },
+          "hashes": {
+            "sha-256": "de662b151b629af25fc6c43ea0e408c7297bc5484f5f776a9d1c7301f9e321c4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/person.h"
+          },
+          "hashes": {
+            "sha-256": "697f70b27ea394e9e2033a4d0ec40bef6c800acc0aeabc57591321bc445f3966"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/rating.h"
+          },
+          "hashes": {
+            "sha-256": "d89ab1a34d3126e799eaf992c84be249ff50de702ed82af0274c19d85f699ffa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/connection.h"
+          },
+          "hashes": {
+            "sha-256": "7fc817bff6c73a83f2a365a1784cd194f4a3de6559ff08a3ca1ab6bd630be4ff"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/demoplotgenerator.h"
+          },
+          "hashes": {
+            "sha-256": "ab4946868470740a8d2669899228b250ef6553b4fc44fa041c052775ea3c1ea5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/player.h"
+          },
+          "hashes": {
+            "sha-256": "cb2e3657cc4fbb67a5f7ae30566e8e46f8be9760f313e24748913d898b483c3f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/agent.h"
+          },
+          "hashes": {
+            "sha-256": "ee5b595cb9546caaeebfadfe173024601e44640b72662dcab4780663c032cdd5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/gateway.h"
+          },
+          "hashes": {
+            "sha-256": "26c1229fd0308adef9c95f5bd1d773e9fc72cda49a8233756e1e8d18bd81bf89"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/databank.h"
+          },
+          "hashes": {
+            "sha-256": "1cf6372e690d5e7c80fec801608f6b369fa6b301121ca713eb54623a329feb21"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/gatewaydef.h"
+          },
+          "hashes": {
+            "sha-256": "eae7b93b6d16cd5f2ed66193a0cfec012ff4755a915d42abe178eb1d0118c21f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/message.h"
+          },
+          "hashes": {
+            "sha-256": "d19b3754e0d8180c220393cd9acc5196b27f06e3c4760b16c923d47455ba64cf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/recordbank.h"
+          },
+          "hashes": {
+            "sha-256": "b4261fe97f5011a0efc70a593f7a4d46dc0d8283d33e602f8d8e6f0cea017f75"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/computer.h"
+          },
+          "hashes": {
+            "sha-256": "4e43c32ef5a81fdd6c567ac68153a32eaa5e5429f2eda1ef4177f6839ecf71ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/logbank.h"
+          },
+          "hashes": {
+            "sha-256": "ecc5d57b91ee4737a80f392b7c71c1caeab6cd825fc5a706d3d097bbd6feb82f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/security.h"
+          },
+          "hashes": {
+            "sha-256": "622201bb6e77fe02cb1190573b2b0a4ca1d17f58a3dfd68d37bfa53b1ac8ffea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/securitymonitor.h"
+          },
+          "hashes": {
+            "sha-256": "c1f13c16e9b76f9b0415c70b84f45b5d1ebd4ebb45b38a2525819dcedbb1e032"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/company/company.h"
+          },
+          "hashes": {
+            "sha-256": "152086305eec44512156aca6272a519f6e8f3cba6ee90c3fb1ca37016a5e2275"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/vlocation.h"
+          },
+          "hashes": {
+            "sha-256": "5a29d416d6a7b886ea9d8140e1102bd01258b92668220c182fb43e2ef7366f36"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/bankcomputer.h"
+          },
+          "hashes": {
+            "sha-256": "4acaa9387b6a9899cca94d57e47e85f83e54e130f14122126e29316fade75d80"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/computer/bankaccount.h"
+          },
+          "hashes": {
+            "sha-256": "1536927f0cf93a317e368e99071921320ba0f07df0db365bc68771a8553b3419"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/company/companyuplink.h"
+          },
+          "hashes": {
+            "sha-256": "7466d1a34a2529bd3a562f48900e243d14fd1752d895faf58ff5eaca8d76503c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/company/mission.h"
+          },
+          "hashes": {
+            "sha-256": "6923ba48221b3a6ecc3a942715257a4622b6d13111af54e592fdecfef2b5df5e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/company/news.h"
+          },
+          "hashes": {
+            "sha-256": "5e62cad7324c7155b774a7ea67a2c6eabaf15c37d0f5aedefaed77dcb1452319"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/worldgenerator.h"
+          },
+          "hashes": {
+            "sha-256": "f973352ecc4aff25b04738d25b34dc547b3ceb88f638bafe2291041b27023a7c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/missiongenerator.h"
+          },
+          "hashes": {
+            "sha-256": "d61e9cb7945cd99ae6147f1d9287b8666422bb4e026201ad7320f4f64277b0ab"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/namegenerator.h"
+          },
+          "hashes": {
+            "sha-256": "eb53a7fe7b07b8a3882e36fd034d71b8862f8582f1e4e00d9a0e73b8d6b19131"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/numbergenerator.h"
+          },
+          "hashes": {
+            "sha-256": "f3dc8f2842ee60c6687ed5df64c16809fff1a4bacc6aab8f961e2bfe629908c0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/generator/consequencegenerator.h"
+          },
+          "hashes": {
+            "sha-256": "1c21b054528e3ecd8941e7f59ac48daf764698a14252c47c43565531eb408e35"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/world/scheduler/notificationevent.h"
+          },
+          "hashes": {
+            "sha-256": "2f8be4bd52dfbccf8a07f30c6a9dae6ec404d251deec2c58b875f1081439f3dc"
+          }
+        }
+      ]
+    }
+  ]
+}

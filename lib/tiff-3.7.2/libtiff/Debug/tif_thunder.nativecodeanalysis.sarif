@@ -1,0 +1,91 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tif_thunder.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "9d75f072bd5fd3c9ae1d6b97cc47d02a9e38c7903cfc92514734f6c11eea99f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiffiop.h"
+          },
+          "hashes": {
+            "sha-256": "a8e88596e4794ad69775cd3f419978a8b2007a87c98939a8c77d190659704a21"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tif_config.h"
+          },
+          "hashes": {
+            "sha-256": "38ffd056147ac87a016ad3d4f31abcf79f3de5d65f5c46df2e544f5aa5938cbe"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiffio.h"
+          },
+          "hashes": {
+            "sha-256": "6d98b037201bbfb8a56a1947d08be85dfb1e4850eac2fc72ef850be0000dab7b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiff.h"
+          },
+          "hashes": {
+            "sha-256": "817fc7dacfc7499ca60575fbd6d9d52f661fa11e21bf9a16165673c0b1bf4e1a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiffconf.h"
+          },
+          "hashes": {
+            "sha-256": "92d7b567c51b88feb889aaf64353784eca46d5277a7931ecb3558089cf77114b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiffvers.h"
+          },
+          "hashes": {
+            "sha-256": "21195898e58f38860e4f0ca228047f29b2ea9056370c5268b1ec74f80c8353ec"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tif_dir.h"
+          },
+          "hashes": {
+            "sha-256": "75e25634448d3b10f29484678d086a8a55fb3b687af02d19f76d25ae46ec1c4a"
+          }
+        }
+      ]
+    }
+  ]
+}

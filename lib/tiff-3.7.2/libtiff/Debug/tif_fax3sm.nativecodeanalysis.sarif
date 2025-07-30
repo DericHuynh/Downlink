@@ -1,0 +1,59 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tif_fax3sm.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "827ce55eebc2006d3305b5a19891dc44f89c33c5233e837ebf766c0675b6dab1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiff.h"
+          },
+          "hashes": {
+            "sha-256": "817fc7dacfc7499ca60575fbd6d9d52f661fa11e21bf9a16165673c0b1bf4e1a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tiffconf.h"
+          },
+          "hashes": {
+            "sha-256": "92d7b567c51b88feb889aaf64353784eca46d5277a7931ecb3558089cf77114b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/tiff-3.7.2/libtiff/tif_fax3.h"
+          },
+          "hashes": {
+            "sha-256": "6fd081cfd635c640def2d5fdf710d938fa2dcf64073058fa3a8db212241e0223"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,796 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CryptKeyCacheItem::Salt' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crypt.h"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CryptKeyCacheItem::{ctor}",
+                  "decoratedName": "??0CryptKeyCacheItem@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CryptKeyCacheItem::Salt"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CryptKeyCacheItem::AESKey' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crypt.h"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CryptKeyCacheItem::{ctor}",
+                  "decoratedName": "??0CryptKeyCacheItem@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CryptKeyCacheItem::AESKey"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CryptKeyCacheItem::SaltPresent' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crypt.h"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CryptKeyCacheItem::{ctor}",
+                  "decoratedName": "??0CryptKeyCacheItem@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CryptKeyCacheItem::SaltPresent"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CryptKeyCacheItem::AESInit' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crypt.h"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CryptKeyCacheItem::{ctor}",
+                  "decoratedName": "??0CryptKeyCacheItem@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CryptKeyCacheItem::AESInit"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'VM_PreparedProgram::InitR' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarvm.h"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "VM_PreparedProgram::{ctor}",
+                  "decoratedName": "??0VM_PreparedProgram@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "VM_PreparedProgram::InitR"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'VM_PreparedProgram::CmdCount' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarvm.h"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "VM_PreparedProgram::{ctor}",
+                  "decoratedName": "??0VM_PreparedProgram@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "VM_PreparedProgram::CmdCount"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'VM_PreparedProgram::FilteredDataSize' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarvm.h"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "VM_PreparedProgram::{ctor}",
+                  "decoratedName": "??0VM_PreparedProgram@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "VM_PreparedProgram::FilteredDataSize"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'VM_PreparedProgram::FilteredData' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarvm.h"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "VM_PreparedProgram::{ctor}",
+                  "decoratedName": "??0VM_PreparedProgram@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "VM_PreparedProgram::FilteredData"
+          }
+        },
+        {
+          "ruleId": "C6308",
+          "message": {
+            "text": "'realloc' might return null pointer: assigning null pointer to 'Buffer', which is passed as an argument to 'realloc', will cause the original memory block to be leaked."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/array.h"
+                },
+                "region": {
+                  "startLine": 80,
+                  "startColumn": 17,
+                  "endLine": 80,
+                  "endColumn": 43
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Array<unsigned char>::Add",
+                  "decoratedName": "?Add@?$Array@E@@QAEXH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "c903dbe61c81288c489ef198de8743d49ec39eb661f7e8cf012dc60afa3cb388"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crypt.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "3d124e0cebfde2f682691c78a8468d5c6445364ec17693efa96ac4ce3869da01"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarvm.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "d1e848a9c94af94f74f85554ba53c7fc2b014d4df885703e1d403bf34ab1fd29"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/array.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "b6a4b003f51efa4c23fecfc273297b9da780fd25f21d430866c45aeb43e1de1d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarbloat.h"
+          },
+          "hashes": {
+            "sha-256": "1df63aace23c9bb93d1c9a10617f0ed56b193d5ba584fcddc9611d6dff4b83aa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/raros.h"
+          },
+          "hashes": {
+            "sha-256": "772cd54e99a6670444c89b48f129567a1458c0063a154e46164aec689c08b15c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/os.h"
+          },
+          "hashes": {
+            "sha-256": "2d4bb70efed1904c0fdcb4c3162bd8da8683046161173d37ce2af735be8082a4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/version.h"
+          },
+          "hashes": {
+            "sha-256": "d27e29d1ecb8578d6dbccc78f0f67358c961c8fbb7de7a38df727edd27651a3a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rartypes.h"
+          },
+          "hashes": {
+            "sha-256": "fd7527a1b8c134fef8d4d5cd1b25e37df834788f625bad59cfb9afdcdcff2505"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rardefs.h"
+          },
+          "hashes": {
+            "sha-256": "28246162d0d339f95795f93bf878f785a1bf4b26cc5731f2c5cdfa3ed381500c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarlang.h"
+          },
+          "hashes": {
+            "sha-256": "56cf89fd78ca4af12a0bc46e7df0a770554e3456a24ff4bb25c2359b4961a091"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/loclang.h"
+          },
+          "hashes": {
+            "sha-256": "218cd433e245371ee0d2a572535a4f9aae36bc86dbc19d992c13626d64cdb9ee"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/int64.h"
+          },
+          "hashes": {
+            "sha-256": "6044edd52167ac08ea75fbfd3cecc79d0fa5581d161951f5a3f4a0b48be41dfc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/unicode.h"
+          },
+          "hashes": {
+            "sha-256": "283d7301dbd1d18cc4eb045c6f43eff8ca6197b9b1126cec0e35b3d1fbabf020"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/errhnd.h"
+          },
+          "hashes": {
+            "sha-256": "834bb2a3fc324a420a8f348ba392e6b5b5f446d5853988d113bd8d38296248eb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/timefn.h"
+          },
+          "hashes": {
+            "sha-256": "bcb88cb805fac53b27f75b197360860f4175511ec426540c62193abb01aff7fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/headers.h"
+          },
+          "hashes": {
+            "sha-256": "1677628126b0e8d1eeedee063a96fc78f4d414147f75e4e098fcafedc3d857aa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarfn.h"
+          },
+          "hashes": {
+            "sha-256": "e71650972b5fe94bd9508f68e9ce4e6b6a84aeb8172d58e4b9c0af98f5fb235e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/pathfn.h"
+          },
+          "hashes": {
+            "sha-256": "18c9a0747107ae35c096083e2681bdc3140833497d0d749589bd3caa86813262"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/strfn.h"
+          },
+          "hashes": {
+            "sha-256": "bb6868bef55e0ae0cc8bbcb31286857a3dfa2a3abdc3c281ebac3817b6c75acc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/strlist.h"
+          },
+          "hashes": {
+            "sha-256": "eba7e67631b7d442198d618c3e2c074a2c8e02e91291b251b9a9a237819af629"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/file.h"
+          },
+          "hashes": {
+            "sha-256": "c8aa0ffba85a098f6174e02d13ed85b0bd928e7d370537a146c11eb2f88ee696"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/sha1.h"
+          },
+          "hashes": {
+            "sha-256": "594ed79ce9f4b394e8ecf4af66f4d3cb41aba37d07996beb319063bc545730aa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/crc.h"
+          },
+          "hashes": {
+            "sha-256": "aafdb487856e1a1a15ec5c5ee486c1bbb36aefd7f8c021dfa2baa80997409b79"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rijndael.h"
+          },
+          "hashes": {
+            "sha-256": "157691ad366334f44f0ccd863dbad1b2dbbe49a30750a9f872b99efd38324408"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/filefn.h"
+          },
+          "hashes": {
+            "sha-256": "d52de94d9feec03c709fa8d833f3f9c6e1f96afff296d68fd9f62ce8a485baf1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/filestr.h"
+          },
+          "hashes": {
+            "sha-256": "897cc8963a2043166c2d5fdba523a5e0a27e45a974872bcfdf4596ec5f743299"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/find.h"
+          },
+          "hashes": {
+            "sha-256": "08606bb059bf977b9c5d8d47eb5eefd2143ed9cbe7ebfabde582f9638f56528a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/scantree.h"
+          },
+          "hashes": {
+            "sha-256": "e2d395006da5aba3a18dbfb7253c4927f9fea8cf1086a8f09bb0466b209501e0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/savepos.h"
+          },
+          "hashes": {
+            "sha-256": "7f610d4191a4d48c29b1eff0c9d65732b6f78d300d46c5a58230cdaa9e55bca0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/getbits.h"
+          },
+          "hashes": {
+            "sha-256": "ebd8e511566861f23e82a799ef2bc60cce46ddf14f949c73ddf8df2f009ac5b3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rdwrfn.h"
+          },
+          "hashes": {
+            "sha-256": "4d8081d11366b74617c40e1174e064badab36e26985dfe82d06faed56b6e57c5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/options.h"
+          },
+          "hashes": {
+            "sha-256": "ca1f97a65a8c5cf18e062c4b5b5921b6d7dfa6a3235c70698e525b2f8ba11791"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/archive.h"
+          },
+          "hashes": {
+            "sha-256": "2258c6a2be46142d2b99b5d6c82730426267b9ff5ffad3afb0dd7cab60fd4249"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/match.h"
+          },
+          "hashes": {
+            "sha-256": "07e7a01c4eb96bf4cab221a43a098173974a1a4bbfff5987bfb8db03ea12a503"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/cmddata.h"
+          },
+          "hashes": {
+            "sha-256": "fb946aa8ac31cb7a2b7ba8c12213b0e881200aa409db4506b0df4424d657390a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/filcreat.h"
+          },
+          "hashes": {
+            "sha-256": "e9777538202de7ebf60f3443cd52dce3aceeefc3ecb43eae62a70fb746445a32"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/consio.h"
+          },
+          "hashes": {
+            "sha-256": "7420c41751b34aa458fec2ba5a4873c22ee64a273bedc042ed7ce5a577b2dfff"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/system.h"
+          },
+          "hashes": {
+            "sha-256": "341f1698cc298a5b6d9c226332ab45d551fe21d9b147384ad6adf08d2df1c06b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/isnt.h"
+          },
+          "hashes": {
+            "sha-256": "b281820988d26173ae2d0df99ccdbbdee76fbdaed56e9673883d2ed24ebf1c05"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/log.h"
+          },
+          "hashes": {
+            "sha-256": "48de6e6794ece5883b7cbc3ef1e5d4ac9394c07563a8ded16ef3ea380172e6d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rawread.h"
+          },
+          "hashes": {
+            "sha-256": "2e2f3c6fc674f2cd4668033b826a296119cac20579a6faf70567fc1be9bc2426"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/encname.h"
+          },
+          "hashes": {
+            "sha-256": "35d388b4c35996b516af32c50354497332e87f70c13af42a2ade58ac07a9973e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rarresource.h"
+          },
+          "hashes": {
+            "sha-256": "df9f02df61f7d58f9a001df3c5e92c0755b2f06336242de73ce04af4b2576d2f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/compress.h"
+          },
+          "hashes": {
+            "sha-256": "166ed7a713a4c858f1568481d95ce2ad6a3edf0992b8fb42e43e227c035250a2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/model.h"
+          },
+          "hashes": {
+            "sha-256": "21df726f9d18a65883b712fd405e8282e67d9dfa2eca472dbae058746615114b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/coder.h"
+          },
+          "hashes": {
+            "sha-256": "1c3237da7fe686b8130c29184f894623846be1c7c771595fa8c4258577c20d71"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/suballoc.h"
+          },
+          "hashes": {
+            "sha-256": "a300914b5c9d80e476decd01445fe393a72a32975ed80e41785f195d3c380a6b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/unpack.h"
+          },
+          "hashes": {
+            "sha-256": "6b36cd75d70302a376607259601a9a3d63b6a8c74654a508a8bb9d2a2b9f37a2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/extinfo.h"
+          },
+          "hashes": {
+            "sha-256": "cbe7805762cb335bab319c70ad9b0a9be83a4ce46db516910ae495b460f16262"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/extract.h"
+          },
+          "hashes": {
+            "sha-256": "c17af46b6109956fc80efcbfb1173974cc70960c536716f893fa6bef0a7ed7d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/unrar.h"
+          },
+          "hashes": {
+            "sha-256": "8b31b6dbd94beb090c6a636e30a545817e8e6bff5a6a5bd6baf1cf0bcede2be4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/list.h"
+          },
+          "hashes": {
+            "sha-256": "8a0f9d7144bf3ff758ae707ab6ef01882a437272668dee5b8458b225d37d7461"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/rs.h"
+          },
+          "hashes": {
+            "sha-256": "ea4978bdfda0fd4b52eca44b76f8f630b9d69591cbaa48c2fcc450c06c4e56ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/recvol.h"
+          },
+          "hashes": {
+            "sha-256": "b594dd87275eef9092e9f4af925b1595975f8586cc46f9a2d766d8a3ea3b8d47"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/volume.h"
+          },
+          "hashes": {
+            "sha-256": "d3f8e9bfcbbabae2c117be4636a9f4e7aaca581aa66e32e799cc98ad0483078c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/smallfn.h"
+          },
+          "hashes": {
+            "sha-256": "9afa817c47ef4e352660a118bc55a013384c26299dabc37c01f663df72188a11"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/ulinks.h"
+          },
+          "hashes": {
+            "sha-256": "bbeddcbd077e079a880a260b8535983a465abe05af3ace71299b4f8f22e2030a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/unrar/global.h"
+          },
+          "hashes": {
+            "sha-256": "cd4682eb4c16ae89c392993a1250a03cb5c6280363d881a58b76b75be454e2f8"
+          }
+        }
+      ]
+    }
+  ]
+}

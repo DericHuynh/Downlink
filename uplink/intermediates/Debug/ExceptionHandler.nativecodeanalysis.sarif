@@ -1,0 +1,92 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C28159",
+          "message": {
+            "text": "Consider using 'GlobalMemoryStatusEx' instead of 'GlobalMemoryStatus'. Reason: Deprecated. See MSDN for details"
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/exceptionhandler.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/ExceptionHandler.cpp"
+                },
+                "region": {
+                  "startLine": 396,
+                  "startColumn": 2,
+                  "endLine": 396,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DumpSystemInformation",
+                  "decoratedName": "?DumpSystemInformation@@YAXPAX@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/exceptionhandler.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "4bd742adfdadb35b2b738c662ecf126c688c5152816a3c3f5a3c68a713668314"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/getwinver.h"
+          },
+          "hashes": {
+            "sha-256": "54dcf5edf8884eab90c57bebdc8a0b16d2cb92231c9f958505a971e35ecc8be3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.h"
+          },
+          "hashes": {
+            "sha-256": "1ae8d54d5869971fc285b008154527f3961a2a9922563a3d9f2b4218071580f2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'lstrcpynA'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/MiniVersion.cpp"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 3,
+                  "endLine": 32,
+                  "endColumn": 49
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CMiniVersion::{ctor}",
+                  "decoratedName": "??0CMiniVersion@@QAE@PBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6388",
+          "message": {
+            "text": "'dwHandle' might not be '0':  this does not adhere to the specification for the function 'GetFileVersionInfoA'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/MiniVersion.cpp"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 2,
+                  "endLine": 75,
+                  "endColumn": 72
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CMiniVersion::Init",
+                  "decoratedName": "?Init@CMiniVersion@@QAEHXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 8
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 8
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 7
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 68,
+                            "startColumn": 9
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 69,
+                            "startColumn": 13
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 72,
+                            "startColumn": 10
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 2
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+                          },
+                          "region": {
+                            "startLine": 75,
+                            "startColumn": 5
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'lstrcpynA'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/MiniVersion.cpp"
+                },
+                "region": {
+                  "startLine": 181,
+                  "startColumn": 2,
+                  "endLine": 181,
+                  "endColumn": 51
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CMiniVersion::GetCompanyName",
+                  "decoratedName": "?GetCompanyName@CMiniVersion@@QAEHPADH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'lstrcpynA'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/MiniVersion.cpp"
+                },
+                "region": {
+                  "startLine": 192,
+                  "startColumn": 2,
+                  "endLine": 192,
+                  "endColumn": 59
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CMiniVersion::GetFileDescription",
+                  "decoratedName": "?GetFileDescription@CMiniVersion@@QAEHPADH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'lstrcpynA'."
+          },
+          "analysisTarget": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/MiniVersion.cpp"
+                },
+                "region": {
+                  "startLine": 203,
+                  "startColumn": 2,
+                  "endLine": 203,
+                  "endColumn": 51
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CMiniVersion::GetProductName",
+                  "decoratedName": "?GetProductName@CMiniVersion@@QAEHPADH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35213.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "6b0dc10a0b6b6cc4393198ca31ade5942afb99810cdcf2f14db79928786b9413"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/stdafx.h"
+          },
+          "hashes": {
+            "sha-256": "ac3f11f92005c7ad75801d894e1adbc75c71aa98bc2ad2a2b35e532aac47daaa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/uplink/src/miniversion.h"
+          },
+          "hashes": {
+            "sha-256": "1ae8d54d5869971fc285b008154527f3961a2a9922563a3d9f2b4218071580f2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/uplink/uplink-source-code-master/uplink-source-code-master/lib/mmgr/mmgr.h"
+          },
+          "hashes": {
+            "sha-256": "63cdcadc9936bf239aba76c5fc00ac3936bab59e1209f778f3a4486f5237fb14"
+          }
+        }
+      ]
+    }
+  ]
+}

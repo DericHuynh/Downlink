@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\strip_rw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\strip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\test_arrays.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\test_arrays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Projekte\C++\uplink-source-code\contrib\tiff-3.7.2\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{79226645-D454-3CBA-A0C2-1E4D0D0AAE82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{818C510F-3359-39E0-B3E0-F722F99E3AB7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
