@@ -127,12 +127,12 @@ char *NotificationEvent::GetLongString ()
 void NotificationEvent::ApplyMonthlyGrowth ()
 {
 
-	DArray <Company *> *d_companies = game->GetWorld ()->companies.ConvertToDArray ();
+	DArray <Company *> *d_companies = game->GetWorld ()->companies.MapDataToDArray ();
 
-	for ( int i = 0; i < d_companies->Size (); ++i ) {
+	for ( int i = 0; i < d_companies->size (); ++i ) {
 		if ( d_companies->ValidIndex (i) ) {
-			d_companies->GetData (i)->Grow ( 30 );
-			d_companies->GetData (i)->VaryGrowth ();
+			d_companies->at (i)->Grow ( 30 );
+			d_companies->at (i)->VaryGrowth ();
 		}
 	}
 
@@ -192,11 +192,11 @@ void NotificationEvent::DemoGenerateNewMission ()
 void NotificationEvent::CheckForSecurityBreaches ()
 {
 
-	DArray <Computer *> *d_computers = game->GetWorld ()->computers.ConvertToDArray ();
+	DArray <Computer *> *d_computers = game->GetWorld ()->computers.MapDataToDArray ();
 
-	for ( int i = 0; i < d_computers->Size (); ++i )
+	for ( int i = 0; i < d_computers->size (); ++i )
 		if ( d_computers->ValidIndex (i) )
-			d_computers->GetData (i)->CheckForSecurityBreaches ();
+			d_computers->at (i)->CheckForSecurityBreaches ();
 
 	delete d_computers;
 
@@ -236,11 +236,11 @@ void NotificationEvent::ExpireOldStuff ()
 	//
 
 
-	DArray <Computer *> *d_computers = game->GetWorld ()->computers.ConvertToDArray ();
+	DArray <Computer *> *d_computers = game->GetWorld ()->computers.MapDataToDArray ();
 
-	for ( int i = 0; i < d_computers->Size (); ++i )
+	for ( int i = 0; i < d_computers->size (); ++i )
 		if ( d_computers->ValidIndex (i) )
-			d_computers->GetData (i)->ManageOldLogs ();
+			d_computers->at (i)->ManageOldLogs ();
 
 	delete d_computers;
 
@@ -252,8 +252,8 @@ void NotificationEvent::ExpireOldStuff ()
 	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert (cu);
 
-	for ( int in = cu->news.Size () - 1; in >= 1; --in ) {
-		News *news = cu->news.GetData (in);
+	for ( int in = cu->news.size () - 1; in >= 1; --in ) {
+		News *news = cu->news.at (in);
 		if ( news ) {
 
 			Date testdate;
@@ -261,8 +261,8 @@ void NotificationEvent::ExpireOldStuff ()
 			testdate.AdvanceMinute ( TIME_TOEXPIRENEWS );
 
 			if ( testdate.Before ( &(game->GetWorld ()->date) ) ) {
-				delete cu->news.GetData (in);
-				cu->news.RemoveData (in);
+				delete cu->news.at (in);
+				cu->news.erase (in);
 			}
 
 		}
@@ -272,8 +272,8 @@ void NotificationEvent::ExpireOldStuff ()
 	// Expire old missions
 	//
 
-	for ( int im = cu->missions.Size () - 1; im >= 1; --im ) {
-		Mission *mission = cu->missions.GetData (im);
+	for ( int im = cu->missions.size () - 1; im >= 1; --im ) {
+		Mission *mission = cu->missions.at (im);
 		if ( mission ) {
 
 			Date testdate;
@@ -282,7 +282,7 @@ void NotificationEvent::ExpireOldStuff ()
 
 			if ( testdate.Before ( &(game->GetWorld ()->date) ) ) {
 				delete mission;
-				cu->missions.RemoveData (im);
+				cu->missions.erase (im);
 			}
 
 		}
@@ -310,9 +310,9 @@ void NotificationEvent::AddInterestOnLoans ()
 	// This event only does interest on the players loans
 	//
 
-	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->accounts.Size (); ++i ) {
+	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->accounts.size (); ++i ) {
 
-		char *fullacc = game->GetWorld ()->GetPlayer ()->accounts.GetData (i);
+		char *fullacc = game->GetWorld ()->GetPlayer ()->accounts.at (i);
 		UplinkAssert (fullacc);
 
 		char ip [SIZE_VLOCATION_IP];
@@ -407,11 +407,11 @@ void NotificationEvent::CheckMissionDueDates ()
 void NotificationEvent::CheckRecentHackCount ()
 {
 
-	DArray <Computer *> *d_computers = game->GetWorld ()->computers.ConvertToDArray ();
+	DArray <Computer *> *d_computers = game->GetWorld ()->computers.MapDataToDArray ();
 
-	for ( int i = 0; i < d_computers->Size (); ++i )
+	for ( int i = 0; i < d_computers->size (); ++i )
 		if ( d_computers->ValidIndex (i) )
-			d_computers->GetData (i)->UpdateRecentHacks ();
+			d_computers->at (i)->UpdateRecentHacks ();
 
 	delete d_computers;
 
@@ -464,9 +464,9 @@ void NotificationEvent::GiveMissionToNPC ()
 	Mission *prioritymission = NULL;
 	int prioritymissionindex = -1;
 
-	for ( int i = 0; i < fullist->Size (); ++i ) {
+	for ( int i = 0; i < fullist->size (); ++i ) {
 
-		Mission *mission = fullist->GetData (i);
+		Mission *mission = fullist->at (i);
 		UplinkAssert (mission);
 
 		if ( agent->rating.uplinkrating >= mission->minuplinkrating && mission->TYPE != MISSION_SPECIAL &&
@@ -490,18 +490,18 @@ void NotificationEvent::GiveMissionToNPC ()
 
 				bool inserted = false;
 
-				for ( int j = 0; j < missions.Size (); ++j ) {
-					if ( mission->difficulty < missions.GetData (j)->difficulty ) {
-						missions.PutDataAtIndex ( mission, j );
-						missions_index.PutDataAtIndex ( i, j );
+				for ( int j = 0; j < missions.size (); ++j ) {
+					if ( mission->difficulty < missions.at (j)->difficulty ) {
+						missions.insert( j, mission);
+						missions_index.insert( j, i);
 						inserted = true;
 						break;
 					}
 				}
 
 				if ( !inserted ) {
-					missions.PutDataAtEnd ( mission );
-					missions_index.PutDataAtEnd ( i );
+					missions.push_back ( mission );
+					missions_index.push_back ( i );
 				}
 
 			}
@@ -518,7 +518,7 @@ void NotificationEvent::GiveMissionToNPC ()
 	if ( prioritymission ) {
 
 		agent->GiveMission ( prioritymission );
-		fullist->RemoveData ( prioritymissionindex );
+		fullist->erase ( prioritymissionindex );
 
 		// Schedule an event to make the agent attempt the mission
 		// in a few hours
@@ -540,14 +540,14 @@ void NotificationEvent::GiveMissionToNPC ()
 		// levels higher than your uplink rating.
 		//
 
-		int nummissions = missions.Size ();
+		int nummissions = missions.size ();
 
 		if ( nummissions > 0 ) {
 
 			int missionindex = (int) NumberGenerator::RandomNormalNumber ( (float) ( nummissions / 4), (float) ( nummissions / 2 ) );
 			if ( missionindex < 0 ) missionindex = 0;
 
-			Mission *targetmission = missions.GetData (missionindex);
+			Mission *targetmission = missions.at (missionindex);
 			UplinkAssert (targetmission);
 
 			//
@@ -556,7 +556,7 @@ void NotificationEvent::GiveMissionToNPC ()
 			//
 
 			agent->GiveMission ( targetmission );
-			fullist->RemoveData ( missions_index.GetData (missionindex) );
+			fullist->erase ( missions_index.at (missionindex) );
 
 			// Schedule an event to make the agent attempt the mission
 			// in a few hours
@@ -597,12 +597,12 @@ void NotificationEvent::PayUplinkMonthlyFee ()
 	// everyone with an Uplink Rating
 	//
 
-	DArray <Person *> *people = (DArray <Person *> *) game->GetWorld ()->people.ConvertToDArray ();
+	DArray <Person *> *people = (DArray <Person *> *) game->GetWorld ()->people.MapDataToDArray ();
 
-	for ( int i = 0; i < people->Size (); ++i ) {
+	for ( int i = 0; i < people->size (); ++i ) {
 		if ( people->ValidIndex (i) ) {
 
-			Person *person = people->GetData (i);
+			Person *person = people->at (i);
 			UplinkAssert (person);
 
 			if ( person->rating.uplinkrating > 0 ) {

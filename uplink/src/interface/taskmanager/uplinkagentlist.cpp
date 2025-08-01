@@ -111,8 +111,8 @@ void UplinkAgentList::UplinkAgentListDraw ( Button *button, bool highlighted, bo
         if ( ual->handles.ValidIndex (index) &&
             ual->names.ValidIndex (index) ) {
 
-            char *handle = ual->handles.GetData (index);
-            char *name = ual->names.GetData (index);
+            char *handle = ual->handles.at (index);
+            char *name = ual->names.at (index);
 
             UplinkAssert (handle);
             UplinkAssert (name);
@@ -206,13 +206,13 @@ void UplinkAgentList::UpdateLists ()
 	// Build a list of agents sorted in handle alphabetical order
 	//
 
-	DArray <Person *> *allpeople = game->GetWorld ()->people.ConvertToDArray ();
+	DArray <Person *> *allpeople = game->GetWorld ()->people.MapDataToDArray ();
 	LList  <Person *> sorted;
 
-	for ( int ip = 0; ip < allpeople->Size (); ++ip ) {
+	for ( int ip = 0; ip < allpeople->size (); ++ip ) {
 		if ( allpeople->ValidIndex (ip) ) {
 
-			Person *p = allpeople->GetData (ip);
+			Person *p = allpeople->at (ip);
 			UplinkAssert (p);
 
 			if ( p->GetOBJECTID () == OID_AGENT ||
@@ -220,14 +220,14 @@ void UplinkAgentList::UpdateLists ()
 
 				bool inserted = false;
 
-				for ( int is = 0; is < sorted.Size (); ++is ) {
+				for ( int is = 0; is < sorted.size (); ++is ) {
 
-					Person *s = sorted.GetData (is);
+					Person *s = sorted.at (is);
 					UplinkAssert (s);
 
 					if ( strcmp ( ((Agent *) p)->handle, ((Agent *)s)->handle ) <= 0 ) {
 
-						sorted.PutDataAtIndex ( p, is );
+						sorted.insert( is, p);
 						inserted = true;
 						break;
 
@@ -235,7 +235,7 @@ void UplinkAgentList::UpdateLists ()
 
 				}
 
-				if ( !inserted ) sorted.PutDataAtEnd ( p );
+				if ( !inserted ) sorted.push_back ( p );
 
 			}
 
@@ -289,12 +289,12 @@ void UplinkAgentList::UpdateLists ()
     //
     // Copy the handles and names into place
 
-    handles.SetSize ( sorted.Size () );
-    names.SetSize ( sorted.Size () );
+    handles.resize ( sorted.size () );
+    names.resize ( sorted.size () );
 
-    for ( int j = 0; j < sorted.Size (); ++j ) {
+    for ( int j = 0; j < sorted.size (); ++j ) {
 
-        Person *person = sorted.GetData (j);
+        Person *person = sorted.at (j);
         UplinkAssert (person);
 
 		size_t handlesize = SIZE_PERSON_NAME;
@@ -311,7 +311,7 @@ void UplinkAgentList::UpdateLists ()
         }
         else { 
 
-            int fileindex = (int) ( 10 * ((float) j / (float) sorted.Size()) );
+            int fileindex = (int) ( 10 * ((float) j / (float) sorted.size()) );
 
             if ( fileindex >= 0 && fileindex < numfiles ) {
 
@@ -324,8 +324,8 @@ void UplinkAgentList::UpdateLists ()
 
         }
          
-        handles.PutData ( handle, j );
-        names.PutData ( name, j );
+        handles.insert( j, handle);
+        names.insert( j, name);
 
     }
 

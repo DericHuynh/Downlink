@@ -65,19 +65,18 @@ public:
 	LList ();
 	~LList ();
 
-	void PutData        ( const T &newdata );     // Adds in data at the end	
-	void PutDataAtEnd   ( const T &newdata );
+	void push_back   ( const T &newdata ); // Adds in data at the end	
 	void PutDataAtStart ( const T &newdata );	
-	void PutDataAtIndex ( const T &newdata, int index );
+	void insert(int index, const T &newdata);
 
-    T GetData          ( int index );			// slow unless sequential
-	void RemoveData    ( int index );			// slow 
+    T at          ( int index );			// slow unless sequential
+	void erase    ( int index );			// slow 
     int  FindData      ( const T &data );		// -1 means 'not found'
   
-    int Size ();			 // Returns the total size of the array
+    int size ();			 // Returns the total size of the array
     bool ValidIndex ( int index );
 
-    void Empty ();				 // Resets the array to empty    
+    void clear ();				 // Resets the array to empty    
     
     T operator [] (int index);
 
@@ -94,36 +93,32 @@ class DArray
 {
 
 protected:
-    
-    int stepsize;
-    int arraysize;
 
-    T *dynarray;
-    char *shadow;				 //0=not used, 1=used
+    int arraysize;
+    T * dynarray;
+    char * shadow;				 //0=not used, 1=used
     
 public:
 
     DArray ();
     DArray ( const DArray<T>& da );
-    DArray ( int newstepsize );
     ~DArray ();
 
-    void SetSize ( int newsize );
-	void SetStepSize ( int newstepsize );
+    void resize ( int newsize );
 
-    int  PutData    ( const T &newdata );			 // Returns index used
-    void PutData    ( const T &newdata, int index );
-    T    GetData    ( int index ) const;
-    void ChangeData ( const T &newdata, int index );
-    void RemoveData ( int index );
+    int  push_back    ( const T &newdata );			 // Returns index used
+    void insert    ( int index, const T &newdata);
+    T    at    ( int index ) const;
+    void ChangeData(int index, const T &newdata);
+    void erase ( int index );
     int  FindData   ( const T &data ) const;		 // -1 means 'not found'
     
     int NumUsed () const;		 // Returns the number of used entries
-    int Size () const;			 // Returns the total size of the array
+    int size () const;			 // Returns the total size of the array
     
     bool ValidIndex ( int index ) const;		    // Returns true if the index contains used data
     
-    void Empty ();				 // Resets the array to empty    
+    void clear ();				 // Resets the array to empty    
     
     T& operator [] (int index);
 
@@ -156,34 +151,34 @@ protected :
     
 public :
 
-    char *id;
+    char *key;
     T data;
 
     BTree ();
-    BTree ( const char *newid, const T &newdata );
+    BTree ( const char *newkey, const T &newdata );
     BTree ( const BTree<T> &copy );
 
     ~BTree ();
     void Copy( const BTree<T> &copy );
 
-    void PutData ( const char *newid, const T &newdata );
-    void RemoveData ( const char *newid );                     // Requires a solid copy constructor in T class
-    void RemoveData ( const char *newid, const T &newdata );   // Requires a solid copy constructor in T class
-    T GetData ( const char *searchid );
+    void insert ( const char *newkey, const T &newdata );
+    void RemoveData ( const char *newkey );                     // Requires a solid copy constructor in T class
+    void RemoveData ( const char *newkey, const T &newdata );   // Requires a solid copy constructor in T class
+    T at ( const char *searchkey );
 
-    BTree *LookupTree( const char *searchid );
+    BTree *find( const char *searchkey );
     
-    void Empty ();
+    void clear ();
     
-    int Size () const;							 // Returns the size in elements
+    int size () const;							 // Returns the size in elements
     
     void Print ();                              // Prints this tree to stdout
     
     BTree *Left () const;
     BTree *Right () const;
     
-    DArray <T> *ConvertToDArray ();
-    DArray <char *> *ConvertIndexToDArray ();
+    DArray <T> *MapDataToDArray ();
+    DArray <char *> *MapKeysToDArray ();
     
 };
 

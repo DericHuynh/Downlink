@@ -100,16 +100,16 @@ void NuclearWarScreenInterface::DrawMainMap ( Button *button, bool highlighted, 
     NuclearWarScreenInterface *nwsi = (NuclearWarScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen();
     UplinkAssert (nwsi);
 
-    for ( int i = 0; i < nwsi->nukes.Size (); ++i ) {
+    for ( int i = 0; i < nwsi->nukes.size (); ++i ) {
 
-        NuclearWar_Nuke *nuke = nwsi->nukes.GetData (i);
+        NuclearWar_Nuke *nuke = nwsi->nukes.at (i);
         int timediff = (int) ( EclGetAccurateTime () - nuke->time );
 
 
         if ( timediff > 10000 ) {
 
             delete nuke;
-            nwsi->nukes.RemoveData (i);
+            nwsi->nukes.erase (i);
             --i;
 
         }
@@ -210,7 +210,7 @@ void NuclearWarScreenInterface::ClickLocation ( Button *button )
     nuke->y = (int) NumberGenerator::RandomNormalNumber ( (float) SY(pgl->y), 20.0f );
     nuke->time = (int) EclGetAccurateTime ();
     nuke->sound = false;
-    nwsi->nukes.PutData ( nuke );
+    nwsi->nukes.push_back ( nuke );
 
     SgPlaySound ( RsArchiveFileOpen ( "sounds/zap.wav" ), "sounds/zap.wav", false );  
  

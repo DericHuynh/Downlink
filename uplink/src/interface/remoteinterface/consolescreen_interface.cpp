@@ -121,7 +121,7 @@ void ConsoleScreenInterface::WaitingCallback ()
 void ConsoleScreenInterface::AddUser ( char *name )
 {
 
-	users.PutDataAtEnd ( name );
+	users.push_back ( name );
 
 	if ( strcmp ( name, "System" ) == 0 ) {
 
@@ -180,14 +180,14 @@ void ConsoleScreenInterface::PutText ( int userid, char *text )
 
 	if ( userid == 0 ) {
 
-		queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_TEXT, text, 0 ) );
+		queue.push_back ( new ConsoleCommand ( CMDTYPE_TEXT, text, 0 ) );
 
 	}
 	else if ( userid == 1 ) {
 
 		char msg [256];
 		UplinkSnprintf ( msg, sizeof ( msg ), "%s:>%s", currentdir, text );
-		queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_TEXT, msg, 0 ) );
+		queue.push_back ( new ConsoleCommand ( CMDTYPE_TEXT, msg, 0 ) );
 
 	}
 
@@ -218,22 +218,22 @@ void ConsoleScreenInterface::RunCommand ( char *command )
 
 	char *lccommand = LowerCaseString ( command );
 
-	if      ( strstr ( lccommand, "help" ) ) {			queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_HELP, NULL, 0 ) );		}
-	else if ( strstr ( lccommand, "dir" ) )  {			queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_DIR, NULL, 0 ) );			}
-	else if ( strstr ( lccommand, "cd " ) )  {			queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_CD, lccommand+3, 0 ) );	}
-	else if ( strstr ( lccommand, "delete" ) ) {		queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_DELETEALL, NULL, 0 ) );	}
-	else if ( strstr ( lccommand, "run " ) ) {			queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_RUN, lccommand+4, 0 ) );	}
-	else if ( strstr ( lccommand, "exit" ) ) {			queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_EXIT, NULL, 0 ) );		}
-	else if ( strstr ( lccommand, "shutdown" ) ) {		queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_SHUTDOWN, NULL, 0 ) );	}
-	else if ( strstr ( lccommand, "disconnect" ) ) {	queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_DISCONNECT, NULL, 0 ) );	}
+	if      ( strstr ( lccommand, "help" ) ) {			queue.push_back ( new ConsoleCommand ( CMDTYPE_HELP, NULL, 0 ) );		}
+	else if ( strstr ( lccommand, "dir" ) )  {			queue.push_back ( new ConsoleCommand ( CMDTYPE_DIR, NULL, 0 ) );			}
+	else if ( strstr ( lccommand, "cd " ) )  {			queue.push_back ( new ConsoleCommand ( CMDTYPE_CD, lccommand+3, 0 ) );	}
+	else if ( strstr ( lccommand, "delete" ) ) {		queue.push_back ( new ConsoleCommand ( CMDTYPE_DELETEALL, NULL, 0 ) );	}
+	else if ( strstr ( lccommand, "run " ) ) {			queue.push_back ( new ConsoleCommand ( CMDTYPE_RUN, lccommand+4, 0 ) );	}
+	else if ( strstr ( lccommand, "exit" ) ) {			queue.push_back ( new ConsoleCommand ( CMDTYPE_EXIT, NULL, 0 ) );		}
+	else if ( strstr ( lccommand, "shutdown" ) ) {		queue.push_back ( new ConsoleCommand ( CMDTYPE_SHUTDOWN, NULL, 0 ) );	}
+	else if ( strstr ( lccommand, "disconnect" ) ) {	queue.push_back ( new ConsoleCommand ( CMDTYPE_DISCONNECT, NULL, 0 ) );	}
 	else {
 
-		queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_TEXT, "Unrecognised text", 0 ) );
+		queue.push_back ( new ConsoleCommand ( CMDTYPE_TEXT, "Unrecognised text", 0 ) );
 
 	}
 
 	delete [] lccommand;
-	queue.PutDataAtEnd ( new ConsoleCommand ( CMDTYPE_TEXT, " ", 0 ) );
+	queue.push_back ( new ConsoleCommand ( CMDTYPE_TEXT, " ", 0 ) );
 
 }
 
@@ -385,10 +385,10 @@ void ConsoleScreenInterface::RunCommand_DIR ()
 		}
 		else {
 
-			for ( int i = 0; i < comp->logbank.logs.Size (); ++i ) {
+			for ( int i = 0; i < comp->logbank.logs.size (); ++i ) {
 				if ( comp->logbank.logs.ValidIndex (i) ) {
 
-					AccessLog *al = comp->logbank.logs.GetData (i);
+					AccessLog *al = comp->logbank.logs.at (i);
 					UplinkAssert (al);
 
 					PutTextAtStart ( 0, al->GetDescription () );
@@ -466,18 +466,18 @@ void ConsoleScreenInterface::RunCommand_DELETEALL ( char *dir )
 			Date logdate;
 			logdate.SetDate ( &game->GetWorld ()->date );
 
-			for ( int i = 0; i < comp->logbank.logs.Size (); ++i ) {
+			for ( int i = 0; i < comp->logbank.logs.size (); ++i ) {
 
 				if ( comp->logbank.logs.ValidIndex ( i ) ) {
 					// Delete the log
-					delete comp->logbank.logs.GetData (i);
-					comp->logbank.logs.RemoveData (i);
+					delete comp->logbank.logs.at (i);
+					comp->logbank.logs.erase (i);
 
 					// Replace it with a "Deleted" marker
 					AccessLog *al = new AccessLog ();
 					al->SetProperties ( &logdate, "Unknown", " ",
 										LOG_NOTSUSPICIOUS, LOG_TYPE_DELETED );
-					comp->logbank.logs.PutData ( al, i );
+					comp->logbank.logs.insert( i, al);
 
 				}
 
@@ -522,10 +522,10 @@ void ConsoleScreenInterface::RunCommand_DELETEALL ( char *dir )
 			queue.PutDataAtStart ( new ConsoleCommand ( CMDTYPE_DELETEALL, "log", 0 ) );
 			queue.PutDataAtStart ( new ConsoleCommand ( CMDTYPE_TEXT, "All files deleted.", 100 ) );
 
-			for ( int i = 0; i < comp->logbank.logs.Size (); ++i ) {
+			for ( int i = 0; i < comp->logbank.logs.size (); ++i ) {
 				if ( comp->logbank.logs.ValidIndex (i) ) {
 
-					AccessLog *al = comp->logbank.logs.GetData (i);
+					AccessLog *al = comp->logbank.logs.at (i);
                     if ( al ) {
                         char caption [256];
                         UplinkSnprintf ( caption, sizeof ( caption ), "Deleting log %s...", al->GetDescription() );
@@ -891,12 +891,12 @@ bool ConsoleScreenInterface::ReturnKeyPressed ()
 void ConsoleScreenInterface::Update ()
 {
 
-	if ( !waiting && timesync == -1 && queue.Size () > 0 ) {
+	if ( !waiting && timesync == -1 && queue.size () > 0 ) {
 
 		// Execute next command
-		ConsoleCommand *cc = queue.GetData (0);
+		ConsoleCommand *cc = queue.at (0);
 		UplinkAssert (cc);
-		queue.RemoveData (0);
+		queue.erase (0);
 
 		RunCommand ( cc );
 
@@ -908,9 +908,9 @@ void ConsoleScreenInterface::Update ()
 			timesync = -1;
 
 			// Execute next command
-			ConsoleCommand *cc = queue.GetData (0);
+			ConsoleCommand *cc = queue.at (0);
 			UplinkAssert (cc);
-			queue.RemoveData (0);
+			queue.erase (0);
 
 			RunCommand ( cc );
 

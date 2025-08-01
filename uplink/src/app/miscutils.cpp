@@ -299,7 +299,7 @@ DArray <char *> *ListDirectory  ( char *directory, char *filter )
 		size_t newnamesize = _MAX_PATH + 1;
 		char *newname = new char [newnamesize];
 		UplinkSnprintf ( newname, newnamesize, "%s%s", directory, thisfile.name );      
-        result->PutData ( newname );
+        result->push_back ( newname );
 		exitmeplease = _findnext ( fileindex, &thisfile );
 
 	}
@@ -337,18 +337,18 @@ DArray <char *> *ListDirectory  ( char *directory, char *filter )
     //
     // Now make absolutely sure there are no duplicates
 
-    for ( int i = 0; i < result->Size(); ++i ) {
+    for ( int i = 0; i < result->size(); ++i ) {
         if ( result->ValidIndex(i) ) {
 
-            for ( int j = i + 1; j < result->Size(); ++j ) {
+            for ( int j = i + 1; j < result->size(); ++j ) {
                 if ( result->ValidIndex(j) ) {
 
-                    char *resultI = result->GetData(i);
-                    char *resultJ = result->GetData(j);
+                    char *resultI = result->at(i);
+                    char *resultJ = result->at(j);
 
 					if ( strcmp ( resultI, resultJ ) == 0 ) {
 						delete [] resultJ;
-                        result->RemoveData( j );
+                        result->erase( j );
 					}
 
                 }
@@ -389,7 +389,7 @@ DArray <char *> *ListSubdirs ( char *directory )
 			size_t newnamesize = 256;
 			char *newname = new char [newnamesize];
 			UplinkStrncpy ( newname, thisfile.name, newnamesize );
-			result->PutData ( newname );
+			result->push_back ( newname );
 
 		}
 		exitmeplease = _findnext ( fileindex, &thisfile );

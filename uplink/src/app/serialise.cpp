@@ -64,10 +64,10 @@ void SaveBTree  ( BTree <UplinkObject *> *btree, FILE *file )
 
 	UplinkAssert ( btree );
 
-	DArray <UplinkObject *> *uo = btree->ConvertToDArray ();
-	DArray <char *> *uo_id = btree->ConvertIndexToDArray ();
+	DArray <UplinkObject *> *uo = btree->MapDataToDArray ();
+	DArray <char *> *uo_id = btree->MapKeysToDArray ();
 
-	int size = uo->Size ();
+	int size = uo->size ();
 
 	int nbitem = 0;
 	for ( int i = 0; i < size; ++i )
@@ -87,15 +87,15 @@ void SaveBTree  ( BTree <UplinkObject *> *btree, FILE *file )
 		if ( uo->ValidIndex (i) ) {
 
 			UplinkAssert ( uo_id->ValidIndex (i) );
-			UplinkAssert ( uo->GetData (i) );
+			UplinkAssert ( uo->at (i) );
 
-			SaveDynamicString ( uo_id->GetData (i), file );
+			SaveDynamicString ( uo_id->at (i), file );
 
-			int OBJECTID = uo->GetData (i)->GetOBJECTID ();
+			int OBJECTID = uo->at (i)->GetOBJECTID ();
 			UplinkAssert ( OBJECTID != 0 );
 			fwrite ( &OBJECTID, sizeof(int), 1, file );			
 
-			uo->GetData (i)->Save ( file );
+			uo->at (i)->Save ( file );
 
 			nbitem++;
 
@@ -142,7 +142,7 @@ bool LoadBTree  ( BTree <UplinkObject *> *btree, FILE *file )
 			return false;
 		}
 
-		btree->PutData ( id, uo );
+		btree->insert ( id, uo );
 
 		delete [] id;
 
@@ -157,17 +157,17 @@ void PrintBTree ( BTree <UplinkObject *> *btree )
 
 	UplinkAssert ( btree );
 
-	DArray <UplinkObject *> *uo = btree->ConvertToDArray ();
-	DArray <char *> *uo_id = btree->ConvertIndexToDArray ();
+	DArray <UplinkObject *> *uo = btree->MapDataToDArray ();
+	DArray <char *> *uo_id = btree->MapKeysToDArray ();
 
-	for ( int i = 0; i < uo->Size (); ++i ) {
+	for ( int i = 0; i < uo->size (); ++i ) {
 		if ( uo->ValidIndex (i) ) {
 			
 			UplinkAssert ( uo_id->ValidIndex (i) );
-			printf ( "Index = %s\n", uo_id->GetData (i) );
+			printf ( "Index = %s\n", uo_id->at (i) );
 
-			if ( uo->GetData (i) )
-				uo->GetData (i)->Print ();
+			if ( uo->at (i) )
+				uo->at (i)->Print ();
 
 			else
 				printf ( "NULL\n" );
@@ -185,12 +185,12 @@ void UpdateBTree ( BTree <UplinkObject *> *btree )
 
 	UplinkAssert ( btree );
 
-	DArray <UplinkObject *> *uo = btree->ConvertToDArray ();
+	DArray <UplinkObject *> *uo = btree->MapDataToDArray ();
 
-	for ( int i = 0; i < uo->Size (); ++i )
+	for ( int i = 0; i < uo->size (); ++i )
 		if ( uo->ValidIndex (i) )
-			if ( uo->GetData (i) )
-				uo->GetData (i)->Update ();
+			if ( uo->at (i) )
+				uo->at (i)->Update ();
 
 	delete uo;	
 
@@ -202,12 +202,12 @@ void DeleteBTreeData ( BTree <UplinkObject *> *btree )
 
 	UplinkAssert ( btree );
 
-	DArray <UplinkObject *> *uo = btree->ConvertToDArray ();
+	DArray <UplinkObject *> *uo = btree->MapDataToDArray ();
 
-	for ( int i = 0; i < uo->Size (); ++i )
+	for ( int i = 0; i < uo->size (); ++i )
 		if ( uo->ValidIndex (i) )
-			if ( uo->GetData (i) )				
-				delete uo->GetData (i);
+			if ( uo->at (i) )				
+				delete uo->at (i);
 
 	delete uo;	
 
@@ -218,10 +218,10 @@ void SaveBTree ( BTree <char *> *btree, FILE *file )
 
 	UplinkAssert ( btree );
 
-	DArray <char *> *uo = btree->ConvertToDArray ();
-	DArray <char *> *uo_id = btree->ConvertIndexToDArray ();
+	DArray <char *> *uo = btree->MapDataToDArray ();
+	DArray <char *> *uo_id = btree->MapKeysToDArray ();
 
-	int size = uo->Size ();
+	int size = uo->size ();
 
 	int nbitem = 0;
 	for ( int i = 0; i < size; ++i )
@@ -242,8 +242,8 @@ void SaveBTree ( BTree <char *> *btree, FILE *file )
 
 			UplinkAssert ( uo_id->ValidIndex (i) );
 
-			SaveDynamicString ( uo_id->GetData (i), file );
-			SaveDynamicString ( uo->GetData (i), file );
+			SaveDynamicString ( uo_id->at (i), file );
+			SaveDynamicString ( uo->at (i), file );
 
 			nbitem++;
 
@@ -286,7 +286,7 @@ bool LoadBTree ( BTree <char *> *btree, FILE *file )
 			return false;
 		}
 
-		btree->PutData ( id, data );
+		btree->insert ( id, data );
 		delete [] id;
 
 	}
@@ -300,17 +300,17 @@ void PrintBTree	( BTree <char *> *btree )
 
 	UplinkAssert ( btree );
 
-	DArray <char *> *uo = btree->ConvertToDArray ();
-	DArray <char *> *uo_id = btree->ConvertIndexToDArray ();
+	DArray <char *> *uo = btree->MapDataToDArray ();
+	DArray <char *> *uo_id = btree->MapKeysToDArray ();
 
-	for ( int i = 0; i < uo->Size (); ++i ) {
+	for ( int i = 0; i < uo->size (); ++i ) {
 		if ( uo->ValidIndex (i) ) {
 			
 			UplinkAssert ( uo_id->ValidIndex (i) );
-			printf ( "Index = %s\n", uo_id->GetData (i) );
+			printf ( "Index = %s\n", uo_id->at (i) );
 
-			if ( uo->GetData (i) )
-				printf ( "%s\n", uo->GetData (i) );
+			if ( uo->at (i) )
+				printf ( "%s\n", uo->at (i) );
 
 			else
 				printf ( "NULL\n" );
@@ -328,14 +328,14 @@ void DeleteBTreeData ( BTree <char *> *btree )
 
 	UplinkAssert ( btree );
 
-	DArray <char *> *uo = btree->ConvertToDArray ();
+	DArray <char *> *uo = btree->MapDataToDArray ();
 
-	for ( int i = 0; i < uo->Size (); ++i )
+	for ( int i = 0; i < uo->size (); ++i )
 		if ( uo->ValidIndex (i) )
-			if ( uo->GetData (i) )
+			if ( uo->at (i) )
 				// Even zero length string need to be deleted
 				//if ( strcmp ( uo->GetData (i), "" ) != 0 )
-					delete [] uo->GetData (i);
+					delete [] uo->at (i);
 
 	delete uo;	
 
@@ -347,10 +347,10 @@ void SaveLList ( LList <UplinkObject *> *llist, FILE *file )
 
 	UplinkAssert ( llist );
 
-	int size = llist->Size ();
+	int size = llist->size ();
 	int nbitem = 0;
 	for ( int i = 0; i < size; ++i )
-		if ( llist->GetData (i) )
+		if ( llist->at (i) )
 			nbitem++;
 
 	if ( nbitem > MAX_ITEMS_DATA_STRUCTURE ) {
@@ -363,11 +363,11 @@ void SaveLList ( LList <UplinkObject *> *llist, FILE *file )
 
 	nbitem = 0;
 	for ( int i = 0; i < size && nbitem < MAX_ITEMS_DATA_STRUCTURE; ++i ) {
-		if ( llist->GetData (i) ) {
-			int OBJECTID = llist->GetData (i)->GetOBJECTID ();
+		if ( llist->at (i) ) {
+			int OBJECTID = llist->at (i)->GetOBJECTID ();
 			UplinkAssert ( OBJECTID != 0 );
 			fwrite ( &OBJECTID, sizeof(int), 1, file );
-			llist->GetData (i)->Save ( file );
+			llist->at (i)->Save ( file );
 			nbitem++;
 		}
 	}
@@ -400,7 +400,7 @@ bool LoadLList ( LList <UplinkObject *> *llist, FILE *file )
 			if ( uo ) delete uo;
 			return false;
 		}
-		llist->PutData ( uo );
+		llist->push_back ( uo );
 
 	}
 
@@ -413,12 +413,12 @@ void PrintLList ( LList <UplinkObject *> *llist )
 
 	UplinkAssert ( llist );
 
-	for ( int i = 0; i < llist->Size (); ++i ) {
+	for ( int i = 0; i < llist->size (); ++i ) {
 
 		printf ( "Index = %d\n", i );
 
-		if ( llist->GetData (i) )
-			llist->GetData (i)->Print ();
+		if ( llist->at (i) )
+			llist->at (i)->Print ();
 
 		else
 			printf ( "NULL\n" );
@@ -432,9 +432,9 @@ void UpdateLList ( LList <UplinkObject *> *llist )
 
 	UplinkAssert ( llist );
 
-	for ( int i = 0; i < llist->Size (); ++i )
-		if ( llist->GetData (i) )
-			llist->GetData (i)->Update ();
+	for ( int i = 0; i < llist->size (); ++i )
+		if ( llist->at (i) )
+			llist->at (i)->Update ();
 
 }
 
@@ -443,9 +443,9 @@ void DeleteLListData ( LList <UplinkObject *> *llist )
 
 	UplinkAssert ( llist );
 
-	for ( int i = 0; i < llist->Size (); ++i )
-		if ( llist->GetData (i) )
-			delete llist->GetData (i);
+	for ( int i = 0; i < llist->size (); ++i )
+		if ( llist->at (i) )
+			delete llist->at (i);
 
 }
 
@@ -454,7 +454,7 @@ void SaveLList ( LList <char *> *llist, FILE *file )
 
 	UplinkAssert ( llist );
 
-	int size = llist->Size ();
+	int size = llist->size ();
 
 	if ( size > MAX_ITEMS_DATA_STRUCTURE ) {
 		UplinkPrintAbortArgs ( "WARNING: SaveLList, number of items appears to be too big, size=%d, maxsize=%d",
@@ -465,7 +465,7 @@ void SaveLList ( LList <char *> *llist, FILE *file )
 	fwrite ( &size, sizeof(size), 1, file );
 
 	for ( int i = 0; i < size; ++i ) 
-		SaveDynamicString ( llist->GetData (i), file );
+		SaveDynamicString ( llist->at (i), file );
 
 }
 
@@ -489,7 +489,7 @@ bool LoadLList ( LList <char *> *llist, FILE *file )
 
 		char *stringdata = NULL;
 		if ( !LoadDynamicStringPtr ( &stringdata, file ) ) return false;
-		llist->PutData ( stringdata );
+		llist->push_back ( stringdata );
 
 	}
 
@@ -502,9 +502,9 @@ void PrintLList	( LList <char *> *llist )
 	
 	UplinkAssert ( llist );
 
-	for ( int i = 0; i < llist->Size (); ++i ) {
-		if ( llist->GetData (i) )
-			printf ( "Index = %d : %s\n", i, llist->GetData (i) );
+	for ( int i = 0; i < llist->size (); ++i ) {
+		if ( llist->at (i) )
+			printf ( "Index = %d : %s\n", i, llist->at (i) );
 		else
 			printf ( "Index = %d : NULL\n", i );
 	}
@@ -516,12 +516,12 @@ void DeleteLListData ( LList <char *> *llist )
 
 	UplinkAssert ( llist );
 
-	for ( int i = 0; i < llist->Size (); ++i ) 
-		if ( llist->GetData (i) )
+	for ( int i = 0; i < llist->size (); ++i ) 
+		if ( llist->at (i) )
 			// Even zero length string need to be deleted
 			//if ( strlen(llist->GetData (i)) != 0 )
 			//	if ( strcmp(llist->GetData (i), "") != 0 )
-					delete [] llist->GetData (i);
+					delete [] llist->at (i);
 					
 
 }
@@ -531,7 +531,7 @@ void SaveDArray ( DArray <UplinkObject *> *darray, FILE *file )
 
 	UplinkAssert ( darray );
 
-	int size = darray->Size ();
+	int size = darray->size ();
 
 	if ( size > MAX_ITEMS_DATA_STRUCTURE ) {
 		UplinkPrintAbortArgs ( "WARNING: SaveDArray, number of items appears to be too big, size=%d, maxsize=%d",
@@ -542,15 +542,15 @@ void SaveDArray ( DArray <UplinkObject *> *darray, FILE *file )
 	fwrite ( &size, sizeof(size), 1, file );
 
 	for ( int i = 0; i < size; ++i ) {
-		if ( darray->ValidIndex (i) && darray->GetData (i) ) {
+		if ( darray->ValidIndex (i) && darray->at (i) ) {
 
 			fwrite ( &i, sizeof(i), 1, file );
 
-			int OBJECTID = darray->GetData (i)->GetOBJECTID ();
+			int OBJECTID = darray->at (i)->GetOBJECTID ();
 			UplinkAssert ( OBJECTID != 0 );
 			fwrite ( &OBJECTID, sizeof(int), 1, file );
 
-			darray->GetData (i)->Save ( file );
+			darray->at (i)->Save ( file );
 
 		}
 		else {
@@ -579,7 +579,7 @@ bool LoadDArray ( DArray <UplinkObject *> *darray, FILE *file )
 		return false;
     }
 
-	darray->SetSize ( size );
+	darray->resize ( size );
 
 	for ( int i = 0; i < size; ++i ) {
 
@@ -612,7 +612,7 @@ bool LoadDArray ( DArray <UplinkObject *> *darray, FILE *file )
 				return false;
 			}
 
-			darray->PutData ( uo, index );			// Insert into the correct index
+			darray->insert( index, uo);			// Insert into the correct index
 
 		}
 
@@ -627,14 +627,14 @@ void PrintDArray ( DArray <UplinkObject *> *darray )
 
 	UplinkAssert ( darray );
 
-	for ( int i = 0; i < darray->Size (); ++i ) {
+	for ( int i = 0; i < darray->size (); ++i ) {
 
 		printf ( "Index = %d\n", i );
 
 		if ( darray->ValidIndex (i) ) {
 
-			if ( darray->GetData (i) )
-				darray->GetData (i)->Print ();
+			if ( darray->at (i) )
+				darray->at (i)->Print ();
 
 			else
 				printf ( "NULL\n" );
@@ -655,10 +655,10 @@ void UpdateDArray ( DArray <UplinkObject *> *darray )
 
 	UplinkAssert ( darray );
 
-	for ( int i = 0; i < darray->Size (); ++i )
+	for ( int i = 0; i < darray->size (); ++i )
 		if ( darray->ValidIndex ( i ) )
-			if ( darray->GetData (i) )
-				darray->GetData (i)->Update ();
+			if ( darray->at (i) )
+				darray->at (i)->Update ();
 
 }
 
@@ -667,13 +667,13 @@ void DeleteDArrayDataD( DArray <UplinkObject *> *darray, const char * file, int 
 
 	UplinkAssert ( darray );
 
-	for ( int i = 0; i < darray->Size (); ++i )
+	for ( int i = 0; i < darray->size (); ++i )
 		if ( darray->ValidIndex ( i ) )
-			if ( darray->GetData (i) ) {
+			if ( darray->at (i) ) {
 				try {
-					UplinkObject * upobj = darray->GetData (i);
+					UplinkObject * upobj = darray->at (i);
 					delete upobj;
-					darray->RemoveData( i );
+					darray->erase( i );
 				} catch(...) {
 					// Log the attempted deletion.
 					DEBUG_PRINTF( "Oops! Tried to delete something that wasn't there [%s (%d)].\n",
@@ -688,14 +688,14 @@ void DeleteDArrayDataD( DArray <char *> *darray, const char * file, int line )
 
 	UplinkAssert ( darray );
 
-	for ( int i = 0; i < darray->Size (); ++i ) 
+	for ( int i = 0; i < darray->size (); ++i ) 
 		if ( darray->ValidIndex (i) )
-            if ( darray->GetData (i) )
+            if ( darray->at (i) )
 				// Even zero length string need to be deleted
 			    //if ( strlen(darray->GetData (i)) != 0 )
 					try {
-					    delete [] darray->GetData (i);
-						darray->RemoveData( i );
+					    delete [] darray->at (i);
+						darray->erase( i );
 					} catch(...) {
 						DEBUG_PRINTF( "Oops! Tried to delete something that wasn't there [%s (%d)].\n",
 							file, line );
@@ -708,7 +708,7 @@ void SaveDArray ( DArray <int> *darray, FILE *file )
 
 	UplinkAssert ( darray );
 
-	int size = darray->Size ();
+	int size = darray->size ();
 
 	if ( size > MAX_ITEMS_DATA_STRUCTURE ) {
 		UplinkPrintAbortArgs ( "WARNING: SaveDArray, number of items appears to be too big, size=%d, maxsize=%d",
@@ -721,7 +721,7 @@ void SaveDArray ( DArray <int> *darray, FILE *file )
 	for ( int i = 0; i < size; ++i ) {
 		if ( darray->ValidIndex (i) ) {
 
-			int data = darray->GetData (i);
+			int data = darray->at (i);
 
 			fwrite ( &i, sizeof(i), 1, file );
 			fwrite ( &data, sizeof(data), 1, file );
@@ -753,7 +753,7 @@ bool LoadDArray ( DArray <int> *darray, FILE *file )
 		return false;
     }
 
-	darray->SetSize ( size );
+	darray->resize ( size );
 
 	for ( int i = 0; i < size; ++i ) {
 
@@ -776,7 +776,7 @@ bool LoadDArray ( DArray <int> *darray, FILE *file )
 			int data;
 			if ( !FileReadData ( &data, sizeof(data), 1, file ) ) return false;
 
-			darray->PutData ( data, index );			// Insert into the correct index
+			darray->insert(index, data);			// Insert into the correct index
 
 		}
 
@@ -791,12 +791,12 @@ void PrintDArray ( DArray <int> *darray )
 
 	UplinkAssert ( darray );
 
-	for ( int i = 0; i < darray->Size (); ++i ) {
+	for ( int i = 0; i < darray->size (); ++i ) {
 
 		printf ( "Index %d : ", i );
 
 		if ( darray->ValidIndex (i) )
-			printf ( "%d\n", darray->GetData (i) );
+			printf ( "%d\n", darray->at (i) );
 
 		else
 			printf ( "Not a valid index\n" );

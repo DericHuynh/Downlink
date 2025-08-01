@@ -21,19 +21,11 @@ LList <T>::LList ()
 template <class T>
 LList<T>::~LList ()
 {
-    Empty();
+    clear();
 }
 
 template <class T>
-void LList<T>::PutData ( const T &newdata )
-{
-
-    PutDataAtEnd ( newdata );
-	
-}
-
-template <class T>
-void LList<T>::PutDataAtEnd ( const T &newdata )
+void LList<T>::push_back ( const T &newdata )
 {
 
     // Create the new data entry
@@ -99,28 +91,28 @@ void LList<T>::PutDataAtStart ( const T &newdata )
 }
 
 template <class T>
-void LList <T>::PutDataAtIndex ( const T &newdata, int index )
+void LList <T>::insert(int index, const T& newdata)
 {
 
-    if ( index == 0 ) {
+    if (index == 0) {
 		
-        PutDataAtStart ( newdata );
+        PutDataAtStart(newdata);
 		
     }
-    else if ( index == numitems ) {
+    else if (index == numitems) {
 		
-        PutDataAtEnd ( newdata );
+        push_back(newdata);
 
     }
     else {
 
         // Create the new data entry
         LListItem <T> *li = new LListItem <T> ();
-        li->data = newdata;		
+        li->data = newdata;
 
         LListItem <T> *current = first;
 
-        for ( int i = 0; i < index - 1; ++i ) {
+        for (int i = 0; i < index - 1; ++i) {
 
             if ( !current )	return;
             current = current->next;
@@ -142,7 +134,7 @@ void LList <T>::PutDataAtIndex ( const T &newdata, int index )
 }
 
 template <class T>
-int LList <T>::Size ()
+int LList <T>::size ()
 {
 
     return numitems;
@@ -150,7 +142,7 @@ int LList <T>::Size ()
 }
 
 template <class T>
-T LList <T>::GetData ( int index )
+T LList <T>::at ( int index )
 {
 
     if ( previous && previousindex != -1 && index == previousindex + 1 ) {
@@ -207,7 +199,7 @@ template <class T>
 T LList <T> :: operator [] (int index)
 {
     
-    return GetData (index);    
+    return at (index);    
 
 }
 
@@ -220,7 +212,7 @@ bool LList <T>::ValidIndex ( int index )
 }
 
 template <class T>
-void LList <T>::Empty ()
+void LList <T>::clear ()
 {
 /*
     LListItem <T> *next = 0;
@@ -246,7 +238,7 @@ void LList <T>::Empty ()
 }
 
 template <class T>
-void LList <T>::RemoveData ( int index )
+void LList <T>::erase ( int index )
 {
 
     LListItem <T> *current = first;
@@ -285,8 +277,8 @@ template <class T>
 int LList <T>::FindData ( const T &data )
 {
 
-    for ( int i = 0; i < Size (); ++i )
-        if ( GetData (i) == data )
+    for ( int i = 0; i < size (); ++i )
+        if ( at (i) == data )
             return i;
 
     return -1;

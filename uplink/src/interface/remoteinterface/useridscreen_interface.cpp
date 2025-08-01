@@ -345,23 +345,23 @@ void UserIDScreenInterface::Create ( ComputerScreen *newcs )
 
 		UplinkAssert ( cs->GetComputer () );
 
-		if ( game->GetWorld ()->GetPlayer ()->codes.LookupTree ( cs->GetComputer ()->ip ) ) {
+		if ( game->GetWorld ()->GetPlayer ()->codes.find ( cs->GetComputer ()->ip ) ) {
 
-			DArray <char *> *codes = game->GetWorld ()->GetPlayer ()->codes.ConvertToDArray ();
-			DArray <char *> *ips   = game->GetWorld ()->GetPlayer ()->codes.ConvertIndexToDArray ();
+			DArray <char *> *codes = game->GetWorld ()->GetPlayer ()->codes.MapDataToDArray ();
+			DArray <char *> *ips   = game->GetWorld ()->GetPlayer ()->codes.MapKeysToDArray ();
 
 			EclRegisterButton ( 200, 310, 250, 15, "Known Access Codes", "", "useridscreen_codestitle" );
 			EclRegisterButtonCallbacks ( "useridscreen_codestitle", textbutton_draw, NULL, NULL, NULL );
 
 			int currentcode = 0;
 
-			for ( int i = 0; i < codes->Size (); ++i ) {
+			for ( int i = 0; i < codes->size (); ++i ) {
 				if ( codes->ValidIndex (i) && ips->ValidIndex (i) ) {
-					if ( strcmp ( ips->GetData (i), cs->GetComputer ()->ip ) == 0 ) {
+					if ( strcmp ( ips->at (i), cs->GetComputer ()->ip ) == 0 ) {
 
 						char name [64];
 						UplinkSnprintf ( name, sizeof ( name ), "useridscreen_code %d", currentcode );
-						EclRegisterButton ( 200, 330 + currentcode*15, 250, 15, codes->GetData (i), "Use this code", name );
+						EclRegisterButton ( 200, 330 + currentcode*15, 250, 15, codes->at (i), "Use this code", name );
 						EclRegisterButtonCallbacks ( name, textbutton_draw, AccessCodeClick, button_click, button_highlight );
 						++currentcode;
 

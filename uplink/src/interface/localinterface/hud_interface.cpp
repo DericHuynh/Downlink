@@ -686,7 +686,7 @@ void HUDInterface::Update ()
 		
 		// Update the messages on display
 
-		for ( int mi = 0; mi < game->GetWorld ()->GetPlayer ()->messages.Size (); ++mi ) {
+		for ( int mi = 0; mi < game->GetWorld ()->GetPlayer ()->messages.size (); ++mi ) {
 
 			char bname [128];
 			UplinkSnprintf ( bname, sizeof ( bname ), "hud_message %d", mi );
@@ -704,7 +704,7 @@ void HUDInterface::Update ()
 		// It removes any message buttons that shouldn't be there 
 		// (ie if they have been deleted)
 
-        int removeMessageIndex = game->GetWorld ()->GetPlayer ()->messages.Size ();
+        int removeMessageIndex = game->GetWorld ()->GetPlayer ()->messages.size ();
 		char bname [128];
 		UplinkSnprintf ( bname, sizeof ( bname ), "hud_message %d", removeMessageIndex );
         while ( EclGetButton ( bname ) ) {
@@ -716,9 +716,9 @@ void HUDInterface::Update ()
 
 		// Update the missions on display
 
-		int baseX = screenw - 30 * (game->GetWorld ()->GetPlayer ()->messages.Size () + 1);
+		int baseX = screenw - 30 * (game->GetWorld ()->GetPlayer ()->messages.size () + 1);
 
-		for ( int msi = 0; msi < game->GetWorld ()->GetPlayer ()->missions.Size (); ++msi ) {
+		for ( int msi = 0; msi < game->GetWorld ()->GetPlayer ()->missions.size (); ++msi ) {
 
 			char bname [128];
 			UplinkSnprintf ( bname, sizeof ( bname ), "hud_mission %d", msi );
@@ -740,7 +740,7 @@ void HUDInterface::Update ()
 		}
 		
 		// Remove any mission buttons that shouldn't be here
-        int removeMissionIndex = game->GetWorld ()->GetPlayer ()->missions.Size ();
+        int removeMissionIndex = game->GetWorld ()->GetPlayer ()->missions.size ();
         UplinkSnprintf ( bname, sizeof ( bname ), "hud_mission %d", removeMissionIndex );
         while ( EclGetButton ( bname ) ) {
 			EclRemoveButton ( bname );

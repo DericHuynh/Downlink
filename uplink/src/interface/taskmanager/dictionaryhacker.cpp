@@ -94,7 +94,7 @@ void DictionaryHacker::Tick ( int n )
 				}
 
 				// Test to see if we have checked all possible words
-				if ( currentindex >= game->GetWorld ()->passwords.Size () ) {
+				if ( currentindex >= game->GetWorld ()->passwords.size () ) {
 
 					// Terminate this task
 					SvbRemoveTask ( this );			
@@ -156,7 +156,7 @@ void DictionaryHacker::Tick ( int n )
 
 			}
 
-			int percentage = (int)((float) currentindex / (float) game->GetWorld ()->passwords.Size () * 100);
+			int percentage = (int)((float) currentindex / (float) game->GetWorld ()->passwords.size () * 100);
 			char caption [1024];
 			UplinkSnprintf ( caption, sizeof ( caption ), "\nTrying\nWordlist...%d%%\n-> ", percentage );		
 			for ( int i = currentindex; i < currentindex + 10; ++i ) {

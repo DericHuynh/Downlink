@@ -510,9 +510,9 @@ void PlotGenerator::PlayerCompletesSpecialMission ( int missionID )
 
 	const char *title = SpecialMissionDescription (missionID);
 
-	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.Size (); ++i ) {
+	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.size (); ++i ) {
 
-		Mission *mis = game->GetWorld ()->GetPlayer ()->missions.GetData (i);
+		Mission *mis = game->GetWorld ()->GetPlayer ()->missions.at (i);
 		UplinkAssert (mis);
 
 		if ( strcmp ( mis->description, title ) == 0 ) {
@@ -520,7 +520,7 @@ void PlotGenerator::PlayerCompletesSpecialMission ( int missionID )
 
 			game->GetWorld ()->GetPlayer ()->ChangeBalance ( mis->payment, "Anonymous donation" );
 			game->GetWorld ()->GetPlayer ()->rating.ChangeUplinkScore ( mis->difficulty );
-			game->GetWorld ()->GetPlayer ()->missions.RemoveData (i);
+			game->GetWorld ()->GetPlayer ()->missions.erase (i);
 
 			specialmissionscompleted |= (1 << missionID);
 
@@ -546,14 +546,14 @@ void PlotGenerator::PlayerFailsSpecialMission ( int missionID )
 
 	const char *title = SpecialMissionDescription (missionID);
 
-	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.Size (); ++i ) {
+	for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.size (); ++i ) {
 
-		Mission *mis = game->GetWorld ()->GetPlayer ()->missions.GetData (i);
+		Mission *mis = game->GetWorld ()->GetPlayer ()->missions.at (i);
 		UplinkAssert (mis);
 
 		if ( strcmp ( mis->description, title ) == 0 ) {
 
-			game->GetWorld ()->GetPlayer ()->missions.RemoveData (i);
+			game->GetWorld ()->GetPlayer ()->missions.erase (i);
             delete mis;
             break;
 
@@ -571,14 +571,14 @@ bool PlotGenerator::RemoveSpecialMission ( int missionID )
     CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
     UplinkAssert ( cu );
 
-    for ( int i = 0; i < cu->missions.Size (); ++i ) {
+    for ( int i = 0; i < cu->missions.size (); ++i ) {
 
-        Mission *m = cu->missions.GetData (i);
+        Mission *m = cu->missions.at (i);
         UplinkAssert (m);
 
         if ( strcmp ( m->description, title ) == 0 ) {
 
-            cu->missions.RemoveData ( i );
+            cu->missions.erase ( i );
             delete m;
             return true;
 
@@ -1133,13 +1133,13 @@ void PlotGenerator::Run_Act1Scene2 ()
 	// for scenes 3 and 4
 	//
 
-	DArray <Person *> *allpeople = game->GetWorld ()->people.ConvertToDArray ();
+	DArray <Person *> *allpeople = game->GetWorld ()->people.MapDataToDArray ();
 	LList  <Person *> sorted;
 
-	for ( int ip = 0; ip < allpeople->Size (); ++ip ) {
+	for ( int ip = 0; ip < allpeople->size (); ++ip ) {
 		if ( allpeople->ValidIndex (ip) ) {
 
-			Person *p = allpeople->GetData (ip);
+			Person *p = allpeople->at (ip);
 			UplinkAssert (p);
 
 			if ( p->GetOBJECTID () == OID_AGENT &&
@@ -1147,14 +1147,14 @@ void PlotGenerator::Run_Act1Scene2 ()
 
 				bool inserted = false;
 
-				for ( int is = 0; is < sorted.Size (); ++is ) {
+				for ( int is = 0; is < sorted.size (); ++is ) {
 
-					Person *s = sorted.GetData (is);
+					Person *s = sorted.at (is);
 					UplinkAssert (s);
 
 					if ( p->rating.uplinkscore >= s->rating.uplinkscore ) {
 
-						sorted.PutDataAtIndex ( p, is );
+						sorted.insert(is, p);
 						inserted = true;
 						break;
 
@@ -1162,7 +1162,7 @@ void PlotGenerator::Run_Act1Scene2 ()
 
 				}
 
-				if ( !inserted ) sorted.PutDataAtEnd ( p );
+				if ( !inserted ) sorted.push_back ( p );
 
 			}
 
@@ -1171,8 +1171,8 @@ void PlotGenerator::Run_Act1Scene2 ()
 
 	delete allpeople;
 
-	UplinkStrncpy ( act1scene3agent, sorted.GetData (1)->name, sizeof ( act1scene3agent ) );
-	UplinkStrncpy ( act1scene4agent, sorted.GetData (0)->name, sizeof ( act1scene4agent ) );
+	UplinkStrncpy ( act1scene3agent, sorted.at (1)->name, sizeof ( act1scene3agent ) );
+	UplinkStrncpy ( act1scene4agent, sorted.at (0)->name, sizeof ( act1scene4agent ) );
 
 	//
 	// Set up a log in on scene4 guys computer
@@ -1950,7 +1950,7 @@ void PlotGenerator::Run_Act3Scene2 ()
 	Computer *comp = game->GetWorld ()->GetComputer ( NAME_UPLINKINTERNALSERVICES );
 	UplinkAssert (comp);
 	UplinkAssert ( comp->screens.ValidIndex ( 1 ) );
-	MenuScreen *menu2 = (MenuScreen *) comp->screens.GetData (1);
+	MenuScreen *menu2 = (MenuScreen *) comp->screens.at (1);
 	UplinkAssert (menu2);
 	UplinkAssert (menu2->GetOBJECTID () == OID_MENUSCREEN );
 	menu2->AddOption ( "Faith Progress", "Shows the latest known versions of Faith and Revelation", 3, 10, 5 );
@@ -2848,10 +2848,10 @@ void PlotGenerator::Run_Act5Scene5 ()
 
             // Run Faith on an infected system
 
-            if ( infected.Size () > 0 ) {
+            if ( infected.size () > 0 ) {
 
-                int pos = NumberGenerator::RandomNumber ( infected.Size () );
-                char *ip = infected.GetData (pos);
+                int pos = NumberGenerator::RandomNumber ( infected.size () );
+                char *ip = infected.at (pos);
                 UplinkAssert (ip);
 
                 RunFaith ( ip, version_faith, false );
@@ -4234,10 +4234,10 @@ bool PlotGenerator::IsMissionComplete_SaveItForTheJury ()
 
     int success = 0;
 
-	for ( int il = 0; il < comp->logbank.logs.Size (); ++il ) {
+	for ( int il = 0; il < comp->logbank.logs.size (); ++il ) {
 		if ( comp->logbank.logs.ValidIndex (il) ) {
 
-			AccessLog *al = comp->logbank.logs.GetData (il);
+			AccessLog *al = comp->logbank.logs.at (il);
 			UplinkAssert (al);
 
 			if ( al->SUSPICIOUS != LOG_NOTSUSPICIOUS &&
@@ -4260,7 +4260,7 @@ bool PlotGenerator::IsMissionComplete_SaveItForTheJury ()
 
 							al->SetSuspicious ( LOG_NOTSUSPICIOUS );
 							if ( comp->logbank.internallogs.ValidIndex (il) )
-								comp->logbank.internallogs.GetData (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
+								comp->logbank.internallogs.at (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
 
 							// Success!
 
@@ -4289,9 +4289,9 @@ bool PlotGenerator::IsMissionComplete_SaveItForTheJury ()
 		CompanyUplink *uplink = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 		UplinkAssert (uplink);
 
-		for ( int i = 0; i < uplink->news.Size (); ++i ) {
+		for ( int i = 0; i < uplink->news.size (); ++i ) {
 
-			News *news = uplink->news.GetData (i);
+			News *news = uplink->news.at (i);
 			UplinkAssert (news);
 
 			if ( news->NEWSTYPE == NEWS_TYPE_ARREST && news->data1 && strcmp ( news->data1, poorsod->name ) == 0 ) {
@@ -4589,9 +4589,9 @@ void PlotGenerator::Infected ( char *ip )
     char *ipcopy = new char [strlen(ip)+1];
     UplinkSafeStrcpy ( ipcopy, ip );
 
-    infected.PutDataAtEnd ( ipcopy );
+    infected.push_back ( ipcopy );
 
-    if ( infected.Size () >= REVELATION_RELEASEUNCONTROLLED ) {
+    if ( infected.size () >= REVELATION_RELEASEUNCONTROLLED ) {
 
         // Its game over!
         Revelation_ReleaseUncontrolled ();
@@ -4607,12 +4607,12 @@ void PlotGenerator::Disinfected ( char *ip )
 
 #ifndef DEMOGAME
 
-     for ( int i = 0; i < infected.Size (); ++i )
-        if ( infected.GetData (i) )
-            if ( strcmp ( infected.GetData (i), ip ) == 0 )
-                infected.RemoveData (i);
+     for ( int i = 0; i < infected.size (); ++i )
+        if ( infected.at (i) )
+            if ( strcmp ( infected.at (i), ip ) == 0 )
+                infected.erase (i);
 
-     if ( infected.Size () == 0 &&
+     if ( infected.size () == 0 &&
           revelation_arcbusted == true &&
           playerloyalty == 1 &&
           !PlayerCompletedSpecialMission (SPECIALMISSION_COUNTERATTACK) ) {

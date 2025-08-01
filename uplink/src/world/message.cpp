@@ -95,7 +95,7 @@ void Message::GiveLink ( char *ip )
 	char *theip = new char [theipsize];
 	UplinkAssert (strlen(ip) < SIZE_VLOCATION_IP );
 	UplinkStrncpy ( theip, ip, theipsize );
-	links.PutData (theip);
+	links.push_back (theip);
 
 }
 
@@ -104,7 +104,7 @@ void Message::GiveCode ( char *ip, char *code )
 
 	char *thecode = new char [strlen(code)+1];
 	UplinkSafeStrcpy ( thecode, code );
-    codes.PutData ( ip, thecode );
+    codes.insert ( ip, thecode );
 
 }
 

@@ -55,7 +55,7 @@ void Sale::AddVersion ( char *details, int cost, int size, int data )
 	SaleVersion *sv = new SaleVersion ();
 	sv->Set ( details, cost, size, data );
 
-	versions.PutData ( sv );
+	versions.push_back ( sv );
 
 }
 
@@ -63,7 +63,7 @@ SaleVersion *Sale::GetVersion ( int index )
 {
 
 	if ( versions.ValidIndex (index) )
-		return versions.GetData (index);
+		return versions.at (index);
 
 	else
 		return NULL;

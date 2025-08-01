@@ -68,8 +68,6 @@ World::World()
 	//
 	// Load the password list from a disk file
 	//
-
-	passwords.SetStepSize ( 100 );
 	FILE *file = RsArchiveFileOpen ( "data/wordlist.txt", "rt" );
 	UplinkAssert ( file );
 	
@@ -131,17 +129,17 @@ World::~World()
 
     DeleteDArrayData ( &passwords );
 
-    for ( int i = 0; i < gatewaydefs.Size (); ++i ) 
+    for ( int i = 0; i < gatewaydefs.size (); ++i ) 
         if ( gatewaydefs.ValidIndex (i) )
-            if ( gatewaydefs.GetData (i) )
-                delete gatewaydefs.GetData (i);
+            if ( gatewaydefs.at (i) )
+                delete gatewaydefs.at (i);
 
 }
 
 VLocation *World::CreateVLocation ( char *ip, int phys_x, int phys_y )
 {
 
-	if ( locations.LookupTree ( ip ) != NULL ) {
+	if ( locations.find ( ip ) != NULL ) {
 
 		char warning [128];
 		UplinkSnprintf ( warning, sizeof ( warning ), "Duplicate IP created : %s", ip );
@@ -150,7 +148,7 @@ VLocation *World::CreateVLocation ( char *ip, int phys_x, int phys_y )
 	}
 
 	VLocation *vl = new VLocation ();
-	locations.PutData ( ip, vl );
+	locations.insert ( ip, vl );
 	
 	vl->SetIP ( ip );
 	vl->SetPLocation ( phys_x, phys_y );
@@ -176,7 +174,7 @@ Company *World::CreateCompany ( char *name )
 {
 
 	Company *company = new Company ();
-	companies.PutData ( name, company );
+	companies.insert ( name, company );
 	
 	company->SetName ( name );
 	
@@ -188,7 +186,7 @@ Computer *World::CreateComputer ( char *name, char *companyname, char *ip )
 {
 
 	Computer *computer = new Computer ();
-	computers.PutData ( name, computer );
+	computers.insert ( name, computer );
 
 	computer->SetName ( name );
 	computer->SetCompanyName ( companyname );
@@ -205,7 +203,7 @@ Person *World::CreatePerson ( char *name, char *localhost )
 {
 
 	Person *person = new Person ();
-	people.PutData ( name, person );
+	people.insert ( name, person );
 
 	person->SetName ( name );
 	person->SetLocalHost ( localhost );	
@@ -221,7 +219,7 @@ void World::CreateVLocation ( VLocation *vlocation )
 	UplinkAssert (vlocation);
 	UplinkAssert (vlocation->ip);
 
-	locations.PutData ( vlocation->ip, vlocation );
+	locations.insert ( vlocation->ip, vlocation );
 
 }
 
@@ -231,7 +229,7 @@ void World::CreateCompany ( Company *company )
 	UplinkAssert ( company );
 	UplinkAssert ( company->name );
 
-	companies.PutData ( company->name, company );
+	companies.insert ( company->name, company );
 
 }
 
@@ -241,7 +239,7 @@ void World::CreateComputer ( Computer *computer )
 	UplinkAssert (computer);
 	UplinkAssert (computer->name);
 
-	computers.PutData ( computer->name, computer );	
+	computers.insert ( computer->name, computer );	
 
 	UplinkAssert ( GetVLocation ( computer->ip ) );
 	GetVLocation ( computer->ip )->SetComputer ( computer->name );
@@ -254,7 +252,7 @@ void World::CreatePerson ( Person *person )
 	UplinkAssert (person);
 	UplinkAssert (person->name);
 
-	people.PutData ( person->name, person );
+	people.insert ( person->name, person );
 
 }
 
@@ -263,7 +261,7 @@ void World::CreatePassword  ( char *password )
 
 	char *newpassword = new char [ strlen ( password ) + 1 ];
 	UplinkSafeStrcpy ( newpassword, password );
-	passwords.PutData ( newpassword );
+	passwords.push_back ( newpassword );
 
 }
 
@@ -275,7 +273,7 @@ void World::CreateGatewayDef ( GatewayDef *newdef )
 	if ( !newdef->VerifyCorrectness () )
 		return;
 
-	gatewaydefs.PutData ( newdef );
+	gatewaydefs.push_back ( newdef );
 
 	gatewaydefs.Sort ( GatewayDef::GatewayDefComparator );
 
@@ -284,7 +282,7 @@ void World::CreateGatewayDef ( GatewayDef *newdef )
 VLocation *World::GetVLocation  ( char *ip )
 {
 
-	BTree <VLocation *> *vl = locations.LookupTree ( ip );
+	BTree <VLocation *> *vl = locations.find ( ip );
 
 	if ( vl ) return vl->data;
 	else	  return NULL;
@@ -294,7 +292,7 @@ VLocation *World::GetVLocation  ( char *ip )
 Company *World::GetCompany ( char *name )
 {
 
-	BTree <Company *> *company = companies.LookupTree ( name );
+	BTree <Company *> *company = companies.find ( name );
 
 	if ( company ) return company->data;
 	else		   return NULL;
@@ -304,7 +302,7 @@ Company *World::GetCompany ( char *name )
 Computer *World::GetComputer ( char *name )
 {
 
-	BTree <Computer *> *computer = computers.LookupTree ( name );
+	BTree <Computer *> *computer = computers.find ( name );
 
 	if ( computer ) return computer->data;
 	else			return NULL;
@@ -314,7 +312,7 @@ Computer *World::GetComputer ( char *name )
 Person *World::GetPerson ( char *name )
 {
 
-	if ( people.LookupTree("PLAYER") && strcmp ( name, GetPlayer ()->handle ) == 0 ) {
+	if ( people.find("PLAYER") && strcmp ( name, GetPlayer ()->handle ) == 0 ) {
 	
 		// We're looking for the player
 		return game->GetWorld ()->GetPlayer ();
@@ -324,7 +322,7 @@ Person *World::GetPerson ( char *name )
 		
 		// We're not looking for the player
 
-		BTree <Person *> *person = people.LookupTree ( name );
+		BTree <Person *> *person = people.find ( name );
 
 		if ( person ) return person->data;
 		else		  return NULL;
@@ -337,7 +335,7 @@ char *World::GetPassword ( int index )
 {
 
 	if ( passwords.ValidIndex ( index ) )
-		return passwords.GetData (index);
+		return passwords.at (index);
 
 	else
 		return NULL;
@@ -350,15 +348,15 @@ GatewayDef *World::GetGatewayDef ( char *name )
 	if ( name ) {
 		char *nameTrim = TrimSpaces ( name );
 
-		for ( int i = 0; i < gatewaydefs.Size (); ++i ) {
-			if ( gatewaydefs.ValidIndex ( i ) && gatewaydefs.GetData ( i ) ) {
+		for ( int i = 0; i < gatewaydefs.size (); ++i ) {
+			if ( gatewaydefs.ValidIndex ( i ) && gatewaydefs.at ( i ) ) {
 
-				char *gatewayNameTrim = TrimSpaces ( gatewaydefs.GetData ( i )->name );
+				char *gatewayNameTrim = TrimSpaces ( gatewaydefs.at ( i )->name );
 				bool equalsname = ( strcmp ( nameTrim, gatewayNameTrim ) == 0 );
 				delete [] gatewayNameTrim;
 				if ( equalsname ) {
 					delete [] nameTrim;
-					return gatewaydefs.GetData ( i );
+					return gatewaydefs.at ( i );
 				}
 
 			}
@@ -374,7 +372,7 @@ GatewayDef *World::GetGatewayDef ( char *name )
 Player *World::GetPlayer ()
 {
 
-	BTree <Person *> *player = people.LookupTree ( "PLAYER" );
+	BTree <Person *> *player = people.find ( "PLAYER" );
 
 	UplinkAssert ( player );
 

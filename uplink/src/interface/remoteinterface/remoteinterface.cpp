@@ -137,7 +137,7 @@ void RemoteInterface::RunNewLocation ()
 
 		        if ( lanComp->systems.ValidIndex(LanMonitor::currentSelected) ) {
 
-			        LanComputerSystem *system = lanComp->systems.GetData(LanMonitor::currentSelected);
+			        LanComputerSystem *system = lanComp->systems.at(LanMonitor::currentSelected);
 			        if ( system->screenIndex != -1 ) 
                         currentscreenindex = system->screenIndex;			
 

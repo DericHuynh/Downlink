@@ -38,14 +38,14 @@ void EventScheduler::ScheduleEvent ( UplinkEvent *event )
 	
 	bool inserted = false;
 
-	for ( int i = 0; i < events.Size (); ++i ) {
+	for ( int i = 0; i < events.size (); ++i ) {
 
-		UplinkEvent *ue = events.GetData (i);
+		UplinkEvent *ue = events.at (i);
 		UplinkAssert ( ue );
 
 		if ( event->rundate.Before ( &(ue->rundate) ) ) {
 
-			events.PutDataAtIndex ( event, i );
+			events.insert( i, event);
 			inserted = true;
 			break;
 
@@ -56,7 +56,7 @@ void EventScheduler::ScheduleEvent ( UplinkEvent *event )
 	if ( !inserted ) {
 
 		// Put it at the back of the queue
-		events.PutDataAtEnd ( event );
+		events.push_back ( event );
 
 	}
 
@@ -79,7 +79,7 @@ void EventScheduler::ScheduleWarning ( UplinkEvent *event, Date *date )
 Date *EventScheduler::GetDateOfNextEvent ()
 {
 
-	UplinkEvent *event = events.GetData (0);
+	UplinkEvent *event = events.at (0);
 	
 	if ( event ) 
 		return &(event->rundate);
@@ -129,18 +129,18 @@ void EventScheduler::Update ()
 
 	LList <UplinkEvent *> eventsToRun;
 
-	if ( events.Size () > 0 ) {
+	if ( events.size () > 0 ) {
 
-		UplinkEvent *event = events.GetData (0);
+		UplinkEvent *event = events.at (0);
 
 		while ( event && game->GetWorld ()->date.After ( &(event->rundate) ) ) {
 
-			eventsToRun.PutData( event );
+			eventsToRun.push_back( event );
 
-			events.RemoveData (0);
+			events.erase (0);
 
 			if ( events.ValidIndex ( 0 ) )
-				event = events.GetData (0);
+				event = events.at (0);
 			else
 				event = NULL;
 
@@ -149,9 +149,9 @@ void EventScheduler::Update ()
 	}
 
 
-	if ( eventsToRun.Size () > 0 ) {
+	if ( eventsToRun.size () > 0 ) {
 
-		UplinkEvent *event = eventsToRun.GetData (0);
+		UplinkEvent *event = eventsToRun.at (0);
 
 		while ( event ) {
 
@@ -161,11 +161,11 @@ void EventScheduler::Update ()
 
 			event->Run ();
 			
-			eventsToRun.RemoveData (0);
+			eventsToRun.erase (0);
 
 			delete event;
 			if ( eventsToRun.ValidIndex ( 0 ) )
-				event = eventsToRun.GetData (0);
+				event = eventsToRun.at (0);
 			else
 				event = NULL;
 

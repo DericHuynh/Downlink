@@ -81,7 +81,7 @@ void AccountScreenInterface::Create ( ComputerScreen *newcs )
 	}
 
 	// Now look up the account based on that account number
-	account = bank->accounts.GetData ( accno );
+	account = bank->accounts.at ( accno );
 
 
 	if ( !IsVisible () ) {

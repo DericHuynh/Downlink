@@ -38,9 +38,9 @@ void SecurityMonitor::BeginAttack ()
 
 	if ( comp->security.NumSystems () > 0 ) {
 
-		currentmonitor.SetSize ( comp->security.NumSystems () );
-		for ( int i = 0; i < currentmonitor.Size (); ++i ) 
-			currentmonitor.PutData ( false, i );
+		currentmonitor.resize ( comp->security.NumSystems () );
+		for ( int i = 0; i < currentmonitor.size (); ++i ) 
+			currentmonitor.insert( i, false);
 
 		nextmonitor_date.SetDate ( &(game->GetWorld ()->date) );
 		nextmonitor_date.AdvanceSecond ( 30 / comp->security.NumSystems () );
@@ -56,7 +56,7 @@ void SecurityMonitor::BeginAttack ()
 void SecurityMonitor::EndAttack ()
 {
 
-	currentmonitor.Empty ();
+	currentmonitor.clear ();
 
 	status = 0;
 
@@ -67,7 +67,7 @@ bool SecurityMonitor::IsMonitored ( int index )
 
 	if ( status == 2 )
 		if ( currentmonitor.ValidIndex (index) )
-			if ( currentmonitor.GetData (index) == true )
+			if ( currentmonitor.at (index) == true )
 				return true;
 
 	return false;
@@ -97,7 +97,7 @@ void SecurityMonitor::Update ()
 
 					// Time up - begin monitering the next system
 
-					currentmonitor.PutData ( true, nextmonitor_index );
+					currentmonitor.insert( nextmonitor_index, true);
 
 					// You'll be rumbled in ~ 4 seconds
 
@@ -134,9 +134,9 @@ void SecurityMonitor::Update ()
 					// Time up - if player has jimmied this system then he 
 					// is now caught
 
-					for ( int i = 0; i < currentmonitor.Size (); ++i ) {
+					for ( int i = 0; i < currentmonitor.size (); ++i ) {
 						if ( currentmonitor.ValidIndex (i) ) {
-							if ( currentmonitor.GetData (i) == true ) {
+							if ( currentmonitor.at (i) == true ) {
 
 								SecuritySystem *ss = comp->security.GetSystem (i);
 								UplinkAssert (ss);
@@ -155,8 +155,8 @@ void SecurityMonitor::Update ()
 				++nextmonitor_index;
 				if ( !comp->security.GetSystem (nextmonitor_index) ) nextmonitor_index = 0;
 
-				for ( int ic = 0; ic < currentmonitor.Size (); ++ic ) 
-					currentmonitor.PutData ( false, ic );
+				for ( int ic = 0; ic < currentmonitor.size (); ++ic ) 
+					currentmonitor.insert( ic, false);
 					
 				nextmonitor_date.SetDate ( &(game->GetWorld ()->date) );
 				if ( comp->security.NumSystems () > 0 )

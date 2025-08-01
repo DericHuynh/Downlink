@@ -55,9 +55,9 @@ void LoginInterface::CreateExistingGames ()
 
 	DArray <char *> *existing = App::ListExistingGames ();
 	
-	for ( int i = 0; i < existing->Size (); ++i ) {
+	for ( int i = 0; i < existing->size (); ++i ) {
 		if ( existing->ValidIndex (i) ) {
-			char *curAgent = existing->GetData ( i );
+			char *curAgent = existing->at ( i );
 
 			char name [32];
 			UplinkSnprintf ( name, sizeof ( name ), "username %d", i );
@@ -146,10 +146,10 @@ void LoginInterface::RetireAgentClick ( Button *button )
 	if ( strlen ( agentfile ) > 0 ) {
 		DArray <char *> *existing = App::ListExistingGames ();
 
-		int lenexisting = existing->Size ();
+		int lenexisting = existing->size ();
 		for ( int i = 0; i < lenexisting; i++ )
 			if ( existing->ValidIndex ( i ) ) {
-				char *curAgent = existing->GetData ( i );
+				char *curAgent = existing->at ( i );
 				if ( strcmp ( curAgent, agentfile ) == 0 )
 					found = true;
 

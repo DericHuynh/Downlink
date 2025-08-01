@@ -130,7 +130,7 @@ void ContactScreenInterface::PutMessage ( int userid, char *message )
 	ContactScreenInterface *thisint = (ContactScreenInterface *) GetInterfaceScreen ( SCREEN_CONTACTSCREEN );
 
 	if	( userid == 0 )	fullmessage << message << '\x0';
-	else				fullmessage << thisint->users.GetData (userid) << " : " << message << '\x0';
+	else				fullmessage << thisint->users.at (userid) << " : " << message << '\x0';
 
 
 	// Add the message to the queue
@@ -138,7 +138,7 @@ void ContactScreenInterface::PutMessage ( int userid, char *message )
 	char * msg = new char[ strlen( fullmessage.str() ) + 1 ];
 	UplinkSafeStrcpy( msg, fullmessage.str() );
 	fullmessage.rdbuf()->freeze( 0 );
-	thisint->messagequeue.PutData ( msg );
+	thisint->messagequeue.push_back ( msg );
 
 	// Can't delete the fullmessage.str here
 	// as it's pointer just got added into the messagequeue
@@ -235,7 +235,7 @@ void ContactScreenInterface::SetMission ( Mission *newmission )
 void ContactScreenInterface::AddUser ( char *name )
 {
 
-	users.PutDataAtEnd ( name );
+	users.push_back ( name );
 
 	if ( strcmp ( name, "System" ) == 0 ) {
 
@@ -513,7 +513,7 @@ void ContactScreenInterface::AskQuestion ( int index )
 
 					// Remove the mission from the bulletin board
 
-					cu->missions.RemoveData ( indexmission );
+					cu->missions.erase ( indexmission );
 
 					// Run the bulletin board
 
@@ -652,7 +652,7 @@ bool ContactScreenInterface::IsVisible ()
 void ContactScreenInterface::Update ()
 {
 
-	if ( !waiting && messagequeue.Size () > 0 ) {
+	if ( !waiting && messagequeue.size () > 0 ) {
 
 		// Scroll the messages up
 
@@ -677,7 +677,7 @@ void ContactScreenInterface::Update ()
 
 		// Set the message on the last button and remove the message from the queue
 
-		char *message = messagequeue.GetData (0);
+		char *message = messagequeue.at (0);
 		int time = (int) ( strlen(message) * 5 );
 
 		char name1 [32];
@@ -686,8 +686,8 @@ void ContactScreenInterface::Update ()
 		EclRegisterCaptionChange ( name1, message, time, WaitingCallback );
 		waiting = true;
 
-		delete [] messagequeue.GetData (0);
-		messagequeue.RemoveData (0);
+		delete [] messagequeue.at (0);
+		messagequeue.erase (0);
 
 	}
 

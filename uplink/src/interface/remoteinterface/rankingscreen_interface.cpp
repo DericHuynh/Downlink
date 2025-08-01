@@ -119,13 +119,13 @@ void RankingScreenInterface::Create ( ComputerScreen *newcs )
 		// Build a list of agents sorted on rating order
 		//
 
-		DArray <Person *> *allpeople = game->GetWorld ()->people.ConvertToDArray ();
+		DArray <Person *> *allpeople = game->GetWorld ()->people.MapDataToDArray ();
 		LList  <Person *> sorted;
 
-		for ( int ip = 0; ip < allpeople->Size (); ++ip ) {
+		for ( int ip = 0; ip < allpeople->size (); ++ip ) {
 			if ( allpeople->ValidIndex (ip) ) {
 
-				Person *p = allpeople->GetData (ip);
+				Person *p = allpeople->at (ip);
 				UplinkAssert (p);
 
 				if ( p->GetOBJECTID () == OID_AGENT ||
@@ -133,14 +133,14 @@ void RankingScreenInterface::Create ( ComputerScreen *newcs )
 
 					bool inserted = false;
 
-					for ( int is = 0; is < sorted.Size (); ++is ) {
+					for ( int is = 0; is < sorted.size (); ++is ) {
 
-						Person *s = sorted.GetData (is);
+						Person *s = sorted.at (is);
 						UplinkAssert (s);
 
 						if ( p->rating.uplinkscore >= s->rating.uplinkscore ) {
 
-							sorted.PutDataAtIndex ( p, is );
+							sorted.insert( is, p);
 							inserted = true;
 							break;
 
@@ -148,7 +148,7 @@ void RankingScreenInterface::Create ( ComputerScreen *newcs )
 
 					}
 
-					if ( !inserted ) sorted.PutDataAtEnd ( p );
+					if ( !inserted ) sorted.push_back ( p );
 	
 				}
 
@@ -163,8 +163,8 @@ void RankingScreenInterface::Create ( ComputerScreen *newcs )
 
 		int playerrank = -1;
 
-		for ( int ir = 0; ir < sorted.Size (); ++ir ) {
-			if ( sorted.GetData (ir) == game->GetWorld ()->GetPlayer () ) {
+		for ( int ir = 0; ir < sorted.size (); ++ir ) {
+			if ( sorted.at (ir) == game->GetWorld ()->GetPlayer () ) {
 				playerrank = ir;
 				break;
 			}
@@ -192,10 +192,10 @@ void RankingScreenInterface::Create ( ComputerScreen *newcs )
 
 			if ( sorted.ValidIndex (i) ) {
 
-				UplinkAssert ( sorted.GetData (i)->GetOBJECTID () == OID_AGENT ||
-							   sorted.GetData (i)->GetOBJECTID () == OID_PLAYER );
+				UplinkAssert ( sorted.at (i)->GetOBJECTID () == OID_AGENT ||
+							   sorted.at (i)->GetOBJECTID () == OID_PLAYER );
 
-				Agent *agent = (Agent *) sorted.GetData (i);
+				Agent *agent = (Agent *) sorted.at (i);
 
 				char cname [128];
 				UplinkSnprintf ( cname, sizeof ( cname ), "%2d  :  Agent %s", i + 1, agent->handle );

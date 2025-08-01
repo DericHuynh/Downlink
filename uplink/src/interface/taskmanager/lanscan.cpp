@@ -209,10 +209,10 @@ void LanScan::Tick ( int n )
 
 			LanComputer *lanComp = (LanComputer *) comp;
 
-			for ( int i = 0; i < lanComp->systems.Size (); ++i ) {
+			for ( int i = 0; i < lanComp->systems.size (); ++i ) {
 				if ( lanComp->systems.ValidIndex( i ) ) {
 
-					LanComputerSystem *system = lanComp->systems.GetData(i);
+					LanComputerSystem *system = lanComp->systems.at(i);
 					UplinkAssert (system);
 
 					if ( system->subnet <= numSubnetsScanned &&

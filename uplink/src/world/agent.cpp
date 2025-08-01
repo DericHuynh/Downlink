@@ -79,7 +79,7 @@ void Agent::SetHandle ( char *newhandle )
 void Agent::GiveMission ( Mission *mission )
 {
 
-	missions.PutData ( mission );
+	missions.push_back ( mission );
 
 	//
 	// Pay the agent the starting amount
@@ -92,21 +92,21 @@ void Agent::GiveMission ( Mission *mission )
 	// Transfer all the links from the mission to the agent
 	//
 
-	for ( int li = 0; li < mission->links.Size (); ++li )
-		GiveLink ( mission->links.GetData (li) );
+	for ( int li = 0; li < mission->links.size (); ++li )
+		GiveLink ( mission->links.at (li) );
 
 	//
 	// Transfer all the access codes from the mission to the agent
 	//
 
-	DArray <char *> *darray = mission->codes.ConvertToDArray ();
-	DArray <char *> *darray_index = mission->codes.ConvertIndexToDArray ();
+	DArray <char *> *darray = mission->codes.MapDataToDArray ();
+	DArray <char *> *darray_index = mission->codes.MapKeysToDArray ();
 	UplinkAssert ( darray );
 	UplinkAssert ( darray_index );
 
-	for ( int ai = 0; ai < darray->Size (); ++ai )
+	for ( int ai = 0; ai < darray->size (); ++ai )
 		if ( darray->ValidIndex (ai) && darray_index->ValidIndex (ai) )
-			GiveCode ( darray_index->GetData (ai), darray->GetData (ai) );
+			GiveCode ( darray_index->at (ai), darray->at (ai) );
 
     delete darray;
     delete darray_index;
@@ -234,10 +234,10 @@ int Agent::HasAccount  ( char *ip )
 
 		if ( firstime ) {
 			firstime = false;
-			treeCode = codes.LookupTree ( ip );
+			treeCode = codes.find ( ip );
 		} else if ( treeCode ){
 			if ( treeCode->Left () )
-				treeCode = treeCode->Left ()->LookupTree ( ip );
+				treeCode = treeCode->Left ()->find ( ip );
 			else
 				treeCode = NULL;
 		}
@@ -298,9 +298,9 @@ int Agent::HasAccount  ( char *ip )
 bool Agent::HasLink ( char *newip )
 {
 
-	for ( int i = 0; i < links.Size (); ++i )
+	for ( int i = 0; i < links.size (); ++i )
 		if ( links.ValidIndex (i) )
-			if ( strcmp ( newip, links.GetData (i) ) == 0 )
+			if ( strcmp ( newip, links.at (i) ) == 0 )
 				return true;
 
 	return false;
@@ -310,11 +310,11 @@ bool Agent::HasLink ( char *newip )
 void Agent::RemoveLink ( char *newip )
 {
 
-	for ( int i = 0; i < links.Size (); ++i ) {
+	for ( int i = 0; i < links.size (); ++i ) {
 		if ( links.ValidIndex (i) ) {
-			if ( strcmp ( newip, links.GetData (i) ) == 0 ) {
+			if ( strcmp ( newip, links.at (i) ) == 0 ) {
 
-				links.RemoveData (i);
+				links.erase (i);
 				break;
 
 			}
@@ -330,19 +330,19 @@ void Agent::GiveMessage ( Message *message )
 
 	// Transfer all links from the message to the agent
 
-	for ( int li = 0; li < message->links.Size (); ++li )
-		GiveLink ( message->links.GetData (li) );
+	for ( int li = 0; li < message->links.size (); ++li )
+		GiveLink ( message->links.at (li) );
 
 	// Transfer all access codes from the mission to the agent
 
-	DArray <char *> *darray = message->codes.ConvertToDArray ();
-	DArray <char *> *darray_index = message->codes.ConvertIndexToDArray ();
+	DArray <char *> *darray = message->codes.MapDataToDArray ();
+	DArray <char *> *darray_index = message->codes.MapKeysToDArray ();
 	UplinkAssert ( darray );
 	UplinkAssert ( darray_index );
 
-	for ( int ai = 0; ai < darray->Size (); ++ai )
+	for ( int ai = 0; ai < darray->size (); ++ai )
 		if ( darray->ValidIndex (ai) && darray_index->ValidIndex (ai) )
-			GiveCode ( darray_index->GetData (ai), darray->GetData (ai) );
+			GiveCode ( darray_index->at (ai), darray->at (ai) );
 
     delete darray;
     delete darray_index;
@@ -355,22 +355,22 @@ void Agent::GiveCode ( char *newip, char *newcode )
     // Do we already have this code?
     //
 
-    DArray <char *> *ips = codes.ConvertIndexToDArray ();
-    DArray <char *> *thecodes = codes.ConvertToDArray ();
+    DArray <char *> *ips = codes.MapKeysToDArray ();
+    DArray <char *> *thecodes = codes.MapDataToDArray ();
     UplinkAssert (ips);
     UplinkAssert (thecodes);
 
     bool found = false;
 
-    for ( int i = 0; i < ips->Size (); ++i ) {
+    for ( int i = 0; i < ips->size (); ++i ) {
         if ( ips->ValidIndex (i) && thecodes->ValidIndex (i) ) {
 
-            char *thisip = ips->GetData (i);
+            char *thisip = ips->at (i);
             UplinkAssert (thisip);
 
             if ( strcmp ( thisip, newip ) == 0 ) {
 
-                char *thiscode = thecodes->GetData (i);
+                char *thiscode = thecodes->at (i);
                 UplinkAssert (thiscode);
 
                 if ( strcmp ( thiscode, newcode ) == 0 ) {
@@ -407,7 +407,7 @@ void Agent::GiveCode ( char *newip, char *newcode )
 							size_t newcodecopysize = 128;
 							char *newcodecopy = new char [newcodecopysize];
 							UplinkStrncpy ( newcodecopy, newcode, newcodecopysize );
-    						codes.PutData ( thisip, newcodecopy );
+    						codes.insert ( thisip, newcodecopy );
 
                             found = true;
                             break;
@@ -430,7 +430,7 @@ void Agent::GiveCode ( char *newip, char *newcode )
 		size_t newcodecopysize = 128;
 	    char *newcodecopy = new char [newcodecopysize];
 	    UplinkStrncpy ( newcodecopy, newcode, newcodecopysize );
-    	codes.PutData ( newip, newcodecopy );
+    	codes.insert ( newip, newcodecopy );
 
     }
 
@@ -454,12 +454,12 @@ int  Agent::CreateNewAccount ( char *bankip, char *accname, char *password, int 
 bool Agent::HasMissionLink ( const char *newip )
 {
 
-	for ( int ii = 0; ii < missions.Size (); ii++ )
+	for ( int ii = 0; ii < missions.size (); ii++ )
 		if ( missions.ValidIndex ( ii ) ) {
-			LList<char*> *links = &(missions.GetData ( ii )->links);
-			for ( int i = 0; i < links->Size () ; i++ )
+			LList<char*> *links = &(missions.at ( ii )->links);
+			for ( int i = 0; i < links->size () ; i++ )
 				if ( links->ValidIndex ( i ) )
-					if ( strcmp ( newip, links->GetData ( i ) ) == 0 )
+					if ( strcmp ( newip, links->at ( i ) ) == 0 )
 						return true;
 		}
 
@@ -470,9 +470,9 @@ bool Agent::HasMissionLink ( const char *newip )
 void Agent::CheckMissionDueDates ()
 {
 
-	for ( int i = 0; i < missions.Size (); ++i ) {
+	for ( int i = 0; i < missions.size (); ++i ) {
 
-		Mission *m = missions.GetData (i);
+		Mission *m = missions.at (i);
 		UplinkAssert (m);
 
 		if ( m->GetDueDate () ) {
@@ -498,7 +498,7 @@ void Agent::CheckMissionDueDates ()
 				// Remove the mission
 
 				delete m;
-				missions.RemoveData ( i );
+				missions.erase ( i );
 				i--;
 
 			}
@@ -512,8 +512,8 @@ void Agent::CheckMissionDueDates ()
 void Agent::AttemptMission ()
 {
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	//
 	// Perform the mission
@@ -537,15 +537,15 @@ void Agent::AttemptMission ()
 #endif
 
 	delete m;
-    missions.RemoveData (0);
+    missions.erase (0);
 
 }
 
 void Agent::AttemptMission_StealFile ()
 {
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	char *targetip = m->completionA;
 	char *filename = m->completionB;
@@ -575,8 +575,8 @@ void Agent::AttemptMission_StealFile ()
 void Agent::AttemptMission_DeleteFile ()
 {
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	char *targetip = m->completionA;
 	char *filename = m->completionB;
@@ -607,8 +607,8 @@ void Agent::AttemptMission_DeleteFile ()
 void Agent::AttemptMission_ChangeAccount ()
 {
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	char sourceip [SIZE_VLOCATION_IP];
 	char targetip [SIZE_VLOCATION_IP];
@@ -638,8 +638,8 @@ void Agent::AttemptMission_TraceUser ()
 	// [ DEEP BREATH ]
 	//
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	char *hackername = m->completionA;
 	Person *hacker = game->GetWorld ()->GetPerson ( hackername );
@@ -649,7 +649,7 @@ void Agent::AttemptMission_TraceUser ()
 	// Get the hacked computer system
 	//
 
-	char *compip = m->links.GetData (0);
+	char *compip = m->links.at (0);
 	VLocation *vl = game->GetWorld ()->GetVLocation ( compip );
 	UplinkAssert (vl);
 	Computer *comp = vl->GetComputer ();
@@ -659,10 +659,10 @@ void Agent::AttemptMission_TraceUser ()
 	// Go through each log, try to trace back to the hacker
 	//
 
-	for ( int il = 0; il < comp->logbank.logs.Size (); ++il ) {
+	for ( int il = 0; il < comp->logbank.logs.size (); ++il ) {
 		if ( comp->logbank.logs.ValidIndex (il) ) {
 
-			AccessLog *al = comp->logbank.logs.GetData (il);
+			AccessLog *al = comp->logbank.logs.at (il);
 			UplinkAssert (al);
 
 			// If the log was deleted/overwritten we may be able to recover it
@@ -672,11 +672,11 @@ void Agent::AttemptMission_TraceUser ()
 
 				if ( comp->logbank.internallogs.ValidIndex (il) ) {
 
-					AccessLog *recovered = comp->logbank.internallogs.GetData (il);
+					AccessLog *recovered = comp->logbank.internallogs.at (il);
 					if ( recovered ) {
 						AccessLog *internalcopy = new AccessLog ();
 						internalcopy->SetProperties ( recovered );
-						comp->logbank.logs.PutData ( internalcopy, il );
+						comp->logbank.logs.insert( il, internalcopy);
 						delete al;
 						al = internalcopy;
 					}
@@ -691,11 +691,11 @@ void Agent::AttemptMission_TraceUser ()
 
 				// Log was overwritten or modified
 
-				AccessLog *recovered = comp->logbank.internallogs.GetData (il);
+				AccessLog *recovered = comp->logbank.internallogs.at (il);
 				if ( recovered ) {
 					AccessLog *internalcopy = new AccessLog ();
 					internalcopy->SetProperties ( recovered );
-					comp->logbank.logs.PutData ( internalcopy, il );
+					comp->logbank.logs.insert( il, internalcopy);
 					delete al;
 					al = internalcopy;
 				}
@@ -712,7 +712,7 @@ void Agent::AttemptMission_TraceUser ()
 
 				al->SetSuspicious ( LOG_NOTSUSPICIOUS );
 				if ( comp->logbank.internallogs.ValidIndex (il) )
-					comp->logbank.internallogs.GetData (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
+					comp->logbank.internallogs.at (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
 
 			}
 			else if ( al->SUSPICIOUS != LOG_NOTSUSPICIOUS &&
@@ -723,7 +723,7 @@ void Agent::AttemptMission_TraceUser ()
 
 				al->SetSuspicious ( LOG_NOTSUSPICIOUS );
 				if ( comp->logbank.internallogs.ValidIndex (il) )
-					comp->logbank.internallogs.GetData (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
+					comp->logbank.internallogs.at (il)->SetSuspicious ( LOG_NOTSUSPICIOUS );
 
 				VLocation *vlf = game->GetWorld ()->GetVLocation ( al->fromip );
 				Computer *fromcomp = NULL;
@@ -761,14 +761,14 @@ void Agent::AttemptMission_TraceUser ()
 
 							// Look up the unfortunate individual
 
-							DArray <Person *> *people = game->GetWorld ()->people.ConvertToDArray ();
+							DArray <Person *> *people = game->GetWorld ()->people.MapDataToDArray ();
 							Person *framed = NULL;
 
-							for ( int ip = 0; ip < people->Size (); ++ip ) {
+							for ( int ip = 0; ip < people->size (); ++ip ) {
 								if ( people->ValidIndex (ip) ) {
-									if ( people->GetData (ip) ) {
-										if ( strcmp ( people->GetData (ip)->localhost, traced_ip ) == 0 ) {
-											framed = people->GetData (ip);
+									if ( people->at (ip) ) {
+										if ( strcmp ( people->at (ip)->localhost, traced_ip ) == 0 ) {
+											framed = people->at (ip);
 											break;
 										}
 									}
@@ -824,8 +824,8 @@ void Agent::AttemptMission_TraceUser ()
 void Agent::AttemptMission_RemoveComputer ()
 {
 
-	if ( !(missions.GetData (0)) ) return;
-	Mission *m = missions.GetData (0);
+	if ( !(missions.at (0)) ) return;
+	Mission *m = missions.at (0);
 
 	char *targetip = m->completionA;
 
@@ -882,42 +882,42 @@ void Agent::EstablishConnection ( char *ip )
 	// The date on the logs should remain the same - so they don't get out of sync
 
 	int coverindex = NumberGenerator::RandomNumber ( numbounces - 1 ) + 1;
-	char *fromip = connection.vlocations.GetData (coverindex-1);
-	char *toip   = connection.vlocations.GetData (coverindex);
+	char *fromip = connection.vlocations.at (coverindex-1);
+	char *toip   = connection.vlocations.at (coverindex);
 
 	VLocation *vl = game->GetWorld ()->GetVLocation ( toip );
 	UplinkAssert (vl);
 	Computer *comp = vl->GetComputer ();
 	UplinkAssert (comp);
 
-	for ( int il = 0; il < comp->logbank.logs.Size (); ++il ) {
+	for ( int il = 0; il < comp->logbank.logs.size (); ++il ) {
 		if ( comp->logbank.logs.ValidIndex (il) ) {
 
-			if ( strcmp ( comp->logbank.logs.GetData (il)->fromname, name ) == 0 &&
-				 strcmp ( comp->logbank.logs.GetData (il)->fromip, fromip ) == 0 ) {
+			if ( strcmp ( comp->logbank.logs.at (il)->fromname, name ) == 0 &&
+				 strcmp ( comp->logbank.logs.at (il)->fromip, fromip ) == 0 ) {
 
 				Date logdate;
-				logdate.SetDate ( &(comp->logbank.logs.GetData (il)->date) );
+				logdate.SetDate ( &(comp->logbank.logs.at (il)->date) );
 
 				if ( rating.uplinkrating >= MINREQUIREDRATING_DELETELOGLEVEL3 ) {
 
 					// Copy an existing log over the top
-					delete comp->logbank.logs.GetData (il);
-					comp->logbank.logs.RemoveData (il);
+					delete comp->logbank.logs.at (il);
+					comp->logbank.logs.erase (il);
 					bool overwritten = false;
 
 					// Look for a valid log to put in the blank place
-					for ( int is = 0; is < comp->logbank.logs.Size (); ++is ) {
+					for ( int is = 0; is < comp->logbank.logs.size (); ++is ) {
 						if ( comp->logbank.logs.ValidIndex (is) ) {
-							if ( strcmp ( comp->logbank.logs.GetData (is)->fromip, fromip ) != 0 ) {
+							if ( strcmp ( comp->logbank.logs.at (is)->fromip, fromip ) != 0 ) {
 
-								AccessLog *copyme = comp->logbank.logs.GetData (is);
+								AccessLog *copyme = comp->logbank.logs.at (is);
 								// This log was made by someone else
 								AccessLog *al = new AccessLog ();
 								al->SetProperties ( copyme );
 								al->date.SetDate ( &logdate );
 								al->SetSuspicious ( LOG_NOTSUSPICIOUS );
-								comp->logbank.logs.PutData ( al, il );
+								comp->logbank.logs.insert(il, al);
 								overwritten = true;
 								break;
 
@@ -934,31 +934,31 @@ void Agent::EstablishConnection ( char *ip )
 						al->SetProperties ( &logdate, WorldGenerator::GetRandomLocation ()->ip, " ",
 											LOG_NOTSUSPICIOUS, LOG_TYPE_TEXT );
 						al->SetData1 ( "Accessed File" );
-						comp->logbank.logs.PutData ( al, il );
+						comp->logbank.logs.insert(il, al);
 
 					}
 
 				}
 				else if ( rating.uplinkrating >= MINREQUIREDRATING_DELETELOGLEVEL2 ) {
 
-					delete comp->logbank.logs.GetData (il);
+					delete comp->logbank.logs.at (il);
 
 					// Blank the log
 					AccessLog *al = new AccessLog ();
 					al->SetProperties ( &logdate, "Unknown", name,
 										LOG_NOTSUSPICIOUS, LOG_TYPE_DELETED);
-					comp->logbank.logs.PutData ( al, il );
+					comp->logbank.logs.insert(il, al);
 
 				}
 				else if ( rating.uplinkrating >= MINREQUIREDRATING_DELETELOGLEVEL1 ) {
 
-					delete comp->logbank.logs.GetData (il);
+					delete comp->logbank.logs.at (il);
 
 					// Delete the log, leave marker
 					AccessLog *al = new AccessLog ();
 					al->SetProperties ( &logdate, "Unknown", name,
 										LOG_NOTSUSPICIOUS, LOG_TYPE_DELETED);
-					comp->logbank.logs.PutData ( al, il );
+					comp->logbank.logs.insert(il, al);
 
 
 				}
@@ -995,14 +995,14 @@ bool Agent::Load ( FILE *file )
 
 	// Fix a problem with invalid access code
 
-    DArray <char *> *ips = codes.ConvertIndexToDArray ();
-    DArray <char *> *thecodes = codes.ConvertToDArray ();
+    DArray <char *> *ips = codes.MapKeysToDArray ();
+    DArray <char *> *thecodes = codes.MapDataToDArray ();
 
 	if ( ips && thecodes ) {
-		for ( int i = 0; i < ips->Size (); ++i ) {
-			if ( ips->ValidIndex ( i ) && thecodes->ValidIndex ( i ) && ips->GetData ( i ) ) {
-				char *thisip = ips->GetData ( i );
-				char *thiscode = thecodes->GetData ( i );
+		for ( int i = 0; i < ips->size (); ++i ) {
+			if ( ips->ValidIndex ( i ) && thecodes->ValidIndex ( i ) && ips->at ( i ) ) {
+				char *thisip = ips->at ( i );
+				char *thiscode = thecodes->at ( i );
 
 				bool success = false;
 				if ( thiscode && strlen ( thiscode ) < 256 ) {

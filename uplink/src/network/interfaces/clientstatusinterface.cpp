@@ -146,10 +146,10 @@ void ClientStatusInterface::WorldPanelDraw ( Button *button, bool highlighted, b
 
 	GciDrawText ( x + 50, y + 40, "Headlines", HELVETICA_18 );
 
-	for ( int i = 0; i < thisint->news.Size (); ++i ) {
+	for ( int i = 0; i < thisint->news.size (); ++i ) {
 		if ( thisint->news.ValidIndex (i) ) {
 
-			char *newsitem = thisint->news.GetData (i);
+			char *newsitem = thisint->news.at (i);
 			UplinkAssert (newsitem);
 
 			text_draw ( x + 10, y + 70 + i * 55, newsitem, button->width + 20 );
@@ -239,7 +239,7 @@ void ClientStatusInterface::AddNewsStory ( char *newsstory )
 
 	news.PutDataAtStart ( newscopy );
 
-	while ( news.Size () > 6 )	news.RemoveData (6);
+	while ( news.size () > 6 )	news.erase (6);
 
 	EclDirtyButton ( "status_worldbg" );
 

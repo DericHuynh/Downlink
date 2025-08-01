@@ -184,7 +184,7 @@ Computer  *LanGenerator::LoadLAN ( char *filename )
 
 		if ( indexUsed != -1 ) {
 			UplinkAssert ( cluster->systems.ValidIndex ( indexUsed ) );
-			LanComputerSystem *system = cluster->systems.GetData(indexUsed);
+			LanComputerSystem *system = cluster->systems.at(indexUsed);
 			system->data1 = data1;
 			system->data2 = data2;
 			system->data3 = data3;
@@ -246,9 +246,9 @@ Computer  *LanGenerator::LoadLAN ( char *filename )
 		thisLine >> name >> systemIndex >> validIndex >> ws;
 
 		if ( cluster->systems.ValidIndex ( systemIndex ) ) {
-			LanComputerSystem *system = cluster->systems.GetData(systemIndex);
+			LanComputerSystem *system = cluster->systems.at(systemIndex);
 			if ( system )
-				system->validSubnets.PutData( validIndex );
+				system->validSubnets.push_back( validIndex );
 		}
 
     }
@@ -446,23 +446,23 @@ void LanGenerator::SanityCheckLAN ( LanComputer *comp )
     // Sanity check those screens
     //
 
-    for ( int i = 0; i < comp->screens.Size(); ++i ) {
+    for ( int i = 0; i < comp->screens.size(); ++i ) {
         if ( comp->screens.ValidIndex (i) ) {
 
-            ComputerScreen *cs = comp->screens.GetData(i);
+            ComputerScreen *cs = comp->screens.at(i);
             UplinkAssert (cs);
             if ( cs->GetOBJECTID () == OID_HIGHSECURITYSCREEN ) {
 
                 HighSecurityScreen *hss = (HighSecurityScreen *) cs;
 
-                for ( int j = 0; j < hss->systems.Size(); ++j ) {
+                for ( int j = 0; j < hss->systems.size(); ++j ) {
                     if ( hss->systems.ValidIndex(j) ) {
 
-                        MenuScreenOption *mso = hss->systems.GetData(j);
+                        MenuScreenOption *mso = hss->systems.at(j);
                         UplinkAssert (mso);
                         if ( comp->screens.ValidIndex(mso->nextpage) ) {
 
-                            ComputerScreen *nextPage = comp->screens.GetData(mso->nextpage);
+                            ComputerScreen *nextPage = comp->screens.at(mso->nextpage);
                             if ( nextPage->GetOBJECTID () == OID_MENUSCREEN ) {
 
                                 printf ( "ERROR Screen %d Points to %d at %s", i, mso->nextpage, comp->companyname );
@@ -500,8 +500,8 @@ void LanGenerator::GenerateLANCluster ( LanComputer *comp, int difficulty )
 
 	UplinkAssert ( cluster->systems.ValidIndex ( cluster->input ) );
 	UplinkAssert ( cluster->systems.ValidIndex ( cluster->output ) );
-    LanComputerSystem *inputSys = cluster->systems.GetData( cluster->input );
-    LanComputerSystem *outputSys = cluster->systems.GetData( cluster->output );
+    LanComputerSystem *inputSys = cluster->systems.at( cluster->input );
+    LanComputerSystem *outputSys = cluster->systems.at( cluster->output );
 
     int routerIndex = GenerateRouter ( comp, cluster, inputSys->x - 70, inputSys->y - 100, 1 );
     cluster->AddLanLink( routerIndex, 0.5, 1.0, cluster->input, 0.5, 0.0, 1 );
@@ -558,7 +558,7 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int authIndex = GenerateAuthentication ( comp, cluster, x + width - 60, y + height / 2, 2 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         cluster->AddLanLink ( hubIndex, 0.5, 1.0, lockIndex, 0.5, 0.0, 1 );
@@ -575,7 +575,7 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int authIndex = GenerateAuthentication ( comp, cluster, x, y + height - 60, 2 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         cluster->AddLanLink ( hubIndex, 1.0, 0.5, lockIndex, 0.5, 0.0, 1 );
@@ -595,12 +595,12 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int termIndex = GenerateTerminal ( comp, cluster, x, y + height / 2, 1 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( isolIndex ) );
-        LanComputerSystem *isol = cluster->systems.GetData( isolIndex );
+        LanComputerSystem *isol = cluster->systems.at( isolIndex );
         isol->data1 = lock1Index;
         isol->data2 = lock2Index;
 
 		UplinkAssert ( cluster->systems.ValidIndex ( lock1Index ) );
-        LanComputerSystem *lock1 = cluster->systems.GetData( lock1Index );
+        LanComputerSystem *lock1 = cluster->systems.at( lock1Index );
         lock1->data1 = 0;
 
         cluster->AddLanLink ( hubIndex, 1.0, 0.5, lock1Index, 0.5, 0.0, 1 );
@@ -621,7 +621,7 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int termIndex = GenerateTerminal ( comp, cluster, x, y + height - 40, 1 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         cluster->AddLanLink ( hubIndex, 1.0, 0.5, authIndex, 0.0, 0.5, 1 );
@@ -641,10 +641,10 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int termIndex = GenerateTerminal ( comp, cluster, x + width - 40, y + height / 2, 1 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( termIndex ) );
-        LanComputerSystem *terminal = cluster->systems.GetData(termIndex);
-        terminal->validSubnets.PutData( t1Index );
-        terminal->validSubnets.PutData( t2Index );
-        terminal->validSubnets.PutData( t3Index );
+        LanComputerSystem *terminal = cluster->systems.at(termIndex);
+        terminal->validSubnets.push_back( t1Index );
+        terminal->validSubnets.push_back( t2Index );
+        terminal->validSubnets.push_back( t3Index );
 
         cluster->AddLanLink ( hubIndex, 0.25, 1.0, t1Index, 1.0, 0.5, 1 );
         cluster->AddLanLink ( hubIndex, 0.5, 1.0, t2Index, 1.0, 0.5, 1 );
@@ -663,12 +663,12 @@ void LanGenerator::GenerateLAN_Level0Cluster ( LanComputer *comp, LanCluster *cl
         int modemIndex = GenerateModem ( comp, cluster, x + width/2, y + height - 40, 2 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( isolIndex ) );
-        LanComputerSystem *isol = cluster->systems.GetData( isolIndex );
+        LanComputerSystem *isol = cluster->systems.at( isolIndex );
         isol->data1 = lock1Index;
         isol->data2 = lock2Index;
 
 		UplinkAssert ( cluster->systems.ValidIndex ( lock1Index ) );
-        LanComputerSystem *lock1 = cluster->systems.GetData( lock1Index );
+        LanComputerSystem *lock1 = cluster->systems.at( lock1Index );
         lock1->data1 = 0;
 
         cluster->AddLanLink ( lock1Index, 0.5, 1.0, isolIndex, 0.5, 0.0, 1 );
@@ -710,10 +710,10 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int t3Index = GenerateTerminal ( comp, cluster, x2, y2 + 30, 1 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData(authIndex);
-        auth->validSubnets.PutData( t1Index );
-        auth->validSubnets.PutData( t2Index );
-        auth->validSubnets.PutData( t3Index );
+        LanComputerSystem *auth = cluster->systems.at(authIndex);
+        auth->validSubnets.push_back( t1Index );
+        auth->validSubnets.push_back( t2Index );
+        auth->validSubnets.push_back( t3Index );
         auth->data1 = lockIndex;
 
         cluster->AddLanLink ( hub1Index, 0.0, 0.5, hub2Index, 0.5, 0.0, 1 );
@@ -738,11 +738,11 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int isoIndex = GenerateIsolationBridge ( comp, cluster, x2, y + height - 40, 2 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lock1Index;
 
 		UplinkAssert ( cluster->systems.ValidIndex ( isoIndex ) );
-        LanComputerSystem *iso = cluster->systems.GetData( isoIndex );
+        LanComputerSystem *iso = cluster->systems.at( isoIndex );
         iso->data1 = lock1Index;
         iso->data2 = lock2Index;
 
@@ -768,13 +768,13 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int term3Index = GenerateTerminal ( comp, cluster, x1, y3, 2 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( auth1Index ) );
-        LanComputerSystem *auth1 = cluster->systems.GetData( auth1Index );
+        LanComputerSystem *auth1 = cluster->systems.at( auth1Index );
         auth1->data1 = lock1Index;
 
 		UplinkAssert ( cluster->systems.ValidIndex ( auth2Index ) );
-        LanComputerSystem *auth2 = cluster->systems.GetData( auth2Index );
+        LanComputerSystem *auth2 = cluster->systems.at( auth2Index );
         auth2->data1 = lock2Index;
-        auth2->validSubnets.PutData( term1Index );
+        auth2->validSubnets.push_back( term1Index );
 
         cluster->AddLanLink ( hubIndex, 1.0, 0.5, auth1Index, 0.0, 0.5, 1 );
         cluster->AddLanLink ( auth1Index, 1.0, 0.5, lock1Index, 0.0, 0.5, 1 );
@@ -798,16 +798,16 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int receiIndex = GenerateRadioReceiver ( comp, cluster, x3, y1, 3 );
 
 		UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
 		UplinkAssert ( cluster->systems.ValidIndex ( receiIndex ) );
-        LanComputerSystem *recei = cluster->systems.GetData( receiIndex );
+        LanComputerSystem *recei = cluster->systems.at( receiIndex );
         recei->data1 = LanGenerator::GetRadioFrequency ( usedRadioFrenquencies );
         recei->data2 = NumberGenerator::RandomNumber ( 10 );
 
         UplinkAssert ( cluster->systems.ValidIndex ( termIndex ) );
-        LanComputerSystem *term = cluster->systems.GetData( termIndex );
+        LanComputerSystem *term = cluster->systems.at( termIndex );
         char freqData [128];
         UplinkSnprintf ( freqData, sizeof ( freqData ), "Radio Receiver Frequency : %d.%d Ghz", recei->data1, recei->data2 );
         HideData ( comp, term, freqData );
@@ -834,11 +834,11 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int receiIndex = GenerateRadioReceiver ( comp, cluster, x2, y + height - 40, 3 );
 
         UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         UplinkAssert ( cluster->systems.ValidIndex ( receiIndex ) );
-        LanComputerSystem *recei = cluster->systems.GetData( receiIndex );
+        LanComputerSystem *recei = cluster->systems.at( receiIndex );
         recei->data1 = LanGenerator::GetRadioFrequency ( usedRadioFrenquencies );
         recei->data2 = NumberGenerator::RandomNumber ( 10 );
 
@@ -847,10 +847,10 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         LanComputerSystem *term = NULL;
         switch ( NumberGenerator::RandomNumber(3) )
         {
-            case 0 : UplinkAssert ( cluster->systems.ValidIndex ( t1Index ) ); term = cluster->systems.GetData( t1Index ); break;
-            case 1 : UplinkAssert ( cluster->systems.ValidIndex ( t2Index ) ); term = cluster->systems.GetData( t2Index ); break;
-            case 2 : UplinkAssert ( cluster->systems.ValidIndex ( t3Index ) ); term = cluster->systems.GetData( t3Index ); break;
-            default: UplinkAssert ( cluster->systems.ValidIndex ( t3Index ) ); term = cluster->systems.GetData( t3Index );
+            case 0 : UplinkAssert ( cluster->systems.ValidIndex ( t1Index ) ); term = cluster->systems.at( t1Index ); break;
+            case 1 : UplinkAssert ( cluster->systems.ValidIndex ( t2Index ) ); term = cluster->systems.at( t2Index ); break;
+            case 2 : UplinkAssert ( cluster->systems.ValidIndex ( t3Index ) ); term = cluster->systems.at( t3Index ); break;
+            default: UplinkAssert ( cluster->systems.ValidIndex ( t3Index ) ); term = cluster->systems.at( t3Index );
         }
         HideData ( comp, term, freqData );
 
@@ -880,12 +880,12 @@ void LanGenerator::GenerateLAN_Level1Cluster ( LanComputer *comp, LanCluster *cl
         int modemIndex = GenerateModem ( comp, cluster, x3, y, 3, phoneNum, sizeof ( phoneNum ) );
 
         UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
-        auth->validSubnets.PutData ( term1Index );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
+        auth->validSubnets.push_back ( term1Index );
         auth->data1 = lockIndex;
 
         UplinkAssert ( cluster->systems.ValidIndex ( term2Index ) );
-        LanComputerSystem *term2 = cluster->systems.GetData( term2Index );
+        LanComputerSystem *term2 = cluster->systems.at( term2Index );
         char data [128];
         UplinkSnprintf ( data, sizeof ( data ), "Local Dial-up number : %s", phoneNum );
         HideData ( comp, term2, data );
@@ -934,7 +934,7 @@ void LanGenerator::GenerateLAN_Level2Cluster ( LanComputer *comp, LanCluster *cl
         cluster->AddLanLink ( hubIndex, 1.0, 0.5, input2, 0.5, 0.0, 1 );
 
         UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         cluster->centreX = 600 / 2;
@@ -995,7 +995,7 @@ void LanGenerator::GenerateLAN_Level2Cluster ( LanComputer *comp, LanCluster *cl
         int msIndex = GenerateMainServer ( comp, cluster, 450, 0, 1 );
 
         UplinkAssert ( cluster->systems.ValidIndex ( msIndex ) );
-        LanComputerSystem *ms = cluster->systems.GetData( msIndex );
+        LanComputerSystem *ms = cluster->systems.at( msIndex );
         ms->data1 = l1Index;
         ms->data2 = l2Index;
         ms->data3 = l3Index;
@@ -1119,11 +1119,11 @@ void LanGenerator::GenerateLAN_Level4Cluster ( LanComputer *comp, LanCluster *cl
         // Remaining
 
         UplinkAssert ( cluster->systems.ValidIndex ( authIndex ) );
-        LanComputerSystem *auth = cluster->systems.GetData( authIndex );
+        LanComputerSystem *auth = cluster->systems.at( authIndex );
         auth->data1 = lockIndex;
 
         UplinkAssert ( cluster->systems.ValidIndex ( termIndex ) );
-        LanComputerSystem *term = cluster->systems.GetData( termIndex );
+        LanComputerSystem *term = cluster->systems.at( termIndex );
         char data[256];
         UplinkSnprintf ( data, sizeof ( data ), "Local Dial up number: %s", phoneNum );
         HideData ( comp, term, data );
@@ -1147,7 +1147,7 @@ void LanGenerator::GenerateLAN_Level4Cluster ( LanComputer *comp, LanCluster *cl
         leftCluster->AddLanLink ( leftCluster->output, 1.0, 0.5, auth1Index, 0.0, 0.5, 1 );
         leftCluster->SetOutput( auth1Index );
         UplinkAssert ( leftCluster->systems.ValidIndex ( rec1Index ) );
-        LanComputerSystem *recei1 = leftCluster->systems.GetData( rec1Index );
+        LanComputerSystem *recei1 = leftCluster->systems.at( rec1Index );
         recei1->data1 = LanGenerator::GetRadioFrequency ( usedRadioFrenquencies );
         recei1->data2 = NumberGenerator::RandomNumber ( 10 );
         leftCluster->Rotate( 1 );
@@ -1165,7 +1165,7 @@ void LanGenerator::GenerateLAN_Level4Cluster ( LanComputer *comp, LanCluster *cl
         rightCluster->AddLanLink ( rightCluster->output, 1.0, 0.5, auth2Index, 0.0, 0.5, 1 );
         rightCluster->SetOutput ( auth2Index );
         UplinkAssert ( rightCluster->systems.ValidIndex ( rec2Index ) );
-        LanComputerSystem *recei2 = rightCluster->systems.GetData( rec2Index );
+        LanComputerSystem *recei2 = rightCluster->systems.at( rec2Index );
         recei2->data1 = LanGenerator::GetRadioFrequency ( usedRadioFrenquencies );
         recei2->data2 = NumberGenerator::RandomNumber ( 10 );
         rightCluster->Rotate( 3 );
@@ -1183,7 +1183,7 @@ void LanGenerator::GenerateLAN_Level4Cluster ( LanComputer *comp, LanCluster *cl
         lowerCluster->AddLanLink ( lowerCluster->output, 1.0, 0.5, auth3Index, 0.0, 0.5, 1 );
         lowerCluster->SetOutput ( auth3Index );
         UplinkAssert ( lowerCluster->systems.ValidIndex ( rec3Index ) );
-        LanComputerSystem *recei3 = lowerCluster->systems.GetData( rec3Index );
+        LanComputerSystem *recei3 = lowerCluster->systems.at( rec3Index );
         recei3->data1 = LanGenerator::GetRadioFrequency ( usedRadioFrenquencies );
         recei3->data2 = NumberGenerator::RandomNumber ( 10 );
         lowerCluster->Merge( cluster, comp );
@@ -1207,25 +1207,25 @@ void LanGenerator::GenerateLAN_Level4Cluster ( LanComputer *comp, LanCluster *cl
         int msIndex = GenerateMainServer ( comp, cluster, x1 + w / 2, y1 + h / 2, 1 );
 
         UplinkAssert ( cluster->systems.ValidIndex ( msIndex ) );
-        LanComputerSystem *ms = cluster->systems.GetData( msIndex );
+        LanComputerSystem *ms = cluster->systems.at( msIndex );
         ms->data1 = l1Index;
         ms->data2 = l2Index;
         ms->data3 = l3Index;
 
         UplinkAssert ( cluster->systems.ValidIndex ( output1 ) );
-        LanComputerSystem *auth1 = cluster->systems.GetData( output1 );
+        LanComputerSystem *auth1 = cluster->systems.at( output1 );
         auth1->data1 = l1Index;
 
         UplinkAssert ( cluster->systems.ValidIndex ( output2 ) );
-        LanComputerSystem *auth2 = cluster->systems.GetData( output2 );
+        LanComputerSystem *auth2 = cluster->systems.at( output2 );
         auth2->data1 = l2Index;
 
         UplinkAssert ( cluster->systems.ValidIndex ( output3 ) );
-        LanComputerSystem *auth3 = cluster->systems.GetData( output3 );
+        LanComputerSystem *auth3 = cluster->systems.at( output3 );
         auth3->data1 = l3Index;
 
         UplinkAssert ( cluster->systems.ValidIndex ( t1Index ) );
-        LanComputerSystem *t1 = cluster->systems.GetData( t1Index );
+        LanComputerSystem *t1 = cluster->systems.at( t1Index );
         char data [512];
         UplinkSnprintf ( data, sizeof ( data ), "Known Radio Receiver Frequencies :\n\n"
 												"Receiver A : %d.%d Ghz\n"
@@ -1459,7 +1459,7 @@ int LanGenerator::GenerateLock ( LanComputer *comp, LanCluster *cluster, int x, 
 	int systemIndex = cluster->AddLanSystem( LANSYSTEM_LOCK, x, y, security, screenIndex, screenIndex );
 
     UplinkAssert ( cluster->systems.ValidIndex ( systemIndex ) );
-	LanComputerSystem *lock = cluster->systems.GetData(systemIndex);
+	LanComputerSystem *lock = cluster->systems.at(systemIndex);
 	UplinkAssert (lock);
 	lock->data1 = 1;
 
@@ -1881,7 +1881,7 @@ bool LanGenerator::HideData ( LanComputer *comp, int systemIndex, char *data )
     UplinkAssert (comp);
 
     if ( comp->systems.ValidIndex(systemIndex) ) {
-        LanComputerSystem *system = comp->systems.GetData( systemIndex );
+        LanComputerSystem *system = comp->systems.at( systemIndex );
         return HideData ( comp, system, data );
     }
 
@@ -1929,14 +1929,14 @@ int LanGenerator::GetRadioFrequency ( LList <int> *usedRadioFrenquencies )
 		newFrequency = RADIOTRANSMITTER_MINRANGE + NumberGenerator::RandomNumber( RADIOTRANSMITTER_MAXRANGE - RADIOTRANSMITTER_MINRANGE );
 
 		foundFrequency = false;
-		for ( int i = 0; i < usedRadioFrenquencies->Size (); i++ )
-			if ( usedRadioFrenquencies->GetData ( i ) == newFrequency ) {
+		for ( int i = 0; i < usedRadioFrenquencies->size (); i++ )
+			if ( usedRadioFrenquencies->at ( i ) == newFrequency ) {
 				foundFrequency = true;
 				break;
 			}
 	} while ( foundFrequency );
 
-	usedRadioFrenquencies->PutData ( newFrequency );
+	usedRadioFrenquencies->push_back ( newFrequency );
 	return newFrequency;
 
 }
@@ -1956,7 +1956,7 @@ LanCluster::~LanCluster ()
 
 int LanCluster::AddLanSystem ( LanComputerSystem *system )
 {
-    return systems.PutData( system );
+    return systems.push_back( system );
 }
 
 int LanCluster::AddLanSystem ( int TYPE, int x, int y, int security, int screenIndex, int dataScreenIndex )
@@ -1987,7 +1987,7 @@ int LanCluster::AddLanLink ( int from, float fromX, float fromY,
     link->toY = toY;
 	link->port = NumberGenerator::RandomNumber ( LAN_LINKPORTRANGE );
 	link->security = security;
-    return links.PutData ( link );
+    return links.push_back ( link );
 }
 
 bool LanCluster::VerifyLanLink ( int from, float fromX, float fromY, 
@@ -2019,10 +2019,10 @@ void LanCluster::Rotate ( int angle )
 
     for ( int i = 0; i < angle; ++i ) {
 
-        for ( int s = 0; s < systems.Size(); ++s ) {
+        for ( int s = 0; s < systems.size(); ++s ) {
             if ( systems.ValidIndex(s) ) {
 
-                LanComputerSystem *system = systems.GetData(s);
+                LanComputerSystem *system = systems.at(s);
                 UplinkAssert (system);
 
                 int tempX = system->x - centreX;
@@ -2042,10 +2042,10 @@ void LanCluster::Rotate ( int angle )
 
     for ( int j = 0; j < angle; ++j ) {
 
-        for ( int l = 0; l < links.Size(); ++l ) {
+        for ( int l = 0; l < links.size(); ++l ) {
             if ( links.ValidIndex(l) ) {
 
-                LanComputerLink *link = links.GetData(l);
+                LanComputerLink *link = links.at(l);
                 UplinkAssert (link);
 
                 float tempX = link->fromX;
@@ -2073,32 +2073,32 @@ void LanCluster::Merge ( LanCluster *target, LanComputer *comp )
     //
     // Make a store for the newly assigned indexes
 
-    int *newIndexes = new int [ systems.Size() ];
-    for ( int k = 0; k < systems.Size(); ++k )
+    int *newIndexes = new int [ systems.size() ];
+    for ( int k = 0; k < systems.size(); ++k )
         newIndexes[k] = -1;
 
     //
     // Transfer all systems
 
-    for ( int i = 0; i < systems.Size (); ++i ) {
+    for ( int i = 0; i < systems.size (); ++i ) {
         if ( systems.ValidIndex (i) ) {
 
-            LanComputerSystem *system = systems.GetData( i );
+            LanComputerSystem *system = systems.at( i );
             newIndexes[i] = target->AddLanSystem ( system );
 
             if ( system->TYPE == LANSYSTEM_MODEM ) {
 
 				if ( comp->screens.ValidIndex ( system->screenIndex ) ) {
-					int targetScreenIndex = ((UserIDScreen *) comp->screens.GetData( system->screenIndex ))->nextpage;
-					DArray <VLocation *> *locations = game->GetWorld ()->locations.ConvertToDArray();
-					for ( int i = 0; i < locations->Size(); ++i ) {
+					int targetScreenIndex = ((UserIDScreen *) comp->screens.at( system->screenIndex ))->nextpage;
+					DArray <VLocation *> *locations = game->GetWorld ()->locations.MapDataToDArray();
+					for ( int i = 0; i < locations->size(); ++i ) {
 						if ( locations->ValidIndex(i) ) {
-							if ( locations->GetData(i)->GetOBJECTID() == OID_VLOCATIONSPECIAL ) {
+							if ( locations->at(i)->GetOBJECTID() == OID_VLOCATIONSPECIAL ) {
 
-								VLocationSpecial *vl = (VLocationSpecial *) locations->GetData(i);
+								VLocationSpecial *vl = (VLocationSpecial *) locations->at(i);
 								if ( strcmp ( vl->computer, comp->name ) == 0 &&
 									 vl->screenIndex == targetScreenIndex &&
-									 vl->securitySystemIndex < systems.Size () ) {
+									 vl->securitySystemIndex < systems.size () ) {
 
 									vl->SetSecuritySystemIndex( newIndexes[vl->securitySystemIndex] );
 									break;
@@ -2119,10 +2119,10 @@ void LanCluster::Merge ( LanCluster *target, LanComputer *comp )
     //
     // Transfer all links
 
-    for ( int j = 0; j < links.Size (); ++j ) {
+    for ( int j = 0; j < links.size (); ++j ) {
         if ( links.ValidIndex (j) ) {
 
-            LanComputerLink *link = links.GetData( j );
+            LanComputerLink *link = links.at( j );
             target->AddLanLink ( newIndexes[link->from], link->fromX, link->fromY,
                                  newIndexes[link->to], link->toX, link->toY, link->security );
 
@@ -2134,10 +2134,10 @@ void LanCluster::Merge ( LanCluster *target, LanComputer *comp )
     //
     // Update all data values
 
-    for ( int l = 0; l < systems.Size(); ++l ) {
+    for ( int l = 0; l < systems.size(); ++l ) {
         if ( systems.ValidIndex(l) ) {
 
-            LanComputerSystem *system = systems.GetData(l);
+            LanComputerSystem *system = systems.at(l);
 
             if ( system->TYPE == LANSYSTEM_AUTHENTICATION ||
                  system->TYPE == LANSYSTEM_ISOLATIONBRIDGE ||
@@ -2149,11 +2149,11 @@ void LanCluster::Merge ( LanCluster *target, LanComputer *comp )
 
             }
 
-            for ( int m = 0; m < system->validSubnets.Size(); ++m ) {
+            for ( int m = 0; m < system->validSubnets.size(); ++m ) {
                 if ( system->validSubnets.ValidIndex(m) ) {
 
-                    int oldIndex = system->validSubnets.GetData(m);
-                    system->validSubnets.PutData( newIndexes[oldIndex], m );
+                    int oldIndex = system->validSubnets.at(m);
+                    system->validSubnets.insert(m, newIndexes[oldIndex]);
 
                 }
             }
@@ -2176,32 +2176,32 @@ void LanCluster::Merge ( LanComputer *target )
     //
     // Make a store for the newly assigned indexes
 
-    int *newIndexes = new int [ systems.Size() ];
-    for ( int k = 0; k < systems.Size(); ++k )
+    int *newIndexes = new int [ systems.size() ];
+    for ( int k = 0; k < systems.size(); ++k )
         newIndexes[k] = -1;
 
     //
     // Transfer all systems
 
-    for ( int i = 0; i < systems.Size (); ++i ) {
+    for ( int i = 0; i < systems.size (); ++i ) {
         if ( systems.ValidIndex (i) ) {
 
-            LanComputerSystem *system = systems.GetData( i );
+            LanComputerSystem *system = systems.at( i );
             newIndexes[i] = target->AddLanSystem ( system );
 
             if ( system->TYPE == LANSYSTEM_MODEM ) {
 
 				if ( target->screens.ValidIndex ( system->screenIndex ) ) {
-					int targetScreenIndex = ((UserIDScreen *) target->screens.GetData( system->screenIndex ))->nextpage;
-					DArray <VLocation *> *locations = game->GetWorld ()->locations.ConvertToDArray();
-					for ( int i = 0; i < locations->Size(); ++i ) {
+					int targetScreenIndex = ((UserIDScreen *) target->screens.at( system->screenIndex ))->nextpage;
+					DArray <VLocation *> *locations = game->GetWorld ()->locations.MapDataToDArray();
+					for ( int i = 0; i < locations->size(); ++i ) {
 						if ( locations->ValidIndex(i) ) {
-							if ( locations->GetData(i)->GetOBJECTID() == OID_VLOCATIONSPECIAL ) {
+							if ( locations->at(i)->GetOBJECTID() == OID_VLOCATIONSPECIAL ) {
 
-								VLocationSpecial *vl = (VLocationSpecial *) locations->GetData(i);
+								VLocationSpecial *vl = (VLocationSpecial *) locations->at(i);
 								if ( strcmp ( vl->computer, target->name ) == 0 &&
 									 vl->screenIndex == targetScreenIndex &&
-									 vl->securitySystemIndex < systems.Size () ) {
+									 vl->securitySystemIndex < systems.size () ) {
 
 									vl->SetSecuritySystemIndex( newIndexes[vl->securitySystemIndex] );
 									break;
@@ -2222,10 +2222,10 @@ void LanCluster::Merge ( LanComputer *target )
     //
     // Transfer all links
 
-    for ( int j = 0; j < links.Size (); ++j ) {
+    for ( int j = 0; j < links.size (); ++j ) {
         if ( links.ValidIndex (j) ) {
 
-            LanComputerLink *link = links.GetData( j );
+            LanComputerLink *link = links.at( j );
             target->AddLanLink ( newIndexes[link->from], link->fromX, link->fromY,
                                  newIndexes[link->to], link->toX, link->toY, link->security );
 
@@ -2237,10 +2237,10 @@ void LanCluster::Merge ( LanComputer *target )
     //
     // Update all data values
 
-    for ( int l = 0; l < systems.Size(); ++l ) {
+    for ( int l = 0; l < systems.size(); ++l ) {
         if ( systems.ValidIndex(l) ) {
 
-            LanComputerSystem *system = systems.GetData(l);
+            LanComputerSystem *system = systems.at(l);
 
             if ( system->TYPE == LANSYSTEM_AUTHENTICATION ||
                  system->TYPE == LANSYSTEM_ISOLATIONBRIDGE ||
@@ -2252,11 +2252,11 @@ void LanCluster::Merge ( LanComputer *target )
 
             }
 
-            for ( int m = 0; m < system->validSubnets.Size(); ++m ) {
+            for ( int m = 0; m < system->validSubnets.size(); ++m ) {
                 if ( system->validSubnets.ValidIndex(m) ) {
 
-                    int oldIndex = system->validSubnets.GetData(m);
-                    system->validSubnets.PutData( newIndexes[oldIndex], m );
+                    int oldIndex = system->validSubnets.at(m);
+                    system->validSubnets.insert(m, newIndexes[oldIndex]);
 
                 }
             }

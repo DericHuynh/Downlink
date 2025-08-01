@@ -44,11 +44,11 @@ Player::~Player ()
 void Player::GiveAllLinks ()
 {
 
-	DArray <VLocation *> *locs = game->GetWorld ()->locations.ConvertToDArray ();
+	DArray <VLocation *> *locs = game->GetWorld ()->locations.MapDataToDArray ();
 
-	for ( int i = 0; i < locs->Size (); ++i )
+	for ( int i = 0; i < locs->size (); ++i )
 		if ( locs->ValidIndex (i) )
-			GiveLink ( locs->GetData (i)->ip );
+			GiveLink ( locs->at (i)->ip );
 
 	delete locs;
 
@@ -74,9 +74,9 @@ bool Player::IsPlayerAccount ( char *bankip, char *accno )
 	char searchstring [64];
 	UplinkSnprintf ( searchstring, sizeof ( searchstring ), "%s %s", bankip, accno );
 
-	for ( int i = 0; i < accounts.Size (); ++i )
+	for ( int i = 0; i < accounts.size (); ++i )
 		if ( accounts.ValidIndex (i) )
-			if ( strcmp ( accounts.GetData (i), searchstring ) == 0 )
+			if ( strcmp ( accounts.at (i), searchstring ) == 0 )
 				return true;
 
 	return false;
@@ -86,7 +86,7 @@ bool Player::IsPlayerAccount ( char *bankip, char *accno )
 int Player::NumSharesOwned	( char *companyname )
 {
 
-	char *stringdata = shares.GetData ( companyname );
+	char *stringdata = shares.at ( companyname );
 
 	if ( !stringdata )
 		return 0;
@@ -105,7 +105,7 @@ int Player::NumSharesOwned	( char *companyname )
 int Player::SharesPricePaid ( char *companyname )
 {
 
-	char *stringdata = shares.GetData ( companyname );
+	char *stringdata = shares.at ( companyname );
 
 	if ( !stringdata )
 		return 0;
@@ -130,7 +130,7 @@ void Player::TradeShares ( char *companyname, int howmany )
 	Company *company = game->GetWorld ()->GetCompany ( companyname );
 	UplinkAssert (company);
 
-	char *stringdata = shares.GetData ( companyname );
+	char *stringdata = shares.at ( companyname );
 
 
 	if ( !stringdata ) {										// No existing transactions
@@ -144,7 +144,7 @@ void Player::TradeShares ( char *companyname, int howmany )
 				size_t newentrysize = 16;
 				char *newentry = new char [newentrysize];
 				UplinkSnprintf ( newentry, newentrysize, "%d %d", howmany, cost );
-				shares.PutData ( companyname, newentry );
+				shares.insert ( companyname, newentry );
 
 				ChangeBalance ( howmany * company->GetSharePrice () * -1, "International Stock Market" );
 
@@ -191,7 +191,7 @@ void Player::TradeShares ( char *companyname, int howmany )
 		size_t newentrysize = 16;
 		char *newentry = new char [newentrysize];
 		UplinkSnprintf ( newentry, newentrysize, "%d %d", numowned, pricepaid );
-		shares.PutData ( companyname, newentry );
+		shares.insert ( companyname, newentry );
 
 	}
 
@@ -259,7 +259,7 @@ int Player::TimeRemaining ()
 
     for ( int i = numlocations; i >= 0; --i ) {
 
-        char *thisip = GetConnection ()->vlocations.GetData ( i );
+        char *thisip = GetConnection ()->vlocations.at ( i );
         UplinkAssert (thisip);
         timeremaining += TimeToTrace ( GetRemoteHost ()->ip, thisip );
 
@@ -340,7 +340,7 @@ void Player::Update ()
 
                 // Work out time to next trace
 
-                char *thisip = GetConnection ()->vlocations.GetData ( GetConnection ()->GetSize () - GetConnection ()->traceprogress - 1 );
+                char *thisip = GetConnection ()->vlocations.at ( GetConnection ()->GetSize () - GetConnection ()->traceprogress - 1 );
                 UplinkAssert (thisip);
 
                 int timetonexttrace = TimeToTrace ( GetRemoteHost ()->ip, thisip );

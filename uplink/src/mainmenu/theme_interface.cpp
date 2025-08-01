@@ -40,7 +40,7 @@ void ThemeInterface::ApplyClick ( Button *button )
 
     DArray <char *> *themes = ListAvailableThemes ();
     if ( themes->ValidIndex (currentSelect) ) {
-        char *newThemeName = themes->GetData( currentSelect );
+        char *newThemeName = themes->at( currentSelect );
         app->GetOptions ()->SetThemeName ( newThemeName );   
     }
 
@@ -79,24 +79,24 @@ DArray <char *> *ThemeInterface::ListAvailableThemes ()
 
         themes = ListSubdirs ( app->path );
 
-		for ( int i = themes->Size() - 1; i >= 0; --i ) {
+		for ( int i = themes->size() - 1; i >= 0; --i ) {
 			if ( themes->ValidIndex (i) ) {
 
 				// Is there a theme in here?
 
 				char themeFilename[256];
-				UplinkSnprintf ( themeFilename, sizeof ( themeFilename ), "%s/theme.txt", themes->GetData(i) );
+				UplinkSnprintf ( themeFilename, sizeof ( themeFilename ), "%s/theme.txt", themes->at(i) );
 				
                 if ( !RsArchiveFileLoaded (themeFilename) ) {
-					delete [] themes->GetData (i);
-					themes->RemoveData (i);
+					delete [] themes->at (i);
+					themes->erase (i);
 					continue;
 				}
 
-                char *lowercaseThemename = LowerCaseString( themes->GetData(i) );
+                char *lowercaseThemename = LowerCaseString( themes->at(i) );
 				if ( strcmp ( lowercaseThemename, "graphics" ) == 0 ) {
-					delete [] themes->GetData (i);
-                    themes->RemoveData (i);
+					delete [] themes->at (i);
+                    themes->erase (i);
 				}
                 delete [] lowercaseThemename;
 
@@ -174,7 +174,7 @@ void ThemeInterface::ThemeNameClick ( Button *button )
     currentSelect = index;
 
     DArray <char *> *themes = ListAvailableThemes ();
-    for ( int i = 0; i < themes->Size(); ++i ) {
+    for ( int i = 0; i < themes->size(); ++i ) {
         if ( themes->ValidIndex (i) ) {
 
             char bname [64];
@@ -215,10 +215,10 @@ void ThemeInterface::Create ()
 
         int ypos = screenh - 130;
 
-        for ( int i = 0; i < themes->Size(); ++i ) {
+        for ( int i = 0; i < themes->size(); ++i ) {
             if ( themes->ValidIndex (i) ) {
 
-                char *themeName = themes->GetData(i);
+                char *themeName = themes->at(i);
                 char bname [64];
                 UplinkSnprintf ( bname, sizeof ( bname ), "theme %d", i );
                 EclRegisterButton ( screenw - 210, screenh - 40, 200, 15, themeName, "Select this theme", bname );
@@ -286,7 +286,7 @@ void ThemeInterface::Remove ()
 
         if ( themes ) {
 
-            for ( int i = 0; i < themes->Size(); ++i ) {
+            for ( int i = 0; i < themes->size(); ++i ) {
                 if ( themes->ValidIndex(i) ) {
             
                     char bname [64];

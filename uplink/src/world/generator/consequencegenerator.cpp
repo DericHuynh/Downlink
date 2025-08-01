@@ -474,14 +474,14 @@ void ConsequenceGenerator::ComputerHacked ( Computer *comp, AccessLog *al )
 
 			bool alreadynoticed = false;
 
-			for ( int i = 0; i < uplink->missions.Size (); ++i ) {
+			for ( int i = 0; i < uplink->missions.size (); ++i ) {
 
 				Mission *m = uplink->GetMission ( i );
 				UplinkAssert (m);
 
 				if ( m->TYPE == MISSION_TRACEUSER &&
 					 strcmp ( m->completionA, hacker->name ) == 0 &&
-					 strcmp ( m->links.GetData (0), comp->ip ) == 0 ) {
+					 strcmp ( m->links.at (0), comp->ip ) == 0 ) {
 
 					alreadynoticed = true;
 					break;
@@ -637,7 +637,7 @@ void ConsequenceGenerator::MissionCompleted_TraceUser ( Mission *mission, Person
 	// Look up the computer that was hacked
 	//
 
-	char *hackedip = mission->links.GetData (0);
+	char *hackedip = mission->links.at (0);
 	VLocation *vl = game->GetWorld ()->GetVLocation ( hackedip );
 	UplinkAssert (vl);
 	Computer *comp = vl->GetComputer ();

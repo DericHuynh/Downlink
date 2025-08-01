@@ -847,7 +847,7 @@ void Tutorial::RunTutorial1 ( int part )
 
 		EclSuperUnHighlight ( "worldmap_close" );
 
-		if ( game->GetWorld ()->GetPlayer ()->messages.Size () > 0 && strcmp ( game->GetWorld ()->GetPlayer ()->messages.GetData ( 0 )->from, "Uplink public access system" ) == 0 ) {
+		if ( game->GetWorld ()->GetPlayer ()->messages.size () > 0 && strcmp ( game->GetWorld ()->GetPlayer ()->messages.at ( 0 )->from, "Uplink public access system" ) == 0 ) {
 
 			EclRegisterCaptionChange ( text, "New emails will queue up in the bottom right\n"
 											 "of the screen.  Click on the email to read it.\n", time_ms*2/3 );
@@ -872,7 +872,7 @@ void Tutorial::RunTutorial1 ( int part )
 
 		EclSuperUnHighlight ( "hud_message 0" );
 
-		if ( game->GetWorld ()->GetPlayer ()->messages.Size () == 0 ) {
+		if ( game->GetWorld ()->GetPlayer ()->messages.size () == 0 ) {
 
 			current_part = 24;
 			RunTutorial1 ( 24 );
@@ -900,7 +900,7 @@ void Tutorial::RunTutorial1 ( int part )
 	}
 	else if ( part == 25 ) {				// Tut 1 Part 25
 
-		if ( game->GetWorld ()->GetPlayer ()->missions.Size () == 0 || strcmp ( game->GetWorld ()->GetPlayer ()->missions.GetData ( 0 )->employer, "Uplink" ) != 0 ) {
+		if ( game->GetWorld ()->GetPlayer ()->missions.size () == 0 || strcmp ( game->GetWorld ()->GetPlayer ()->missions.at ( 0 )->employer, "Uplink" ) != 0 ) {
 
 			current_part = 28;
 			RunTutorial1 ( 28 );

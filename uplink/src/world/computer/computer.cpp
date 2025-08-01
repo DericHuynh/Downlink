@@ -174,16 +174,16 @@ int  Computer::AddComputerScreen ( ComputerScreen *cs, int index )
 	if ( index == -1 ) {
 		
 		// Place the screen in the next available slot
-		return screens.PutData ( cs );
+		return screens.push_back ( cs );
 
 	}	
 	else {
 
 		// Place the screen at the specified position
-		if ( index >= screens.Size () )
-			screens.SetSize ( index + 1 );
+		if ( index >= screens.size () )
+			screens.resize ( index + 1 );
 
-		screens.PutData ( cs, index );
+		screens.insert( index, cs);
 		return index;
 
 	}
@@ -194,7 +194,7 @@ ComputerScreen *Computer::GetComputerScreen ( int index )
 {
 
 	if ( screens.ValidIndex ( index ) )
-		return (ComputerScreen *) screens.GetData (index);
+		return (ComputerScreen *) screens.at (index);
 
 	else
 		return NULL;
@@ -231,13 +231,13 @@ void Computer::CheckForSecurityBreaches ()
 	// Check for suspect logs
 	//
 
-	for ( int i = 0; i < logbank.logs.Size (); ++i ) {
+	for ( int i = 0; i < logbank.logs.size (); ++i ) {
 		if ( logbank.logs.ValidIndex (i) ) {
 
-			AccessLog *al = logbank.logs.GetData (i);
+			AccessLog *al = logbank.logs.at (i);
 			
 			AccessLog *internallog = NULL;
-			if ( logbank.internallogs.ValidIndex (i) ) internallog = logbank.internallogs.GetData (i);
+			if ( logbank.internallogs.ValidIndex (i) ) internallog = logbank.internallogs.at (i);
 
 			if ( al->SUSPICIOUS == LOG_SUSPICIOUS ) {
 
@@ -250,8 +250,8 @@ void Computer::CheckForSecurityBreaches ()
 
 				if ( strcmp ( al->fromname, "PLAYER" ) == 0 ) {
 
-					for ( int l = 0; l < game->GetWorld ()->GetPlayer ()->missions.Size (); ++l ) {
-						Mission *m = game->GetWorld ()->GetPlayer ()->missions.GetData (l);
+					for ( int l = 0; l < game->GetWorld ()->GetPlayer ()->missions.size (); ++l ) {
+						Mission *m = game->GetWorld ()->GetPlayer ()->missions.at (l);
 						UplinkAssert (m);
 
 						if ( m->TYPE == MISSION_TRACEUSER && strcmp ( m->completionB, ip ) == 0 ) 
@@ -390,10 +390,10 @@ void Computer::ManageOldLogs ()
 	// Delete any logs older than a certain age
 	//
 
-	for ( int i = logbank.logs.Size () - 1; i >= 0; --i ) {
+	for ( int i = logbank.logs.size () - 1; i >= 0; --i ) {
 		if ( logbank.logs.ValidIndex (i) ) {
 
-			AccessLog *al = logbank.logs.GetData (i);
+			AccessLog *al = logbank.logs.at (i);
 
 			if ( al ) {
 
@@ -403,12 +403,12 @@ void Computer::ManageOldLogs ()
 
 				if ( testdate.Before ( &(game->GetWorld ()->date) ) ) {
 
-					delete logbank.logs.GetData (i);
-					logbank.logs.RemoveData (i);
+					delete logbank.logs.at (i);
+					logbank.logs.erase (i);
 
 					if ( logbank.internallogs.ValidIndex ( i ) ) {
-						delete logbank.internallogs.GetData (i);				
-						logbank.internallogs.RemoveData (i);
+						delete logbank.internallogs.at (i);				
+						logbank.internallogs.erase (i);
 					}
 
 				}
@@ -425,7 +425,7 @@ void Computer::ManageOldLogs ()
 
 	int nextlog = 0;
 
-	for ( int il = 0; il < logbank.logs.Size (); ++il ) {
+	for ( int il = 0; il < logbank.logs.size (); ++il ) {
 
 		if ( il > nextlog ) nextlog = il;
 
@@ -436,16 +436,16 @@ void Computer::ManageOldLogs ()
 			
 			bool found = false;
 
-			for ( ; nextlog < logbank.logs.Size (); ++nextlog ) {
+			for ( ; nextlog < logbank.logs.size (); ++nextlog ) {
 				
 				if ( logbank.logs.ValidIndex (nextlog) ) {
 
-					logbank.logs.PutData	( logbank.logs.GetData (nextlog), il );
-					logbank.logs.RemoveData (nextlog);
+					logbank.logs.insert( il, logbank.logs.at (nextlog));
+					logbank.logs.erase (nextlog);
 
 					if ( logbank.internallogs.ValidIndex(nextlog) ) {
-						logbank.internallogs.PutData ( logbank.internallogs.GetData (nextlog), il );
-						logbank.internallogs.RemoveData (nextlog);
+						logbank.internallogs.insert( il, logbank.internallogs.at (nextlog));
+						logbank.internallogs.erase (nextlog);
 					}
 
 					++nextlog;
@@ -463,8 +463,8 @@ void Computer::ManageOldLogs ()
 				// So resize the DArray since this is now the max size
 				// Then quit
 
-				logbank.logs.SetSize ( il );
-				logbank.internallogs.SetSize ( il );
+				logbank.logs.resize ( il );
+				logbank.internallogs.resize ( il );
 				break;
 
 			}

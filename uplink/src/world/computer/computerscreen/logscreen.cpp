@@ -89,7 +89,7 @@ LogBank *LogScreen::GetTargetLogBank ()
 
 			// Now look up the account based on that account number
 
-			BankAccount *account = bank->accounts.GetData ( accno );
+			BankAccount *account = bank->accounts.at ( accno );
 			UplinkAssert (account);
 			
 			logbank = &(account->log);			

@@ -146,16 +146,16 @@ void GatewayInterface::Create ()
 
 			if ( gatewaydef->cpus.ValidIndex ( ic ) ) {
 
-				GatewayDefLocation *gdl = gatewaydef->cpus.GetData (ic);
+				GatewayDefLocation *gdl = gatewaydef->cpus.at (ic);
 				UplinkAssert (gdl);
 				char bname [64];
 				UplinkSnprintf ( bname, sizeof ( bname ), "gateway_cpu %d", ic );
 				EclRegisterButton ( gatewayX + gdl->x, gatewayY + gdl->y, 
 									SIZE_GATEWAY_CPU_W, SIZE_GATEWAY_CPU_H, " ", " ", bname );
 
-				if ( ic < cpus->Size () ) {
+				if ( ic < cpus->size () ) {
 
-					EclGetButton ( bname )->SetTooltip ( cpus->GetData (ic) );
+					EclGetButton ( bname )->SetTooltip ( cpus->at (ic) );
 					button_assignbitmap ( bname, "gateway/cpu.tif" );
 					EclRegisterButtonCallbacks ( bname, DrawPopulatedItem, NULL, button_click, button_highlight );
 
@@ -179,7 +179,7 @@ void GatewayInterface::Create ()
 
 			if ( gatewaydef->memory.ValidIndex ( im ) ) {
 
-				GatewayDefLocation *gdl = gatewaydef->memory.GetData (im);
+				GatewayDefLocation *gdl = gatewaydef->memory.at (im);
 				UplinkAssert (gdl);
 
 				char bname [64];
@@ -210,7 +210,7 @@ void GatewayInterface::Create ()
 
 			if ( gatewaydef->security.ValidIndex ( is ) ) {
 
-				GatewayDefLocation *gdl = gatewaydef->security.GetData (is);
+				GatewayDefLocation *gdl = gatewaydef->security.at (is);
 				UplinkAssert (gdl);
 
 				char bname [64];
@@ -220,7 +220,7 @@ void GatewayInterface::Create ()
 									SIZE_GATEWAY_SEC_W, SIZE_GATEWAY_SEC_H, " ", bname );
 
 				if ( is < gateway->GetNumSecurity () ) {
-					EclGetButton ( bname )->SetTooltip ( security->GetData (is) );
+					EclGetButton ( bname )->SetTooltip ( security->at (is) );
 					button_assignbitmap ( bname, "gateway/security.tif" );
 					EclRegisterButtonCallbacks ( bname, DrawPopulatedItem, NULL, button_click, button_highlight );
 				}

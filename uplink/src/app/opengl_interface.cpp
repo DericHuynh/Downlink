@@ -420,7 +420,7 @@ LList <char *> *wordwraptext ( const char *string, int linesize )
 
 		char *emptystring = new char [ 2 ];
 		*emptystring = '\0';
-		llist->PutData ( emptystring );
+		llist->push_back ( emptystring );
 		return llist;
 
 	}
@@ -444,7 +444,7 @@ LList <char *> *wordwraptext ( const char *string, int linesize )
 	// Each pointer representing another line
 
 	char *currentpos = newstring;
-	llist->PutData ( currentpos );
+	llist->push_back ( currentpos );
 
 	while ( true ) {
 
@@ -466,11 +466,11 @@ LList <char *> *wordwraptext ( const char *string, int linesize )
 				*(currentpos - 1) = oldchar;
 				currentpos = space + 1;
 				*space = 0;
-				llist->PutData ( currentpos );
+				llist->push_back ( currentpos );
 			}
 			else {
 				// We cannot wrap this line - the word is longer than the max line width
-				llist->PutData ( currentpos );
+				llist->push_back ( currentpos );
 			}
 
 		}
@@ -481,7 +481,7 @@ LList <char *> *wordwraptext ( const char *string, int linesize )
 			// then continue from this position
 			currentpos =  nextnewline + 1;
 			*nextnewline = 0;
-			llist->PutData ( currentpos );
+			llist->push_back ( currentpos );
 
 		}
 
@@ -498,17 +498,17 @@ void text_draw	( int x, int y, const char *string, int linesize )
 
 	if ( wrappedtext ) {
 
-		for ( int i = 0; i < wrappedtext->Size (); ++i ) {
+		for ( int i = 0; i < wrappedtext->size (); ++i ) {
 
 			int xpos = x;
 			int	ypos = y + i * 15;
 
-			GciDrawText ( xpos, ypos, wrappedtext->GetData (i) );		
+			GciDrawText ( xpos, ypos, wrappedtext->at (i) );		
 
 		}
 
-		if ( wrappedtext->ValidIndex (0) && wrappedtext->GetData (0) )
-			delete [] wrappedtext->GetData (0);				// Only delete first entry - since there is only one string really
+		if ( wrappedtext->ValidIndex (0) && wrappedtext->at (0) )
+			delete [] wrappedtext->at (0);				// Only delete first entry - since there is only one string really
 		delete wrappedtext;
 
 	}
@@ -567,17 +567,17 @@ void text_draw ( Button *button, bool highlighted, bool clicked )
 
 	if ( wrappedtext ) {
 
-		for ( int i = 0; i < wrappedtext->Size (); ++i ) {
+		for ( int i = 0; i < wrappedtext->size (); ++i ) {
 
 			int xpos = button->x + 10;
 			int	ypos = button->y + 10 + i * 15;
 
-			GciDrawText ( xpos, ypos, wrappedtext->GetData (i) );		
+			GciDrawText ( xpos, ypos, wrappedtext->at (i) );		
 
 		}
 
-		if ( wrappedtext->ValidIndex (0) && wrappedtext->GetData (0) )
-			delete [] wrappedtext->GetData (0);				// Only delete first entry - since there is only one string really
+		if ( wrappedtext->ValidIndex (0) && wrappedtext->at (0) )
+			delete [] wrappedtext->at (0);				// Only delete first entry - since there is only one string really
 		delete wrappedtext;
 
 	}
@@ -1157,9 +1157,9 @@ void create_stextbox ( int x, int y, int width, int height, char *caption, char 
     else {
         LList <char *> *wrappedText = wordwraptext( caption, width );
 		if ( wrappedText ) {
-			numItems = wrappedText->Size() + 2;
-			if ( wrappedText->ValidIndex (0) && wrappedText->GetData (0) )
-				delete [] wrappedText->GetData(0);
+			numItems = wrappedText->size() + 2;
+			if ( wrappedText->ValidIndex (0) && wrappedText->at (0) )
+				delete [] wrappedText->at(0);
 			delete wrappedText;
 		}
 		if ( numItems < 4 ) numItems = 15;
@@ -1241,7 +1241,7 @@ void draw_stextbox ( Button *button, bool highlighted, bool clicked )
 
 	if ( wrappedtext ) {
 
-		for ( int i = offset; i < wrappedtext->Size (); ++i ) {
+		for ( int i = offset; i < wrappedtext->size (); ++i ) {
 
 			if ( i > maxnumlines + offset )
 				break;
@@ -1249,13 +1249,13 @@ void draw_stextbox ( Button *button, bool highlighted, bool clicked )
 			int xpos = button->x + 10;
 			int	ypos = button->y + 10 + (i-offset) * 15;
 
-			GciDrawText ( xpos, ypos, wrappedtext->GetData (i), HELVETICA_10 );
+			GciDrawText ( xpos, ypos, wrappedtext->at (i), HELVETICA_10 );
 
 		}
 
 		//DeleteLListData ( wrappedtext );							// Only delete first entry - since there is only one string really
-		if ( wrappedtext->ValidIndex (0) && wrappedtext->GetData (0) )
-			delete [] wrappedtext->GetData (0);
+		if ( wrappedtext->ValidIndex (0) && wrappedtext->at (0) )
+			delete [] wrappedtext->at (0);
 		delete wrappedtext;
 
 	}

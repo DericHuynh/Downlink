@@ -46,7 +46,7 @@ void HighSecurityScreenInterface::SystemTitleDraw ( Button *button, bool highlig
 
 	HighSecurityScreen *hs = (HighSecurityScreen *) game->GetInterface ()->GetRemoteInterface ()->GetComputerScreen ();
 	UplinkAssert (hs);
-	MenuScreenOption *mso = hs->systems.GetData (index);
+	MenuScreenOption *mso = hs->systems.at (index);
 	UplinkAssert (mso);
 
 
@@ -87,7 +87,7 @@ void HighSecurityScreenInterface::SystemClick ( Button *button )
 
 	HighSecurityScreen *hs = (HighSecurityScreen *) game->GetInterface ()->GetRemoteInterface ()->GetComputerScreen ();
 	UplinkAssert (hs);
-	MenuScreenOption *mso = hs->systems.GetData (index);
+	MenuScreenOption *mso = hs->systems.at (index);
 	UplinkAssert (mso);
 
 	int nextpage = mso->nextpage;
@@ -123,9 +123,9 @@ void HighSecurityScreenInterface::ProceedClick ( Button *button )
 
 	int worstlevel = 1;
 
-	for ( int i = 0; i < hs->systems.Size (); ++i ) {
-		if ( hs->systems.GetData(i)->security > worstlevel )
-			worstlevel = hs->systems.GetData(i)->security;
+	for ( int i = 0; i < hs->systems.size (); ++i ) {
+		if ( hs->systems.at(i)->security > worstlevel )
+			worstlevel = hs->systems.at(i)->security;
 	}
 
 	if ( worstlevel < 10 ) {
@@ -157,9 +157,9 @@ void HighSecurityScreenInterface::Create ( ComputerScreen *newcs )
 		HighSecurityScreen *hs = GetComputerScreen ();
 		UplinkAssert (hs);
 
-		for ( int i = 0; i < hs->systems.Size (); ++i ) {
+		for ( int i = 0; i < hs->systems.size (); ++i ) {
 			
-			MenuScreenOption *mso = hs->systems.GetData (i);
+			MenuScreenOption *mso = hs->systems.at (i);
 			UplinkAssert (mso);
 
 			// Have we just finished bypassing this screen?
@@ -235,7 +235,7 @@ void HighSecurityScreenInterface::Remove ()
 		HighSecurityScreen *hs = GetComputerScreen ();
 		UplinkAssert (hs);
 
-		for ( int i = 0; i < hs->systems.Size (); ++i ) {
+		for ( int i = 0; i < hs->systems.size (); ++i ) {
 			
 			char title [64];
 			char button [64];

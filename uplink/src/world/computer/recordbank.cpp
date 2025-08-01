@@ -31,7 +31,7 @@ void RecordBank::AddRecord ( Record *newrecord )
 {
 
 	UplinkAssert (newrecord);
-	records.PutData ( newrecord );
+	records.push_back ( newrecord );
 
 }
 
@@ -46,14 +46,14 @@ void RecordBank::AddRecordSorted ( Record *newrecord, char *sortfield )
 
 	bool inserted = false;
 
-	for ( int i = 0; i < records.Size (); ++i ) {
-		if ( records.GetData (i) ) {
+	for ( int i = 0; i < records.size (); ++i ) {
+		if ( records.at (i) ) {
 
-			char *fieldvalue = records.GetData (i)->GetField ( sortfield );
+			char *fieldvalue = records.at (i)->GetField ( sortfield );
 			UplinkAssert (fieldvalue);
 
 			if ( strcmp ( fieldvalue, newvalue ) > 0 ) {
-				records.PutDataAtIndex ( newrecord, i );
+				records.insert( i, newrecord);
 				inserted = true;
 				break;
 			}
@@ -61,7 +61,7 @@ void RecordBank::AddRecordSorted ( Record *newrecord, char *sortfield )
 		}
 	}
 			
-	if ( !inserted ) records.PutDataAtEnd ( newrecord );
+	if ( !inserted ) records.push_back ( newrecord );
 
 }
 
@@ -96,17 +96,17 @@ Record *RecordBank::GetRecord ( char *query )
 		return NULL;
 
 	}
-    else if ( result->Size () == 0 ) {
+    else if ( result->size () == 0 ) {
 
         delete result;
         return NULL;
 
     }
-	else if ( result->Size () > 1 ) {
+	else if ( result->size () > 1 ) {
 
 		printf ( "RecordBank::GetRecord, found more than 1 match, returning the first\n" );
 		UplinkAssert ( result->ValidIndex (0) );
-		Record *record = result->GetData (0);
+		Record *record = result->at (0);
         delete result;
         return record;
 
@@ -114,7 +114,7 @@ Record *RecordBank::GetRecord ( char *query )
 	else {
 
 		UplinkAssert ( result->ValidIndex (0) );
-        Record *record = result->GetData (0);
+        Record *record = result->at (0);
         delete result;
 		return record;
 
@@ -224,10 +224,10 @@ LList <Record *> *RecordBank::GetRecords ( char *query )
 	
 	LList <Record *> *results = new LList <Record *> ();
 	
-	for ( int ri = 0; ri < records.Size (); ++ri ) {
+	for ( int ri = 0; ri < records.size (); ++ri ) {
 		if ( records.ValidIndex (ri) ) {
 
-			Record *rec = records.GetData (ri);
+			Record *rec = records.at (ri);
 			int nummatches = 0;
 
 			for ( i = 0; i < numconditions; ++i ) {
@@ -251,7 +251,7 @@ LList <Record *> *RecordBank::GetRecords ( char *query )
 			}
 
 			if ( nummatches == numconditions )
-				results->PutData ( rec );
+				results->push_back ( rec );
 
 		}
 	}
@@ -266,7 +266,7 @@ LList <Record *> *RecordBank::GetRecords ( char *query )
 
 	// Return the results
 
-	if ( results->Size () > 0 ) 
+	if ( results->size () > 0 ) 
 		return results;
 
     else {
@@ -283,9 +283,9 @@ Record *RecordBank::GetRandomRecord ( char *query )
 
 	if ( records ) {
 
-		int index = NumberGenerator::RandomNumber ( records->Size () );
+		int index = NumberGenerator::RandomNumber ( records->size () );
 		UplinkAssert ( records->ValidIndex (index) );
-        Record *result = records->GetData (index);
+        Record *result = records->at (index);
         delete records;
         return result;
 
@@ -365,7 +365,7 @@ void Record::AddField ( char *name, char *value )
 
 	char *newvalue = new char [strlen(value) + 1];
 	UplinkSafeStrcpy ( newvalue, value );
-	fields.PutData ( name, newvalue );
+	fields.insert ( name, newvalue );
 
 }
 
@@ -375,14 +375,14 @@ void Record::AddField ( char *name, int value )
 	size_t newvaluesize = 16;
 	char *newvalue = new char [newvaluesize];
 	UplinkSnprintf ( newvalue, newvaluesize, "%d", value );
-	fields.PutData ( name, newvalue );
+	fields.insert ( name, newvalue );
 
 }
 
 void Record::ChangeField ( char *name, char *newvalue )
 {
 
-	BTree <char *> *tree = fields.LookupTree ( name );
+	BTree <char *> *tree = fields.find ( name );
 
 	if ( tree ) {
 
@@ -404,7 +404,7 @@ void Record::ChangeField ( char *name, char *newvalue )
 void Record::ChangeField ( char *name, int newvalue )
 {
 
-	BTree <char *> *tree = fields.LookupTree ( name );
+	BTree <char *> *tree = fields.find ( name );
 
 	if ( tree ) {
 
@@ -428,7 +428,7 @@ char *Record::GetField ( char *name )
 
 	if ( !name ) return NULL;
 
-	BTree <char *> *tree = fields.LookupTree ( name );
+	BTree <char *> *tree = fields.find ( name );
 
 	if ( tree ) {
 
@@ -457,7 +457,7 @@ int RecordBank::FindNextRecordIndexNameNotSystemAccount ( int curindex )
 	if ( curindex != -1 )
 		recordindex = curindex + 1;
 
-	while ( recordindex < records.Size () ) {
+	while ( recordindex < records.size () ) {
 
 		Record *rec = GetRecord ( recordindex );
 		UplinkAssert (rec);
@@ -508,15 +508,15 @@ void Record::Print ()
 
 	printf ( "Record :\n" );
 
-	DArray <char *> *field_names = fields.ConvertIndexToDArray ();
-	DArray <char *> *field_values = fields.ConvertToDArray ();
+	DArray <char *> *field_names = fields.MapKeysToDArray ();
+	DArray <char *> *field_values = fields.MapDataToDArray ();
 
-	for ( int i = 0; i < field_names->Size (); ++i ) {
+	for ( int i = 0; i < field_names->size (); ++i ) {
 
 		UplinkAssert ( field_names->ValidIndex (i) );
 		UplinkAssert ( field_values->ValidIndex (i) );
 
-		printf ( "%s : %s\n", field_names->GetData (i), field_values->GetData (i) );
+		printf ( "%s : %s\n", field_names->at (i), field_values->at (i) );
 
 	}
 

@@ -91,7 +91,7 @@ void IRCInterface::MainTextDraw ( Button *button, bool highlighted, bool clicked
 
 		if ( buffer.ValidIndex (thisRow) ) {
 
-			UplinkIRCMessage *msg = buffer.GetData(thisRow);
+			UplinkIRCMessage *msg = buffer.at(thisRow);
 			UplinkAssert (msg);
 
 			int xpos = button->x + 10;
@@ -135,7 +135,7 @@ void IRCInterface::AddEmoticons ( int row, char *smiley, Image *imgSmiley )
 
 	if ( buffer.ValidIndex (thisRow) ) {
 
-		UplinkIRCMessage *msg = buffer.GetData(thisRow);
+		UplinkIRCMessage *msg = buffer.at(thisRow);
 		UplinkAssert (msg);
 
         Button *button = EclGetButton ( "irc_maintext" );
@@ -211,12 +211,12 @@ void IRCInterface::UserListDraw ( Button *button, bool highlighted, bool clicked
 
                 int ypos = button->y + 20 + i * 17;
             
-                if ( users.GetData(i + baseOffset)->status == 0 ) 
+                if ( users.at(i + baseOffset)->status == 0 ) 
                     glColor3f ( 1.0f, 1.0f, 1.0f );
                 else
                     glColor3f ( 1.0f, 0.5f, 0.5f );
 
-                GciDrawText ( xpos, ypos, users.GetData(i + baseOffset)->name ); 
+                GciDrawText ( xpos, ypos, users.at(i + baseOffset)->name ); 
 
             }
 
@@ -248,11 +248,11 @@ void IRCInterface::ConnectClick ( Button *button )
         ResetUsers();
         thisint->RemoveTalkWindow();
 
-		for ( int i = 0; i < buffer.Size (); ++i )
+		for ( int i = 0; i < buffer.size (); ++i )
 			if ( buffer.ValidIndex ( i ) )
-				delete buffer.GetData ( i );
+				delete buffer.at ( i );
 
-		buffer.Empty();
+		buffer.clear();
 
 		connected = false;
         
@@ -262,11 +262,11 @@ void IRCInterface::ConnectClick ( Button *button )
 		thisint->CreateTalkWindow();
         ResetUsers ();
         
-		for ( int i = 0; i < buffer.Size (); ++i )
+		for ( int i = 0; i < buffer.size (); ++i )
 			if ( buffer.ValidIndex ( i ) )
-				delete buffer.GetData ( i );
+				delete buffer.at ( i );
 
-		buffer.Empty();
+		buffer.clear();
 
 		winSockInit = new WinsockInit();
         cIrcSession = new CIrcSession();
@@ -377,34 +377,34 @@ void IRCInterface::AddText ( char *user, const char *text, float r, float g, flo
 	LList <char *> *wrapped = wordwraptext( text, mainWidth );
 
 	if ( wrapped ) {
-		int numLines = wrapped->Size();
+		int numLines = wrapped->size();
 		
 		// Add those lines into the buffer
 		
 		for ( int i = 0; i < numLines; ++i ) {
-			char *theLine = wrapped->GetData(i);
+			char *theLine = wrapped->at(i);
 			UplinkAssert (theLine);
 			if ( strlen(theLine) > 0 ) {
 				UplinkIRCMessage *msg = new UplinkIRCMessage ();
 				char *thisuser = ( i == 0 ? user : NULL );
 				msg->Set ( thisuser, theLine, r, g, b );
-				buffer.PutDataAtEnd( msg );
+				buffer.push_back( msg );
 			}
 		}
 
 		// Now finished with the wrapped stuff
 
-		if ( wrapped->ValidIndex (0) && wrapped->GetData (0) )
-			delete [] wrapped->GetData (0);				// Only delete first entry - since there is only one string really
+		if ( wrapped->ValidIndex (0) && wrapped->at (0) )
+			delete [] wrapped->at (0);				// Only delete first entry - since there is only one string really
 		delete wrapped;
 	}
 	
 	// Trim the buffer to size
 
 	while ( buffer.ValidIndex( IRCBUFFERSIZE ) ) {
-		UplinkIRCMessage *msg = buffer.GetData( 0 );
+		UplinkIRCMessage *msg = buffer.at( 0 );
 		delete msg;
-		buffer.RemoveData( 0 );
+		buffer.erase( 0 );
 	}
 
     // Update the scrollbox
@@ -415,7 +415,7 @@ void IRCInterface::AddText ( char *user, const char *text, float r, float g, flo
         if ( scrollBox->numItems <= scrollBox->windowSize || ( scrollBox->currentIndex == scrollBox->numItems - scrollBox->windowSize ) )
             viewingNewest = true;
 
-        scrollBox->SetNumItems( buffer.Size() );        
+        scrollBox->SetNumItems( buffer.size() );        
 		if ( viewingNewest ) {
 			if ( scrollBox->numItems < scrollBox->windowSize )
 				scrollBox->SetCurrentIndex ( 0 );
@@ -434,13 +434,13 @@ void IRCInterface::ResetUsers ()
 {
 
     while ( users.ValidIndex(0) ) {
-        UplinkIRCUser *user = users.GetData(0);
+        UplinkIRCUser *user = users.at(0);
         delete user;
-        users.RemoveData(0);
+        users.erase(0);
     }
 
     ScrollBox *scrollBox = ScrollBox::GetScrollBox( "irc_userscroll" );
-    if ( scrollBox ) scrollBox->SetNumItems( users.Size() );
+    if ( scrollBox ) scrollBox->SetNumItems( users.size() );
     EclDirtyButton ( "irc_userlist" );
 
 }
@@ -475,15 +475,15 @@ void IRCInterface::AddUser ( char *name )
     bool inserted = false;
     char *lowerCaseName = LowerCaseString (name);
 
-    for ( int i = 0; i < users.Size(); ++i ) {
-        UplinkIRCUser *thisUser = users.GetData(i);
+    for ( int i = 0; i < users.size(); ++i ) {
+        UplinkIRCUser *thisUser = users.at(i);
         UplinkAssert (thisUser);
         char *lowerCaseThisUser = LowerCaseString ( thisUser->name );
         if ( ( user->status == 1 && thisUser->status == 0 )                                                            ||
              (user->status == 1 && thisUser->status == 1 && strcmp ( lowerCaseName, lowerCaseThisUser ) < 0 )          ||
              (user->status == 0 && thisUser->status == 0 && strcmp ( lowerCaseName, lowerCaseThisUser ) < 0 ) ) {
 
-            users.PutDataAtIndex ( user, i );
+            users.insert(i, user);
             inserted = true;
             delete [] lowerCaseThisUser;
             break;
@@ -492,14 +492,14 @@ void IRCInterface::AddUser ( char *name )
 
     }
 
-    if ( !inserted ) users.PutDataAtEnd ( user );
+    if ( !inserted ) users.push_back ( user );
 
     delete [] lowerCaseName;
 
     // Update the scrollbar
 
     ScrollBox *scrollBox = ScrollBox::GetScrollBox( "irc_userscroll" );
-    if ( scrollBox ) scrollBox->SetNumItems( users.Size() );
+    if ( scrollBox ) scrollBox->SetNumItems( users.size() );
 
     // Update the screen
 
@@ -510,13 +510,13 @@ void IRCInterface::AddUser ( char *name )
 void IRCInterface::RemoveUser ( char *name )
 {
     
-    for ( int i = 0; i < users.Size(); ++i ) {
-        UplinkIRCUser *user = users.GetData(i);
+    for ( int i = 0; i < users.size(); ++i ) {
+        UplinkIRCUser *user = users.at(i);
         UplinkAssert (user);
         if ( strcmp ( user->name, name ) == 0 ) {
-            users.RemoveData( i );
+            users.erase( i );
             ScrollBox *scrollBox = ScrollBox::GetScrollBox( "irc_userscroll" );
-            if ( scrollBox ) scrollBox->SetNumItems( users.Size() );
+            if ( scrollBox ) scrollBox->SetNumItems( users.size() );
             return;
         }
     }
@@ -526,8 +526,8 @@ void IRCInterface::RemoveUser ( char *name )
 UplinkIRCUser *IRCInterface::GetUser ( char *name )
 {
 
-    for ( int i = 0; i < users.Size(); ++i ) {
-        UplinkIRCUser *user = users.GetData(i);
+    for ( int i = 0; i < users.size(); ++i ) {
+        UplinkIRCUser *user = users.at(i);
         UplinkAssert (user);
         if ( strcmp ( user->name, name ) == 0 )
             return user;        
@@ -630,7 +630,7 @@ void IRCInterface::CreateTalkWindow()
 	int numRows = mainHeight / 15;
     ScrollBox::CreateScrollBox( "ircscroller", 
                                 (30 + mainWidth) - 15, 30, 15, mainHeight, 
-								buffer.Size(), numRows, ( buffer.Size() < numRows )? 0 : buffer.Size() - numRows, 
+								buffer.size(), numRows, ( buffer.size() < numRows )? 0 : buffer.size() - numRows, 
                                 TextScrollChange );                
 
 	//
@@ -715,7 +715,7 @@ void IRCInterface::Create ()
         int numUsers = boxheight / 17;
         ScrollBox::CreateScrollBox( "irc_userscroll", 
                                     (screenw - 7) - 15, (paneltop + 3) + 20, 15, boxheight, 
-                                    users.Size(), numUsers, 0, 
+                                    users.size(), numUsers, 0, 
                                     UserScrollChange );
         
 		//

@@ -254,7 +254,7 @@ void Mission::GiveLink ( char *ip )
 	size_t theipsize = SIZE_VLOCATION_IP;
 	char *theip = new char [theipsize];
 	UplinkStrncpy ( theip, ip, theipsize );
-	links.PutData ( theip );
+	links.push_back ( theip );
 
 }
 
@@ -268,7 +268,7 @@ void Mission::GiveCode ( char *ip, char *code )
 	char *thecode = new char [strlen(code)+1];
 	UplinkSafeStrcpy ( thecode, code );
 
-	codes.PutData ( theip, thecode );
+	codes.insert ( theip, thecode );
 
 }
 

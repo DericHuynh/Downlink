@@ -35,22 +35,22 @@ LogBank::~LogBank ()
 void LogBank::AddLog ( AccessLog *log, int index )
 {
 
-	if ( index == -1 ) index = logs.Size ();
+	if ( index == -1 ) index = logs.size ();
 
 	// Add the log on at the end
 
-	if ( index >= logs.Size () )
-		logs.SetSize ( index + 1 );
+	if ( index >= logs.size () )
+		logs.resize ( index + 1 );
 
-	logs.PutData ( log, index );
+	logs.insert( index, log);
 
 	// Add the log into the internal structure
 
 	AccessLog *internalcopy = new AccessLog ();
 	internalcopy->SetProperties ( log );
 
-	internallogs.SetSize ( logs.Size () );
-	internallogs.PutData ( internalcopy, index );
+	internallogs.resize ( logs.size () );
+	internallogs.insert( index, internalcopy);
 
 }
 
@@ -61,8 +61,8 @@ bool LogBank::LogModified ( int index )
 		return false;
 
 
-	AccessLog *log = logs.GetData (index);
-	AccessLog *internallog = internallogs.GetData (index);
+	AccessLog *log = logs.at (index);
+	AccessLog *internallog = internallogs.at (index);
 
 	// Are they the same object?
 	// Do a comparison
@@ -97,10 +97,10 @@ char *LogBank::TraceLog ( char *to_ip, char *logbank_ip, Date *date, int uplinkr
 	// to to_ip.
 	// Then recurse into that source log.
 
-	for ( int i = 0; i < logs.Size (); ++i ) {
+	for ( int i = 0; i < logs.size (); ++i ) {
 		if ( logs.ValidIndex (i) ) {
 
-			AccessLog *al = logs.GetData (i);
+			AccessLog *al = logs.at (i);
 
 			// If the log was deleted/overwritten we may be able to recover it
 
@@ -109,11 +109,11 @@ char *LogBank::TraceLog ( char *to_ip, char *logbank_ip, Date *date, int uplinkr
 
 				if ( internallogs.ValidIndex (i) ) {
 
-					AccessLog *recovered = internallogs.GetData (i);
+					AccessLog *recovered = internallogs.at (i);
 					if ( recovered ) {
 						AccessLog *internalcopy = new AccessLog ();
 						internalcopy->SetProperties ( recovered );
-						logs.PutData ( internalcopy, i );
+						logs.insert( i, internalcopy);
 						delete al;
 						al = internalcopy;
 					}
@@ -129,11 +129,11 @@ char *LogBank::TraceLog ( char *to_ip, char *logbank_ip, Date *date, int uplinkr
 
 				if ( internallogs.ValidIndex (i) ) {
 
-					AccessLog *recovered = internallogs.GetData (i);
+					AccessLog *recovered = internallogs.at (i);
 					if ( recovered ) {
 						AccessLog *internalcopy = new AccessLog ();
 						internalcopy->SetProperties ( recovered );
-						logs.PutData ( internalcopy, i );
+						logs.insert( i, internalcopy);
 						delete al;
 						al = internalcopy;
 					}
@@ -216,8 +216,8 @@ void LogBank::Empty ()
     DeleteDArrayData ( (DArray <UplinkObject *> *) &logs );
     DeleteDArrayData ( (DArray <UplinkObject *> *) &internallogs );
 
-    logs.Empty ();
-    internallogs.Empty ();
+    logs.clear ();
+    internallogs.clear ();
 
 }
 
@@ -234,8 +234,8 @@ bool LogBank::Load ( FILE *file )
 		return false;
     }
 
-	logs.SetSize ( size );
-	internallogs.SetSize ( size );
+	logs.resize ( size );
+	internallogs.resize ( size );
 
 	for ( int i = 0; i < size; ++i ) {
 
@@ -262,7 +262,7 @@ bool LogBank::Load ( FILE *file )
 				delete al;
 				return false;
 			}
-			logs.PutData ( al, index );
+			logs.insert( index, al);
 
 		}
 
@@ -278,7 +278,7 @@ bool LogBank::Load ( FILE *file )
 				delete al;
 				return false;
 			}
-			internallogs.PutData ( al, index );
+			internallogs.insert( index, al);
 
 		}
 		else {
@@ -292,9 +292,9 @@ bool LogBank::Load ( FILE *file )
 						delete al;
 						return false;
 					}
-					al->SetProperties ( logs.GetData (index) );
+					al->SetProperties ( logs.at (index) );
 				}
-			    internallogs.PutData ( al, index );
+			    internallogs.insert( index, al);
 
             }
 
@@ -319,7 +319,7 @@ void LogBank::Save ( FILE *file )
 		small number of logs are changed by hackers.
 		*/
 
-	int size = logs.Size ();
+	int size = logs.size ();
 	fwrite ( &size, sizeof(size), 1, file );
 
 	for ( int i = 0; i < size; ++i ) {
@@ -329,7 +329,7 @@ void LogBank::Save ( FILE *file )
 		if ( logs.ValidIndex (i) ) {
 
 			fwrite ( &i, sizeof(i), 1, file );
-			logs.GetData (i)->Save ( file );
+			logs.at (i)->Save ( file );
 
 		}
 		else {
@@ -347,7 +347,7 @@ void LogBank::Save ( FILE *file )
 		if ( modified ) {
 
 			UplinkAssert ( internallogs.ValidIndex (i) );
-			internallogs.GetData (i)->Save ( file );
+			internallogs.at (i)->Save ( file );
 
 		}
 

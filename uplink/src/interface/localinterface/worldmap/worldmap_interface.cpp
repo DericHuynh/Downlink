@@ -281,9 +281,9 @@ void WorldMapInterface::DrawAllObjects ()
 
 	int mapWidth = GetLargeMapWidth();
 	int mapHeight = GetLargeMapHeight();
-    for ( int i = 0; i < labels.Size (); ++i ) {
+    for ( int i = 0; i < labels.size (); ++i ) {
 
-        WorldMapInterfaceLabel *object = labels.GetData (i);
+        WorldMapInterfaceLabel *object = labels.at (i);
         UplinkAssert (object);
         object->Draw ( (int) ( scrollX * mapWidth ),
                        (int) ( scrollY * mapHeight ),
@@ -293,9 +293,9 @@ void WorldMapInterface::DrawAllObjects ()
 
     // Draw all location Dots
 
-    for ( int il = 0; il < locations.Size (); ++il ) {
+    for ( int il = 0; il < locations.size (); ++il ) {
 
-        WorldMapInterfaceObject *object = locations.GetData (il);
+        WorldMapInterfaceObject *object = locations.at (il);
         UplinkAssert (object);
         object->Draw ( (int) ( scrollX * mapWidth ),
                        (int) ( scrollY * mapHeight ),
@@ -346,14 +346,14 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
 
         glBegin ( GL_LINE_STRIP );
 
-            for ( int li = 0; li < connection->vlocations.Size (); ++li ) {
+            for ( int li = 0; li < connection->vlocations.size (); ++li ) {
 
-                VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.GetData (li) );
+                VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.at (li) );
                 UplinkAssert ( vl );
                 glVertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );
 
                 if ( connection->TraceInProgress () &&
-                     connection->traceprogress == (connection->vlocations.Size () - li - 1) &&
+                     connection->traceprogress == (connection->vlocations.size () - li - 1) &&
                      game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) ) {
                     glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
                     glVertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );                        
@@ -371,9 +371,9 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
 
         glBegin ( GL_QUADS );
 
-            for ( int di = 0; di < connection->vlocations.Size (); ++di ) {
+            for ( int di = 0; di < connection->vlocations.size (); ++di ) {
 
-                VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.GetData (di) );
+                VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.at (di) );
                 UplinkAssert ( vl );
 
                 int x = button->x + GetScaledX ( vl->x, WORLDMAP_SMALL );
@@ -384,7 +384,7 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
                 glVertex2i ( x + 2, y + 2 );
                 glVertex2i ( x - 1, y + 2 );
 
-                if ( connection->traceprogress == (connection->vlocations.Size () - di - 1) &&
+                if ( connection->traceprogress == (connection->vlocations.size () - di - 1) &&
                      game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) )
                     glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
 
@@ -400,9 +400,9 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
 
     glBegin ( GL_QUADS );
 
-        for ( int i = 0; i < game->GetWorld ()->plotgenerator.infected.Size (); ++i ) {
+        for ( int i = 0; i < game->GetWorld ()->plotgenerator.infected.size (); ++i ) {
 
-            char *ip = game->GetWorld ()->plotgenerator.infected.GetData (i);
+            char *ip = game->GetWorld ()->plotgenerator.infected.at (i);
             UplinkAssert (ip);
 
             VLocation *vl = game->GetWorld ()->GetVLocation (ip);
@@ -555,9 +555,9 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 
     glBegin ( GL_QUADS );
 
-        for ( int j = 0; j < game->GetWorld ()->plotgenerator.infected.Size (); ++j ) {
+        for ( int j = 0; j < game->GetWorld ()->plotgenerator.infected.size (); ++j ) {
 
-            char *ip = game->GetWorld ()->plotgenerator.infected.GetData (j);
+            char *ip = game->GetWorld ()->plotgenerator.infected.at (j);
             UplinkAssert (ip);
 
             VLocation *vl = game->GetWorld ()->GetVLocation (ip);
@@ -594,9 +594,9 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 
     glBegin ( GL_LINE_STRIP );
 
-        for ( int i = 0; i < connection->vlocations.Size (); ++i ) {
+        for ( int i = 0; i < connection->vlocations.size (); ++i ) {
 
-            VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.GetData (i) );
+            VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.at (i) );
             UplinkAssert ( vl );
 
             int xpos = button->x + GetScaledX ( vl->x, WORLDMAP_LARGE );
@@ -605,7 +605,7 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
             glVertex2i ( xpos, ypos );
 
             if ( connection->TraceInProgress () &&
-                 connection->traceprogress == (connection->vlocations.Size () - i - 1) &&
+                 connection->traceprogress == (connection->vlocations.size () - i - 1) &&
                  game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) ) {
                 glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
                 glVertex2i ( xpos, ypos );                
@@ -928,9 +928,9 @@ void WorldMapInterface::ProgramLayoutEngine()
 
     // Add all links in the connection
     
-    for ( int i = 0; i < conn.Size(); ++i) {
+    for ( int i = 0; i < conn.size(); ++i) {
 
-        VLocation *vl = game->GetWorld ()->GetVLocation ( conn.GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( conn.at (i) );
         UplinkAssert ( vl );
 	
 		// Removed to fix missing links in connection
@@ -982,9 +982,9 @@ void WorldMapInterface::ProgramLayoutEngine()
     
     // Add all the other known links
 
-    for ( int j = 0; j < links.Size (); ++j ) {
+    for ( int j = 0; j < links.size (); ++j ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links.GetData (j) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links.at (j) );
         UplinkAssert ( vl );
 
         if ( !player->connection.LocationIncluded(vl->ip) && vl->displayed ) {
@@ -1028,9 +1028,9 @@ void WorldMapInterface::ProgramLayoutEnginePartial()
 
 	bool isWorldmapLarge = ( IsVisibleWorldMapInterface () == WORLDMAP_LARGE );
 
-    for ( int i = 0; i < conn.Size(); ++i) {
+    for ( int i = 0; i < conn.size(); ++i) {
 
-        VLocation *vl = game->GetWorld ()->GetVLocation ( conn.GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( conn.at (i) );
         UplinkAssert ( vl );
 	
         if ( i != 0 && ( !vl->displayed || !player->HasLink ( vl->ip ) ) ) {
@@ -1083,20 +1083,20 @@ void WorldMapInterface::SaveCurrentConnection ()
 {
 
     DeleteLListData ( &savedconnection );
-    savedconnection.Empty ();
+    savedconnection.clear ();
 
     Connection *connection = &(game->GetWorld ()->GetPlayer ()->connection);
 
     for ( int i = 0; i < connection->GetSize (); ++i ) {
 
-        char *thisip = connection->vlocations.GetData (i);
+        char *thisip = connection->vlocations.at (i);
         UplinkAssert (thisip);
 
 		size_t ipcopysize = SIZE_VLOCATION_IP;
         char *ipcopy = new char [ipcopysize];
         UplinkStrncpy ( ipcopy, thisip, ipcopysize );
 
-        savedconnection.PutDataAtEnd (ipcopy);
+        savedconnection.push_back (ipcopy);
 
     }
 
@@ -1114,9 +1114,9 @@ void WorldMapInterface::LoadConnection ()
 
 		game->GetWorld ()->GetPlayer ()->connection.Reset ();
 
-        for ( int i = 0; i < savedconnection.Size (); ++i ) {
+        for ( int i = 0; i < savedconnection.size (); ++i ) {
 
-            char *ip = savedconnection.GetData (i);
+            char *ip = savedconnection.at (i);
             UplinkAssert (ip);
 
 			// Use a different solution for the missings servers in connection
@@ -1208,9 +1208,9 @@ void WorldMapInterface::CreateWorldMapInterface_Large ()
     
     LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-    for ( int i = 0; i < links->Size (); ++i ) {
+    for ( int i = 0; i < links->size (); ++i ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
         UplinkAssert ( vl );
 
         if ( vl->displayed || 
@@ -1292,9 +1292,9 @@ void WorldMapInterface::RemoveWorldMapInterface ()
 
             LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-            for ( int i = 0; i < links->Size (); ++i ) {
+            for ( int i = 0; i < links->size (); ++i ) {
 
-                VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+                VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
                     
                 char name [128];
                 //UplinkSnprintf ( name, sizeof ( name ), "worldmap %s %d", vl->ip, i );
@@ -1427,9 +1427,9 @@ void WorldMapInterface::ScrollX ( float x )
 
     LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-    for ( int i = 0; i < links->Size (); ++i ) {
+    for ( int i = 0; i < links->size (); ++i ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
         UplinkAssert ( vl );
         char name [128];
         //UplinkSnprintf ( name, sizeof ( name ), "worldmap %s %d", vl->ip, i );
@@ -1490,9 +1490,9 @@ void WorldMapInterface::ScrollY ( float y )
 
     LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-    for ( int i = 0; i < links->Size (); ++i ) {
+    for ( int i = 0; i < links->size (); ++i ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
         UplinkAssert ( vl );
         char name [128];
         //UplinkSnprintf ( name, sizeof ( name ), "worldmap %s %d", vl->ip, i );
@@ -1563,9 +1563,9 @@ void WorldMapInterface::SetZoom ( float z )
 
     LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-    for ( int i = 0; i < links->Size (); ++i ) {
+    for ( int i = 0; i < links->size (); ++i ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
         UplinkAssert ( vl );
         char name [128];
         //UplinkSnprintf ( name, sizeof ( name ), "worldmap %s %d", vl->ip, i );
@@ -1626,8 +1626,8 @@ void WorldMapInterface::CheckLinksChanged()
 	int count = connection->GetSize ();
 	int newnbcolored = 0;
 
-    for ( int i = 0; i < links.Size (); ++i ) {
-        char *link = links.GetData (i);
+    for ( int i = 0; i < links.size (); ++i ) {
+        char *link = links.at (i);
         UplinkAssert (link);
 
         VLocation *vl = world->GetVLocation (link);
@@ -1643,8 +1643,8 @@ void WorldMapInterface::CheckLinksChanged()
 
 	int countTemp = 0;
 
-	for ( int j = 1; j < connection->vlocations.Size (); ++j ) {
-		char *link = connection->vlocations.GetData ( j );
+	for ( int j = 1; j < connection->vlocations.size (); ++j ) {
+		char *link = connection->vlocations.at ( j );
 		UplinkAssert ( link );
 		VLocation *vl = world->GetVLocation ( link );
 		UplinkAssert ( vl );
@@ -1656,12 +1656,12 @@ void WorldMapInterface::CheckLinksChanged()
 
     // Program Layout Engine if the num links has changed
 
-	int newnbmissions = missions.Size();
-	int newnbmessages = messages.Size();
+	int newnbmissions = missions.size();
+	int newnbmessages = messages.size();
 
 	int layoutCountTemp = layout->GetCountLocationTemp();
 
-	if ( ( layout->GetLocations().Size() - layoutCountTemp ) != ( count - countTemp ) ) {
+	if ( ( layout->GetLocations().size() - layoutCountTemp ) != ( count - countTemp ) ) {
         ProgramLayoutEngine();
 	}
 	else {
@@ -1684,9 +1684,9 @@ void WorldMapInterface::UpdateAccessLevel ()
 
     LList <char *> *links = &(game->GetWorld ()->GetPlayer ()->links);                
 
-    for ( int i = 0; i < links->Size (); ++i ) {
+    for ( int i = 0; i < links->size (); ++i ) {
                             
-        VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData (i) );
+        VLocation *vl = game->GetWorld ()->GetVLocation ( links->at (i) );
         UplinkAssert ( vl );
         char name [128];
         //UplinkSnprintf ( name, sizeof ( name ), "worldmap %s %d", vl->ip, i );

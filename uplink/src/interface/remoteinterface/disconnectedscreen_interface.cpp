@@ -78,7 +78,7 @@ void DisconnectedScreenInterface::Create ( ComputerScreen *newcs )
 		EclRegisterButtonCallbacks ( "disconnectedscreen_message", textbutton_draw, NULL, NULL, NULL );
 		EclRegisterCaptionChange   ( "disconnectedscreen_message", GetComputerScreen ()->textmessage, 2000 );
 
-        if ( DisconnectedScreen::loginslost.Size () > 0 ) {
+        if ( DisconnectedScreen::loginslost.size () > 0 ) {
 
             EclRegisterButton ( 50, 180, 400, 200, "", "", "disconnectedscreen_loginslost" );
             EclRegisterButtonCallbacks ( "disconnectedscreen_loginslost", textbutton_draw, NULL, NULL, NULL );
@@ -86,11 +86,11 @@ void DisconnectedScreenInterface::Create ( ComputerScreen *newcs )
             std::ostrstream loginslost;
             loginslost << "Your username and password was revoked on these systems:\n\n";
 
-            for ( int i = 0; i < DisconnectedScreen::loginslost.Size (); ++i ) {
+            for ( int i = 0; i < DisconnectedScreen::loginslost.size (); ++i ) {
 
 				if ( DisconnectedScreen::loginslost.ValidIndex ( i ) ) {
 
-					char *ip = DisconnectedScreen::loginslost.GetData (i);
+					char *ip = DisconnectedScreen::loginslost.at (i);
 					UplinkAssert (ip);
 					VLocation *vl = game->GetWorld ()->GetVLocation (ip);
 

@@ -39,15 +39,15 @@ void SgPlaylist_Initialise ()
 void SgPlaylist_Shutdown ()
 {
 
-    while ( playlists.GetData (0) ) {
+    while ( playlists.at (0) ) {
 
-        SgPlaylist *playlist = playlists.GetData (0);
-        playlists.RemoveData (0);
+        SgPlaylist *playlist = playlists.at (0);
+        playlists.erase (0);
         delete playlist;
 
     }
 
-    playlists.Empty ();
+    playlists.clear ();
 
 }
 
@@ -56,17 +56,17 @@ void SgPlaylist_Create ( char *pname )
 
     SgPlaylist *playlist = new SgPlaylist ();
     playlist->SetName ( pname );
-    playlists.PutData ( playlist );
+    playlists.push_back ( playlist );
 
 }
 
 SgPlaylist *SgPlaylist_GetPlaylist ( char *pname )
 {
 
-    for ( int i = 0; i < playlists.Size (); ++i ) 
-        if ( playlists.GetData (i) )            
-            if ( strcmp ( playlists.GetData (i)->name, pname ) == 0 )
-                return playlists.GetData(i);
+    for ( int i = 0; i < playlists.size (); ++i ) 
+        if ( playlists.at (i) )            
+            if ( strcmp ( playlists.at (i)->name, pname ) == 0 )
+                return playlists.at(i);
 
     return NULL;
 
@@ -133,8 +133,8 @@ void SgPlaylist_NextSong ()
     if ( playlist ) {
 
         ++songindex;
-        if ( songindex >= playlist->songs.Size() ) songindex = 0;
-        char *songtitle = playlist->songs.GetData(songindex);
+        if ( songindex >= playlist->songs.size() ) songindex = 0;
+        char *songtitle = playlist->songs.at(songindex);
 
         SgPlayMod ( RsArchiveFileOpen ( songtitle ) );
         strcpy ( currentsong, songtitle );

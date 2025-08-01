@@ -118,7 +118,7 @@ void ClientConnection::Handle_ClientCommsInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS ) 	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS ) 	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -144,7 +144,7 @@ void ClientConnection::Handle_ClientCommsInterface ()
 	    char *message = msgstream.str ();
 
 	    int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-	    if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+	    if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 	    //delete [] msgstream.str ();
@@ -157,18 +157,18 @@ void ClientConnection::Handle_ClientCommsInterface ()
 	// Update known links
 	//
 
-	if ( links->Size () > numlinks ) {
+	if ( links->size () > numlinks ) {
 
 	    // The player has added some new links
 	    // Update the client
 
-	    int numnewlinks = links->Size () - numlinks;
+	    int numnewlinks = links->size () - numlinks;
 
 	    for ( int i = 0; i < numnewlinks; ++i ) {
 
 		std::ostrstream msgstream;
 
-		VLocation *vl = game->GetWorld ()->GetVLocation ( links->GetData(i) );
+		VLocation *vl = game->GetWorld ()->GetVLocation ( links->at(i) );
 		UplinkAssert (vl);
 		msgstream << "CLIENTCOMMS-IPNAME " << vl->ip
 			  << " " << vl->x << " " << vl->y << " " << vl->computer;
@@ -177,22 +177,22 @@ void ClientConnection::Handle_ClientCommsInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
 
 	    }
 
-	    numlinks = links->Size ();
+	    numlinks = links->size ();
 
 	}
-	else if ( links->Size () < numlinks ) {
+	else if ( links->size () < numlinks ) {
 
 	    // Player has deleted some links
 	    // No need to update the client
 
-	    numlinks = links->Size ();
+	    numlinks = links->size ();
 
 	}
 
@@ -216,7 +216,7 @@ void ClientConnection::Handle_ClientCommsInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS ) 	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS ) 	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -251,7 +251,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -265,15 +265,15 @@ void ClientConnection::Handle_ClientStatusInterface ()
 	// Send latest balance
 	//
 
-	if ( player->GetBalance () != balance || player->accounts.Size () != numaccounts ) {
+	if ( player->GetBalance () != balance || player->accounts.size () != numaccounts ) {
 
 		std::ostrstream msgstream;
 		msgstream << "CLIENTSTATUS-FINANCE "
 				  << "Balance : " << player->GetBalance () << "c\n\n";
 
-		for ( int i = 0; i < player->accounts.Size (); ++i ) {
+		for ( int i = 0; i < player->accounts.size (); ++i ) {
 
-			char *account = player->accounts.GetData (i);
+			char *account = player->accounts.at (i);
 			UplinkAssert (account);
 
 			char ip [SIZE_VLOCATION_IP];
@@ -290,14 +290,14 @@ void ClientConnection::Handle_ClientStatusInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
 
 
 		balance = player->GetBalance ();
-		numaccounts = player->accounts.Size ();
+		numaccounts = player->accounts.size ();
 
 	}
 
@@ -322,7 +322,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -350,7 +350,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -364,7 +364,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 	//
 
 	if ( player->gateway.GetCPUSpeed () * player->gateway.GetBandwidth () * player->gateway.memorysize != cpumodemmemory ||
-		 player->gateway.hardware.Size () != numhwitems ) {
+		 player->gateway.hardware.size () != numhwitems ) {
 
 		// Explanation of above formula
 		// No need to store cpu, modem and mem seperately - multiply them together and compare
@@ -376,21 +376,21 @@ void ClientConnection::Handle_ClientStatusInterface ()
 				  << player->gateway.modemtype << "\n"
 				  << "Memory : " << player->gateway.memorysize << "\n";
 
-		for ( int i = 0; i < player->gateway.hardware.Size (); ++i )
+		for ( int i = 0; i < player->gateway.hardware.size (); ++i )
 			if ( player->gateway.hardware.ValidIndex (i) )
-				msgstream << player->gateway.hardware.GetData (i) << "\n";
+				msgstream << player->gateway.hardware.at (i) << "\n";
 
 		msgstream << (char) 10 << (char) 13 << '#' << '\x0';
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
 
 		cpumodemmemory = player->gateway.GetCPUSpeed () * player->gateway.GetBandwidth () * player->gateway.memorysize;
-		numhwitems = player->gateway.hardware.Size ();
+		numhwitems = player->gateway.hardware.size ();
 
 	}
 
@@ -419,7 +419,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 		char *message = msgstream.str ();
 
 		int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+		if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 		msgstream.rdbuf()->freeze( 0 );
 		//delete [] msgstream.str ();
@@ -442,12 +442,12 @@ void ClientConnection::Handle_ClientStatusInterface ()
 
 		// Find the first "new" news story
 
-		int indexofnew = uplink->news.Size ();
+		int indexofnew = uplink->news.size ();
 
-		for ( int i = 1; i < uplink->news.Size (); ++i ) {
+		for ( int i = 1; i < uplink->news.size (); ++i ) {
 			if ( uplink->news.ValidIndex (i) ) {
 
-				News *thisnews = uplink->news.GetData (i);
+				News *thisnews = uplink->news.at (i);
 				UplinkAssert (thisnews);
 
 				if ( ! (thisnews->date.After ( &lastnewsdate )) ) {
@@ -466,7 +466,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 
 		for ( int in = indexofnew; in >= 0; --in ) {
 
-			News *thisnews = uplink->news.GetData (in);
+			News *thisnews = uplink->news.at (in);
 			UplinkAssert (thisnews);
 
 			std::ostrstream msgstream;
@@ -475,7 +475,7 @@ void ClientConnection::Handle_ClientStatusInterface ()
 			char *message = msgstream.str ();
 
 			int result = TcpSend ( socket, message, (unsigned int) ( strlen(message)+1 ), false, HFILE_ERROR );
-			if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+			if ( result != TCP4U_SUCCESS )	app->GetNetwork ()->GetServer ()->clients.erase (index);
 
 			msgstream.rdbuf()->freeze( 0 );
 			//delete [] msgstream.str ();
@@ -522,7 +522,7 @@ void ClientConnection::Update ()
 		switch ( result ) {
 
 			case TCP4U_SOCKETCLOSED:
-				app->GetNetwork ()->GetServer ()->clients.RemoveData (index);
+				app->GetNetwork ()->GetServer ()->clients.erase (index);
 				break;
 
 			case TCP4U_OVERFLOW:

@@ -154,7 +154,7 @@ void LanForce::SetTarget ( UplinkObject *uo, char *uos, int uoi )
 			comp = (LanComputer *) uo;
 			if ( !comp->systems.ValidIndex( uoi ) ) return;
 			systemIndex = uoi;
-			LanComputerSystem *system = comp->systems.GetData( uoi );
+			LanComputerSystem *system = comp->systems.at( uoi );
             LanInterfaceObject *lio = LanInterface::GetLanInterfaceObject( system->TYPE );
 		
             if ( system->TYPE == LANSYSTEM_LOCK ) {
@@ -254,7 +254,7 @@ void LanForce::Tick ( int n )
 			if ( progress >= numticksrequired ) {
 
 				UplinkAssert (comp->systems.ValidIndex(systemIndex));
-    			LanComputerSystem *system = comp->systems.GetData( systemIndex );
+    			LanComputerSystem *system = comp->systems.at( systemIndex );
 	    		UplinkAssert (system);
                 system->data1 = 0;
 

@@ -17,11 +17,11 @@ SgPlaylist::SgPlaylist ()
 SgPlaylist::~SgPlaylist ()
 {
 
-	for ( int i = 0; i < songs.Size (); ++i ) 
-		if ( songs.GetData (i) )
-			if ( strlen(songs.GetData (i)) != 0 )
-				if ( strcmp(songs.GetData (i), "") != 0 )
-					delete [] songs.GetData (i);
+	for ( int i = 0; i < songs.size (); ++i ) 
+		if ( songs.at (i) )
+			if ( strlen(songs.at (i)) != 0 )
+				if ( strcmp(songs.at (i), "") != 0 )
+					delete [] songs.at (i);
 
 }
 
@@ -38,14 +38,14 @@ void SgPlaylist::AddSong ( char *name )
 
     char *namecopy = new char [strlen(name)+1];
     sprintf ( namecopy, name );
-    songs.PutData(namecopy);
+    songs.push_back(namecopy);
 
 }
 
 int SgPlaylist::NumSongs ()
 {
     
-    return songs.Size ();
+    return songs.size ();
 
 }
 
@@ -53,7 +53,7 @@ char *SgPlaylist::GetRandomSong ()
 {
 
   	int songindex = (int)( ( (float) rand () / (float) RAND_MAX ) * NumSongs () );
-    return songs.GetData(songindex);
+    return songs.at(songindex);
 
 }
 
@@ -67,7 +67,7 @@ char *SgPlaylist::GetRandomSong ( char *oldsong )
     }
     else if ( NumSongs () == 1 ) {
 
-        return songs.GetData (0);
+        return songs.at (0);
 
     }
     else {

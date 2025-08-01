@@ -157,7 +157,7 @@ void LanSpoof::SetTarget ( UplinkObject *uo, char *uos, int uoi )
 			comp = (LanComputer *) uo;
 			if ( !comp->systems.ValidIndex( uoi ) ) return;
 			systemIndex = uoi;
-			LanComputerSystem *system = comp->systems.GetData( uoi );
+			LanComputerSystem *system = comp->systems.at( uoi );
             LanInterfaceObject *lio = LanInterface::GetLanInterfaceObject( system->TYPE );
 		
 			Button *button = EclGetButton ( uos );
@@ -240,7 +240,7 @@ void LanSpoof::Tick ( int n )
             }
 
 			UplinkAssert (comp->systems.ValidIndex(systemIndex));
-			LanComputerSystem *system = comp->systems.GetData( systemIndex );
+			LanComputerSystem *system = comp->systems.at( systemIndex );
 			UplinkAssert (system);
 
 			progress = min ( progress + n, numticksrequired );

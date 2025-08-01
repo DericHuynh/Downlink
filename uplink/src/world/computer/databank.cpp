@@ -34,14 +34,14 @@ DataBank::~DataBank()
 void DataBank::SetSize ( int newsize )
 {
 
-	memory.SetSize ( newsize );
+	memory.resize ( newsize );
 
 }
 
 int DataBank::GetSize ()
 {
 
-	return memory.Size ();
+	return memory.size ();
 
 }
 
@@ -55,7 +55,7 @@ int DataBank::NumDataFiles ()
 int DataBank::GetDataSize ()
 {
 
-	return	data.Size ();
+	return	data.size ();
 
 }
 
@@ -77,43 +77,43 @@ void DataBank::InsertData ( Data *newdata )
 
     UplinkAssert (newdata);
 
-    if ( data.Size () == 0 )
+    if ( data.size () == 0 )
         PutData ( newdata );
 
     else {
 
-        int insertindex = NumberGenerator::RandomNumber ( data.Size () );
+        int insertindex = NumberGenerator::RandomNumber ( data.size () );
 
         // Move the old data item from this location to the end
 
         if ( data.ValidIndex (insertindex) ) {
-            data.SetSize ( data.Size () + 1 );
-            Data *olddata = data.GetData (insertindex);
+            data.resize ( data.size () + 1 );
+            Data *olddata = data.at (insertindex);
             UplinkAssert (olddata);
-            int newindex = data.Size () - 1;
-            data.PutData (olddata, newindex );
+            int newindex = data.size () - 1;
+            data.insert(newindex, olddata);
 
-            for ( int i = 0; i < memory.Size (); ++i )
+            for ( int i = 0; i < memory.size (); ++i )
                 if ( memory.ValidIndex (i) )
-                    if ( memory.GetData (i) == insertindex )
-                        memory.PutData ( newindex, i );
+                    if ( memory.at (i) == insertindex )
+                        memory.insert( i, newindex);
         }
         
         // Insert the new data item
 
-        data.PutData ( newdata, insertindex );
+        data.insert( insertindex, newdata);
 
         int index = FindValidPlacement (newdata);
 
         if ( index == -1 ) {
-            memory.SetSize ( memory.Size () + newdata->size );
+            memory.resize ( memory.size () + newdata->size );
             index = FindValidPlacement (newdata);
         }
     
         UplinkAssert (index != -1);
 
         for ( int i = 0; i < newdata->size; ++i )
-		    memory.PutData ( insertindex, index + i );
+		    memory.insert( index + i, insertindex);
 
     }
 
@@ -122,12 +122,12 @@ void DataBank::InsertData ( Data *newdata )
 void DataBank::PutData ( Data *newdata, int memoryindex )
 {
 
-	int pos = data.PutData ( newdata );
+	int pos = data.push_back ( newdata );
 
 	UplinkAssert ( newdata );
 
 	for ( int i = 0; i < newdata->size; ++i )
-		memory.PutData ( pos, memoryindex + i );
+		memory.insert( memoryindex + i, pos);
 
 }
 
@@ -153,17 +153,17 @@ void DataBank::RemoveDataFile ( int dataindex )
 
 		// Delete the file
 
-        Data *thefile = data.GetData (dataindex);               // TODO is it safe to delete the data here?
+        Data *thefile = data.at (dataindex);               // TODO is it safe to delete the data here?
         if ( thefile ) delete thefile;
 
-		data.RemoveData (dataindex);
+		data.erase (dataindex);
 
 		// Delete any indexes to the file
 	
-		for ( int i = 0; i < memory.Size (); ++i )
+		for ( int i = 0; i < memory.size (); ++i )
 			if ( memory.ValidIndex (i) )
-				if ( memory.GetData (i) == dataindex )
-					memory.RemoveData ( i );
+				if ( memory.at (i) == dataindex )
+					memory.erase ( i );
 
 		// If that was the last file, then this databank has been formatted
 
@@ -191,10 +191,10 @@ Data *DataBank::GetData ( int memoryindex )
 Data *DataBank::GetData ( char *title )
 {
 
-	for ( int i = 0; i < data.Size (); ++i )
+	for ( int i = 0; i < data.size (); ++i )
 		if ( data.ValidIndex (i) )
-			if ( strcmp ( data.GetData (i)->title, title ) == 0 )
-				return data.GetData (i);
+			if ( strcmp ( data.at (i)->title, title ) == 0 )
+				return data.at (i);
 
 	return NULL;
 
@@ -203,10 +203,10 @@ Data *DataBank::GetData ( char *title )
 bool DataBank::ContainsData ( char *title, float version )
 {
 
-	for ( int i = 0; i < data.Size (); ++i )
+	for ( int i = 0; i < data.size (); ++i )
 		if ( data.ValidIndex (i) )
-			if ( strcmp ( data.GetData (i)->title, title ) == 0 ) {
-				float versionData = data.GetData (i)->version;
+			if ( strcmp ( data.at (i)->title, title ) == 0 ) {
+				float versionData = data.at (i)->version;
 				if ( versionData < 0.0f || versionData >= version )
 					return true;
 			}
@@ -222,7 +222,7 @@ Data *DataBank::GetDataFile ( int dataindex )
 		return NULL;
 
 	else
-		return data.GetData (dataindex);
+		return data.at (dataindex);
 
 }
 
@@ -244,10 +244,10 @@ int DataBank::GetDataIndex ( int memoryindex )
 int DataBank::GetMemoryIndex ( int dataindex )
 {
 
-	for ( int i = 0; i < memory.Size (); ++i ) {
+	for ( int i = 0; i < memory.size (); ++i ) {
 		if ( memory.ValidIndex (i) ) {
 	
-			if ( memory.GetData (i) == dataindex )
+			if ( memory.at (i) == dataindex )
 				return i;
 
 		}
@@ -266,7 +266,7 @@ int DataBank::IsValidPlacement ( Data *newdata, int memoryindex )
 
 	for ( int i = memoryindex; i < memoryindex + newdata->size; ++i ) {
 	
-		if ( i >= memory.Size () || i < 0 ) 
+		if ( i >= memory.size () || i < 0 ) 
 			return 2;									// Not valid
 
 		else if ( memory.ValidIndex (i) )
@@ -283,7 +283,7 @@ int DataBank::FindValidPlacement ( Data *newdata )
 
 	UplinkAssert (newdata);
 
-	for ( int i = 0; i < memory.Size (); ++i ) {
+	for ( int i = 0; i < memory.size (); ++i ) {
 
 		if ( IsValidPlacement ( newdata, i ) == 0 ) {
 
@@ -300,13 +300,13 @@ int DataBank::FindValidPlacement ( Data *newdata )
 void DataBank::Format ()
 {
 
-    int oldmemsize = memory.Size ();
+    int oldmemsize = memory.size ();
 
 	DeleteDArrayData ( (DArray <UplinkObject *> *) &data );
 	
-	data.Empty ();
-	memory.Empty ();
-    memory.SetSize ( oldmemsize );
+	data.clear ();
+	memory.clear ();
+    memory.resize ( oldmemsize );
 
 	formatted = true;
 
@@ -317,32 +317,32 @@ void DataBank::RandomizeDataPlacement ()
 
 	DArray <Data *> tempdata;
 
-	for ( int i = 0; i < data.Size (); i++ )
+	for ( int i = 0; i < data.size (); i++ )
 		if ( data.ValidIndex ( i ) )
-			tempdata.PutData ( data.GetData ( i ) );
+			tempdata.push_back ( data.at ( i ) );
 
-	for ( int i = 0; i < tempdata.Size (); i++ ) {
-		int index1 = NumberGenerator::RandomNumber ( tempdata.Size () );
-		int index2 = NumberGenerator::RandomNumber ( tempdata.Size () );
+	for ( int i = 0; i < tempdata.size (); i++ ) {
+		int index1 = NumberGenerator::RandomNumber ( tempdata.size () );
+		int index2 = NumberGenerator::RandomNumber ( tempdata.size () );
 
 		if ( index1 != index2 && tempdata.ValidIndex ( index1 ) && tempdata.ValidIndex ( index2 ) ) {
-			Data *temp = tempdata.GetData ( index1 );
-			tempdata.PutData ( tempdata.GetData ( index2 ), index1 );
-			tempdata.PutData ( temp, index2 );
+			Data *temp = tempdata.at ( index1 );
+			tempdata.insert( index1, tempdata.at ( index2 ));
+			tempdata.insert( index2, temp);
 		}
 	}
 
-	data.Empty ();
+	data.clear ();
 
-	int oldmemsize = memory.Size ();
-	memory.Empty ();
-    memory.SetSize ( oldmemsize );
+	int oldmemsize = memory.size ();
+	memory.clear ();
+    memory.resize ( oldmemsize );
 
 	int index = 0;
-	for ( int i = 0; i < tempdata.Size (); i++ )
+	for ( int i = 0; i < tempdata.size (); i++ )
 		if ( tempdata.ValidIndex ( i ) ) {
-			PutData ( tempdata.GetData ( i ), index );
-			index += tempdata.GetData ( i )->size;
+			PutData ( tempdata.at ( i ), index );
+			index += tempdata.at ( i )->size;
 		}
 
 }

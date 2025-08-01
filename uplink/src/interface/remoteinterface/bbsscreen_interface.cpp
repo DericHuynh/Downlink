@@ -249,7 +249,7 @@ void BBSScreenInterface::AcceptClick ( Button *button )
 
 			game->GetWorld ()->GetPlayer ()->GiveMission ( mission );
 		
-			cu->missions.RemoveData ( currentselect );
+			cu->missions.erase ( currentselect );
 		
 			currentselect = -1;
 			EclRegisterCaptionChange ( "bbs_details", " " );
@@ -387,7 +387,7 @@ void BBSScreenInterface::Create ( ComputerScreen *newcs )
 
     	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	    UplinkAssert ( cu );
-        ScrollBox::CreateScrollBox ( "bbs_scroll", 22 + SY(388), 47, 15, NumItemsOnScreen() * 20, cu->missions.Size(), 12, 0, ScrollChange );
+        ScrollBox::CreateScrollBox ( "bbs_scroll", 22 + SY(388), 47, 15, NumItemsOnScreen() * 20, cu->missions.size(), 12, 0, ScrollChange );
 
 		baseoffset = 0;
 		currentselect = -1;
@@ -444,9 +444,9 @@ void BBSScreenInterface::Update ()
 	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert ( cu );
 
-	int newnummessages = cu->missions.Size ();
+	int newnummessages = cu->missions.size ();
     if ( newnummessages != previousnummessages ) {
-        ScrollBox::GetScrollBox( "bbs_scroll" )->SetNumItems( cu->missions.Size() );
+        ScrollBox::GetScrollBox( "bbs_scroll" )->SetNumItems( cu->missions.size() );
 		previousnummessages = newnummessages;
     }
 

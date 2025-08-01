@@ -112,7 +112,7 @@ void HWSalesScreenInterface::ClickHWButton ( Button *button )
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
 
-	Sale *sale = thisint->items.GetData (index);
+	Sale *sale = thisint->items.at (index);
 
 	if ( sale && sale->GetVersion ( 1 ) ) {
 
@@ -138,7 +138,7 @@ void HWSalesScreenInterface::DrawHWButton ( Button *button, bool highlighted, bo
 
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
-	Sale *sale = thisint->items.GetData ( index );
+	Sale *sale = thisint->items.at ( index );
 
 	if ( sale ) {
 
@@ -203,7 +203,7 @@ void HWSalesScreenInterface::MousedownHWButton ( Button *button )
 
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
-	Sale *sale = thisint->items.GetData (index + baseoffset);
+	Sale *sale = thisint->items.at (index + baseoffset);
 
 	if ( sale ) 
 		button_click ( button );
@@ -219,7 +219,7 @@ void HWSalesScreenInterface::HighlightHWButton ( Button *button )
 
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
-	Sale *sale = thisint->items.GetData (index + baseoffset);
+	Sale *sale = thisint->items.at (index + baseoffset);
 
 	if ( sale )
 		button_highlight ( button );
@@ -260,7 +260,7 @@ void HWSalesScreenInterface::AcceptClick ( Button *button )
 
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
-	Sale *sale = thisint->items.GetData ( currentselect );
+	Sale *sale = thisint->items.at ( currentselect );
 
 	if ( sale ) {
 
@@ -412,7 +412,7 @@ void HWSalesScreenInterface::ScrollDownClick ( Button *button )
 
 	HWSalesScreenInterface *thisint = (HWSalesScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
-	int numitems = thisint->items.Size ();
+	int numitems = thisint->items.size ();
 
 	if ( baseoffset > numitems - 12 )
 		baseoffset = numitems - 12;
@@ -520,14 +520,14 @@ void HWSalesScreenInterface::CreateSalesMenu ( ComputerScreen *newcs )
 		// Populate the "items" array with all items of this type
 		//
 
-		items.Empty ();
+		items.clear ();
 		CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 		UplinkAssert ( cu );
-		for ( int ic = 0; ic < cu->hw_sales.Size (); ++ic ) {
+		for ( int ic = 0; ic < cu->hw_sales.size (); ++ic ) {
 			Sale *thissale = cu->GetHWSale (ic);
 			UplinkAssert (thissale);
 			if (thissale->swhwTYPE == HWType )
-				items.PutData (thissale);
+				items.push_back (thissale);
 		}
 	
 		//

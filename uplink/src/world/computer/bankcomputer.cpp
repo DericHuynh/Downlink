@@ -33,7 +33,7 @@ int BankComputer::GenerateUniqueAccountNumber ()
 	char previousaccno_s [12];
 	UplinkSnprintf ( previousaccno_s, sizeof ( previousaccno_s ), "%d", previousaccno );
 
-	while ( accounts.LookupTree ( previousaccno_s ) ) {
+	while ( accounts.find ( previousaccno_s ) ) {
 
 		previousaccno += NumberGenerator::RandomNumber ( 999999 );	
 		UplinkSnprintf ( previousaccno_s, sizeof ( previousaccno_s ), "%d", previousaccno );
@@ -55,9 +55,9 @@ int BankComputer::CreateBankAccount ( BankAccount *newaccount )
 	char s_account [16];
 	UplinkSnprintf ( s_account, sizeof ( s_account ), "%d", newaccount->accountnumber );
 
-	UplinkAssert ( !(accounts.LookupTree ( s_account )) );
+	UplinkAssert ( !(accounts.find ( s_account )) );
 
-	accounts.PutData ( s_account, newaccount );
+	accounts.insert ( s_account, newaccount );
 
 	// Create the access record
 
@@ -103,16 +103,16 @@ BankAccount *BankComputer::GetRandomAccount ()
 {
 
 	// Put the accounts into a DArray then choose a random one
-	DArray <BankAccount *> *tempaccounts = accounts.ConvertToDArray ();
+	DArray <BankAccount *> *tempaccounts = accounts.MapDataToDArray ();
 
-    if ( tempaccounts->Size () == 0 ) {
+    if ( tempaccounts->size () == 0 ) {
         delete tempaccounts;
         return NULL;
     }
 
-	int index = NumberGenerator::RandomNumber ( tempaccounts->Size () );
+	int index = NumberGenerator::RandomNumber ( tempaccounts->size () );
 	UplinkAssert (tempaccounts->ValidIndex (index) );
-	BankAccount *account = tempaccounts->GetData (index);
+	BankAccount *account = tempaccounts->at (index);
 
 	delete tempaccounts;
 	return account;

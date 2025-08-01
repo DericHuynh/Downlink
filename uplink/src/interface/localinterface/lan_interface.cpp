@@ -145,7 +145,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 
 	if ( lanComp->systems.ValidIndex( currentSelected ) ) {
 
-		LanComputerSystem *system = lanComp->systems.GetData( currentSelected );
+		LanComputerSystem *system = lanComp->systems.at( currentSelected );
 		UplinkAssert (system);
 
 		LanInterfaceObject *intObj = &lanInterfaceObjects[system->TYPE];
@@ -178,7 +178,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 	int currentSystem = LanMonitor::currentSystem;
 	if ( lanComp->systems.ValidIndex( currentSystem ) ) {
 
-		LanComputerSystem *system = lanComp->systems.GetData( currentSystem );
+		LanComputerSystem *system = lanComp->systems.at( currentSystem );
 		UplinkAssert (system);
 
 		LanInterfaceObject *intObj = &lanInterfaceObjects[system->TYPE];
@@ -214,18 +214,18 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
     glLineWidth ( 2.0f );
     glColor4f ( 0.0f, 0.5f, 0.6f, 1.0f );   
 
-    for ( int i = 0; i < lanComp->links.Size(); ++i ) {
+    for ( int i = 0; i < lanComp->links.size(); ++i ) {
         if ( lanComp->links.ValidIndex(i) ) {
 
-            LanComputerLink *link = lanComp->links.GetData(i);
+            LanComputerLink *link = lanComp->links.at(i);
             UplinkAssert (link);
 
             if ( link->visible > LANLINKVISIBLE_NONE ) {
 
 				UplinkAssert (lanComp->systems.ValidIndex(link->from));
 				UplinkAssert (lanComp->systems.ValidIndex(link->to));
-                LanComputerSystem *from = lanComp->systems.GetData( link->from );
-                LanComputerSystem *to = lanComp->systems.GetData( link->to );
+                LanComputerSystem *from = lanComp->systems.at( link->from );
+                LanComputerSystem *to = lanComp->systems.at( link->to );
                 UplinkAssert (from);
                 UplinkAssert (to);
 
@@ -326,14 +326,14 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
     LanInterface *thisInt = (LanInterface *) game->GetInterface ()->GetLocalInterface ()->GetInterfaceScreen ();
     UplinkAssert (thisInt);
 
-    for ( int h = 0; h < thisInt->highlights.Size(); ++h ) {
+    for ( int h = 0; h < thisInt->highlights.size(); ++h ) {
 
-        LanInterfaceHighlight *lih = thisInt->highlights.GetData(h);
+        LanInterfaceHighlight *lih = thisInt->highlights.at(h);
         UplinkAssert (lih);
 
         if ( lanComp->systems.ValidIndex( lih->systemIndex ) ) {
 
-            LanComputerSystem *system = lanComp->systems.GetData( lih->systemIndex );
+            LanComputerSystem *system = lanComp->systems.at( lih->systemIndex );
             UplinkAssert (system);
 
 		    LanInterfaceObject *intObj = &lanInterfaceObjects[system->TYPE];
@@ -387,7 +387,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 
 	if ( lanComp->systems.ValidIndex( sysAdminCurrentSystem ) ) {
 
-		LanComputerSystem *system = lanComp->systems.GetData( sysAdminCurrentSystem );
+		LanComputerSystem *system = lanComp->systems.at( sysAdminCurrentSystem );
 		UplinkAssert (system);
 
 		LanInterfaceObject *intObj = &lanInterfaceObjects[system->TYPE];
@@ -525,7 +525,7 @@ void LanInterface::LanSystemDraw ( Button *button, bool highlighted, bool clicke
     sscanf ( button->name, "%s %d", unused, &systemIndex );
 
     if ( !lancomp->systems.ValidIndex(systemIndex) ) return;
-    LanComputerSystem *system = lancomp->systems.GetData(systemIndex);
+    LanComputerSystem *system = lancomp->systems.at(systemIndex);
     if ( !system ) return;
 
     //
@@ -585,7 +585,7 @@ void LanInterface::LanSystemClick ( Button *button )
 
     LanComputerSystem *system = NULL;
 	if ( lancomp->systems.ValidIndex ( systemIndex ) )
-		system = lancomp->systems.GetData(systemIndex);
+		system = lancomp->systems.at(systemIndex);
     if ( system && system->visible != LANSYSTEMVISIBLE_NONE ) 
         game->GetInterface ()->GetTaskManager ()->SetProgramTarget( lancomp, button->name, systemIndex );
     
@@ -609,7 +609,7 @@ void LanInterface::LanSystemMouseMove ( Button *button )
     int systemIndex;
     sscanf ( button->name, "%s %d", unused, &systemIndex );
 	if ( !lancomp->systems.ValidIndex ( systemIndex ) ) return;
-    LanComputerSystem *system = lancomp->systems.GetData(systemIndex);
+    LanComputerSystem *system = lancomp->systems.at(systemIndex);
     if ( !system ) return;
 
 
@@ -671,12 +671,12 @@ void LanInterface::ConnectClick ( Button *button )
         //
         // Remove everything in the connection after the current Selected
 
-        for ( int i = LanMonitor::connection.Size() - 1; i >= 0; --i ) {
-            int systemIndex = LanMonitor::connection.GetData(i);
+        for ( int i = LanMonitor::connection.size() - 1; i >= 0; --i ) {
+            int systemIndex = LanMonitor::connection.at(i);
             if ( systemIndex == LanMonitor::currentSelected ) {
 
                 while ( LanMonitor::connection.ValidIndex( i + 1 ) )
-                    LanMonitor::connection.RemoveData( i + 1 );
+                    LanMonitor::connection.erase( i + 1 );
                     
                 break;
 
@@ -690,7 +690,7 @@ void LanInterface::ConnectClick ( Button *button )
 
 		if ( lanComp->systems.ValidIndex(LanMonitor::currentSelected) ) {
 
-			LanComputerSystem *system = lanComp->systems.GetData(LanMonitor::currentSelected);
+			LanComputerSystem *system = lanComp->systems.at(LanMonitor::currentSelected);
 			if ( system->screenIndex != -1 ) {
 				game->GetInterface()->GetRemoteInterface()->RunScreen( system->screenIndex, lanComp );
 				game->GetInterface()->GetLocalInterface()->RunScreen( SCREEN_NONE );
@@ -739,7 +739,7 @@ void LanInterface::CancelClick ( Button *button )
 
         LanComputer *lc = (LanComputer *) comp;
 		if ( lc->systems.ValidIndex ( currentSystem ) ) {
-			LanComputerSystem *system = lc->systems.GetData(currentSystem);
+			LanComputerSystem *system = lc->systems.at(currentSystem);
 			game->GetInterface()->GetRemoteInterface()->RunScreen ( system->screenIndex, lc );
 
 			game->GetInterface ()->GetLocalInterface ()->RunScreen ( SCREEN_NONE );
@@ -760,7 +760,7 @@ void LanInterface::BackDraw ( Button *button, bool highlighted, bool clicked )
 	UplinkAssert (comp);
 
     if ( comp->TYPE == COMPUTER_TYPE_LAN &&
-        LanMonitor::connection.Size() > 1 ) {
+        LanMonitor::connection.size() > 1 ) {
 
 		button_draw ( button, highlighted, clicked );
 
@@ -778,7 +778,7 @@ void LanInterface::BackMouseMove ( Button *button )
 	UplinkAssert (comp);
 
     if ( comp->TYPE == COMPUTER_TYPE_LAN &&
-        LanMonitor::connection.Size() > 1 ) {
+        LanMonitor::connection.size() > 1 ) {
 
 		button_highlight ( button );
 
@@ -810,8 +810,8 @@ void LanInterface::GenerateClick ( Button *button )
 
         game->GetInterface ()->GetLocalInterface ()->RunScreen( SCREEN_NONE );
         LanComputer *lanComp = (LanComputer *) comp;
-        lanComp->systems.Empty ();
-        lanComp->links.Empty ();
+        lanComp->systems.clear ();
+        lanComp->links.clear ();
         
         switch (size)
         {
@@ -900,7 +900,7 @@ void LanInterface::SelectSystem ( int systemIndex )
     LanComputerSystem *system = NULL;
 
     if ( lancomp->systems.ValidIndex(systemIndex) ) {
-        system = lancomp->systems.GetData(systemIndex);
+        system = lancomp->systems.at(systemIndex);
         if ( !system || system->visible == LANSYSTEMVISIBLE_NONE ) 
             return;
     }
@@ -942,27 +942,27 @@ void LanInterface::SelectSystem ( int systemIndex )
     // Update the highlights
 
     while ( highlights.ValidIndex(0) ) {
-        LanInterfaceHighlight *lih = highlights.GetData(0);
+        LanInterfaceHighlight *lih = highlights.at(0);
         delete lih;
-        highlights.RemoveData(0);
+        highlights.erase(0);
     }
-    highlights.Empty ();
+    highlights.clear ();
 
     switch ( system->TYPE )
     {
-        case LANSYSTEM_AUTHENTICATION:      highlights.PutData( new LanInterfaceHighlight ( system->data1, "Locks/Unlocks" ) );             break;        
-        case LANSYSTEM_ISOLATIONBRIDGE:     highlights.PutData( new LanInterfaceHighlight ( system->data1, "Locks" ) );
-                                            highlights.PutData( new LanInterfaceHighlight ( system->data2, "Unlocks" ) );                   break;
+        case LANSYSTEM_AUTHENTICATION:      highlights.push_back( new LanInterfaceHighlight ( system->data1, "Locks/Unlocks" ) );             break;        
+        case LANSYSTEM_ISOLATIONBRIDGE:     highlights.push_back( new LanInterfaceHighlight ( system->data1, "Locks" ) );
+                                            highlights.push_back( new LanInterfaceHighlight ( system->data2, "Unlocks" ) );                   break;
         
         case LANSYSTEM_LOCK:
         {
-            for ( int i = 0; i < lancomp->systems.Size(); ++i ) {
+            for ( int i = 0; i < lancomp->systems.size(); ++i ) {
                 if ( lancomp->systems.ValidIndex(i) ) {
-                    LanComputerSystem *thisSys = lancomp->systems.GetData(i);
+                    LanComputerSystem *thisSys = lancomp->systems.at(i);
                     if ( thisSys->TYPE == LANSYSTEM_AUTHENTICATION && (thisSys->data1 == systemIndex || thisSys->data2 == systemIndex || thisSys->data3 == systemIndex) )
-                        highlights.PutData( new LanInterfaceHighlight ( i, "Controller" ) );
+                        highlights.push_back( new LanInterfaceHighlight ( i, "Controller" ) );
                     if ( thisSys->TYPE == LANSYSTEM_ISOLATIONBRIDGE && (thisSys->data1 == systemIndex || thisSys->data2 == systemIndex ) )
-                        highlights.PutData( new LanInterfaceHighlight ( i, "Controller" ) );
+                        highlights.push_back( new LanInterfaceHighlight ( i, "Controller" ) );
                 }
             }
         }
@@ -970,16 +970,16 @@ void LanInterface::SelectSystem ( int systemIndex )
 
         case LANSYSTEM_MAINSERVER:          
             
-            if ( system->data1 != -1 )      highlights.PutData( new LanInterfaceHighlight ( system->data1, "GuardedBy" ) );
-            if ( system->data2 != -1 )      highlights.PutData( new LanInterfaceHighlight ( system->data2, "GuardedBy" ) );
-            if ( system->data3 != -1 )      highlights.PutData( new LanInterfaceHighlight ( system->data3, "GuardedBy" ) );
+            if ( system->data1 != -1 )      highlights.push_back( new LanInterfaceHighlight ( system->data1, "GuardedBy" ) );
+            if ( system->data2 != -1 )      highlights.push_back( new LanInterfaceHighlight ( system->data2, "GuardedBy" ) );
+            if ( system->data3 != -1 )      highlights.push_back( new LanInterfaceHighlight ( system->data3, "GuardedBy" ) );
             break;
 
     }
 
-    for ( int i = 0; i < system->validSubnets.Size(); ++i ) 
+    for ( int i = 0; i < system->validSubnets.size(); ++i ) 
 		if ( system->validSubnets.ValidIndex ( i ) )
-			highlights.PutData( new LanInterfaceHighlight ( system->validSubnets.GetData(i), "Valid Subnet" ) );
+			highlights.push_back( new LanInterfaceHighlight ( system->validSubnets.at(i), "Valid Subnet" ) );
 
 }
 
@@ -1003,10 +1003,10 @@ void LanInterface::CreateLayout ()
         //
         // Create icons for each system
 
-        for ( int i = 0; i < lancomp->systems.Size(); ++i ) {
+        for ( int i = 0; i < lancomp->systems.size(); ++i ) {
             if ( lancomp->systems.ValidIndex(i) ) {
 
-                LanComputerSystem *lanSystem = lancomp->systems.GetData(i);
+                LanComputerSystem *lanSystem = lancomp->systems.at(i);
                 UplinkAssert (lanSystem);
 
                 char name [64];
@@ -1030,7 +1030,7 @@ void LanInterface::CreateLayout ()
 
         if ( lancomp->systems.ValidIndex( LanMonitor::currentSystem ) ) {
 
-		    LanComputerSystem *system = lancomp->systems.GetData(LanMonitor::currentSystem);
+		    LanComputerSystem *system = lancomp->systems.at(LanMonitor::currentSystem);
 
             Button *background = EclGetButton ( "lan_background" );
             UplinkAssert (background);
@@ -1094,10 +1094,10 @@ void LanInterface::PositionLayout ()
         //
         // Create icons for each system
 
-        for ( int i = 0; i < lancomp->systems.Size(); ++i ) {
+        for ( int i = 0; i < lancomp->systems.size(); ++i ) {
             if ( lancomp->systems.ValidIndex(i) ) {
 
-                LanComputerSystem *lanSystem = lancomp->systems.GetData(i);
+                LanComputerSystem *lanSystem = lancomp->systems.at(i);
                 UplinkAssert (lanSystem);
 
                 char name [64];

@@ -55,20 +55,20 @@ GatewayDef::GatewayDef ( const GatewayDef& gd )
 	width = gd.width;
 	height = gd.height;
 
-	for ( int c = 0; c < gd.cpus.Size (); ++c ) 
+	for ( int c = 0; c < gd.cpus.size (); ++c ) 
 		if ( gd.cpus.ValidIndex (c) )
-			if ( gd.cpus.GetData (c) )
-				cpus.PutData ( new GatewayDefLocation ( *gd.cpus.GetData (c) ), c );
+			if ( gd.cpus.at (c) )
+				cpus.insert( c, new GatewayDefLocation ( *gd.cpus.at (c) ));
 
-	for ( int m = 0; m < gd.memory.Size (); ++m ) 
+	for ( int m = 0; m < gd.memory.size (); ++m ) 
 		if ( gd.memory.ValidIndex (m) )
-			if ( gd.memory.GetData (m) )
-				memory.PutData ( new GatewayDefLocation ( *gd.memory.GetData (m) ), m );
+			if ( gd.memory.at (m) )
+				memory.insert( m, new GatewayDefLocation ( *gd.memory.at (m) ));
 
-	for ( int s = 0; s < gd.security.Size (); ++s ) 
+	for ( int s = 0; s < gd.security.size (); ++s ) 
 		if ( gd.security.ValidIndex (s) )
-			if ( gd.security.GetData (s) )
-				security.PutData ( new GatewayDefLocation ( *gd.security.GetData (s) ), s );
+			if ( gd.security.at (s) )
+				security.insert( s, new GatewayDefLocation ( *gd.security.at (s) ));
 
 	modemX = gd.modemX;
 	modemY = gd.modemY;
@@ -80,22 +80,22 @@ GatewayDef::GatewayDef ( const GatewayDef& gd )
 GatewayDef::~GatewayDef ()
 {
 
-    for ( int c = 0; c < cpus.Size (); ++c ) 
+    for ( int c = 0; c < cpus.size (); ++c ) 
         if ( cpus.ValidIndex (c) )
-            if ( cpus.GetData (c) )
-                delete cpus.GetData (c);
+            if ( cpus.at (c) )
+                delete cpus.at (c);
 
 
-    for ( int m = 0; m < memory.Size (); ++m ) 
+    for ( int m = 0; m < memory.size (); ++m ) 
         if ( memory.ValidIndex (m) )
-            if ( memory.GetData (m) )
-                delete memory.GetData (m);
+            if ( memory.at (m) )
+                delete memory.at (m);
 
 
-    for ( int s = 0; s < security.Size (); ++s ) 
+    for ( int s = 0; s < security.size (); ++s ) 
         if ( security.ValidIndex (s) )
-            if ( security.GetData (s) )
-                delete security.GetData (s);
+            if ( security.at (s) )
+                delete security.at (s);
         
 }
 
@@ -117,7 +117,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 
 	// CPU positions
 
-	cpus.SetSize ( maxcpus );
+	cpus.resize ( maxcpus );
 
 	if ( maxcpus > 0 ) {
 
@@ -128,7 +128,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 		
 			GatewayDefLocation *gdl = new GatewayDefLocation ();
 			thefile >> gdl->x >> gdl->y >> ws;
-			cpus.PutData ( gdl, ic );
+			cpus.insert( ic, gdl);
 			
 		}
 
@@ -138,7 +138,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 
 	if ( maxmemory > 0 ) {
 
-		memory.SetSize ( maxmemory );
+		memory.resize ( maxmemory );
 		
 		char unused [8];
 		thefile >> unused >> ws;
@@ -147,7 +147,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 
 			GatewayDefLocation *gdl = new GatewayDefLocation ();
 			thefile >> gdl->x >> gdl->y >> ws;
-			memory.PutData ( gdl, i );
+			memory.insert( i, gdl);
 
 		}
 
@@ -157,7 +157,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 
 	if ( maxsecurity > 0 ) {
 
-		security.SetSize ( maxsecurity );
+		security.resize ( maxsecurity );
 		
 		char unused [8];
 		thefile >> unused >> ws;
@@ -166,7 +166,7 @@ void GatewayDef::LoadGatewayDefinition ( istream &thefile )
 
 			GatewayDefLocation *gdl = new GatewayDefLocation ();
 			thefile >> gdl->x >> gdl->y >> ws;
-			security.PutData ( gdl, i );
+			security.insert( i, gdl);
 
 		}
 
@@ -302,13 +302,13 @@ static void SaveDArrayGatewayDefLocation ( DArray <GatewayDefLocation *> *darray
 
 	UplinkAssert ( darray );
 
-	int size = darray->Size ();
+	int size = darray->size ();
 	fwrite ( &size, sizeof(size), 1, file );
 
 	for ( int i = 0; i < size; ++i ) {
 		if ( darray->ValidIndex (i) ) {
 
-			GatewayDefLocation *data = darray->GetData (i);
+			GatewayDefLocation *data = darray->at (i);
 
 			fwrite ( &i, sizeof(i), 1, file );
 			fwrite ( data, sizeof(GatewayDefLocation), 1, file );
@@ -340,7 +340,7 @@ static bool LoadDArrayGatewayDefLocation ( DArray <GatewayDefLocation *> *darray
 		return false;
     }
 
-	darray->SetSize ( size );
+	darray->resize ( size );
 
 	for ( int i = 0; i < size; ++i ) {
 
@@ -366,7 +366,7 @@ static bool LoadDArrayGatewayDefLocation ( DArray <GatewayDefLocation *> *darray
 				return false;
 			}
 
-			darray->PutData ( data, index );			// Insert into the correct index
+			darray->insert( index, data);			// Insert into the correct index
 
 		}
 

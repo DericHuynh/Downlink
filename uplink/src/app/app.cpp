@@ -455,7 +455,7 @@ DArray <char *> *App::ListExistingGames ()
 		char *p = strchr ( newname, '.' );
 		if ( p ) *p = '\x0';
 
-		existing->PutData ( newname );
+		existing->push_back ( newname );
 		exitmeplease = _findnext ( fileindex, &thisfile );
 
 	}

@@ -39,12 +39,12 @@ Options::~Options()
 	DeleteBTreeData ( (BTree <UplinkObject *> *) &options );
 
 
-	DArray <ColourOption *> *cols = colours.ConvertToDArray ();
+	DArray <ColourOption *> *cols = colours.MapDataToDArray ();
 
-	for ( int i = 0; i < cols->Size (); ++i )
+	for ( int i = 0; i < cols->size (); ++i )
 		if ( cols->ValidIndex (i) )
-			if ( cols->GetData (i) )
-				delete cols->GetData (i);
+			if ( cols->at (i) )
+				delete cols->at (i);
 
 	delete cols;
 
@@ -53,7 +53,7 @@ Options::~Options()
 Option *Options::GetOption ( char *name )
 {
 
-	BTree <Option *> *btree = options.LookupTree ( name );
+	BTree <Option *> *btree = options.find ( name );
 
 	if ( btree )
 		return btree->data;
@@ -94,7 +94,7 @@ bool Options::IsOptionEqualTo ( char *name, int value )
 void Options::SetOptionValue ( char *name, int newvalue )
 {
 
-	BTree <Option *> *btree = options.LookupTree ( name );
+	BTree <Option *> *btree = options.find ( name );
 
 	if ( btree ) {
 
@@ -114,7 +114,7 @@ void Options::SetOptionValue ( char *name, int newvalue )
 void Options::SetOptionValue ( char *name, int newvalue, char *tooltip, bool yesorno, bool visible )
 {
 
-	BTree <Option *> *btree = options.LookupTree ( name );
+	BTree <Option *> *btree = options.find ( name );
 
 	if ( btree ) {
 
@@ -136,7 +136,7 @@ void Options::SetOptionValue ( char *name, int newvalue, char *tooltip, bool yes
 		option->SetYesOrNo ( yesorno );
 		option->SetVisible ( visible );
 
-		options.PutData ( name, option );
+		options.insert ( name, option );
 
 	}
 
@@ -146,18 +146,18 @@ void Options::SetOptionValue ( char *name, int newvalue, char *tooltip, bool yes
 LList <Option *> *Options::GetAllOptions ( char *searchstring, bool returnhidden )
 {
 
-	DArray <Option *> *alloptions = options.ConvertToDArray ();
+	DArray <Option *> *alloptions = options.MapDataToDArray ();
 	LList <Option *> *result = new LList <Option *> ();
 
-	for ( int i = 0; i < alloptions->Size (); ++i ) {
+	for ( int i = 0; i < alloptions->size (); ++i ) {
 		if ( alloptions->ValidIndex (i) ) {
 
-			Option *option = alloptions->GetData (i);
+			Option *option = alloptions->at (i);
 			UplinkAssert (option);
 
 			if ( option->visible || returnhidden )
 				if ( !searchstring || strstr ( option->name, searchstring ) != NULL )
-					result->PutData ( option );
+					result->push_back ( option );
 
 		}
 	}
@@ -177,7 +177,7 @@ void Options::CreateDefaultOptions ()
 #ifndef TESTGAME
 	if ( !GetOption ( "game_firsttime" ) ) {
 		DArray <char *> *existing = App::ListExistingGames ();
-		int lenexisting = existing->Size ();
+		int lenexisting = existing->size ();
 
 		if ( lenexisting > 0 ) {
 			SetOptionValue ( "game_firsttime", 0, "z", true, false );
@@ -188,7 +188,7 @@ void Options::CreateDefaultOptions ()
 
 		for ( int i = 0; i < lenexisting; i++ )
 			if ( existing->ValidIndex ( i ) )
-				delete [] existing->GetData (i);
+				delete [] existing->at (i);
 
 		delete existing;
 	}
@@ -292,9 +292,9 @@ void Options::SetThemeName ( char *newThemeName )
     		std::istrstream thisLine ( lineBuffer );
             thisLine >> colourName >> ws >> r >> g >> b >> ws;
 
-            BTree <ColourOption *> *exists = colours.LookupTree( colourName );
+            BTree <ColourOption *> *exists = colours.find( colourName );
             if ( !exists ) {
-                colours.PutData( colourName, new ColourOption ( r, g, b ) );
+                colours.insert( colourName, new ColourOption ( r, g, b ) );
             }
             else {
                 delete exists->data;
@@ -330,7 +330,7 @@ char *Options::GetThemeDescription ()
 ColourOption *Options::GetColour ( char *colourName )
 {
 
-    ColourOption *result = colours.GetData (colourName);
+    ColourOption *result = colours.at (colourName);
 
     if ( result ) {
         return result;
@@ -379,17 +379,17 @@ void Options::RequestShutdownChange ( char *optionName, int newValue )
     UplinkStrncpy ( oc->name, optionName, sizeof ( oc->name ) );
     oc->value = newValue;
 
-    shutdownChanges.PutData( oc );
+    shutdownChanges.push_back( oc );
 
 }
 
 void Options::ApplyShutdownChanges ()
 {
 
-    while ( shutdownChanges.GetData(0) ) {
+    while ( shutdownChanges.at(0) ) {
 
-        OptionChange *oc = shutdownChanges.GetData(0);
-        shutdownChanges.RemoveData(0);
+        OptionChange *oc = shutdownChanges.at(0);
+        shutdownChanges.erase(0);
 
         SetOptionValue ( oc->name, oc->value );
 

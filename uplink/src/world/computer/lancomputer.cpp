@@ -26,7 +26,7 @@ LanComputer::~LanComputer ()
 int LanComputer::AddLanSystem ( LanComputerSystem *system )
 {
 
-    return systems.PutData ( system );
+    return systems.push_back ( system );
 
 }
 
@@ -59,7 +59,7 @@ int LanComputer::AddLanLink ( int from, float fromX, float fromY,
     link->toY = toY;
 	link->port = NumberGenerator::RandomNumber ( LAN_LINKPORTRANGE );
 	link->security = security;
-    return links.PutData ( link );
+    return links.push_back ( link );
 
 }
 

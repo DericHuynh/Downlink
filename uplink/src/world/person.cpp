@@ -139,7 +139,7 @@ int Person::GetStatus ( )
 void Person::GiveMessage ( Message *message )
 {
 
-	messages.PutData ( message );
+	messages.push_back ( message );
 
 }
 
@@ -185,11 +185,11 @@ void Person::SetCurrentAccount ( int index )
 void Person::ChangeBalance ( int amount, char *description )
 {
 
-	if ( accounts.Size () > 0 ) {
+	if ( accounts.size () > 0 ) {
 
 		// Change the current account
 
-		char *fullcurrentaccount = accounts.GetData (currentaccount);
+		char *fullcurrentaccount = accounts.at (currentaccount);
 		UplinkAssert (fullcurrentaccount);
 
 		char ip [SIZE_VLOCATION_IP];
@@ -262,7 +262,7 @@ int Person::CreateNewAccount ( char *bankip, char *accname, char *password, int 
 	size_t newaccountsize = 32;
 	char *newaccount = new char [newaccountsize];
 	UplinkSnprintf ( newaccount, newaccountsize, "%s %d", bankip, accountnumber );
-	accounts.PutData ( newaccount );
+	accounts.push_back ( newaccount );
 
 	// Return the account number
 
@@ -275,11 +275,11 @@ int Person::GetBalance ()
 
 	int result = 0;
 
-	for ( int i = 0; i < accounts.Size (); ++i ) {
+	for ( int i = 0; i < accounts.size (); ++i ) {
 
 		char ip [SIZE_VLOCATION_IP];
 		char accno [16];
-		sscanf ( accounts.GetData (i), "%s %s", ip, accno );
+		sscanf ( accounts.at (i), "%s %s", ip, accno );
 
 		BankAccount *ba = BankAccount::GetAccount ( ip, accno );
 		UplinkAssert (ba);
@@ -301,12 +301,12 @@ void Person::SetIsTargetable ( bool newvalue )
 bool Person::HasMessageLink ( const char *newip )
 {
 
-	for ( int ii = 0; ii < messages.Size (); ii++ )
+	for ( int ii = 0; ii < messages.size (); ii++ )
 		if ( messages.ValidIndex ( ii ) ) {
-			LList<char*> *links = &(messages.GetData ( ii )->links);
-			for ( int i = 0; i < links->Size () ; i++ )
+			LList<char*> *links = &(messages.at ( ii )->links);
+			for ( int i = 0; i < links->size () ; i++ )
 				if ( links->ValidIndex ( i ) )
-					if ( strcmp ( newip, links->GetData ( i ) ) == 0 )
+					if ( strcmp ( newip, links->at ( i ) ) == 0 )
 						return true;
 		}
 
@@ -324,12 +324,12 @@ bool Person::Load  ( FILE *file )
 	if ( !LoadDynamicStringStatic ( remotehost, SIZE_VLOCATION_IP, file ) ) return false;
 	if ( !LoadDynamicStringStatic ( phonenumber, SIZE_VLOCATION_IP, file ) ) return false;
 
-	if ( !game->GetWorld ()->locations.LookupTree ( localhost ) ) {
+	if ( !game->GetWorld ()->locations.find ( localhost ) ) {
 		UplinkPrintAbortArgs ( "WARNING: Person::Load, Localhost IP '%s' already existing", localhost );
 		return false;
 	}
 
-	if ( !game->GetWorld ()->locations.LookupTree ( remotehost ) ) {
+	if ( !game->GetWorld ()->locations.find ( remotehost ) ) {
 		UplinkPrintAbortArgs ( "WARNING: Person::Load, Remotehost IP '%s' already existing", remotehost );
 		return false;
 	}
@@ -409,9 +409,9 @@ void Person::Update ()
 		// This person reads his mail
 		//
 
-		if ( messages.Size () > 0 ) {
+		if ( messages.size () > 0 ) {
 
-			Message *msg = messages.GetData (0);
+			Message *msg = messages.at (0);
 
 			if ( strcmp ( msg->from, "PLAYER" ) == 0 ) {
 
@@ -435,16 +435,16 @@ void Person::Update ()
 
 					// Go through each of the players missions and see if this email satisfies any of them
 
-					for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.Size (); ++i ) {
+					for ( int i = 0; i < game->GetWorld ()->GetPlayer ()->missions.size (); ++i ) {
 
-						Mission *mis = game->GetWorld ()->GetPlayer ()->missions.GetData (i);
+						Mission *mis = game->GetWorld ()->GetPlayer ()->missions.at (i);
 						UplinkAssert (mis);
 
 						if ( strcmp ( mis->contact, name ) == 0 &&
                              strstr ( msg->GetBody (), mis->description ) != NULL &&                // ie the name of the mission appears in your email
                              MissionGenerator::IsMissionComplete ( mis, this, msg ) ) {
 
-							game->GetWorld ()->GetPlayer ()->missions.RemoveData (i);
+							game->GetWorld ()->GetPlayer ()->missions.erase (i);
                             delete mis;
 
                         }
@@ -462,7 +462,7 @@ void Person::Update ()
 
 			// Finished dealing with this email
 			delete msg;
-			messages.RemoveData (0);
+			messages.erase (0);
 
 		}
 

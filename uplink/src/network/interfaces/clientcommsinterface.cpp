@@ -110,17 +110,17 @@ void ClientCommsInterface::LargeMapDraw ( Button *button, bool highlighted, bool
 
     glBegin ( GL_LINE_STRIP );
 
-    for ( int li = 0; li < connection.Size (); ++li ) {
+    for ( int li = 0; li < connection.size (); ++li ) {
 
-	char *ip = connection.GetData (li);
+	char *ip = connection.at (li);
 	UplinkAssert (ip);
-	VLocation *vl = locations.GetData (ip);
+	VLocation *vl = locations.at (ip);
 		
 	if ( vl ) {
 
 	    glVertex2i ( button->x + vl->x, button->y + vl->y );
 
-	    if ( traceprogress == (locations.Size () - li - 1) ) {
+	    if ( traceprogress == (locations.size () - li - 1) ) {
 		glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
 		glVertex2i ( button->x + vl->x, button->y + vl->y );				
 	    }
@@ -196,10 +196,10 @@ void ClientCommsInterface::DrawAllObjects ()
     LList <WorldMapInterfaceObject *> &locations = layout->GetLocations();
     LList <WorldMapInterfaceLabel *> &labels = layout->GetLabels();
 
-    for ( int i = 0; i < labels.Size (); ++i ) {
+    for ( int i = 0; i < labels.size (); ++i ) {
 
-	WorldMapInterfaceLabel *label = labels.GetData (i);
-	WorldMapInterfaceObject *point = locations.GetData (i);
+	WorldMapInterfaceLabel *label = labels.at (i);
+	WorldMapInterfaceObject *point = locations.at (i);
 	    
 	UplinkAssert (label);
 	UplinkAssert (point);
@@ -216,9 +216,9 @@ void ClientCommsInterface::DrawAllObjects ()
 
 bool ClientCommsInterface::InConnection( const char *computerName )
 {
-    for (int i = 0; i < connection.Size(); i++) {
+    for (int i = 0; i < connection.size(); i++) {
 	
-	VLocation *vl = locations.GetData ( connection.GetData (i) );
+	VLocation *vl = locations.at ( connection.at (i) );
 	UplinkAssert (vl);
 	
 	if ( strcmp ( vl->computer, computerName ) == 0 )
@@ -288,13 +288,13 @@ void ClientCommsInterface::LayoutLabels()
 //    cout << "ClientCommsInterface::LayoutLabels\n";
     layout->Reset();
     
-    DArray <VLocation *> *alllinks = locations.ConvertToDArray ();
+    DArray <VLocation *> *alllinks = locations.MapDataToDArray ();
 	
-    for (int i = 0; i < alllinks->Size(); i++) {
+    for (int i = 0; i < alllinks->size(); i++) {
 
 		if ( alllinks->ValidIndex ( i ) ) {
 
-			VLocation *vl = alllinks->GetData (i);
+			VLocation *vl = alllinks->at (i);
 			    
 			if ( vl ) {
 

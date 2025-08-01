@@ -175,7 +175,7 @@ void NetworkClient::Handle_ClientCommsData ( char *buffer )
 	UplinkAssert ( screen );
 	UplinkAssert ( screen->ScreenID () == CLIENT_COMMS );
 
-	((ClientCommsInterface *) screen)->connection.Empty ();
+	((ClientCommsInterface *) screen)->connection.clear ();
 
 	int numrelays;
 	msgstream >> numrelays;
@@ -199,9 +199,9 @@ void NetworkClient::Handle_ClientCommsData ( char *buffer )
 
 	    }
 */
-	    UplinkAssert ( ((ClientCommsInterface *) screen)->locations.LookupTree (ip) );
+	    UplinkAssert ( ((ClientCommsInterface *) screen)->locations.find (ip) );
 
-	    ((ClientCommsInterface *) screen)->connection.PutData ( ip );
+	    ((ClientCommsInterface *) screen)->connection.push_back ( ip );
 	}
 
     }
@@ -235,7 +235,7 @@ void NetworkClient::Handle_ClientCommsData ( char *buffer )
 	cout << "'" << compname << "'\n";
 
 	BTree <VLocation *> *locations = & (((ClientCommsInterface *) screen)->locations);
-	VLocation *vl = locations->GetData (ip);
+	VLocation *vl = locations->at (ip);
 	if ( vl ) {
 	    vl->SetComputer ( compname );
 	    vl->SetPLocation ( x, y );
@@ -247,7 +247,7 @@ void NetworkClient::Handle_ClientCommsData ( char *buffer )
 	    vl->SetPLocation ( x, y );
 	    vl->SetIP ( ip );
 	    vl->SetComputer ( compname );
-	    ((ClientCommsInterface *) screen)->locations.PutData ( ip, vl );
+	    ((ClientCommsInterface *) screen)->locations.insert ( ip, vl );
 	    ((ClientCommsInterface *) screen)->LayoutLabels();
 
 	}

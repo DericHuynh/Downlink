@@ -62,7 +62,7 @@ char *AttemptMissionEvent::GetLongString ()
 	Agent *agent = (Agent *) game->GetWorld ()->GetPerson ( agentname );
 	UplinkAssert (agent);
 
-	Mission *m = agent->missions.GetData (0);
+	Mission *m = agent->missions.at (0);
 	UplinkAssert (m);
 
 	std::ostrstream longstring;

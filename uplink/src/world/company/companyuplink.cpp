@@ -48,15 +48,15 @@ void CompanyUplink::CreateMission ( Mission *mission )
 
 	// Insert the mission in date order
 
-	for ( int i = 0; i < missions.Size (); ++i ) {
-		if ( mission->createdate.After ( &(missions.GetData (i)->createdate) ) ) {
-			missions.PutDataAtIndex ( mission, i );
+	for ( int i = 0; i < missions.size (); ++i ) {
+		if ( mission->createdate.After ( &(missions.at (i)->createdate) ) ) {
+			missions.insert( i, mission);
 			return;
 		}
 	}
 
 	// If we get here, put the mission at the end of the list
-	missions.PutDataAtEnd ( mission );
+	missions.push_back ( mission );
 	
 }
 
@@ -76,22 +76,22 @@ void CompanyUplink::CreateMission ( char *employer, int payment, char *descripti
 
 	// Insert the mission in date order
 
-	for ( int i = 0; i < missions.Size (); ++i ) {
-		if ( mission->createdate.Before ( &(missions.GetData (i)->createdate) ) ) {
-			missions.PutDataAtIndex ( mission, i );
+	for ( int i = 0; i < missions.size (); ++i ) {
+		if ( mission->createdate.Before ( &(missions.at (i)->createdate) ) ) {
+			missions.insert( i, mission);
 			return;
 		}
 	}
 
 	// If we get here, put the mission at the end of the list
-	missions.PutDataAtEnd ( mission );
+	missions.push_back ( mission );
 		
 }
 
 Mission *CompanyUplink::GetMission ( int index )
 {
 
-	if ( missions.ValidIndex (index) )    return missions.GetData (index);
+	if ( missions.ValidIndex (index) )    return missions.at (index);
 	else								  return NULL;
 
 }
@@ -99,7 +99,7 @@ Mission *CompanyUplink::GetMission ( int index )
 Sale *CompanyUplink::GetSWSale ( int index )
 {
 
-	if ( sw_sales.ValidIndex (index) )	  return sw_sales.GetData (index);
+	if ( sw_sales.ValidIndex (index) )	  return sw_sales.at (index);
 	else								  return NULL;
 
 }
@@ -107,7 +107,7 @@ Sale *CompanyUplink::GetSWSale ( int index )
 Sale *CompanyUplink::GetHWSale ( int index )
 {
 
-	if ( hw_sales.ValidIndex (index) )	  return hw_sales.GetData (index);
+	if ( hw_sales.ValidIndex (index) )	  return hw_sales.at (index);
 	else								  return NULL;
 
 }
@@ -115,7 +115,7 @@ Sale *CompanyUplink::GetHWSale ( int index )
 News *CompanyUplink::GetNews ( int index )
 {
 
-	if ( news.ValidIndex (index) )		return news.GetData (index);
+	if ( news.ValidIndex (index) )		return news.at (index);
 	else								return NULL;
 
 }
@@ -124,7 +124,7 @@ void CompanyUplink::CreateHWSale ( Sale *newsale )
 {
 	
 	UplinkAssert (newsale);
-	hw_sales.PutData ( newsale );
+	hw_sales.push_back ( newsale );
 
 }
 
@@ -132,7 +132,7 @@ void CompanyUplink::CreateSWSale ( Sale *newsale )
 {
 	
 	UplinkAssert (newsale);
-	sw_sales.PutData ( newsale );
+	sw_sales.push_back ( newsale );
 
 }
 

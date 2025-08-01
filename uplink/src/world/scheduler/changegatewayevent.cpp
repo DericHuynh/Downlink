@@ -111,7 +111,7 @@ bool ChangeGatewayEvent::Load  ( FILE *file )
 		int old_newtype = -1;
 		if ( !FileReadData ( &old_newtype, sizeof(old_newtype), 1, file ) ) return false;
 		if ( game->GetWorld ()->gatewaydefs.ValidIndex ( old_newtype ) ) {
-			newgatewaydef = new GatewayDef ( *game->GetWorld ()->gatewaydefs.GetData ( old_newtype ) );
+			newgatewaydef = new GatewayDef ( *game->GetWorld ()->gatewaydefs.at ( old_newtype ) );
 		}
 	}
 

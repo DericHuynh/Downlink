@@ -195,7 +195,7 @@ void PasswordScreenInterface::Create ( ComputerScreen *newcs )
 
 		// Create the box that will show the currently known codes for this screen
 		UplinkAssert ( cs->GetComputer () );
-		BTree <char *> *btree = game->GetWorld ()->GetPlayer ()->codes.LookupTree ( cs->GetComputer ()->ip );
+		BTree <char *> *btree = game->GetWorld ()->GetPlayer ()->codes.find ( cs->GetComputer ()->ip );
 
 		if ( btree ) {
 

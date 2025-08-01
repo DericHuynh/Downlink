@@ -149,19 +149,19 @@ void Defrag::StopDefrag ( )
 	// Should dump any files in transit to memory now
 	// Or they will be lost
 
-	for ( int i = 0; i < transitData.Size(); ++i ) {
+	for ( int i = 0; i < transitData.size(); ++i ) {
 	
 		DataBank *databank = &(game->GetWorld ()->GetPlayer ()->gateway.databank);
 		UplinkAssert (databank);
 
-		Data *data = transitData.GetData (i);
+		Data *data = transitData.at (i);
 		UplinkAssert (data);
 
 		databank->PutData ( data );
 
 	}
 	
-	transitData.Empty ();
+	transitData.clear ();
 
 	/********** Start code by François Gagné **********/
 	//
@@ -213,7 +213,7 @@ void Defrag::HandleNewMemorySlot ( int index )
 
 		Data *theFileCopy = new Data ( file );
 		databank->RemoveDataFile ( databank->GetDataIndex (index) );
-		transitData.PutDataAtEnd( theFileCopy );
+		transitData.push_back( theFileCopy );
 
 	}
 
@@ -235,14 +235,14 @@ void Defrag::HandleNewMemorySlot ( int index )
 	// Dump files from transitData if there is enough room
 
 	int freeSpace = 1 + (index - firstFreeMemorySlot);
-	if ( transitData.Size () > 0 ) {
+	if ( transitData.size () > 0 ) {
 
-		Data *theTransitData = transitData.GetData(0);
+		Data *theTransitData = transitData.at(0);
 		UplinkAssert (theTransitData);
 		if ( theTransitData->size <= freeSpace ) {
 
 			databank->PutData( theTransitData, firstFreeMemorySlot );
-			transitData.RemoveData ( 0 );
+			transitData.erase ( 0 );
 			
 			if ( !databank->GetData( firstFreeMemorySlot + theTransitData->size ) )
 				firstFreeMemorySlot = firstFreeMemorySlot + theTransitData->size;

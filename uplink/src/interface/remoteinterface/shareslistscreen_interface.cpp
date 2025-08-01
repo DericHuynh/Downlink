@@ -49,7 +49,7 @@ void SharesListScreenInterface::ShareClick ( Button *button )
 
 	if ( thisint->filteredlist.ValidIndex (fileindex) ) {
 
-		char *companyname = thisint->filteredlist.GetData (fileindex);
+		char *companyname = thisint->filteredlist.at (fileindex);
 
 		game->GetInterface ()->GetRemoteInterface ()->RunScreen ( thisint->GetComputerScreen ()->viewpage, thisint->GetComputerScreen ()->GetComputer () );
 		SharesViewScreenInterface *newint = (SharesViewScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
@@ -72,7 +72,7 @@ void SharesListScreenInterface::ShareDraw ( Button *button, bool highlighted, bo
 	shareindex += baseoffset;
 
 	LList <char *> *filteredlist = &((SharesListScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-	char *companyname = filteredlist->GetData (shareindex);
+	char *companyname = filteredlist->at (shareindex);
 
 	/*
 		Re above line
@@ -265,11 +265,11 @@ void SharesListScreenInterface::SetFullList ( LList <char *> *newfulllist )
 
 	UplinkAssert (newfulllist);
 
-	fulllist.Empty ();
-	filteredlist.Empty ();
+	fulllist.clear ();
+	filteredlist.clear ();
 
-	for ( int i = 0; i < newfulllist->Size (); ++i )
-		fulllist.PutData ( newfulllist->GetData (i) );
+	for ( int i = 0; i < newfulllist->size (); ++i )
+		fulllist.push_back ( newfulllist->at (i) );
 	
 	ApplyFilter ( NULL );
 
@@ -278,10 +278,10 @@ void SharesListScreenInterface::SetFullList ( LList <char *> *newfulllist )
 void SharesListScreenInterface::SetFullList ()
 {
 
-	fulllist.Empty ();
+	fulllist.clear ();
 
-	for ( int i = 0; i < filteredlist.Size (); ++i )
-		fulllist.PutData ( filteredlist.GetData (i) );
+	for ( int i = 0; i < filteredlist.size (); ++i )
+		fulllist.push_back ( filteredlist.at (i) );
 
 	ApplyFilter ( NULL );
 
@@ -294,18 +294,18 @@ void SharesListScreenInterface::ApplyFilter ( char *filter )
 	// Do the filtering
 	//
 
-	filteredlist.Empty ();
+	filteredlist.clear ();
 
 	if ( filter ) {
 
 		char *lowercasefilter = LowerCaseString ( filter );
 
-		for ( int i = 0; i < fulllist.Size (); ++i ) {
+		for ( int i = 0; i < fulllist.size (); ++i ) {
 
-			char *companyname = LowerCaseString ( fulllist.GetData (i) );
+			char *companyname = LowerCaseString ( fulllist.at (i) );
 
 			if ( strstr ( companyname, lowercasefilter ) != NULL )
-				filteredlist.PutData ( fulllist.GetData (i) );
+				filteredlist.push_back ( fulllist.at (i) );
 
             delete [] companyname;
 				
@@ -316,8 +316,8 @@ void SharesListScreenInterface::ApplyFilter ( char *filter )
 	}
 	else {
 
-		for ( int i = 0; i < fulllist.Size (); ++i ) 
-			filteredlist.PutData ( fulllist.GetData (i) );
+		for ( int i = 0; i < fulllist.size (); ++i ) 
+			filteredlist.push_back ( fulllist.at (i) );
 
 	}
 
@@ -404,16 +404,16 @@ void SharesListScreenInterface::Create ( ComputerScreen *newcs )
 
 			LList <char *> allshares;
 			
-			DArray <Company *> *allcompanies = game->GetWorld ()->companies.ConvertToDArray ();
+			DArray <Company *> *allcompanies = game->GetWorld ()->companies.MapDataToDArray ();
 
-			for ( int i = 0; i < allcompanies->Size (); ++i ) {
+			for ( int i = 0; i < allcompanies->size (); ++i ) {
 				if ( allcompanies->ValidIndex (i) ) {
-					Company *company = allcompanies->GetData (i);
+					Company *company = allcompanies->at (i);
 					UplinkAssert (company);
 					if ( company->TYPE == COMPANYTYPE_INDUSTRIAL || 
 						 company->TYPE == COMPANYTYPE_COMMERCIAL ||
 						 company->TYPE == COMPANYTYPE_FINANCIAL )
-						 allshares.PutData ( company->name );
+						 allshares.push_back ( company->name );
 				}
 			}
 
@@ -423,7 +423,7 @@ void SharesListScreenInterface::Create ( ComputerScreen *newcs )
 
 		}
 
-		if ( fulllist.Size () >= 14 ) {
+		if ( fulllist.size () >= 14 ) {
 
 			// Create the scrollbar
 

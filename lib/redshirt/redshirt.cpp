@@ -690,13 +690,13 @@ DArray <char *> *RsListArchive ( char *path, char *filter )
 
     // Strip rsapppath from every result
 
-    for ( int i = 0; i < result->Size(); ++i ) {
+    for ( int i = 0; i < result->size(); ++i ) {
         if ( result->ValidIndex(i) ) {
 
-            char *thisResult = result->GetData(i);
+            char *thisResult = result->at(i);
             char *newResult = new char [strlen(thisResult) - strlen(rsapppath) + 1];
             strcpy ( newResult, thisResult + strlen(rsapppath) );
-            result->PutData( newResult, i );
+			result->insert(i, newResult);
 
         }
     }

@@ -293,17 +293,17 @@ void RecordGenerator::GenerateRecord_Academic ( char *personname, int age )
 		// Has some college quals
 
 		LList <char *> possiblequals;
-		possiblequals.PutData ( "Science" );
-		possiblequals.PutData ( "Maths" );
-		possiblequals.PutData ( "Physics" );
-		possiblequals.PutData ( "Biology" );
-		possiblequals.PutData ( "Art" );
-		possiblequals.PutData ( "History ");
-		possiblequals.PutData ( "Psychology" );
-		possiblequals.PutData ( "Electronics" );
-		possiblequals.PutData ( "Computing" );
-		possiblequals.PutData ( "Media studies" );
-		possiblequals.PutData ( "Sociology" );
+		possiblequals.push_back ( "Science" );
+		possiblequals.push_back ( "Maths" );
+		possiblequals.push_back ( "Physics" );
+		possiblequals.push_back ( "Biology" );
+		possiblequals.push_back ( "Art" );
+		possiblequals.push_back ( "History ");
+		possiblequals.push_back ( "Psychology" );
+		possiblequals.push_back ( "Electronics" );
+		possiblequals.push_back ( "Computing" );
+		possiblequals.push_back ( "Media studies" );
+		possiblequals.push_back ( "Sociology" );
 
 		char grades [] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
 
@@ -313,16 +313,16 @@ void RecordGenerator::GenerateRecord_Academic ( char *personname, int age )
 
 			for ( int i = 0; i < numquals; ++i ) {
 
-				int thisqualindex = NumberGenerator::RandomNumber ( possiblequals.Size () );
+				int thisqualindex = NumberGenerator::RandomNumber ( possiblequals.size () );
 				UplinkAssert ( possiblequals.ValidIndex (thisqualindex) );
 
 				int grade = (int) ( 1 + NumberGenerator::RandomNormalNumber ( 100.0f - brains, 40.0f ) / 15 );
 				if ( grade < 0 ) grade = 0;
 				if ( grade > 6 ) grade = 6;
 
-				collegequals << possiblequals.GetData (thisqualindex) << "      " << grades [grade] << "\n";
+				collegequals << possiblequals.at (thisqualindex) << "      " << grades [grade] << "\n";
 
-				possiblequals.RemoveData (thisqualindex);
+				possiblequals.erase (thisqualindex);
 
 			}
 
@@ -464,7 +464,7 @@ void RecordGenerator::GenerateRecord_Financial ( char *personname, int age )
 	char accno_s [16];
 	UplinkSnprintf ( accno_s, sizeof ( accno_s ), "%d", accno );
 
-	BankAccount *myaccount = bank->accounts.GetData (accno_s);
+	BankAccount *myaccount = bank->accounts.at (accno_s);
 	UplinkAssert (myaccount);
 
 
@@ -605,7 +605,7 @@ BankAccount *RecordGenerator::GetFinancial ( char *personname )
 	Person *person = game->GetWorld ()->GetPerson ( personname );
 	UplinkAssert ( person );
 
-	char *fullcurrentaccount = person->accounts.GetData (0);
+	char *fullcurrentaccount = person->accounts.at (0);
 	UplinkAssert (fullcurrentaccount);
 
 	char ip [SIZE_VLOCATION_IP];

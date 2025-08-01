@@ -55,10 +55,10 @@ void NetworkServer::StopServer ()
 
 	// Close all open sockets
 
-	for ( int i = 0; i < clients.Size (); ++i ) {
+	for ( int i = 0; i < clients.size (); ++i ) {
 		if ( clients.ValidIndex (i) ) {
 
-			int result = TcpClose ( &(clients.GetData (i)->socket) );
+			int result = TcpClose ( &(clients.at (i)->socket) );
 
 			if ( result != TCP4U_SUCCESS ) 
 				printf ( "NetworkServer::StopServer, failed to close connection %d\n", i );
@@ -67,7 +67,7 @@ void NetworkServer::StopServer ()
 	}
 
 	DeleteDArrayData ( (DArray <UplinkObject *> *) &clients );
-	clients.Empty ();
+	clients.clear ();
 
 }
 
@@ -78,7 +78,7 @@ char *NetworkServer::GetRemoteHost ( int socketindex )
 
 	DWORD ip;
 	char *host = new char [128];
-	int result = TcpGetRemoteID ( clients.GetData (socketindex)->socket, host, 128, &ip );
+	int result = TcpGetRemoteID ( clients.at (socketindex)->socket, host, 128, &ip );
 			     
 	if ( result == TCP4U_SUCCESS ) 
 		return host;
@@ -98,7 +98,7 @@ char *NetworkServer::GetRemoteIP ( int socketindex )
 	DWORD ip;
 	char *sip = (char *) &ip;
 	char *host = new char [128];
-	int result = TcpGetRemoteID ( clients.GetData (socketindex)->socket, host, 128, &ip );
+	int result = TcpGetRemoteID ( clients.at (socketindex)->socket, host, 128, &ip );
 
 	size_t fullipsize = 64;
 	char *fullip = new char [fullipsize];
@@ -171,7 +171,7 @@ void NetworkServer::Update ()
 				cc->SetClientType      ( CLIENT_NONE );
 				cc->SetConnectionTime  ( (int) EclGetAccurateTime () );
 
-				int index = clients.PutData ( cc );
+				int index = clients.push_back ( cc );
 				cc->SetIndex ( index );
 
 			}

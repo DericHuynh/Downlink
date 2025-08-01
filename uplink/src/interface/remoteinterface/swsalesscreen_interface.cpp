@@ -472,7 +472,7 @@ void SWSalesScreenInterface::Create ( ComputerScreen *newcs )
 
     	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	    UplinkAssert ( cu );
-        ScrollBox::CreateScrollBox ( "swsales_scroll", 22 + SY(390), 47, 15, NumItemsOnScreen() * 20, cu->sw_sales.Size(), NumItemsOnScreen(), 0, ScrollChange );
+        ScrollBox::CreateScrollBox ( "swsales_scroll", 22 + SY(390), 47, 15, NumItemsOnScreen() * 20, cu->sw_sales.size(), NumItemsOnScreen(), 0, ScrollChange );
 
 		baseoffset = 0;
 		currentselect = -1;

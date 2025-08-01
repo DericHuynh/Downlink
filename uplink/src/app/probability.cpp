@@ -18,24 +18,24 @@ Probability::Probability()
 	// Initialise the first value to 0
 	// Just in case we don't insert a zero value
 
-	chances.PutData ( 0 );
+	chances.push_back ( 0 );
 
 }
 
 Probability::~Probability()
 {
 
-    chances.Empty ();
+    chances.clear ();
 
 }
 
 void Probability::InputProbability ( int value, int percentagechance )
 {
 
-	if ( value >= chances.Size () )
-		chances.SetSize ( value + 1 );
+	if ( value >= chances.size () )
+		chances.resize ( value + 1 );
 
-	chances.PutData ( percentagechance, value );
+	chances.insert( value, percentagechance);
 
 }
 
@@ -43,7 +43,7 @@ void Probability::ChangeProbability ( int value, int percentagechance )
 {
 
 	if ( chances.ValidIndex (value) )
-		chances.ChangeData ( percentagechance, value );
+		chances.ChangeData( value, percentagechance);
 
 	else
 		printf ( "WARNING: Probability::ChangeProbability, invalid value passed\n" );
@@ -55,11 +55,11 @@ bool Probability::Validate ()
 
 	int sum = 0;
 
-	for ( int i = 0; i < chances.Size (); ++i ) {
+	for ( int i = 0; i < chances.size (); ++i ) {
 
 		if ( chances.ValidIndex ( i ) ) {
 
-			int value = chances.GetData (i);
+			int value = chances.at (i);
 
 			if ( value >= 0 && value <= 100 )
 				sum += value;
@@ -88,13 +88,13 @@ int Probability::GetValue ()
 	int result = 0;
 	int totalscore = 0;
 
-	for ( int i = 0; i < chances.Size (); ++i ) {
+	for ( int i = 0; i < chances.size (); ++i ) {
 		if ( chances.ValidIndex ( i ) ) {
-			if ( r >= totalscore && r < totalscore + chances.GetData (i) ) {
+			if ( r >= totalscore && r < totalscore + chances.at (i) ) {
 				result = i;
 				break;
 			}
-			totalscore += chances.GetData (i);
+			totalscore += chances.at (i);
 		}
 	}
 

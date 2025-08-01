@@ -52,7 +52,7 @@ BankAccount *BankAccount::GetAccount ( char *bankip, char *accno )
 	if ( !(comp->GetOBJECTID () == OID_BANKCOMPUTER ) ) return NULL;
 	BankComputer *bank = (BankComputer *) comp;
 
-	BankAccount *account = bank->accounts.GetData ( accno );
+	BankAccount *account = bank->accounts.at ( accno );
 	return account;
 
 }
@@ -204,10 +204,10 @@ bool BankAccount::HasTransferOccured ( char *s_ip, char *t_ip, int t_accno, int 
 	// Check the source account (this)
 	//
 
-	for ( i = 0; i < log.internallogs.Size (); ++i ) {
+	for ( i = 0; i < log.internallogs.size (); ++i ) {
 		if ( log.internallogs.ValidIndex (i) ) {
 		
-			AccessLog *al = log.internallogs.GetData (i);
+			AccessLog *al = log.internallogs.at (i);
 			UplinkAssert ( al );
 
             if ( al->TYPE == LOG_TYPE_TRANSFERTO ) {
@@ -243,10 +243,10 @@ bool BankAccount::HasTransferOccured ( char *s_ip, char *t_ip, int t_accno, int 
 
 	if ( !target_acc ) return false;
 
-	for ( i = 0; i < target_acc->log.internallogs.Size (); ++i ) {
+	for ( i = 0; i < target_acc->log.internallogs.size (); ++i ) {
 		if ( target_acc->log.internallogs.ValidIndex (i) ) {
 		
-			AccessLog *al = target_acc->log.internallogs.GetData (i);
+			AccessLog *al = target_acc->log.internallogs.at (i);
 			UplinkAssert ( al );
 
 
@@ -285,10 +285,10 @@ bool BankAccount::HasTransferOccured ( char *person, int amount )
 	// Go throught each transfer trying to find a match for the amount
 	//
 
-	for ( int i = 0; i < log.internallogs.Size (); ++i ) {
+	for ( int i = 0; i < log.internallogs.size (); ++i ) {
 		if ( log.internallogs.ValidIndex (i) ) {
 		
-			AccessLog *al = log.internallogs.GetData (i);
+			AccessLog *al = log.internallogs.at (i);
 			UplinkAssert ( al );
 
             if ( al->TYPE == LOG_TYPE_TRANSFERFROM ) {
@@ -319,10 +319,10 @@ Person *BankAccount::GetPerson ()
 	Person *accountowner = NULL;
 
 	Player *pl = game->GetWorld ()->GetPlayer ();
-	for ( int i = 0; i < pl->accounts.Size (); ++i ) {
+	for ( int i = 0; i < pl->accounts.size (); ++i ) {
 		char ip [SIZE_VLOCATION_IP];
 		char accno [16];
-		sscanf ( pl->accounts.GetData (i), "%s %s", ip, accno );
+		sscanf ( pl->accounts.at (i), "%s %s", ip, accno );
 
 		BankAccount *ba = BankAccount::GetAccount ( ip, accno );
 		if ( ba == this ) {

@@ -383,7 +383,7 @@ void ScrollBox::CreateScrollBox ( char *name,
     sb->SetWindowSize ( windowSize );
     sb->SetCurrentIndex ( currentIndex );
     sb->SetCallback ( callback );
-    scrollBoxes.PutData( sb );
+    scrollBoxes.push_back( sb );
 
     sb->CreateInterface();
 
@@ -392,14 +392,14 @@ void ScrollBox::CreateScrollBox ( char *name,
 void ScrollBox::RemoveScrollBox ( char *name )
 {
 
-    for ( int i = 0; i < scrollBoxes.Size(); ++i ) {
+    for ( int i = 0; i < scrollBoxes.size(); ++i ) {
         
-        ScrollBox *sb = scrollBoxes.GetData(i);
+        ScrollBox *sb = scrollBoxes.at(i);
 
         if ( strcmp ( sb->name, name ) == 0 ) {
             sb->RemoveInterface ();
             delete sb;
-            scrollBoxes.RemoveData(i);
+            scrollBoxes.erase(i);
             return;
         }
 
@@ -410,9 +410,9 @@ void ScrollBox::RemoveScrollBox ( char *name )
 ScrollBox *ScrollBox::GetScrollBox ( char *name )
 {
 
-    for ( int i = 0; i < scrollBoxes.Size(); ++i )
-        if ( strcmp ( scrollBoxes.GetData(i)->name, name ) == 0 )
-            return scrollBoxes.GetData(i);
+    for ( int i = 0; i < scrollBoxes.size(); ++i )
+        if ( strcmp ( scrollBoxes.at(i)->name, name ) == 0 )
+            return scrollBoxes.at(i);
 
     return NULL;
 

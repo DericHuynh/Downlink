@@ -2307,7 +2307,7 @@ Mission *MissionGenerator::Generate_TraceHacker ( Mission *completedmission, Per
 	// Look up the computer that was hacked
 	//
 
-	char *hackedip = completedmission->links.GetData (0);
+	char *hackedip = completedmission->links.at (0);
 	VLocation *vl = game->GetWorld ()->GetVLocation ( hackedip );
 	UplinkAssert (vl);
 	Computer *comp = vl->GetComputer ();
@@ -3117,9 +3117,9 @@ bool MissionGenerator::IsMissionComplete_DestroyFile ( Mission *mission, Person 
 		CompanyUplink *uplink = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 		UplinkAssert (uplink);
 
-		for ( int in = 0; in < uplink->news.Size (); ++in ) {
+		for ( int in = 0; in < uplink->news.size (); ++in ) {
 
-			News *news = uplink->news.GetData (in);
+			News *news = uplink->news.at (in);
 			UplinkAssert (news);
 
 			// method 1 - Delete all files
@@ -3388,9 +3388,9 @@ bool MissionGenerator::IsMissionComplete_FrameUser ( Mission *mission, Person *p
 	CompanyUplink *uplink = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert (uplink);
 
-	for ( int i = 0; i < uplink->news.Size (); ++i ) {
+	for ( int i = 0; i < uplink->news.size (); ++i ) {
 
-		News *news = uplink->news.GetData (i);
+		News *news = uplink->news.at (i);
 		UplinkAssert (news);
 
 		if ( news->NEWSTYPE == NEWS_TYPE_ARREST && news->data1 && strcmp ( news->data1, personname ) == 0 ) {
@@ -3435,9 +3435,9 @@ bool MissionGenerator::IsMissionComplete_FrameUser ( Mission *mission, Person *p
 		}
 		else if ( strcmp ( framedfor, "FINANCIAL" ) == 0 ) {						// Financial fraud
 
-			for ( int in = 0; in < uplink->news.Size (); ++in ) {
+			for ( int in = 0; in < uplink->news.size (); ++in ) {
 
-				News *news = uplink->news.GetData (in);
+				News *news = uplink->news.at (in);
 				UplinkAssert (news);
 
 				if ( news->NEWSTYPE == NEWS_TYPE_HACKED && news->data1 && ip && strcmp ( news->data1, ip ) == 0 ) {
@@ -3455,9 +3455,9 @@ bool MissionGenerator::IsMissionComplete_FrameUser ( Mission *mission, Person *p
 		}
 		else if ( strcmp ( framedfor, "DESTROYALL" ) == 0 ) {						// Destroying all files
 
-			for ( int in = 0; in < uplink->news.Size (); ++in ) {
+			for ( int in = 0; in < uplink->news.size (); ++in ) {
 
-				News *news = uplink->news.GetData (in);
+				News *news = uplink->news.at (in);
 				UplinkAssert (news);
 
 				if ( news->NEWSTYPE == NEWS_TYPE_DELETED && news->data1 && ip && strcmp ( news->data1, ip ) == 0 ) {
@@ -3608,9 +3608,9 @@ bool MissionGenerator::IsMissionComplete_RemoveComputer ( Mission *mission, Pers
 	CompanyUplink *uplink = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert (uplink);
 
-	for ( int in = 0; in < uplink->news.Size (); ++in ) {
+	for ( int in = 0; in < uplink->news.size (); ++in ) {
 
-		News *news = uplink->news.GetData (in);
+		News *news = uplink->news.at (in);
 		UplinkAssert (news);
 
 		if ( news->NEWSTYPE == NEWS_TYPE_COMPUTERDESTROYED &&
@@ -3676,9 +3676,9 @@ bool MissionGenerator::IsMissionComplete_RemoveUser	( Mission *mission, Person *
 	CompanyUplink *uplink = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert (uplink);
 
-	for ( int i = 0; i < uplink->news.Size (); ++i ) {
+	for ( int i = 0; i < uplink->news.size (); ++i ) {
 
-		News *news = uplink->news.GetData (i);
+		News *news = uplink->news.at (i);
 		UplinkAssert (news);
 
 		if ( news->NEWSTYPE == NEWS_TYPE_ARREST && news->data1 && strcmp ( news->data1, personname ) == 0 ) {
@@ -3729,10 +3729,10 @@ bool MissionGenerator::IsMissionComplete_PayFine ( Mission *mission, Person *per
 	if ( !success ) {
 		Player *pl = game->GetWorld()->GetPlayer();
 		if ( strcmp ( finedperson, pl->handle ) == 0 ) {
-			for ( int i = 0; i < pl->accounts.Size (); ++i ) {
+			for ( int i = 0; i < pl->accounts.size (); ++i ) {
 				char ip [SIZE_VLOCATION_IP];
 				char accno [16];
-				sscanf ( pl->accounts.GetData (i), "%s %s", ip, accno );
+				sscanf ( pl->accounts.at (i), "%s %s", ip, accno );
 
 				BankAccount *ba = BankAccount::GetAccount ( ip, accno );
 				if ( ba && ( success = target_account->HasTransferOccured ( ba->name, amount ) ) )
@@ -4013,8 +4013,8 @@ void MissionGenerator::MissionCompleted ( Mission *mission, Person *person, Mess
 
     // Unselect all of the links on the world map
 
-    for ( int i = 0; i < mission->links.Size (); ++i ) {
-        char *ip = mission->links.GetData (i);
+    for ( int i = 0; i < mission->links.size (); ++i ) {
+        char *ip = mission->links.at (i);
         UplinkAssert (ip);
         VLocation *vl = game->GetWorld ()->GetVLocation (ip);
         UplinkAssert (vl);

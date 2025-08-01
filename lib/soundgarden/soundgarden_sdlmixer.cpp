@@ -163,11 +163,11 @@ void SgPlaySound ( char *fullfilename, char *id, bool synchronised )
   Mix_Chunk *sample = NULL;
   char *sampleid = id ? id : fullfilename;
 
-  if ( cache.LookupTree ( sampleid ) ) {
+  if ( cache.find ( sampleid ) ) {
 
     // Sound sample already loaded into memory - start it playing
 		
-    sample = cache.GetData ( sampleid );
+    sample = cache.at ( sampleid );
 		
     if ( !sample ) {
 
@@ -188,7 +188,7 @@ void SgPlaySound ( char *fullfilename, char *id, bool synchronised )
       return;
     }
 
-    cache.PutData ( sampleid, sample );
+    cache.insert ( sampleid, sample );
 
   }
 

@@ -9,14 +9,12 @@
 #include <iostream>
 #include <assert.h>
 using namespace std;
-
+#include <vector>
 #include "tosser.h"
 
 template <class T>
 DArray <T> :: DArray ()
 {
-
-    stepsize = 1;
     arraysize = 0;
     dynarray = NULL;
     shadow = NULL;
@@ -27,7 +25,6 @@ template <class T>
 DArray <T> :: DArray ( const DArray<T>& da )
 {
 
-    stepsize = da.stepsize;
     arraysize = da.arraysize;
 
 	if ( da.dynarray && da.shadow ) {
@@ -47,26 +44,15 @@ DArray <T> :: DArray ( const DArray<T>& da )
 }
 
 template <class T>
-DArray <T> :: DArray ( int newstepsize )
-{
-
-    stepsize = newstepsize;
-    arraysize = 0;
-    dynarray = NULL;
-    shadow = NULL;
-    
-}
-
-template <class T>
 DArray <T> :: ~DArray ()
 {
 
-    Empty ();
+    clear ();
 
 }
 
 template <class T>
-void DArray <T> :: SetSize ( int newsize )
+void DArray <T> :: resize ( int newsize )
 {
 
 	if ( newsize <= 0 ) {
@@ -136,15 +122,7 @@ void DArray <T> :: SetSize ( int newsize )
 }
 
 template <class T>
-void DArray <T> :: SetStepSize ( int newstepsize )
-{
-
-	stepsize = newstepsize;
-
-}
-
-template <class T>
-int DArray <T> :: PutData ( const T &newdata )
+int DArray <T> :: push_back ( const T &newdata )
 {
     
     int freespace = -1;				 // Find a free space
@@ -163,7 +141,7 @@ int DArray <T> :: PutData ( const T &newdata )
     if ( freespace == -1 ) {			 // Must resize the array
 			
 		freespace = arraysize;		
-		SetSize ( arraysize + stepsize );
+		resize ( arraysize + arraysize);
    
     }
 
@@ -175,7 +153,7 @@ int DArray <T> :: PutData ( const T &newdata )
 }
 
 template <class T>
-void DArray <T> :: PutData ( const T &newdata, int index )
+void DArray <T> ::insert(int index, const T &newdata)
 {
 
     assert ( index < arraysize && index >= 0 );       
@@ -186,7 +164,7 @@ void DArray <T> :: PutData ( const T &newdata, int index )
 }
 
 template <class T>
-void DArray <T> :: Empty ()
+void DArray <T> :: clear ()
 {
 
     if ( dynarray != NULL )
@@ -203,7 +181,7 @@ void DArray <T> :: Empty ()
 }
 
 template <class T>
-T DArray <T> :: GetData ( int index ) const
+T DArray <T> :: at ( int index ) const
 {
 
     assert ( index < arraysize && index >= 0 );       
@@ -229,21 +207,20 @@ T& DArray <T> :: operator [] (int index)
 
 
 template <class T>
-void DArray <T> :: ChangeData ( const T &newdata, int index )
+void DArray <T> ::ChangeData(int index, const T& newdata)
 {
-    
-	assert ( index < arraysize && index >= 0 );
+	assert(index < arraysize && index >= 0);
         
-    if ( shadow [index] == 0 )
+	if (shadow[index] == 0)
 		cout << "Warning : DArray::ChangeData called, referenced unused data.  (Index = " << index << ")\n";
     
-    PutData ( newdata, index );
-    shadow [index] = 1;
+	dynarray[index] = newdata;
+	shadow[index] = 1;
     
 }
 
 template <class T>
-void DArray <T> :: RemoveData ( int index )
+void DArray <T> :: erase ( int index )
 {
     
     assert ( index < arraysize && index >= 0 );
@@ -270,7 +247,7 @@ int DArray <T> :: NumUsed () const
 }
 
 template <class T>
-int DArray <T> :: Size () const 
+int DArray <T> :: size () const 
 {
 	       
     return arraysize;
@@ -286,7 +263,7 @@ bool DArray <T> :: ValidIndex ( int index ) const
     
     if (!shadow [index])
 		return false;
-    
+
     return true;
     
 }

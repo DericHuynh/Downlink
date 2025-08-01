@@ -134,7 +134,7 @@ int LogScreenInterface::GetNbItems ( DArray<class AccessLog *> *logs )
 {
 
 	int firstIndex = -1, lastIndex = -1;
-	for ( int i = 0; i < logs->Size (); i++ )
+	for ( int i = 0; i < logs->size (); i++ )
 		if ( logs->ValidIndex ( i ) ) {
 			if ( firstIndex == -1 )
 				firstIndex = i;
@@ -152,7 +152,7 @@ int LogScreenInterface::GetNbItems ( DArray<class AccessLog *> *logs )
 int LogScreenInterface::GetFirstItem ( DArray<class AccessLog *> *logs )
 {
 
-	for ( int i = 0; i < logs->Size (); i++ )
+	for ( int i = 0; i < logs->size (); i++ )
 		if ( logs->ValidIndex ( i ) )
 			return i;
 
@@ -163,7 +163,7 @@ int LogScreenInterface::GetFirstItem ( DArray<class AccessLog *> *logs )
 int LogScreenInterface::GetLastItem ( DArray<class AccessLog *> *logs )
 {
 
-	for ( int i = logs->Size () - 1; i >= 0 ; i-- )
+	for ( int i = logs->size () - 1; i >= 0 ; i-- )
 		if ( logs->ValidIndex ( i ) )
 			return i;
 
@@ -213,7 +213,7 @@ void LogScreenInterface::LogDraw ( Button *button, bool highlighted, bool clicke
 
 	if ( logbank->logs.ValidIndex (logindex) ) {
 
-		AccessLog *log = logbank->logs.GetData (logindex);
+		AccessLog *log = logbank->logs.at (logindex);
 
 		if ( logindex % 2 == 0 ) {
 

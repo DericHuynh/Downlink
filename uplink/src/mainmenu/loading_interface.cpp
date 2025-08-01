@@ -69,12 +69,12 @@ void LoadingInterface::Create ()
 			fscanf ( file, "%s\n", thisfile );
 			// kris.tif have simply not the same level of quality of the other files
 			if ( strcmp ( thisfile, "loading/kris.tif" ) != 0 )
-				filenames.PutData ( thisfile );
+				filenames.push_back ( thisfile );
 			else
 				delete [] thisfile;
 		}
 		float value = ( (float) rand () / (float) RAND_MAX );		
-		int pictureindex = (int) ( value * filenames.Size () );
+		int pictureindex = (int) ( value * filenames.size () );
     
 		EclRegisterButton ( 0, 0, screenw, screenh, "", "", "loading_background" );
 		button_assignbitmap ( "loading_background", filenames [pictureindex] );

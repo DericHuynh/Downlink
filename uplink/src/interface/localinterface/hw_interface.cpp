@@ -108,13 +108,13 @@ void HWInterface::CreateHWInterface ()
 		std::ostrstream hardware;	
 		hardware << "DEVICES\n";
         LList <char *> *security = gateway->GetSecurity ();
-        if ( security->Size () == 0 ) 
+        if ( security->size () == 0 ) 
             hardware << "None";
 
         else
-            for ( int i = 0; i < security->Size (); ++i ) 
+            for ( int i = 0; i < security->size (); ++i ) 
                 if ( security->ValidIndex (i) ) 
-		            hardware << security->GetData (i) << "\n";
+		            hardware << security->at (i) << "\n";
         hardware << '\x0';
 
 		EclRegisterButton ( screenw - panelwidth, paneltop + 130, panelwidth - 10, SY(150), "", "", "hw_hardware" );

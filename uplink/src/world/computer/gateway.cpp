@@ -76,7 +76,7 @@ void Gateway::Nuke ()
 	SetGatewayStart ();
 
 	DeleteLListData ( &hardware );
-	hardware.Empty ();
+	hardware.clear ();
 
 	GiveStartingHardware ();
 
@@ -116,9 +116,9 @@ void Gateway::SetGatewayStart ()
 	GatewayDef *newgateway = game->GetWorld ()->GetGatewayDef ( PLAYER_START_GATEWAYNAME );
 
 	if ( !newgateway )
-		for ( int i = 0; i < game->GetWorld ()->gatewaydefs.Size (); i++ )
+		for ( int i = 0; i < game->GetWorld ()->gatewaydefs.size (); i++ )
 			if ( game->GetWorld ()->gatewaydefs.ValidIndex ( i ) ) {
-				newgateway = game->GetWorld ()->gatewaydefs.GetData ( i );
+				newgateway = game->GetWorld ()->gatewaydefs.at ( i );
 				break;
 			}
 
@@ -190,9 +190,9 @@ void Gateway::ExchangeGatewayComplete ()
 		int indexSlowest = -1;
 		const ComputerUpgrade *upgradeSlowest = NULL;
 
-		for ( int i = 0; i < hardware.Size (); ++i ) {
+		for ( int i = 0; i < hardware.size (); ++i ) {
 
-			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 			UplinkAssert (cu);
 
 			if ( cu->TYPE == GATEWAYUPGRADETYPE_CPU ) {
@@ -210,8 +210,8 @@ void Gateway::ExchangeGatewayComplete ()
 
 		if ( indexSlowest != -1 ) {
 			UplinkAssert (upgradeSlowest != NULL);
-			removedItems.PutData ( upgradeSlowest->name );
-			hardware.RemoveData (indexSlowest);
+			removedItems.push_back ( upgradeSlowest->name );
+			hardware.erase (indexSlowest);
 		}
 		else {
 			UplinkAbort ( "Gateway::ExchangeGatewayComplete, there should be a slowest CPU" );
@@ -232,7 +232,7 @@ void Gateway::ExchangeGatewayComplete ()
 		size_t removedMemorysize = 64;
 		char *removedMemory = new char [removedMemorysize];
 		UplinkSnprintf ( removedMemory, removedMemorysize, "%dGq of memory", memorysize - (newgateway->maxmemory*8) );
-		removedItems.PutData (removedMemory);
+		removedItems.push_back (removedMemory);
 
         SetMemorySize ( newgateway->maxmemory * 8 );
 
@@ -247,14 +247,14 @@ void Gateway::ExchangeGatewayComplete ()
 
 	while ( newgateway->maxsecurity < numSecurity ) {
 
-		for ( int i = 0; i < hardware.Size (); ++i ) {
+		for ( int i = 0; i < hardware.size (); ++i ) {
 
-			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 			UplinkAssert (cu);
 
 			if ( cu->TYPE == GATEWAYUPGRADETYPE_SECURITY ) {
-				removedItems.PutData ( cu->name );
-				hardware.RemoveData (i);
+				removedItems.push_back ( cu->name );
+				hardware.erase (i);
 			}
 
 		}
@@ -267,15 +267,15 @@ void Gateway::ExchangeGatewayComplete ()
 	// Tell the player what we removed
 	//
 
-	if ( removedItems.Size () > 0 ) {
+	if ( removedItems.size () > 0 ) {
 
 		std::ostrstream removedText;
 		removedText << "Unfortunately, your new gateway does not have enough space to contain "
 					   "all of your old hardware.  As such, we have been forced to remove the "
 					   "following items from your new system :\n\n";
 
-		for ( int i = 0; i < removedItems.Size (); ++i )
-			removedText << removedItems.GetData(i) << "\n";
+		for ( int i = 0; i < removedItems.size (); ++i )
+			removedText << removedItems.at(i) << "\n";
 
 		removedText << '\x0';
 
@@ -360,7 +360,7 @@ void Gateway::GiveCPU ( char *CPUName )
 
 	if ( GetNumCPUs () < gatewaydef->maxcpus ) {
 
-		hardware.PutData ( cpucopy );
+		hardware.push_back ( cpucopy );
 
 	}
 	else {
@@ -371,9 +371,9 @@ void Gateway::GiveCPU ( char *CPUName )
 		int indexSlowest = -1;
 		const ComputerUpgrade *upgradeSlowest = NULL;
 
-		for ( int i = 0; i < hardware.Size (); ++i ) {
+		for ( int i = 0; i < hardware.size (); ++i ) {
 
-			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+			const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 			UplinkAssert (cu);
 
 			if ( cu->TYPE == GATEWAYUPGRADETYPE_CPU ) {
@@ -390,10 +390,10 @@ void Gateway::GiveCPU ( char *CPUName )
 		}
 
 		if ( indexSlowest != -1 ) {
-			char *existing = hardware.GetData (indexSlowest);
-            hardware.RemoveData (indexSlowest);
+			char *existing = hardware.at (indexSlowest);
+            hardware.erase (indexSlowest);
             delete [] existing;
-			hardware.PutDataAtIndex ( cpucopy, indexSlowest);
+			hardware.insert( indexSlowest, cpucopy);
 		}
 		else {
 			UplinkAbort ( "Gateway::GiveCPU, there should be a slowest CPU" );
@@ -408,9 +408,9 @@ int Gateway::GetNumCPUs ()
 
 	int numCPUs = 0;
 
-	for ( int i = 0; i < hardware.Size (); ++i ) {
+	for ( int i = 0; i < hardware.size (); ++i ) {
 
-		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 		UplinkAssert (cu);
 
 		if ( cu->TYPE == GATEWAYUPGRADETYPE_CPU )
@@ -427,8 +427,8 @@ int Gateway::GetCPUSpeed ()
 
 	int speed = 0;
 
-	for ( int i = 0; i < hardware.Size (); ++i ) {
-		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+	for ( int i = 0; i < hardware.size (); ++i ) {
+		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 		UplinkAssert (cu);
 		if ( cu->TYPE == GATEWAYUPGRADETYPE_CPU )
 			speed += cu->data;
@@ -443,13 +443,13 @@ LList <char *> *Gateway::GetCPUs ()
 
 	LList <char *> *list = new LList <char *> ();
 
-	for ( int i = 0; i < hardware.Size (); ++i ) {
+	for ( int i = 0; i < hardware.size (); ++i ) {
 
-		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 		UplinkAssert (cu);
 
 		if ( cu->TYPE == GATEWAYUPGRADETYPE_CPU )
-			list->PutData ( cu->name );
+			list->push_back ( cu->name );
 
 	}
 
@@ -476,9 +476,9 @@ int Gateway::GetNumSecurity ()
 
 	int numsec = 0;
 
-	for ( int i = 0; i < hardware.Size (); ++i ) {
+	for ( int i = 0; i < hardware.size (); ++i ) {
 
-		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 		UplinkAssert (cu);
 
 		if ( cu->TYPE == GATEWAYUPGRADETYPE_SECURITY )
@@ -495,13 +495,13 @@ LList <char *> *Gateway::GetSecurity ()
 
 	LList <char *> *list = new LList <char *> ();
 
-	for ( int i = 0; i < hardware.Size (); ++i ) {
+	for ( int i = 0; i < hardware.size (); ++i ) {
 
-		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.GetData (i) );
+		const ComputerUpgrade *cu = GetHardwareUpgrade ( hardware.at (i) );
 		UplinkAssert (cu);
 
 		if ( cu->TYPE == GATEWAYUPGRADETYPE_SECURITY )
-			list->PutData ( cu->name );
+			list->push_back ( cu->name );
 
 	}
 
@@ -536,16 +536,16 @@ void Gateway::GiveHardware ( char *newhardware )
 	char *hwtitle = new char [strlen(newhardware)+1];
 	UplinkSafeStrcpy ( hwtitle, newhardware );
 
-	hardware.PutData ( hwtitle );
+	hardware.push_back ( hwtitle );
 
 }
 
 bool Gateway::IsHWInstalled ( char *name )
 {
 
-	for ( int i = 0; i < hardware.Size (); ++i )
-		if ( hardware.GetData (i) )
-			if ( strcmp ( hardware.GetData (i), name ) == 0 )
+	for ( int i = 0; i < hardware.size (); ++i )
+		if ( hardware.at (i) )
+			if ( strcmp ( hardware.at (i), name ) == 0 )
 				return true;
 
 	return false;
@@ -585,9 +585,9 @@ void Gateway::GiveAllHardware ()
 	// Best gateway
 
 	GatewayDef *bestgatewayDef = NULL;
-	for ( int i = game->GetWorld ()->gatewaydefs.Size () - 1; i >= 0; i-- )
+	for ( int i = game->GetWorld ()->gatewaydefs.size () - 1; i >= 0; i-- )
 		if ( game->GetWorld ()->gatewaydefs.ValidIndex ( i ) ) {
-			bestgatewayDef = game->GetWorld ()->gatewaydefs.GetData ( i );
+			bestgatewayDef = game->GetWorld ()->gatewaydefs.at ( i );
 			break;
 		}
 
@@ -697,7 +697,7 @@ bool Gateway::Load  ( FILE *file )
 		}
 		else {
 			if ( game->GetWorld ()->gatewaydefs.ValidIndex ( old_type ) ) {
-				SetGateway ( game->GetWorld ()->gatewaydefs.GetData ( old_type ) );
+				SetGateway ( game->GetWorld ()->gatewaydefs.at ( old_type ) );
 			}
 			else {
 				UplinkPrintAbortArgs ( "WARNING: Gateway::Load, cannot find gateway at index %d", old_type );
@@ -707,7 +707,7 @@ bool Gateway::Load  ( FILE *file )
 
 		if ( old_newtype != -1 ) {
 			if ( game->GetWorld ()->gatewaydefs.ValidIndex ( old_newtype ) )
-				ExchangeGateway ( game->GetWorld ()->gatewaydefs.GetData ( old_newtype ) );
+				ExchangeGateway ( game->GetWorld ()->gatewaydefs.at ( old_newtype ) );
 		}
 	}
 

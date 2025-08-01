@@ -63,7 +63,7 @@ void RevelationTracker::Tick ( int n )
 			//
 			// How many computers are infected?
 
-			int numinfected = game->GetWorld ()->plotgenerator.infected.Size ();
+			int numinfected = game->GetWorld ()->plotgenerator.infected.size ();
 
 			if ( numinfected != height ) {
 
@@ -88,9 +88,9 @@ void RevelationTracker::Tick ( int n )
 
 				newcaption << "Infected systems" << "\n";
 
-				for ( int i = 0; i < game->GetWorld ()->plotgenerator.infected.Size (); ++i ) {
+				for ( int i = 0; i < game->GetWorld ()->plotgenerator.infected.size (); ++i ) {
 
-					char *ip = game->GetWorld ()->plotgenerator.infected.GetData (i);
+					char *ip = game->GetWorld ()->plotgenerator.infected.at (i);
 					UplinkAssert (ip);
 
 					VLocation *vl = game->GetWorld ()->GetVLocation (ip);

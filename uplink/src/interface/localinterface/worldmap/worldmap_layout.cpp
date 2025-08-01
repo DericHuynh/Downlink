@@ -474,14 +474,14 @@ void WorldMapLayout::ResetLayoutParameters()
 
 void WorldMapLayout::DeleteLocations()
 {
-    for ( int i = 0; i < labels.Size (); ++i ) 
-        delete labels.GetData(i);
+    for ( int i = 0; i < labels.size (); ++i ) 
+        delete labels.at(i);
     
-    for ( int il = 0; il < locations.Size (); ++il ) 
-        delete locations.GetData (il);
+    for ( int il = 0; il < locations.size (); ++il ) 
+        delete locations.at (il);
     
-    labels.Empty();
-    locations.Empty();
+    labels.clear();
+    locations.clear();
 }
 
 void WorldMapLayout::AddLocation ( int x, int y, const char *name, const char *ip, bool tempForConnection )
@@ -496,11 +496,11 @@ void WorldMapLayout::AddLocation ( int x, int y, const char *name, const char *i
     thedot->SetBasePosition ( x, y );
     thedot->SetIP( ip );
 	thedot->tempForConnection = tempForConnection;
-    locations.PutData (thedot);
+    locations.push_back (thedot);
 
     WorldMapInterfaceLabel *thelabel = new WorldMapInterfaceLabel ( mapRectangle, thedot, name );
     thelabel->SetBasePosition( x, y );
-    labels.PutData (thelabel);
+    labels.push_back (thelabel);
     
 	if ( !tempForConnection ) {
 		if ( layoutStarted ) 
@@ -513,12 +513,12 @@ void WorldMapLayout::AddLocation ( int x, int y, const char *name, const char *i
 void WorldMapLayout::DeleteLocationsTemp()
 {
 	int i = 0;
-	while ( i < locations.Size () ) {
-		if ( locations.GetData ( i )->tempForConnection ) {
-			delete labels.GetData ( i );
-			delete locations.GetData ( i );
-			labels.RemoveData ( i );
-			locations.RemoveData ( i );
+	while ( i < locations.size () ) {
+		if ( locations.at ( i )->tempForConnection ) {
+			delete labels.at ( i );
+			delete locations.at ( i );
+			labels.erase ( i );
+			locations.erase ( i );
 		}
 		else {
 			i++;
@@ -537,17 +537,17 @@ void WorldMapLayout::StartLayout()
     
     // Initial Random Layout
     
-    for ( int i = 0; i < labels.Size (); ++i ) {
+    for ( int i = 0; i < labels.size (); ++i ) {
 	
-	WorldMapInterfaceLabel *l = labels.GetData (i);
+	WorldMapInterfaceLabel *l = labels.at (i);
 	UplinkAssert (l);
 	l->SetRandomLabelPosition();
 	objective.AddObject(l);
     }
     
-    for ( int il = 0; il < locations.Size (); ++il ) {
+    for ( int il = 0; il < locations.size (); ++il ) {
 	
-	WorldMapInterfaceObject *l = locations.GetData (il);
+	WorldMapInterfaceObject *l = locations.at (il);
 	UplinkAssert (l);
 	objective.AddObject(l);
 	
@@ -568,7 +568,7 @@ void WorldMapLayout::StartLayout()
 
 void WorldMapLayout::PartialLayoutLabels()
 {
-    int n = labels.Size();
+    int n = labels.size();
     
     if (layoutComplete) 
         return;
@@ -577,7 +577,7 @@ void WorldMapLayout::PartialLayoutLabels()
         StartLayout();
     
     for (int i = 0; E > 0 && i < 20; i++) {
-        WorldMapInterfaceLabel *l = labels.GetData(NumberGenerator::RandomNumber(n));
+        WorldMapInterfaceLabel *l = labels.at(NumberGenerator::RandomNumber(n));
 	    
         int origLabelPos = l->GetLabelPosition();
 	    
@@ -651,8 +651,8 @@ int WorldMapLayout::GetCountLocationTemp()
 {
 	int countTemp = 0;
 
-	for ( int i = 0; i < locations.Size (); i++ )
-		if ( locations.GetData ( i )->tempForConnection )
+	for ( int i = 0; i < locations.size (); i++ )
+		if ( locations.at ( i )->tempForConnection )
 			countTemp++;
 
 	return countTemp;
@@ -661,8 +661,8 @@ int WorldMapLayout::GetCountLocationTemp()
 void WorldMapLayout::CheckIPs()
 {
 
-	for ( int i = 0; i < locations.Size (); i++ )
-		locations.GetData ( i )->CheckIP ();
+	for ( int i = 0; i < locations.size (); i++ )
+		locations.at ( i )->CheckIP ();
 
 }
 

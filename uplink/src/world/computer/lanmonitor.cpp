@@ -81,9 +81,9 @@ void LanMonitor::BeginAttack ()
             //
 		    // Insert the Router to the connection
 
-            for ( int k = 0; k < lanComputer->systems.Size(); ++k ) {
+            for ( int k = 0; k < lanComputer->systems.size(); ++k ) {
                 if ( lanComputer->systems.ValidIndex(k) ) {
-                    LanComputerSystem *system = lanComputer->systems.GetData(k);
+                    LanComputerSystem *system = lanComputer->systems.at(k);
 				    UplinkAssert (system);
 				    if ( system->TYPE == LANSYSTEM_ROUTER ) {
                         ourFirstLink = k;
@@ -100,7 +100,7 @@ void LanMonitor::BeginAttack ()
         currentSystem = ourFirstLink;
         currentSelected = ourFirstLink;
 
-        lanComputer->systems.GetData( ourFirstLink )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
+        lanComputer->systems.at( ourFirstLink )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
 
     }
     else {
@@ -122,7 +122,7 @@ void LanMonitor::EndAttack ()
 void LanMonitor::ResetAll ()
 {
 
-	connection.Empty ();
+	connection.clear ();
 
     currentlyActive = false;
     lanComputer = NULL;
@@ -165,16 +165,16 @@ void LanMonitor::ExtendConnection ( int newNode )
 	// Is it adjacent to an existing linked system, 
 	// with a visible link to this one?
 
-	int linkHeadIndex = connection.Size() - 1;
+	int linkHeadIndex = connection.size() - 1;
 	if ( !connection.ValidIndex(linkHeadIndex) )
 		return;
 
-	int linkHead = connection.GetData(linkHeadIndex);
+	int linkHead = connection.at(linkHeadIndex);
 	
-	for ( int i = 0; i < lanComputer->links.Size(); ++i ) {
+	for ( int i = 0; i < lanComputer->links.size(); ++i ) {
 		if ( lanComputer->links.ValidIndex(i) ) {
 		
-			LanComputerLink *link = lanComputer->links.GetData(i);
+			LanComputerLink *link = lanComputer->links.at(i);
 			UplinkAssert(link);
 
 			if ( ( (link->from == linkHead && link->to == newNode) ||
@@ -182,8 +182,8 @@ void LanMonitor::ExtendConnection ( int newNode )
 			 	 link->visible == LANLINKVISIBLE_AWARE ) {
 
 				if ( lanComputer->systems.ValidIndex ( newNode ) ) {
-					connection.PutDataAtEnd( newNode );
-					lanComputer->systems.GetData( newNode )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
+					connection.push_back( newNode );
+					lanComputer->systems.at( newNode )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
 				}
 
 				break;
@@ -206,18 +206,18 @@ void LanMonitor::ForceExtendConnection ( int newNode )
 	if ( !lanComputer->systems.ValidIndex(newNode) ) 
 		return;
 
-    connection.PutDataAtEnd ( newNode );
-    lanComputer->systems.GetData( newNode )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
+    connection.push_back ( newNode );
+    lanComputer->systems.at( newNode )->IncreaseVisibility( LANSYSTEMVISIBLE_TYPE );
 
 }
 
 void LanMonitor::RetractConnection ()
 {
 
-    int removeIndex = connection.Size() - 1;
+    int removeIndex = connection.size() - 1;
     if ( removeIndex > 0 ) {
-        connection.RemoveData( removeIndex );
-        currentSelected = connection.GetData( connection.Size() - 1 );
+        connection.erase( removeIndex );
+        currentSelected = connection.at( connection.size() - 1 );
     }
 
 }
@@ -232,10 +232,10 @@ bool LanMonitor::IsInConnection ( int node )
 int LanMonitor::GetNodeIndex ( int node )
 {
 
-	for ( int i = 0; i < connection.Size(); ++i ) {
+	for ( int i = 0; i < connection.size(); ++i ) {
 		if ( connection.ValidIndex(i) ) {
 
-			int thisNode = connection.GetData(i);
+			int thisNode = connection.at(i);
 			if ( thisNode == node )
 				return i;
 
@@ -260,7 +260,7 @@ bool LanMonitor::IsAccessable ( int newNode )
 	if ( !lanComputer->systems.ValidIndex(newNode) ) 
 		return false;
 
-	LanComputerSystem *newSystem = lanComputer->systems.GetData(newNode);
+	LanComputerSystem *newSystem = lanComputer->systems.at(newNode);
 	UplinkAssert (newSystem);
 
 	
@@ -277,9 +277,9 @@ bool LanMonitor::IsAccessable ( int newNode )
     if ( newNode != currentSystem ) {
 
         bool knownLinks = false;
-        for ( int i = 0; i < lanComputer->links.Size(); ++i ) {
+        for ( int i = 0; i < lanComputer->links.size(); ++i ) {
             if ( lanComputer->links.ValidIndex(i) ) {
-                LanComputerLink *link = lanComputer->links.GetData(i);
+                LanComputerLink *link = lanComputer->links.at(i);
                 UplinkAssert (link);
                 
                 if ( (link->to == newNode && link->visible == LANLINKVISIBLE_TOAWARE) ||
@@ -313,9 +313,9 @@ bool LanMonitor::IsAccessable ( int newNode )
 
     if ( newSystem->TYPE == LANSYSTEM_MAINSERVER ) {
 
-        if ( newSystem->data1 != -1 && lanComputer->systems.ValidIndex ( newSystem->data1 ) && lanComputer->systems.GetData(newSystem->data1)->data1 == 1 ) return false;
-        if ( newSystem->data2 != -1 && lanComputer->systems.ValidIndex ( newSystem->data2 ) && lanComputer->systems.GetData(newSystem->data2)->data1 == 1 ) return false;
-        if ( newSystem->data3 != -1 && lanComputer->systems.ValidIndex ( newSystem->data3 ) && lanComputer->systems.GetData(newSystem->data3)->data1 == 1 ) return false;
+        if ( newSystem->data1 != -1 && lanComputer->systems.ValidIndex ( newSystem->data1 ) && lanComputer->systems.at(newSystem->data1)->data1 == 1 ) return false;
+        if ( newSystem->data2 != -1 && lanComputer->systems.ValidIndex ( newSystem->data2 ) && lanComputer->systems.at(newSystem->data2)->data1 == 1 ) return false;
+        if ( newSystem->data3 != -1 && lanComputer->systems.ValidIndex ( newSystem->data3 ) && lanComputer->systems.at(newSystem->data3)->data1 == 1 ) return false;
 
     }
 
@@ -323,14 +323,14 @@ bool LanMonitor::IsAccessable ( int newNode )
     // If it has restricted FROM addresses,
     // are we coming from one of them?
 
-    if ( newSystem->validSubnets.Size() > 0 ) {
+    if ( newSystem->validSubnets.size() > 0 ) {
         int playerSubnet = currentSpoof;
         if ( currentSpoof == -1 ) return false;
         
         bool valid = false;
-        for ( int i = 0; i < newSystem->validSubnets.Size(); ++i ) {
+        for ( int i = 0; i < newSystem->validSubnets.size(); ++i ) {
 			if ( newSystem->validSubnets.ValidIndex ( i ) ) {
-				int thisSubnet = newSystem->validSubnets.GetData(i);
+				int thisSubnet = newSystem->validSubnets.at(i);
 				if ( thisSubnet == currentSpoof )
 					valid = true;
 			}
@@ -390,9 +390,9 @@ void LanMonitor::Update ()
         {
             
             if ( lanComputer && lanComputer->systems.ValidIndex( currentSystem ) &&
-                ( lanComputer->systems.GetData( currentSystem )->TYPE == LANSYSTEM_MAINSERVER ||
-                  lanComputer->systems.GetData( currentSystem )->TYPE == LANSYSTEM_FILESERVER ||
-                  lanComputer->systems.GetData( currentSystem )->TYPE == LANSYSTEM_LOGSERVER ) ) {
+                ( lanComputer->systems.at( currentSystem )->TYPE == LANSYSTEM_MAINSERVER ||
+                  lanComputer->systems.at( currentSystem )->TYPE == LANSYSTEM_FILESERVER ||
+                  lanComputer->systems.at( currentSystem )->TYPE == LANSYSTEM_LOGSERVER ) ) {
 
                 SysAdminAwaken ();
 
@@ -406,7 +406,7 @@ void LanMonitor::Update ()
             if ( EclGetAccurateTime() >= sysAdminTimer ) {
                 sysAdminState = SYSADMIN_SEARCHING;
                 if ( connection.ValidIndex(0) ) 
-                    sysAdminCurrentSystem = connection.GetData(0);
+                    sysAdminCurrentSystem = connection.at(0);
                 else 
                     sysAdminState = SYSADMIN_ASLEEP;                    
                 int timeToDiscover = (int) NumberGenerator::RandomNormalNumber( 10, 5 );
@@ -429,7 +429,7 @@ void LanMonitor::Update ()
                         sysAdminState = SYSADMIN_CURIOUS;
                     else {
                         if ( connection.ValidIndex(nodeIndex+1) )
-                            sysAdminCurrentSystem = connection.GetData(nodeIndex+1);
+                            sysAdminCurrentSystem = connection.at(nodeIndex+1);
                         else
                             sysAdminState = SYSADMIN_CURIOUS;
                     }
@@ -458,10 +458,10 @@ void LanMonitor::Update ()
 
             CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
             UplinkAssert (cu);
-            for ( int i = 0; i < cu->missions.Size(); ++i ) {
+            for ( int i = 0; i < cu->missions.size(); ++i ) {
                 if ( cu->missions.ValidIndex(i) ) {
-                    if ( cu->missions.GetData(i) == mission ) {
-                        cu->missions.RemoveData( i );
+                    if ( cu->missions.at(i) == mission ) {
+                        cu->missions.erase( i );
                         break;
                     }
                 }

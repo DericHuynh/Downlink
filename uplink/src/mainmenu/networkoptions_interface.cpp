@@ -287,14 +287,14 @@ void NetworkOptionsInterface::Update ()
 		char cdetails [512];
 		UplinkSnprintf ( cdetails, sizeof ( cdetails ), "Active connections : %d", app->GetNetwork ()->GetServer ()->clients.NumUsed () );
 		
-		for ( i = 0; i < app->GetNetwork ()->GetServer ()->clients.Size (); ++i ) {
+		for ( i = 0; i < app->GetNetwork ()->GetServer ()->clients.size (); ++i ) {
 			if ( app->GetNetwork ()->GetServer ()->clients.ValidIndex (i) ) {
 
 				char thisconnection [128];
 				UplinkSnprintf ( thisconnection, sizeof ( thisconnection ), "\nFrom %s, ip %s, active %d secs", 
 																			app->GetNetwork ()->GetServer ()->GetRemoteHost (i),
 						  													app->GetNetwork ()->GetServer ()->GetRemoteIP (i),
-																			app->GetNetwork ()->GetServer ()->clients.GetData (i)->TimeActive () );
+																			app->GetNetwork ()->GetServer ()->clients.at (i)->TimeActive () );
 				UplinkStrncat ( cdetails, sizeof ( cdetails ), thisconnection );
 
 			}

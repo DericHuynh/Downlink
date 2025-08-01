@@ -405,7 +405,7 @@ void LogModifier::Tick ( int n )
 					return;
 				}
 
-				AccessLog *log = source->logs.GetData (sourceindex);
+				AccessLog *log = source->logs.at (sourceindex);
 				UplinkAssert (log);
 				
 				char sprogress [64];
@@ -448,13 +448,13 @@ void LogModifier::Tick ( int n )
 					// This should be undetectable - so copy the result into internal logs
 
 					if ( source->internallogs.ValidIndex (sourceindex) ) {
-						source->internallogs.GetData ( sourceindex )->SetProperties ( log );
+						source->internallogs.at ( sourceindex )->SetProperties ( log );
 
 					}
 					else {
 						AccessLog *internalcopy = new AccessLog ();
 						internalcopy->SetProperties ( log );
-						source->internallogs.PutData ( internalcopy, sourceindex );
+						source->internallogs.insert( sourceindex, internalcopy);
 					}
 
 					status = LOGMODIFIER_STATUS_FINISHED;
@@ -746,7 +746,7 @@ void LogModifier::CreateExpandedInterface ()
 
 			// Register those caption changes
 
-			AccessLog *log = source->logs.GetData (sourceindex);
+			AccessLog *log = source->logs.at (sourceindex);
 			UplinkAssert (log);		
 
 			log->Print ();

@@ -66,9 +66,9 @@ LinksScreenInterface::~LinksScreenInterface ()
 {
     
     DeleteLListData ( &fulllist );
-	fulllist.Empty ();
+	fulllist.clear ();
     DeleteLListData ( &filteredlist );
-	filteredlist.Empty ();
+	filteredlist.clear ();
 
 	if ( ilink_tif ) {
 		delete ilink_tif;
@@ -114,7 +114,7 @@ void LinksScreenInterface::LinkClick ( Button *button )
 
 	if ( filteredlist->ValidIndex (fileindex) ) {
 
-		char *ip = filteredlist->GetData (fileindex);
+		char *ip = filteredlist->at (fileindex);
 
 		game->GetWorld ()->GetPlayer ()->GetConnection ()->Disconnect ();
 		game->GetWorld ()->GetPlayer ()->GetConnection ()->Reset ();
@@ -153,7 +153,7 @@ void LinksScreenInterface::LinkDraw ( Button *button, bool highlighted, bool cli
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;	
-    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->GetData (linkindex) : NULL;
+    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->at (linkindex) : NULL;
 
 	/*
 		Re above line
@@ -266,7 +266,7 @@ void LinksScreenInterface::DeleteLinkDraw ( Button *button, bool highlighted, bo
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->GetData (linkindex) : NULL;
+    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->at (linkindex) : NULL;
 
 	if ( link ) 
 		imagebutton_draw ( button, highlighted, clicked );
@@ -296,7 +296,7 @@ void LinksScreenInterface::DeleteLinkClick ( Button *button )
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-	char *link = filteredlist->ValidIndex (linkindex) ? filteredlist->GetData (linkindex) : NULL;
+	char *link = filteredlist->ValidIndex (linkindex) ? filteredlist->at (linkindex) : NULL;
 
 	if ( link && game->GetWorld ()->GetPlayer ()->HasLink (link) &&
          strcmp( link, IP_INTERNIC) != 0 ) {
@@ -335,7 +335,7 @@ void LinksScreenInterface::AddLinkDraw ( Button *button, bool highlighted, bool 
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-    char *link = filteredlist->ValidIndex (linkindex) ? filteredlist->GetData (linkindex) : NULL;
+    char *link = filteredlist->ValidIndex (linkindex) ? filteredlist->at (linkindex) : NULL;
 
 	if ( link && !game->GetWorld ()->GetPlayer ()->HasLink (link) ) 
 		imagebutton_draw ( button, highlighted, clicked );
@@ -358,7 +358,7 @@ void LinksScreenInterface::AddLinkClick ( Button *button )
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->GetData (linkindex) : NULL;
+    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->at (linkindex) : NULL;
 
 	if ( link && !game->GetWorld ()->GetPlayer ()->HasLink (link) )
 		game->GetWorld ()->GetPlayer ()->GiveLink ( link );
@@ -375,7 +375,7 @@ void LinksScreenInterface::ShowLinkDraw ( Button *button, bool highlighted, bool
 	linkindex += baseoffset;
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
-    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->GetData (linkindex) : NULL;
+    char *link = filteredlist->ValidIndex(linkindex) ? filteredlist->at (linkindex) : NULL;
 
     if ( link ) {
 
@@ -424,7 +424,7 @@ void LinksScreenInterface::ShowLinkClick ( Button *button )
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
 
-	char *link = filteredlist->GetData (linkindex);
+	char *link = filteredlist->at (linkindex);
 
     if ( link ) {
 
@@ -459,7 +459,7 @@ void LinksScreenInterface::ShowLinkMouseMove ( Button *button )
 
 	LList <char *> *filteredlist = &((LinksScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ())->filteredlist;
 
-	char *link = filteredlist->GetData (linkindex);
+	char *link = filteredlist->at (linkindex);
 
     if ( link ) {
 
@@ -545,15 +545,15 @@ void LinksScreenInterface::SetFullList ( LList <char *> *newfulllist )
     DeleteLListData ( &fulllist );
     DeleteLListData ( &filteredlist );
     
-	fulllist.Empty ();
-	filteredlist.Empty ();
+	fulllist.clear ();
+	filteredlist.clear ();
 
-    for ( int i = 0; i < newfulllist->Size (); ++i ) {
+    for ( int i = 0; i < newfulllist->size (); ++i ) {
 
 		size_t copydatasize = SIZE_VLOCATION_IP;
         char *copydata = new char [copydatasize];
-        UplinkStrncpy ( copydata, newfulllist->GetData (i), copydatasize );
-        fulllist.PutData ( copydata );
+        UplinkStrncpy ( copydata, newfulllist->at (i), copydatasize );
+        fulllist.push_back ( copydata );
 
     }
 	
@@ -565,14 +565,14 @@ void LinksScreenInterface::SetFullList ()
 {
 
 	DeleteLListData ( &fulllist );
-    fulllist.Empty ();
+    fulllist.clear ();
 
-    for ( int i = 0; i < filteredlist.Size (); ++i ) {
+    for ( int i = 0; i < filteredlist.size (); ++i ) {
 
 		size_t copydatasize = SIZE_VLOCATION_IP;
         char *copydata = new char [copydatasize];
-        UplinkStrncpy ( copydata, filteredlist.GetData (i), copydatasize );
-		fulllist.PutData ( copydata );
+        UplinkStrncpy ( copydata, filteredlist.at (i), copydatasize );
+		fulllist.push_back ( copydata );
 
     }
 
@@ -588,18 +588,18 @@ void LinksScreenInterface::ApplyFilter ( char *filter )
 	//
 
     DeleteLListData ( &filteredlist );
-    filteredlist.Empty ();
+    filteredlist.clear ();
 
 	if ( filter ) {
 
 		char *lowercasefilter = LowerCaseString ( filter );
 
-		for ( int i = 0; i < fulllist.Size (); ++i ) {
+		for ( int i = 0; i < fulllist.size (); ++i ) {
 
-			VLocation *vl = game->GetWorld ()->GetVLocation ( fulllist.GetData (i) );
+			VLocation *vl = game->GetWorld ()->GetVLocation ( fulllist.at (i) );
 
 			if ( !vl ) { 
-				UplinkAbortArgs ( "Cannot find location for ip %s", fulllist.GetData (i) );
+				UplinkAbortArgs ( "Cannot find location for ip %s", fulllist.at (i) );
 			}
 
 			char *computername = vl->computer;
@@ -609,8 +609,8 @@ void LinksScreenInterface::ApplyFilter ( char *filter )
 
 				size_t datacopysize = SIZE_VLOCATION_IP;
                 char *datacopy = new char [datacopysize];
-                UplinkStrncpy ( datacopy, fulllist.GetData (i), datacopysize );
-				filteredlist.PutData ( datacopy );
+                UplinkStrncpy ( datacopy, fulllist.at (i), datacopysize );
+				filteredlist.push_back ( datacopy );
 
             }
 
@@ -623,12 +623,12 @@ void LinksScreenInterface::ApplyFilter ( char *filter )
 	}
 	else {
 
-        for ( int i = 0; i < fulllist.Size (); ++i ) {
+        for ( int i = 0; i < fulllist.size (); ++i ) {
 
 			size_t datacopysize = SIZE_VLOCATION_IP;
             char *datacopy = new char [datacopysize];
-            UplinkStrncpy ( datacopy, fulllist.GetData (i), datacopysize );		     
-            filteredlist.PutData ( datacopy );
+            UplinkStrncpy ( datacopy, fulllist.at (i), datacopysize );		     
+            filteredlist.push_back ( datacopy );
 
         }
 
@@ -671,7 +671,7 @@ void LinksScreenInterface::ApplyFilter ( char *filter )
     //
 
     ScrollBox *sb = ScrollBox::GetScrollBox("linksscreen_scroll");
-    if ( sb ) sb->SetNumItems( filteredlist.Size() );
+    if ( sb ) sb->SetNumItems( filteredlist.size() );
 
 }
 
@@ -771,12 +771,12 @@ void LinksScreenInterface::Create ( ComputerScreen *newcs )
 		else if ( GetComputerScreen ()->SCREENTYPE == LINKSSCREENTYPE_ALLLINKS ) {
 
 			LList <char *> alllinks;
-			DArray <VLocation *> *locs = game->GetWorld ()->locations.ConvertToDArray ();
+			DArray <VLocation *> *locs = game->GetWorld ()->locations.MapDataToDArray ();
 
-			for ( int i = 0; i < locs->Size (); ++i )
+			for ( int i = 0; i < locs->size (); ++i )
 				if ( locs->ValidIndex (i) )
-					if ( locs->GetData (i)->listed )
-						alllinks.PutData ( locs->GetData (i)->ip );
+					if ( locs->at (i)->listed )
+						alllinks.push_back ( locs->at (i)->ip );
 
 			delete locs;
 
@@ -788,12 +788,12 @@ void LinksScreenInterface::Create ( ComputerScreen *newcs )
 			char *companyname = GetComputerScreen ()->GetComputer ()->companyname;
 
 			LList <char *> alllinks;
-			DArray <VLocation *> *locs = game->GetWorld ()->locations.ConvertToDArray ();
+			DArray <VLocation *> *locs = game->GetWorld ()->locations.MapDataToDArray ();
 
-			for ( int i = 0; i < locs->Size (); ++i )
+			for ( int i = 0; i < locs->size (); ++i )
 				if ( locs->ValidIndex (i) )		
-                    if ( locs->GetData (i)->GetOBJECTID () != OID_VLOCATIONSPECIAL )
-					    alllinks.PutData ( locs->GetData (i)->ip );
+                    if ( locs->at (i)->GetOBJECTID () != OID_VLOCATIONSPECIAL )
+					    alllinks.push_back ( locs->at (i)->ip );
 
 			delete locs;
 
@@ -803,12 +803,12 @@ void LinksScreenInterface::Create ( ComputerScreen *newcs )
 	
 		}
 
-		if ( fulllist.Size () >= NumLinksOnScreen () ) {
+		if ( fulllist.size () >= NumLinksOnScreen () ) {
 
 			// Create the scrollbar
    
             ScrollBox::CreateScrollBox( "linksscreen_scroll", 50 + SY(375), 145, 15, 
-                                        NumLinksOnScreen() * 15, fulllist.Size(), NumLinksOnScreen(), 0,  ScrollChange );
+                                        NumLinksOnScreen() * 15, fulllist.size(), NumLinksOnScreen(), 0,  ScrollChange );
 
 			EclRegisterButton ( 50 + SY(375), 125, 15, 15, "", "", "linksscreen_topright" );
 
@@ -840,7 +840,7 @@ void LinksScreenInterface::Create ( ComputerScreen *newcs )
 		// or if more than 13 links are on display
 
 		if ( GetComputerScreen ()->SCREENTYPE != LINKSSCREENTYPE_PLAYERLINKS ||
-			 fulllist.Size () >= NumLinksOnScreen() ) {
+			 fulllist.size () >= NumLinksOnScreen() ) {
 
 			int xpos = 15;
 			int width = 150 - xpos;

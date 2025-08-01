@@ -52,9 +52,9 @@ void MainMenuScreen::Create ()
 void MainMenuScreen::Remove ()
 {
 	DArray<char *> *btns = this->interface_buttons;
-	for ( int i = 0; i < btns->Size(); ++i ) {
+	for ( int i = 0; i < btns->size(); ++i ) {
 		if ( btns->ValidIndex( i ) ) {
-			char *btn_name = btns->GetData( i );
+			char *btn_name = btns->at( i );
 			if ( (NULL != btn_name) && ('\0' != btn_name[0]) )
 				EclRemoveButton( btn_name );
 		}
@@ -92,7 +92,7 @@ void MainMenuScreen::RegisterButton ( int x, int y, int width, int height,
 	EclRegisterButton ( x, y, width, height, caption, tooltip, newname );
 	char *name = new char [strlen (newname) + 1];
 	UplinkSafeStrcpy( name, newname );
-	this->interface_buttons->PutData( name );
+	this->interface_buttons->push_back( name );
 }
 
 void MainMenuScreen::RegisterButton ( int x, int y, int width, int height,
@@ -100,5 +100,5 @@ void MainMenuScreen::RegisterButton ( int x, int y, int width, int height,
 	EclRegisterButton ( x, y, width, height, caption, newname );
 	char *name = new char [strlen (newname) + 1];
 	UplinkSafeStrcpy( name, newname );
-	this->interface_buttons->PutData( name );
+	this->interface_buttons->push_back( name );
 }

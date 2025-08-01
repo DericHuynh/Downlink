@@ -135,11 +135,11 @@ void SendMailInterface::ToggleFileList ( int x, int y )
 		for ( int di = 0; di < db->GetDataSize (); ++di ) {
 
 			if ( db->GetDataFile (di) ) 
-				software.PutData ( db->GetDataFile (di)->title );
+				software.push_back ( db->GetDataFile (di)->title );
 
 		}
 
-		int numfiles = software.Size ();
+		int numfiles = software.size ();
 
 		if ( numfiles > 0 ) {
 
@@ -148,7 +148,7 @@ void SendMailInterface::ToggleFileList ( int x, int y )
 			for ( int si = 0; si < numfiles; ++si ) {
 
 				char caption [128], tooltip [128], name [128];
-				UplinkStrncpy ( caption, software.GetData (si), sizeof ( caption ) );
+				UplinkStrncpy ( caption, software.at (si), sizeof ( caption ) );
 				UplinkStrncpy ( tooltip, "Attach this file to the mail message", sizeof ( tooltip ) );
 				UplinkSnprintf ( name, sizeof ( name ), "sendmail_file %d", si );
 				EclRegisterButton ( x, y, 120, 15, caption, tooltip, name );
@@ -203,7 +203,7 @@ void SendMailInterface::ToggleAddressBook ( int x, int y )
 	if ( !IsVisibleAddressBook () ) {
 
 		// Create address book
-		int numcontacts = game->GetWorld ()->GetPlayer ()->missions.Size ();
+		int numcontacts = game->GetWorld ()->GetPlayer ()->missions.size ();
 		
 		if ( numcontacts > 0 ) {
 
@@ -214,7 +214,7 @@ void SendMailInterface::ToggleAddressBook ( int x, int y )
 				char name [64];
 				UplinkSnprintf ( name, sizeof ( name ), "sendmail_addressbook %d", i );
 
-				char *contact = game->GetWorld ()->GetPlayer ()->missions.GetData (i)->contact;
+				char *contact = game->GetWorld ()->GetPlayer ()->missions.at (i)->contact;
 
 				EclRegisterButton ( x, y, 140, 15, contact, "Send to this recipient", name );
 				EclRegisterButtonCallbacks ( name, button_draw, AddressClick, button_click, button_highlight );

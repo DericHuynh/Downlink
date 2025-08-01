@@ -109,7 +109,7 @@ void WorldGenerator::GenerateValidMapPos ( int &x, int &y )
 
 	/********** Start code by François Gagné **********/
 	int retryDiffLoc = 0;
-	DArray <VLocation *> *vls = game->GetWorld ()->locations.ConvertToDArray (); 
+	DArray <VLocation *> *vls = game->GetWorld ()->locations.MapDataToDArray (); 
 	/********** End code by François Gagné **********/
 
 	while ( 1 ) {
@@ -124,9 +124,9 @@ void WorldGenerator::GenerateValidMapPos ( int &x, int &y )
 
 			/********** Start code by François Gagné **********/
 			int found = 0;
-			for ( int i = vls->Size () - 1; i >= 0; i-- ) {
+			for ( int i = vls->size () - 1; i >= 0; i-- ) {
 				if ( vls->ValidIndex ( i ) ) {
-					VLocation *vl = vls->GetData (i);
+					VLocation *vl = vls->at (i);
 
 					//Don't put 2 locations in the same square
 					if ( abs ( vl->x - tX ) < 2 && abs ( vl->y - tY ) < 2 ) {
@@ -186,14 +186,14 @@ void WorldGenerator::GenerateRandomWorld ()
 
 	// Generate employment data
 
-	DArray <Company *> *companies = game->GetWorld ()->companies.ConvertToDArray ();
+	DArray <Company *> *companies = game->GetWorld ()->companies.MapDataToDArray ();
 	UplinkAssert (companies);
 
-	for ( i = 0; i < companies->Size (); ++i ) {
+	for ( i = 0; i < companies->size (); ++i ) {
 
 		if ( companies->ValidIndex ( i ) ) {
 
-			Company *company = companies->GetData (i);
+			Company *company = companies->at (i);
 			UplinkAssert (company);
 
 			if ( strcmp ( company->name, "Government" ) != 0 &&
@@ -475,10 +475,10 @@ void WorldGenerator::LoadDynamics ()
 
     DArray <char *> *files = ListDirectory( "data/lans/", ".txt" );
 
-    for ( int k = 0; k< files->Size(); ++k ) {
+    for ( int k = 0; k< files->size(); ++k ) {
         if ( files->ValidIndex(k) ) {
 
-            char *filename = files->GetData(k);
+            char *filename = files->at(k);
             UplinkAssert (filename);
             LanGenerator::LoadLAN( filename );
 
@@ -496,12 +496,12 @@ void WorldGenerator::LoadDynamicsGatewayDefs ()
     // Load additional gateways from the directory
     //
 
-    int numgateways = game->GetWorld()->gatewaydefs.Size();
+    int numgateways = game->GetWorld()->gatewaydefs.size();
     DArray <char *> *extraGateways = ListDirectory ( "data/gateways/", ".txt" );
-    for ( int j = 0; j < extraGateways->Size(); ++j ) {
+    for ( int j = 0; j < extraGateways->size(); ++j ) {
         if ( extraGateways->ValidIndex(j) ) {
 
-            char *gatewayFilename = extraGateways->GetData(j);
+            char *gatewayFilename = extraGateways->at(j);
 	        char *rsFilename = RsArchiveFileOpen ( gatewayFilename );
 	        UplinkAssert (rsFilename);
 	        idos2unixstream thisFile ( rsFilename );
@@ -523,7 +523,7 @@ void WorldGenerator::LoadDynamicsGatewayDefs ()
             game->GetWorld()->CreateGatewayDef ( def );
 
             thisFile.close ();
-            RsArchiveFileClose ( extraGateways->GetData(j) );
+            RsArchiveFileClose ( extraGateways->at(j) );
 
         }
     }
@@ -3781,13 +3781,13 @@ void WorldGenerator::UpdateSoftwareUpgrades ( )
 
 	// Update the software items for sale
 
-	for ( int i = 0; i < cu->sw_sales.Size (); i++ )
+	for ( int i = 0; i < cu->sw_sales.size (); i++ )
 		if ( cu->sw_sales.ValidIndex ( i ) ) {
-			Sale *sale = cu->sw_sales.GetData ( i );
+			Sale *sale = cu->sw_sales.at ( i );
 			if ( sale )
 				delete sale;
 	}
-	cu->sw_sales.Empty ();
+	cu->sw_sales.clear ();
 
 	Sale *previoussale = NULL;
 
@@ -3831,13 +3831,13 @@ void WorldGenerator::UpdateSoftwareUpgrades ( )
 VLocation *WorldGenerator::GetRandomLocation ()
 {
 
-	DArray <char *> *vls = game->GetWorld ()->locations.ConvertIndexToDArray ();
-	UplinkAssert ( vls->Size () > 0 );
+	DArray <char *> *vls = game->GetWorld ()->locations.MapKeysToDArray ();
+	UplinkAssert ( vls->size () > 0 );
 
-	int index = NumberGenerator::RandomNumber ( vls->Size () );
+	int index = NumberGenerator::RandomNumber ( vls->size () );
 	UplinkAssert ( vls->ValidIndex (index) );
 
-	VLocation *vl = game->GetWorld ()->GetVLocation ( vls->GetData (index) );
+	VLocation *vl = game->GetWorld ()->GetVLocation ( vls->at (index) );
 	delete vls;
 	return vl;
 
@@ -3846,15 +3846,15 @@ VLocation *WorldGenerator::GetRandomLocation ()
 Company *WorldGenerator::GetRandomCompany ()
 {
 
-	DArray <char *> *comps = game->GetWorld ()->companies.ConvertIndexToDArray ();
-	UplinkAssert ( comps->Size () > 0 );
+	DArray <char *> *comps = game->GetWorld ()->companies.MapKeysToDArray ();
+	UplinkAssert ( comps->size () > 0 );
 
 	while (1) {
 
-		int index = NumberGenerator::RandomNumber ( comps->Size () );
+		int index = NumberGenerator::RandomNumber ( comps->size () );
 		UplinkAssert ( comps->ValidIndex ( index ) );
 
-		Company *comp = game->GetWorld ()->GetCompany ( comps->GetData (index) );
+		Company *comp = game->GetWorld ()->GetCompany ( comps->at (index) );
 		UplinkAssert (comp);
 
 		// Make sure we haven't picked up the player's computer
@@ -3907,29 +3907,29 @@ Computer *WorldGenerator::GetRandomComputer ()
 Computer *WorldGenerator::GetRandomComputer ( int TYPE )
 {
 
-	DArray <char *> *comps = game->GetWorld ()->computers.ConvertIndexToDArray ();
-	UplinkAssert ( comps->Size () > 0 );
+	DArray <char *> *comps = game->GetWorld ()->computers.MapKeysToDArray ();
+	UplinkAssert ( comps->size () > 0 );
 
 	// Create a new array of all valid computers
 
 	DArray <char *> *typecomps = new DArray <char *> ();
 
-	for ( int i = 0; i < comps->Size (); ++i ) {
+	for ( int i = 0; i < comps->size (); ++i ) {
 
 		if ( comps->ValidIndex ( i ) ) {
 
-			Computer *comp = game->GetWorld ()->GetComputer ( comps->GetData (i) );
+			Computer *comp = game->GetWorld ()->GetComputer ( comps->at (i) );
 			UplinkAssert ( comp );
 
 			if ( (comp->TYPE & TYPE) && comp->istargetable && comp->isrunning &&
 				 strcmp(comp->companyname, "Government" ) != 0 )
-				typecomps->PutData ( comps->GetData (i) );
+				typecomps->push_back ( comps->at (i) );
 
 		}
 
 	}
 
-    if ( typecomps->Size () == 0 ) {
+    if ( typecomps->size () == 0 ) {
 
         delete comps;
         delete typecomps;
@@ -3946,10 +3946,10 @@ Computer *WorldGenerator::GetRandomComputer ( int TYPE )
     }
     else {
 
-	    int index = NumberGenerator::RandomNumber ( typecomps->Size () );
+	    int index = NumberGenerator::RandomNumber ( typecomps->size () );
 	    UplinkAssert ( typecomps->ValidIndex ( index ) );
 
-	    Computer *comp = game->GetWorld ()->GetComputer ( typecomps->GetData (index) );
+	    Computer *comp = game->GetWorld ()->GetComputer ( typecomps->at (index) );
 	    UplinkAssert (comp);
 
 	    delete comps;
@@ -4009,29 +4009,29 @@ Person *WorldGenerator::GetRandomPerson ()
     //
     // Build a list of all valid People
 
-	DArray <char *> *people = game->GetWorld ()->people.ConvertIndexToDArray ();
-	UplinkAssert ( people->Size () > 0 );
+	DArray <char *> *people = game->GetWorld ()->people.MapKeysToDArray ();
+	UplinkAssert ( people->size () > 0 );
 
     DArray <Person *> validPeople;
 
-    for ( int i = 0; i < people->Size(); ++i ) {
+    for ( int i = 0; i < people->size(); ++i ) {
 
         UplinkAssert ( people->ValidIndex(i) );
 
-		Person *person = game->GetWorld ()->GetPerson ( people->GetData(i) );
+		Person *person = game->GetWorld ()->GetPerson ( people->at(i) );
 		UplinkAssert (person);
 
 		if ( person->istargetable &&
 			 person->GetStatus () == PERSON_STATUS_NONE )
 
-			validPeople.PutData( person );
+			validPeople.push_back( person );
 
     }
 
     delete people;
 
 
-    if ( validPeople.Size() == 0 ) {
+    if ( validPeople.size() == 0 ) {
 
         // No person fits the criteria
         // Create a new one and return him
@@ -4042,9 +4042,9 @@ Person *WorldGenerator::GetRandomPerson ()
     }
     else {
 
-	    int index = NumberGenerator::RandomNumber ( validPeople.Size () );
+	    int index = NumberGenerator::RandomNumber ( validPeople.size () );
 		UplinkAssert ( validPeople.ValidIndex (index) );
-        return (Person *) validPeople.GetData ( index );
+        return (Person *) validPeople.at ( index );
 
     }
 
@@ -4053,8 +4053,8 @@ Person *WorldGenerator::GetRandomPerson ()
 Agent *WorldGenerator::GetRandomAgent ()
 {
 
-	DArray <char *> *people = game->GetWorld ()->people.ConvertIndexToDArray ();
-	UplinkAssert ( people->Size () > 0 );
+	DArray <char *> *people = game->GetWorld ()->people.MapKeysToDArray ();
+	UplinkAssert ( people->size () > 0 );
 
 /*
 
@@ -4085,25 +4085,25 @@ Agent *WorldGenerator::GetRandomAgent ()
 
     DArray <Person *> validPeople;
 
-    for ( int i = 0; i < people->Size(); ++i ) {
+    for ( int i = 0; i < people->size(); ++i ) {
 
         UplinkAssert ( people->ValidIndex(i) );
 
-		Person *person = game->GetWorld ()->GetPerson ( people->GetData(i) );
+		Person *person = game->GetWorld ()->GetPerson ( people->at(i) );
 		UplinkAssert (person);
 
 		if ( person->istargetable &&
 			 person->rating.uplinkrating > 0 &&
 			 person->GetStatus () == PERSON_STATUS_NONE )
 
-			validPeople.PutData( person );
+			validPeople.push_back( person );
 
     }
 
     delete people;
 
 
-    if ( validPeople.Size() == 0 ) {
+    if ( validPeople.size() == 0 ) {
 
         // No agent fits the criteria
         // Create a new one and return him
@@ -4114,9 +4114,9 @@ Agent *WorldGenerator::GetRandomAgent ()
     }
     else {
 
-	    int index = NumberGenerator::RandomNumber ( validPeople.Size () );
+	    int index = NumberGenerator::RandomNumber ( validPeople.size () );
 		UplinkAssert ( validPeople.ValidIndex (index) );
-        return (Agent *) validPeople.GetData ( index );
+        return (Agent *) validPeople.at ( index );
 
     }
 
@@ -4129,12 +4129,12 @@ Mission *WorldGenerator::GetRandomMission  ()
 	UplinkAssert ( cu );
 
 	LList <Mission *> *missions = &(cu->missions);
-	UplinkAssert ( missions->Size () > 0 );
+	UplinkAssert ( missions->size () > 0 );
 
-	int index = NumberGenerator::RandomNumber ( missions->Size () );
+	int index = NumberGenerator::RandomNumber ( missions->size () );
 	UplinkAssert ( missions->ValidIndex (index) );
 
-	Mission *mission = missions->GetData (index);
+	Mission *mission = missions->at (index);
 	UplinkAssert ( mission );
 	return mission;
 
@@ -4143,13 +4143,13 @@ Mission *WorldGenerator::GetRandomMission  ()
 void WorldGenerator::ReplaceAdminCompanies ( Person *person )
 {
 
-	DArray<class Company*> *comps = game->GetWorld ()->companies.ConvertToDArray ();
+	DArray<class Company*> *comps = game->GetWorld ()->companies.MapDataToDArray ();
 
-	for ( int i = comps->Size () - 1; i >= 0; i-- ) {
+	for ( int i = comps->size () - 1; i >= 0; i-- ) {
 
 		if ( comps->ValidIndex ( i ) ) {
 	
-			Company *cp = comps->GetData ( i );
+			Company *cp = comps->at ( i );
 
 			if ( cp->administrator && strcmp( person->name, cp->administrator ) == 0 ) {
 
@@ -4171,13 +4171,13 @@ void WorldGenerator::ReplaceInvalidCompanyAdmins ( )
 {
 
 	World *world = game->GetWorld ();
-	DArray<class Company*> *comps = world->companies.ConvertToDArray ();
+	DArray<class Company*> *comps = world->companies.MapDataToDArray ();
 
-	for ( int i = comps->Size () - 1; i >= 0; i-- ) {
+	for ( int i = comps->size () - 1; i >= 0; i-- ) {
 
 		if ( comps->ValidIndex ( i ) ) {
 
-			Company *cp = comps->GetData ( i );
+			Company *cp = comps->at ( i );
 			
 			if ( cp->administrator ) {
 			

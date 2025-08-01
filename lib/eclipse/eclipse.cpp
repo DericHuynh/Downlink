@@ -94,7 +94,7 @@ void EclReset ( int width, int height )
 	currentclick = NULL;
     
     while ( buttons.ValidIndex ( 0 ) ) {
-        Button *b = buttons.GetData (0);
+        Button *b = buttons.at (0);
         //buttons.RemoveData (0);
         //delete b;
 		EclRemoveButton ( b->name );
@@ -114,15 +114,15 @@ void EclReset ( int width, int height )
 
     // Also delete the edidable buttons
 
-    while ( editablebuttons.GetData (0) ) {
-        char *b = editablebuttons.GetData (0);
-        editablebuttons.RemoveData (0);
+    while ( editablebuttons.at (0) ) {
+        char *b = editablebuttons.at (0);
+        editablebuttons.erase (0);
         delete [] b;
     }
 
-	buttons.Empty ();
+	buttons.clear ();
 //    anims.Empty ();
-	editablebuttons.Empty ();
+	editablebuttons.clear ();
         
 	superhighlight_borderwidth = 0;
     
@@ -212,7 +212,7 @@ void EclRemoveButton ( char *name )
 		if ( EclIsButtonEditable ( name ) )
 			EclMakeButtonUnEditable ( name );
 
-		for( int i = anims.Size() - 1; i >= 0; i-- ){
+		for( int i = anims.size() - 1; i >= 0; i-- ){
 			if ( anims.ValidIndex (i) ) {
 				Animation *anim = anims [i];
 
@@ -223,7 +223,7 @@ void EclRemoveButton ( char *name )
 
 		EclDirtyRectangle ( button->x, button->y, button->width, button->height );
 
-		buttons.RemoveData ( index );
+		buttons.erase ( index );
 		if ( button ) delete button;
 
 	}
@@ -245,7 +245,7 @@ void EclButtonBringToFront ( char *name )
 	if ( buttons.ValidIndex ( index ) ) {
 
 		Button *button = buttons [index];
-		buttons.RemoveData ( index );
+		buttons.erase ( index );
 		buttons.PutDataAtStart ( button );
 		EclDirtyButton ( name );
 
@@ -268,8 +268,8 @@ void EclButtonSendToBack   ( char *name )
 	if ( buttons.ValidIndex ( index ) ) {
 
 		Button *button = buttons [index];
-		buttons.RemoveData ( index );
-		buttons.PutDataAtEnd ( button );
+		buttons.erase ( index );
+		buttons.push_back ( button );
 		EclDirtyButton ( name );
 
 	}
@@ -347,7 +347,7 @@ void EclMakeButtonEditable ( char *name )
 	if ( button ) {
 		char *bname = new char [strlen(name)+1];
 		strcpy ( bname, name );
-		editablebuttons.PutDataAtEnd ( bname );
+		editablebuttons.push_back ( bname );
 	}
 
 #ifdef DEBUG
@@ -362,11 +362,11 @@ void EclMakeButtonEditable ( char *name )
 void EclMakeButtonUnEditable ( char *name )
 {
 
-	for ( int i = 0; i < editablebuttons.Size (); ++i ) {
+	for ( int i = 0; i < editablebuttons.size (); ++i ) {
 		if ( editablebuttons.ValidIndex (i) ) {
-			if ( strcmp ( editablebuttons.GetData (i), name ) == 0 ) {				
-				delete [] ( editablebuttons.GetData (i) );
-				editablebuttons.RemoveData (i);
+			if ( strcmp ( editablebuttons.at (i), name ) == 0 ) {				
+				delete [] ( editablebuttons.at (i) );
+				editablebuttons.erase (i);
 				break;
 			}
 		}
@@ -380,9 +380,9 @@ bool EclIsButtonEditable ( char *name )
 	if ( !EclGetButton (name) ) 
 		return false;
 
-	for ( int i = 0; i < editablebuttons.Size (); ++i )
+	for ( int i = 0; i < editablebuttons.size (); ++i )
 		if ( editablebuttons.ValidIndex (i) )
-			if ( strcmp ( editablebuttons.GetData (i), name ) == 0 )
+			if ( strcmp ( editablebuttons.at (i), name ) == 0 )
 				return true;
 
 	return false;
@@ -398,16 +398,16 @@ void EclHighlightNextEditableButton ()
 
 	if ( currenthighlight ) {
 
-		for ( int i = 0; i < editablebuttons.Size (); ++i ) {
+		for ( int i = 0; i < editablebuttons.size (); ++i ) {
 			if ( editablebuttons.ValidIndex (i) ) {
-				if ( strcmp ( editablebuttons.GetData (i), currenthighlight ) == 0 ) {
+				if ( strcmp ( editablebuttons.at (i), currenthighlight ) == 0 ) {
 
 					// This is the currently highlighted button 
 					// move onto the next
 
-					char *nextbutton = ( i < editablebuttons.Size () - 1 ) ?
-											 editablebuttons.GetData (i+1) :
-											 editablebuttons.GetData (0);
+					char *nextbutton = ( i < editablebuttons.size () - 1 ) ?
+											 editablebuttons.at (i+1) :
+											 editablebuttons.at (0);
 
 					EclHighlightButton ( nextbutton );
 					return;
@@ -423,7 +423,7 @@ void EclHighlightNextEditableButton ()
 	//
 
 	if ( editablebuttons.ValidIndex (0) )
-		EclHighlightButton ( editablebuttons.GetData (0) );
+		EclHighlightButton ( editablebuttons.at (0) );
 	
 }
 
@@ -431,7 +431,7 @@ int  EclLookupIndex ( char *name )
 {
 
 	if ( name )
-		for ( int i = 0; i < buttons.Size (); ++i )
+		for ( int i = 0; i < buttons.size (); ++i )
 			if ( buttons.ValidIndex ( i ) )		
 				if ( strcmp ( buttons [i]->name, name ) == 0 )
 					return i;
@@ -461,7 +461,7 @@ local bool EclRectangleOverlap ( int x1, int y1, int w1, int h1,
 bool EclIsOccupied ( int x, int y, int w, int h )
 {
 
-	for ( int i = 0; i < buttons.Size (); ++i ) {
+	for ( int i = 0; i < buttons.size (); ++i ) {
 
 		if ( buttons.ValidIndex (i) ) {
 			
@@ -590,7 +590,7 @@ void EclDrawAllButtons ()
 
 	// Draw all buttons
 
-	for ( int i = buttons.Size () - 1; i >= 0; --i )
+	for ( int i = buttons.size () - 1; i >= 0; --i )
 		if ( buttons.ValidIndex ( i ) ) {
 			Button *b = buttons [i];
 			if ( b->x >= 0 && b->y >= 0 ) {
@@ -633,7 +633,7 @@ void EclDirtyClear  ()
 
     dirtyrectangles.clear ();
 
-	for ( int ib = buttons.Size () - 1; ib >= 0; --ib )
+	for ( int ib = buttons.size () - 1; ib >= 0; --ib )
 		if ( buttons.ValidIndex ( ib ) ) 
 			buttons [ib]->dirty = false;	
 
@@ -735,10 +735,10 @@ void EclSuperHighlight ( char *name )
 
 	Button *button = EclGetButton ( name );
 
-	if ( !superhighlightedbuttons.LookupTree ( name ) && button ) {
+	if ( !superhighlightedbuttons.find ( name ) && button ) {
 
 		// Needs to be added
-		superhighlightedbuttons.PutData ( name, 0 );
+		superhighlightedbuttons.insert ( name, 0 );
 
 		// Create the button itself
 		
@@ -762,7 +762,7 @@ void EclSuperHighlight ( char *name )
 void EclSuperUnHighlight ( char *name )
 {
 
-	if ( superhighlightedbuttons.LookupTree ( name ) ) {
+	if ( superhighlightedbuttons.find ( name ) ) {
 
 		superhighlightedbuttons.RemoveData ( name );
 
@@ -782,18 +782,18 @@ void EclSuperUnHighlight ( char *name )
 void EclSuperUnHighlightAll	()
 {
 
-	DArray <char *> *highlights = superhighlightedbuttons.ConvertIndexToDArray ();
+	DArray <char *> *highlights = superhighlightedbuttons.MapKeysToDArray ();
 
-	for ( int i = 0; i < highlights->Size (); ++i )
+	for ( int i = 0; i < highlights->size (); ++i )
 		if ( highlights->ValidIndex (i) )
-			EclSuperUnHighlight ( highlights->GetData (i) );
+			EclSuperUnHighlight ( highlights->at (i) );
 
 }
 
 bool EclIsSuperHighlighted ( char *name )
 {
 
-	return ( superhighlightedbuttons.LookupTree (name) != NULL );
+	return ( superhighlightedbuttons.find (name) != NULL );
 
 }
 
@@ -866,7 +866,7 @@ void EclUpdateSuperHighlights ( char *name )
 char *EclGetButtonAtCoord ( int x, int y )
 {
 
-	for ( int i = 0; i < buttons.Size (); ++i ) {
+	for ( int i = 0; i < buttons.size (); ++i ) {
 		if ( buttons.ValidIndex (i) ) {
 			Button *b = buttons [i];
 			if ( x >= b->x && x <= b->x + b->width &&
@@ -996,7 +996,7 @@ int  EclRegisterCaptionChange ( char *bname, char *targetC,
 
 int EclAnimationsRunning()
 {
-	return anims.Size() > 0;
+	return anims.size() > 0;
 }
 
 
@@ -1091,7 +1091,7 @@ int  EclRegisterAnimation ( char *bname, int targetX, int targetY, int MOVETYPE,
 
 		}
 
-		return anims.PutData ( anim );
+		return anims.push_back ( anim );
 
 	}
 	else {
@@ -1106,7 +1106,7 @@ int  EclRegisterAnimation ( char *bname, int targetX, int targetY, int MOVETYPE,
 int EclIsAnimationActive ( char *bname )
 {
 
-	for ( int i = 0; i < anims.Size (); ++i ) {
+	for ( int i = 0; i < anims.size (); ++i ) {
 
 		if ( anims.ValidIndex (i) ) {
 
@@ -1127,7 +1127,7 @@ int EclIsAnimationActive ( char *bname )
 int EclIsCaptionChangeActive ( char *bname )
 {
 
-	for ( int i = 0; i < anims.Size (); ++i ) {
+	for ( int i = 0; i < anims.size (); ++i ) {
 
 		if ( anims.ValidIndex (i) ) {
 
@@ -1149,7 +1149,7 @@ int EclIsCaptionChangeActive ( char *bname )
 int EclIsNoCaptionChangeActive ( char *bname )
 {
 
-	for ( int i = 0; i < anims.Size (); ++i ) {
+	for ( int i = 0; i < anims.size (); ++i ) {
 
 		if ( anims.ValidIndex (i) ) {
 
@@ -1172,9 +1172,9 @@ void EclRemoveAnimation ( int idnumber )
 {
 
     if ( anims.ValidIndex ( idnumber ) ) {
-        Animation *anim = anims.GetData (idnumber);
+        Animation *anim = anims.at (idnumber);
         if ( anim ) delete anim;
-		anims.RemoveData ( idnumber );
+		anims.erase ( idnumber );
     }
 
 }
@@ -1189,11 +1189,11 @@ void EclUpdateAllAnimations ()
 	// Update all super-highlighted buttons
 	//
 
-	DArray <char *> *superhighlighted = superhighlightedbuttons.ConvertIndexToDArray ();
+	DArray <char *> *superhighlighted = superhighlightedbuttons.MapKeysToDArray ();
 
-	for ( i = 0; i < superhighlighted->Size (); ++i )
+	for ( i = 0; i < superhighlighted->size (); ++i )
 		if ( superhighlighted->ValidIndex (i) )
-			EclUpdateSuperHighlights ( superhighlighted->GetData (i) );
+			EclUpdateSuperHighlights ( superhighlighted->at (i) );
 
 	delete superhighlighted;
 
@@ -1202,7 +1202,7 @@ void EclUpdateAllAnimations ()
 	// Update all animations
 	//
 
-	for ( i = 0; i < anims.Size (); ++i ) {
+	for ( i = 0; i < anims.size (); ++i ) {
 
 		if ( anims.ValidIndex (i) ) {
 
@@ -1465,8 +1465,8 @@ void EclDebugPrint ()
 	printf ( "============== E C L I P S E ===============================\n" );	
 
 	printf ( "BUTTONS : \n" );
-	for ( int bi = 0; bi < buttons.Size (); ++bi )
-		buttons.GetData (bi)->DebugPrint ();		
+	for ( int bi = 0; bi < buttons.size (); ++bi )
+		buttons.at (bi)->DebugPrint ();		
 
 	printf ( "Current Highlight = %s\n", currenthighlight );
 	printf ( "Current Click     = %s\n", currentclick );
@@ -1478,15 +1478,15 @@ void EclDebugPrint ()
 	if ( animsfasterenabled )  printf ( "Faster Animations are ENABLED\n" );
 	else                       printf ( "Faster Animations are DISABLED\n" );
 
-	for ( int ai = 0; ai < anims.Size (); ++ai ) 
+	for ( int ai = 0; ai < anims.size (); ++ai ) 
 		if ( anims.ValidIndex (ai) )
-			anims.GetData (ai)->DebugPrint ();
+			anims.at (ai)->DebugPrint ();
 
 	printf ( "EDITABLE BUTTONS : \n" );
 	
-	for ( int eb = 0; eb < editablebuttons.Size (); ++eb )
+	for ( int eb = 0; eb < editablebuttons.size (); ++eb )
 		if ( editablebuttons.ValidIndex (eb) )
-			printf ( "%s\n", editablebuttons.GetData (eb) );
+			printf ( "%s\n", editablebuttons.at (eb) );
 
 	printf ( "============== E N D  O F  E C L I P S E ===================\n" );
 

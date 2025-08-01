@@ -30,7 +30,7 @@ void HighSecurityScreen::AddSystem ( char *name, int page )
 	mso->SetCaption ( name );
 	mso->SetNextPage ( page );
 	mso->SetSecurity ( 10 );
-	systems.PutData ( mso );
+	systems.push_back ( mso );
 
 }
 
@@ -44,8 +44,8 @@ void HighSecurityScreen::SetNextPage ( int newnextpage )
 void HighSecurityScreen::ResetSecurity ()
 {
 
-	for ( int i = 0; i < systems.Size (); ++i )
-		systems.GetData(i)->security = 10;
+	for ( int i = 0; i < systems.size (); ++i )
+		systems.at(i)->security = 10;
 
 }
 

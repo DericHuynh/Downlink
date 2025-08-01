@@ -77,9 +77,9 @@ void NewsScreenInterface::ClickNewsButton ( Button *button )
             UplinkAssert (detailsButton);
         	LList <char *> *wrappedtext = wordwraptext ( newDetails, detailsButton->width );
 			if ( wrappedtext ) {
-				scrollBox->SetNumItems( wrappedtext->Size() );
-				if ( wrappedtext->ValidIndex (0) && wrappedtext->GetData (0) )
-					delete [] wrappedtext->GetData(0);
+				scrollBox->SetNumItems( wrappedtext->size() );
+				if ( wrappedtext->ValidIndex (0) && wrappedtext->at (0) )
+					delete [] wrappedtext->at(0);
 				delete wrappedtext;
 			}
 			else {
@@ -233,7 +233,7 @@ void NewsScreenInterface::DrawDetails ( Button *button, bool highlighted, bool c
 
 	if ( wrappedtext ) {
 
-		for ( int i = offset; i < wrappedtext->Size (); ++i ) {
+		for ( int i = offset; i < wrappedtext->size (); ++i ) {
 
 			if ( i > maxnumlines + offset )
 				break;
@@ -241,13 +241,13 @@ void NewsScreenInterface::DrawDetails ( Button *button, bool highlighted, bool c
 			int xpos = button->x + 10;
 			int	ypos = button->y + 10 + (i-offset) * 15;
 
-			GciDrawText ( xpos, ypos, wrappedtext->GetData (i), HELVETICA_10 );
+			GciDrawText ( xpos, ypos, wrappedtext->at (i), HELVETICA_10 );
 
 		}
 
 		//DeleteLListData ( wrappedtext );							// Only delete first entry - since there is only one string really
-		if ( wrappedtext->ValidIndex (0) && wrappedtext->GetData (0) )
-			delete [] wrappedtext->GetData (0);
+		if ( wrappedtext->ValidIndex (0) && wrappedtext->at (0) )
+			delete [] wrappedtext->at (0);
 		delete wrappedtext;
 
 	}
@@ -351,7 +351,7 @@ void NewsScreenInterface::Create ( ComputerScreen *newcs )
 
     	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	    UplinkAssert ( cu );
-        ScrollBox::CreateScrollBox( "news_scroll", itemWidth + 21, 50, 15, numRows * 40, cu->news.Size(), numRows, 0, ScrollChange );
+        ScrollBox::CreateScrollBox( "news_scroll", itemWidth + 21, 50, 15, numRows * 40, cu->news.size(), numRows, 0, ScrollChange );
 
 		baseoffset = 0;
 		currentselect = -1;
@@ -402,7 +402,7 @@ void NewsScreenInterface::Update ()
 	CompanyUplink *cu = (CompanyUplink *) game->GetWorld ()->GetCompany ( "Uplink" );
 	UplinkAssert ( cu );
 
-	int newnummessages = cu->news.Size ();
+	int newnummessages = cu->news.size ();
 
 	if ( newnummessages != previousnummessages ) {
 

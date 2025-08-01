@@ -156,7 +156,7 @@ void LanProbe::SetTarget ( UplinkObject *uo, char *uos, int uoi )
 			comp = (LanComputer *) uo;
 			if ( !comp->systems.ValidIndex( uoi ) ) return;
 			systemIndex = uoi;
-			LanComputerSystem *system = comp->systems.GetData( uoi );
+			LanComputerSystem *system = comp->systems.at( uoi );
             LanInterfaceObject *lio = LanInterface::GetLanInterfaceObject( system->TYPE );
 
 			Button *button = EclGetButton ( uos );
@@ -239,7 +239,7 @@ void LanProbe::Tick ( int n )
             }
 
 			UplinkAssert (comp->systems.ValidIndex(systemIndex));
-			LanComputerSystem *system = comp->systems.GetData( systemIndex );
+			LanComputerSystem *system = comp->systems.at( systemIndex );
 			UplinkAssert (system);
 
 			progress = min ( progress + n, numticksrequired );
@@ -275,7 +275,7 @@ void LanProbe::Tick ( int n )
             }
 
 			UplinkAssert (comp->systems.ValidIndex(systemIndex));
-			LanComputerSystem *system = comp->systems.GetData( systemIndex );
+			LanComputerSystem *system = comp->systems.at( systemIndex );
 			UplinkAssert (system);
 
 			progress = min ( progress + n, numticksrequired );
@@ -288,10 +288,10 @@ void LanProbe::Tick ( int n )
 			    // Every link with a port number <= this has been scanned
 			    int portDone = (int) ( LAN_LINKPORTRANGE * ( (float) progress / (float) TICKSREQUIRED_SCANLANLINKS ) );
 
-			    for ( int i = 0; i < comp->links.Size(); ++i ) {
+			    for ( int i = 0; i < comp->links.size(); ++i ) {
 				    if ( comp->links.ValidIndex( i ) ) {
 
-					    LanComputerLink *link = comp->links.GetData( i );
+					    LanComputerLink *link = comp->links.at( i );
 					    UplinkAssert (link);
 	    
 					    if ( link->visible < LANLINKVISIBLE_AWARE &&
@@ -305,7 +305,7 @@ void LanProbe::Tick ( int n )
 								    link->IncreaseVisibility( LANLINKVISIBLE_AWARE );
 
 							        if ( comp->systems.ValidIndex( link->to ) ) {
-								        LanComputerSystem *target = comp->systems.GetData( link->to );
+								        LanComputerSystem *target = comp->systems.at( link->to );
 								        UplinkAssert (target);
 								        target->IncreaseVisibility( LANSYSTEMVISIBLE_AWARE );
 							        }
@@ -324,7 +324,7 @@ void LanProbe::Tick ( int n )
 								    link->IncreaseVisibility( LANLINKVISIBLE_AWARE );
 
 							        if ( comp->systems.ValidIndex( link->from ) ) {
-								        LanComputerSystem *target = comp->systems.GetData( link->from );
+								        LanComputerSystem *target = comp->systems.at( link->from );
 								        UplinkAssert (target);
 								        target->IncreaseVisibility( LANSYSTEMVISIBLE_AWARE );
 							        }

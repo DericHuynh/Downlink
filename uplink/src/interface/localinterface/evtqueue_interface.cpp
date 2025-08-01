@@ -87,9 +87,9 @@ void EventQueueInterface::EventDraw ( Button *button, bool highlighted, bool cli
 	sscanf ( button->name, "evtqueue_event %d", &index );
 	index += baseoffset;
 
-	if ( index < game->GetWorld ()->scheduler.events.Size () ) {
+	if ( index < game->GetWorld ()->scheduler.events.size () ) {
 
-		UplinkEvent *e = game->GetWorld ()->scheduler.events.GetData (index);
+		UplinkEvent *e = game->GetWorld ()->scheduler.events.at (index);
 		UplinkAssert (e);
 
 		// Draw the button background
@@ -129,7 +129,7 @@ void EventQueueInterface::EventClick ( Button *button )
 	sscanf ( button->name, "evtqueue_event %d", &index );
 	index += baseoffset;
 
-	if ( index < game->GetWorld ()->scheduler.events.Size () ) {
+	if ( index < game->GetWorld ()->scheduler.events.size () ) {
 
 		int screenw = app->GetOptions ()->GetOptionValue ("graphics_screenwidth");
 		int screenh = app->GetOptions ()->GetOptionValue ("graphics_screenheight");
@@ -138,7 +138,7 @@ void EventQueueInterface::EventClick ( Button *button )
 
 		// Create a more detailed version
 
-		UplinkEvent *e = game->GetWorld ()->scheduler.events.GetData (index);
+		UplinkEvent *e = game->GetWorld ()->scheduler.events.at (index);
 		UplinkAssert (e);
 
 		char *date = e->rundate.GetLongString ();
@@ -161,7 +161,7 @@ void EventQueueInterface::DeleteEventDraw ( Button *button, bool highlighted, bo
 	sscanf ( button->name, "evtqueue_deleteevent %d", &index );
 	index += baseoffset;
 
-	if ( index < game->GetWorld ()->scheduler.events.Size () ) 
+	if ( index < game->GetWorld ()->scheduler.events.size () ) 
         imagebutton_draw ( button, highlighted, clicked );
 
 }
@@ -173,9 +173,9 @@ void EventQueueInterface::DeleteEventClick ( Button *button )
 	sscanf ( button->name, "evtqueue_deleteevent %d", &index );
 	index += baseoffset;
 
-    if ( index < game->GetWorld ()->scheduler.events.Size () ) {
+    if ( index < game->GetWorld ()->scheduler.events.size () ) {
 
-        game->GetWorld ()->scheduler.events.RemoveData (index);
+        game->GetWorld ()->scheduler.events.erase (index);
     
     }
 

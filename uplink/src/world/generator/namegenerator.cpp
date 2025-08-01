@@ -42,11 +42,11 @@ void NameGenerator::Shutdown ()
     DeleteLListData ( &companynamesA );
     DeleteLListData ( &companynamesB );
 
-    fornames.Empty ();
-    surnames.Empty ();
-    agentaliases.Empty ();
-    companynamesA.Empty ();
-    companynamesB.Empty ();
+    fornames.clear ();
+    surnames.clear ();
+    agentaliases.clear ();
+    companynamesA.clear ();
+    companynamesB.clear ();
 
 }
 
@@ -59,7 +59,7 @@ void NameGenerator::LoadNames ()
 
 	char tempName [ 128 ];
 
-	if ( fornames.Size () == 0 ) {
+	if ( fornames.size () == 0 ) {
 
 		FILE *file = RsArchiveFileOpen ( "data/fornames.txt", "rt" );
 		UplinkAssert ( file );
@@ -69,13 +69,13 @@ void NameGenerator::LoadNames ()
 			fscanf ( file, "%s\n", tempName );
 			char *name = new char [ strlen ( tempName ) + 1 ];
 			UplinkSafeStrcpy ( name, tempName );
-			fornames.PutData ( name );
+			fornames.push_back ( name );
 
 		}
 		
-        char *deleteme = fornames.GetData ( fornames.Size () - 1 );
+        char *deleteme = fornames.at ( fornames.size () - 1 );
         delete [] deleteme;
-        fornames.RemoveData ( fornames.Size () - 1 );					// Remove last entry
+        fornames.erase ( fornames.size () - 1 );					// Remove last entry
 
 		RsArchiveFileClose ( "data/fornames.txt", file );
 
@@ -85,7 +85,7 @@ void NameGenerator::LoadNames ()
 	// Load surnames (required when all surnames have been used)
 	//
 
-	if ( surnames.Size () == 0 ) {
+	if ( surnames.size () == 0 ) {
 
 		FILE *file = RsArchiveFileOpen ( "data/surnames.txt", "rt" );
 		UplinkAssert ( file );
@@ -95,13 +95,13 @@ void NameGenerator::LoadNames ()
 			fscanf ( file, "%s\n", tempName );
 			char *name = new char [ strlen ( tempName ) + 1 ];
 			UplinkSafeStrcpy ( name, tempName );
-			surnames.PutData ( name );
+			surnames.push_back ( name );
 
 		}
 
-        char *deleteme = surnames.GetData ( surnames.Size () - 1 );
+        char *deleteme = surnames.at ( surnames.size () - 1 );
         delete [] deleteme;
-		surnames.RemoveData ( surnames.Size () - 1 );					// Remove last entry
+		surnames.erase ( surnames.size () - 1 );					// Remove last entry
 
 		RsArchiveFileClose ( "data/surnames.txt", file );
 
@@ -111,7 +111,7 @@ void NameGenerator::LoadNames ()
 	// Load Agent aliases
 	//
 
-	if ( agentaliases.Size () == 0 ) {
+	if ( agentaliases.size () == 0 ) {
 
 		FILE *file = RsArchiveFileOpen ( "data/agentaliases.txt", "rt" );
 		UplinkAssert ( file );
@@ -121,13 +121,13 @@ void NameGenerator::LoadNames ()
 			fscanf ( file, "%s\n", tempName );
 			char *name = new char [ strlen ( tempName ) + 1 ];
 			UplinkSafeStrcpy ( name, tempName );
-			agentaliases.PutData ( name );
+			agentaliases.push_back ( name );
 
 		}
 
-        char *deleteme = agentaliases.GetData ( agentaliases.Size () - 1 );
+        char *deleteme = agentaliases.at ( agentaliases.size () - 1 );
         delete [] deleteme;
-		agentaliases.RemoveData ( agentaliases.Size () - 1 );					// Remove last entry
+		agentaliases.erase ( agentaliases.size () - 1 );					// Remove last entry
 
 		RsArchiveFileClose ( "data/agentaliases.txt", file );
 
@@ -138,7 +138,7 @@ void NameGenerator::LoadNames ()
 	// These may run out and will then need to be reloaded
 	//
 
-	if ( companynamesA.Size () == 0 ) {
+	if ( companynamesA.size () == 0 ) {
 
 		FILE *file = RsArchiveFileOpen ( "data/companya.txt", "rt" );
 		UplinkAssert ( file );
@@ -148,13 +148,13 @@ void NameGenerator::LoadNames ()
 			fscanf ( file, "%s\n", tempName );
 			char *name = new char [ strlen ( tempName ) + 1 ];
 			UplinkSafeStrcpy ( name, tempName );
-			companynamesA.PutData ( name );
+			companynamesA.push_back ( name );
 
 		}
 
-        char *deleteme = companynamesA.GetData ( companynamesA.Size () - 1 );
+        char *deleteme = companynamesA.at ( companynamesA.size () - 1 );
         delete [] deleteme;
-		companynamesA.RemoveData ( companynamesA.Size () - 1 );					// Remove last entry
+		companynamesA.erase ( companynamesA.size () - 1 );					// Remove last entry
 
 		RsArchiveFileClose ( "data/companya.txt", file );
 
@@ -164,7 +164,7 @@ void NameGenerator::LoadNames ()
 	// Load company names (partB)
 	//
 
-	if ( companynamesB.Size () == 0 ) {
+	if ( companynamesB.size () == 0 ) {
 
 		FILE *file = RsArchiveFileOpen ( "data/companyb.txt", "rt" );
 		UplinkAssert ( file );
@@ -174,13 +174,13 @@ void NameGenerator::LoadNames ()
 			fscanf ( file, "%s\n", tempName );
 			char *name = new char [ strlen ( tempName ) + 1 ];
 			UplinkSafeStrcpy ( name, tempName );
-			companynamesB.PutData ( name );
+			companynamesB.push_back ( name );
 
 		}
 
-        char *deleteme = companynamesB.GetData ( companynamesB.Size () - 1 );
+        char *deleteme = companynamesB.at ( companynamesB.size () - 1 );
         delete [] deleteme;
-		companynamesB.RemoveData ( companynamesB.Size () - 1 );					// Remove last entry
+		companynamesB.erase ( companynamesB.size () - 1 );					// Remove last entry
 
 		RsArchiveFileClose ( "data/companyb.txt", file );
 
@@ -193,8 +193,8 @@ char *NameGenerator::GenerateCompanyName ()
 
 	LoadNames ();
 
-	int size1 = companynamesA.Size ();
-	int size2 = companynamesB.Size ();
+	int size1 = companynamesA.size ();
+	int size2 = companynamesB.size ();
 
 
 	// Choose part 1 (primary name part1)
@@ -205,13 +205,13 @@ char *NameGenerator::GenerateCompanyName ()
 
 	// Build the name 
 
-    char *companynameA = companynamesA.GetData (index1);
-    char *companynameB = companynamesB.GetData (index2);
+    char *companynameA = companynamesA.at (index1);
+    char *companynameB = companynamesB.at (index2);
 	char name [SIZE_COMPANY_NAME];
 	UplinkSnprintf ( name, sizeof ( name ), "%s %s", companynameA, companynameB );
 
 	delete [] companynameA;
-    companynamesA.RemoveData (index1);
+    companynamesA.erase (index1);
 
     UplinkStrncpy ( tempname, name, sizeof ( tempname ) );
 	return tempname;
@@ -223,21 +223,21 @@ char *NameGenerator::GeneratePersonName ()
 
 	LoadNames ();								// Won't do anything if names exist
 
-	int size_f = fornames.Size ();
-	int size_s = surnames.Size ();
+	int size_f = fornames.size ();
+	int size_s = surnames.size ();
 	
 	int index_f = NumberGenerator::RandomNumber ( size_f );
 	int index_s = NumberGenerator::RandomNumber ( size_s );
 
 	// Build the name;
 
-    char *forname = fornames.GetData (index_f);
-    char *surname = surnames.GetData (index_s);
+    char *forname = fornames.at (index_f);
+    char *surname = surnames.at (index_s);
 	char name [SIZE_PERSON_NAME];
 	UplinkSnprintf ( name, sizeof ( name ), "%s %s", forname, surname );
 
     delete [] surname;
-	surnames.RemoveData (index_s);
+	surnames.erase (index_s);
 
     UplinkStrncpy ( tempname, name, sizeof ( tempname ) );
 	return tempname;
@@ -249,13 +249,13 @@ char *NameGenerator::GenerateAgentAlias ()
 
 	LoadNames ();
 
-	int index = NumberGenerator::RandomNumber ( agentaliases.Size () );
+	int index = NumberGenerator::RandomNumber ( agentaliases.size () );
 
-	char *result = agentaliases.GetData (index);
+	char *result = agentaliases.at (index);
     UplinkStrncpy ( tempname, result, sizeof ( tempname ) );
 
     delete [] result;
-	agentaliases.RemoveData (index);
+	agentaliases.erase (index);
 
 	return tempname;
 
@@ -271,14 +271,14 @@ char *NameGenerator::GenerateBankName ()
 char *NameGenerator::GeneratePassword ()
 {
 
-	int numpasswords = game->GetWorld ()->passwords.Size ();
+	int numpasswords = game->GetWorld ()->passwords.size ();
 
 	int index = NumberGenerator::RandomNumber ( numpasswords );
 
 	while (!(game->GetWorld ()->passwords.ValidIndex (index)) ) 
 		index = NumberGenerator::RandomNumber ( numpasswords );
 			
-	return game->GetWorld ()->passwords.GetData (index);
+	return game->GetWorld ()->passwords.at (index);
 
 }
 

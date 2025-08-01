@@ -47,7 +47,7 @@ void DisconnectedScreen::AddLoginLost ( char *ip )
 	size_t ipcopysize = SIZE_VLOCATION_IP;
     char *ipcopy = new char [ipcopysize];
     UplinkStrncpy ( ipcopy, ip, ipcopysize );
-    loginslost.PutData ( ipcopy );
+    loginslost.push_back ( ipcopy );
 
 }
 
@@ -55,7 +55,7 @@ void DisconnectedScreen::ClearLoginsLost ()
 {
 
     DeleteDArrayData ( &loginslost );
-    loginslost.Empty ();
+    loginslost.clear ();
 
 }
 

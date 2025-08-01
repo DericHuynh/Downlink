@@ -39,17 +39,17 @@ void MenuScreen::AddOption ( char *caption, char *tooltip, int nextpage, int sec
 	mso->SetSecurity ( security );
 
 	if ( index == -1 )
-		options.PutData ( mso );
+		options.push_back ( mso );
 
 	else
-		options.PutDataAtIndex ( mso, index );
+		options.insert( index, mso);
 
 }
 
 int MenuScreen::NumOptions  ()
 {
 
-	return options.Size ();
+	return options.size ();
 
 }
 
@@ -58,7 +58,7 @@ char *MenuScreen::GetCaption ( int index )
 
 	UplinkAssert ( options.ValidIndex ( index ) );
 
-	return options.GetData (index)->caption;
+	return options.at (index)->caption;
 
 }
 
@@ -67,7 +67,7 @@ char *MenuScreen::GetTooltip ( int index )
 
 	UplinkAssert ( options.ValidIndex ( index ) );
 
-	return options.GetData (index)->tooltip;
+	return options.at (index)->tooltip;
 	
 }
 
@@ -76,7 +76,7 @@ int MenuScreen::GetNextPage ( int index )
 
 	UplinkAssert ( options.ValidIndex ( index ) );
 
-	return options.GetData (index)->nextpage;
+	return options.at (index)->nextpage;
 
 }
 
@@ -85,7 +85,7 @@ int MenuScreen::GetSecurity ( int index )
 
 	UplinkAssert ( options.ValidIndex ( index ) );
 
-	return options.GetData (index)->security;
+	return options.at (index)->security;
 
 }
 

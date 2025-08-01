@@ -181,8 +181,8 @@ void SWInterface::ToggleSubMenu ( int softwareTYPE, int x, int y )
 				// First try to find a software item of the same name
 				int existingindex = -1;
 				
-				for ( int si = 0; si < software.Size (); ++si ) {
-					if ( strcmp ( software.GetData (si), db->GetDataFile (di)->title ) == 0 ) {
+				for ( int si = 0; si < software.size (); ++si ) {
+					if ( strcmp ( software.at (si), db->GetDataFile (di)->title ) == 0 ) {
 						existingindex = si;
 						break;
 					}
@@ -192,18 +192,18 @@ void SWInterface::ToggleSubMenu ( int softwareTYPE, int x, int y )
 
 				if ( existingindex == -1 ) {
 
-					software.PutData ( db->GetDataFile (di)->title );
-					versions.PutData ( db->GetDataFile (di)->version );
+					software.push_back ( db->GetDataFile (di)->title );
+					versions.push_back ( db->GetDataFile (di)->version );
 
 				}
 				if ( existingindex != -1 &&	
-					 db->GetDataFile (di)->version > versions.GetData (existingindex) ) {
+					 db->GetDataFile (di)->version > versions.at (existingindex) ) {
 				
-					software.RemoveData ( existingindex );
-					versions.RemoveData ( existingindex );
+					software.erase ( existingindex );
+					versions.erase ( existingindex );
 
-					software.PutDataAtIndex ( db->GetDataFile (di)->title, existingindex );
-					versions.PutDataAtIndex ( db->GetDataFile (di)->version, existingindex );
+					software.insert( existingindex, db->GetDataFile (di)->title);
+					versions.insert( existingindex, db->GetDataFile (di)->version);
 
 				}
 
@@ -212,13 +212,13 @@ void SWInterface::ToggleSubMenu ( int softwareTYPE, int x, int y )
 		}
 
 		int timesplit = 500;
-		if ( software.Size () > 0 )
-			timesplit /= software.Size ();				// Ensures total time = 500ms
+		if ( software.size () > 0 )
+			timesplit /= software.size ();				// Ensures total time = 500ms
 
-		for ( int si = 0; si < software.Size (); ++si ) {
+		for ( int si = 0; si < software.size (); ++si ) {
 	
 			char caption [128], tooltip [128], name [128];
-			UplinkSnprintf ( caption, sizeof ( caption ), "%s v%1.1f", software.GetData (si), versions.GetData (si) );
+			UplinkSnprintf ( caption, sizeof ( caption ), "%s v%1.1f", software.at (si), versions.at (si) );
 			UplinkStrncpy ( tooltip, "Runs this software application", sizeof ( tooltip ) );
 			UplinkSnprintf ( name, sizeof ( name ), "hud_software %d", si );
 			EclRegisterButton ( x, y, 140, 15, caption, tooltip, name );
@@ -491,8 +491,8 @@ void SWInterface::ToggleVersionMenu ( char *program, int x, int y )
 				 db->GetDataFile (di)->TYPE == DATATYPE_PROGRAM &&
 				 strcmp ( db->GetDataFile (di)->title, program ) == 0 ) {
 
-				software.PutData ( db->GetDataFile (di)->title );
-				versions.PutData ( db->GetDataFile (di)->version );
+				software.push_back ( db->GetDataFile (di)->title );
+				versions.push_back ( db->GetDataFile (di)->version );
 
 			}
 
@@ -501,13 +501,13 @@ void SWInterface::ToggleVersionMenu ( char *program, int x, int y )
 		// Ensures total time = 500ms
 
 		int timesplit = 500;
-		if ( software.Size () > 0 )
-			timesplit /= software.Size ();
+		if ( software.size () > 0 )
+			timesplit /= software.size ();
 
-		for ( int si = 0; si < software.Size (); ++si ) {
+		for ( int si = 0; si < software.size (); ++si ) {
 	
 			char caption [128], tooltip [128], name [128];
-			UplinkSnprintf ( caption, sizeof ( caption ), "%s v%1.1f", software.GetData (si), versions.GetData (si) );
+			UplinkSnprintf ( caption, sizeof ( caption ), "%s v%1.1f", software.at (si), versions.at (si) );
 			UplinkStrncpy ( tooltip, "Runs this software application", sizeof ( tooltip ) );
 			UplinkSnprintf ( name, sizeof ( name ), "hud_version %d", si );
 			EclRegisterButton ( x, y, 120, 15, caption, tooltip, name );

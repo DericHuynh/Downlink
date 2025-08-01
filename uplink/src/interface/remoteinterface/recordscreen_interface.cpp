@@ -205,12 +205,12 @@ void RecordScreenInterface::CreateRecord ( int index )
 
 	if ( rec ) {
 
-		DArray <char *> *field_titles = rec->fields.ConvertIndexToDArray ();
-		DArray <char *> *field_values = rec->fields.ConvertToDArray ();
+		DArray <char *> *field_titles = rec->fields.MapKeysToDArray ();
+		DArray <char *> *field_values = rec->fields.MapDataToDArray ();
 
 		int currentY = 150;
 
-		for ( int j = 0; j < field_titles->Size (); ++j ) {
+		for ( int j = 0; j < field_titles->size (); ++j ) {
 
 			UplinkAssert ( field_titles->ValidIndex (j) );
 			UplinkAssert ( field_values->ValidIndex (j) );
@@ -223,23 +223,23 @@ void RecordScreenInterface::CreateRecord ( int index )
 
 			// Count the number of newlines
 			int numnewlines = 1;			// (the last one)
-			for ( char *p = field_values->GetData (j); *p != 0; ++p )
+			for ( char *p = field_values->at (j); *p != 0; ++p )
 				if ( *p == '\n' )
 					++numnewlines;
 
 			int buttonheight = 15 * numnewlines;
 
-			EclRegisterButton ( 20, currentY, 120, buttonheight, field_titles->GetData (j), "", bname_title );
+			EclRegisterButton ( 20, currentY, 120, buttonheight, field_titles->at (j), "", bname_title );
 
 			// Ugly kludge to display the correct name of bank accounts
 			// The real change should be made in BankComputer::CreateBankAccount, but due to buggy code, it's safer to change it here
 			bool found = false;
-			if ( strcmp ( field_titles->GetData (j), RECORDBANK_NAME ) == 0 )
-				for ( int ii = 0; ii < field_titles->Size (); ii++ )
+			if ( strcmp ( field_titles->at (j), RECORDBANK_NAME ) == 0 )
+				for ( int ii = 0; ii < field_titles->size (); ii++ )
 					if ( field_titles->ValidIndex ( ii ) )
-						if ( strcmp ( field_titles->GetData ( ii ), RECORDBANK_ACCNO ) == 0 ) {
+						if ( strcmp ( field_titles->at ( ii ), RECORDBANK_ACCNO ) == 0 ) {
 							if ( field_values->ValidIndex ( ii ) ) {
-								BankAccount *account = BankAccount::GetAccount ( cs->GetComputer ()->ip, field_values->GetData ( ii ) );
+								BankAccount *account = BankAccount::GetAccount ( cs->GetComputer ()->ip, field_values->at ( ii ) );
 								if ( account ) {
 									EclRegisterButton ( 140, currentY, 300, buttonheight, account->name, "", bname_value );
 									found = true;
@@ -249,7 +249,7 @@ void RecordScreenInterface::CreateRecord ( int index )
 						}
 
 			if ( !found )
-				EclRegisterButton ( 140, currentY, 300, buttonheight, field_values->GetData (j), "", bname_value );
+				EclRegisterButton ( 140, currentY, 300, buttonheight, field_values->at (j), "", bname_value );
 
 			EclRegisterButtonCallbacks ( bname_title, textbutton_draw, NULL, NULL, NULL );
 			EclRegisterButtonCallbacks ( bname_value, textbutton_draw, NULL, button_click, button_highlight );

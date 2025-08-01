@@ -272,11 +272,11 @@ void ScriptLibrary::Script11 ()
 
 	// Verify the name is unique
 
-	DArray <BankAccount *> *baccounts = bank->accounts.ConvertToDArray ();
+	DArray <BankAccount *> *baccounts = bank->accounts.MapDataToDArray ();
 
-	for ( int i = 0; i < baccounts->Size(); i++ )
+	for ( int i = 0; i < baccounts->size(); i++ )
 		if ( baccounts->ValidIndex ( i ) )
-			if ( strcmp ( name, baccounts->GetData ( i )->name ) == 0 ) {
+			if ( strcmp ( name, baccounts->at ( i )->name ) == 0 ) {
 				delete baccounts;
 				create_msgbox ( "Error", "You must enter an unique username" );
 				return;
@@ -381,7 +381,7 @@ void ScriptLibrary::Script13 ()
 
 	// Now look up the account based on that account number
 	
-    BankAccount *account = bank->accounts.GetData ( accno );
+    BankAccount *account = bank->accounts.at ( accno );
     UplinkAssert (account);
 
     // Only allow close if empty
@@ -1629,9 +1629,9 @@ void ScriptLibrary::Script71 ()
 
     // Does the player already have this offer?
 
-    for ( int i = 0; i < game->GetWorld ()->GetPlayer()->missions.Size(); ++i ) {
+    for ( int i = 0; i < game->GetWorld ()->GetPlayer()->missions.size(); ++i ) {
 
-        Mission *m = game->GetWorld ()->GetPlayer ()->missions.GetData(i);
+        Mission *m = game->GetWorld ()->GetPlayer ()->missions.at(i);
         UplinkAssert (m);
 
         if ( strcmp ( m->description, PlotGenerator::SpecialMissionDescription ( SPECIALMISSION_MOLE ) ) == 0 ) 
@@ -1790,28 +1790,28 @@ void ScriptLibrary::Script80 ()
 	
 	if ( lan->systems.ValidIndex(currentIndex) ) {
 
-		LanComputerSystem *system = lan->systems.GetData(currentIndex);
+		LanComputerSystem *system = lan->systems.at(currentIndex);
 		UplinkAssert (system);
 
 		if ( system->TYPE == LANSYSTEM_AUTHENTICATION ) {
 
 			int unlockIndex1 = system->data1;
 			if ( lan->systems.ValidIndex(unlockIndex1) ) {
-				LanComputerSystem *lock1 = lan->systems.GetData(unlockIndex1);
+				LanComputerSystem *lock1 = lan->systems.at(unlockIndex1);
 				UplinkAssert (lock1);
 				lock1->data1 = 1;
 			}
 
 			int unlockIndex2 = system->data2;
 			if ( lan->systems.ValidIndex(unlockIndex2) ) {
-				LanComputerSystem *lock2 = lan->systems.GetData(unlockIndex2);
+				LanComputerSystem *lock2 = lan->systems.at(unlockIndex2);
 				UplinkAssert (lock2);
 				lock2->data1 = 1;
 			}
 
 			int unlockIndex3 = system->data3;
 			if ( lan->systems.ValidIndex(unlockIndex3) ) {
-				LanComputerSystem *lock3 = lan->systems.GetData(unlockIndex3);
+				LanComputerSystem *lock3 = lan->systems.at(unlockIndex3);
 				UplinkAssert (lock3);
 				lock3->data3 = 1;
 			}
@@ -1833,7 +1833,7 @@ void ScriptLibrary::Script80 ()
 
                     LanComputer *lc = (LanComputer *) comp;
 					if ( lc->systems.ValidIndex ( currentSystem ) ) {
-						LanComputerSystem *system = lc->systems.GetData(currentSystem);
+						LanComputerSystem *system = lc->systems.at(currentSystem);
 						game->GetInterface()->GetRemoteInterface()->RunScreen ( system->screenIndex, lc );
 
 						game->GetInterface ()->GetLocalInterface ()->RunScreen ( SCREEN_NONE );
@@ -1881,28 +1881,28 @@ void ScriptLibrary::Script81 ()
 	
 	if ( lan->systems.ValidIndex(currentIndex) ) {
 
-		LanComputerSystem *system = lan->systems.GetData(currentIndex);
+		LanComputerSystem *system = lan->systems.at(currentIndex);
 		UplinkAssert (system);
 
 		if ( system->TYPE == LANSYSTEM_AUTHENTICATION ) {
 
 			int unlockIndex1 = system->data1;
 			if ( lan->systems.ValidIndex(unlockIndex1) ) {
-				LanComputerSystem *lock1 = lan->systems.GetData(unlockIndex1);
+				LanComputerSystem *lock1 = lan->systems.at(unlockIndex1);
 				UplinkAssert (lock1);
 				lock1->data1 = 0;
 			}
 
 			int unlockIndex2 = system->data2;
 			if ( lan->systems.ValidIndex(unlockIndex2) ) {
-				LanComputerSystem *lock2 = lan->systems.GetData(unlockIndex2);
+				LanComputerSystem *lock2 = lan->systems.at(unlockIndex2);
 				UplinkAssert (lock2);
 				lock2->data1 = 0;
 			}
 
 			int unlockIndex3 = system->data3;
 			if ( lan->systems.ValidIndex(unlockIndex3) ) {
-				LanComputerSystem *lock3 = lan->systems.GetData(unlockIndex3);
+				LanComputerSystem *lock3 = lan->systems.at(unlockIndex3);
 				UplinkAssert (lock3);
 				lock3->data1 = 0;
 			}
@@ -1945,21 +1945,21 @@ void ScriptLibrary::Script82 ()
 	
 	if ( lan->systems.ValidIndex(currentIndex) ) {
 
-		LanComputerSystem *system = lan->systems.GetData(currentIndex);
+		LanComputerSystem *system = lan->systems.at(currentIndex);
 		UplinkAssert (system);
 
 		if ( system->TYPE == LANSYSTEM_ISOLATIONBRIDGE ) {
 
 			int unlockIndex1 = system->data1;
 			if ( lan->systems.ValidIndex(unlockIndex1) ) {
-				LanComputerSystem *lock1 = lan->systems.GetData(unlockIndex1);
+				LanComputerSystem *lock1 = lan->systems.at(unlockIndex1);
 				UplinkAssert (lock1);
 				lock1->data1 = 1;
 			}
 
 			int unlockIndex2 = system->data2;
 			if ( lan->systems.ValidIndex(unlockIndex2) ) {
-				LanComputerSystem *lock2 = lan->systems.GetData(unlockIndex2);
+				LanComputerSystem *lock2 = lan->systems.at(unlockIndex2);
 				UplinkAssert (lock2);
 				lock2->data1 = 0;
 			}
@@ -1984,7 +1984,7 @@ void ScriptLibrary::Script82 ()
 
                     LanComputer *lc = (LanComputer *) comp;
 					if ( lc->systems.ValidIndex ( currentSystem ) ) {
-						LanComputerSystem *system = lc->systems.GetData(currentSystem);
+						LanComputerSystem *system = lc->systems.at(currentSystem);
 						game->GetInterface()->GetRemoteInterface()->RunScreen ( system->screenIndex, lc );
 
 						game->GetInterface ()->GetLocalInterface ()->RunScreen ( SCREEN_NONE );
@@ -2034,21 +2034,21 @@ void ScriptLibrary::Script83 ()
 	
 	if ( lan->systems.ValidIndex(currentIndex) ) {
 
-		LanComputerSystem *system = lan->systems.GetData(currentIndex);
+		LanComputerSystem *system = lan->systems.at(currentIndex);
 		UplinkAssert (system);
 
 		if ( system->TYPE == LANSYSTEM_ISOLATIONBRIDGE ) {
 
 			int unlockIndex1 = system->data1;
 			if ( lan->systems.ValidIndex(unlockIndex1) ) {
-				LanComputerSystem *lock1 = lan->systems.GetData(unlockIndex1);
+				LanComputerSystem *lock1 = lan->systems.at(unlockIndex1);
 				UplinkAssert (lock1);
 				lock1->data1 = 0;
 			}
 
 			int unlockIndex2 = system->data2;
 			if ( lan->systems.ValidIndex(unlockIndex2) ) {
-				LanComputerSystem *lock2 = lan->systems.GetData(unlockIndex2);
+				LanComputerSystem *lock2 = lan->systems.at(unlockIndex2);
 				UplinkAssert (lock2);
 				lock2->data1 = 1;
 			}
@@ -2073,7 +2073,7 @@ void ScriptLibrary::Script83 ()
 
                     LanComputer *lc = (LanComputer *) comp;
 					if ( lc->systems.ValidIndex ( currentSystem ) ) {
-						LanComputerSystem *system = lc->systems.GetData(currentSystem);
+						LanComputerSystem *system = lc->systems.at(currentSystem);
 						game->GetInterface()->GetRemoteInterface()->RunScreen ( system->screenIndex, lc );
 
 						game->GetInterface ()->GetLocalInterface ()->RunScreen ( SCREEN_NONE );

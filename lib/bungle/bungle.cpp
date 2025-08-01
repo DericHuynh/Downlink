@@ -139,7 +139,7 @@ bool BglOpenZipFile ( FILE *file, char *apppath, char *id )
 
 			BglSlashify ( fullfilename );
 
-			files.PutData ( fullfilename, fh );
+			files.insert ( fullfilename, fh );
 
 		}
 		else {
@@ -168,7 +168,7 @@ bool BglFileLoaded ( char *filename )
 	strcpy ( filenamecopy, filename );
 	BglSlashify ( filenamecopy );
 
-	LocalFileHeader *lfh = files.GetData ( filenamecopy );
+	LocalFileHeader *lfh = files.at ( filenamecopy );
 
 	delete [] filenamecopy;
 
@@ -191,7 +191,7 @@ void BglCloseZipFile_Recursive ( BTree <LocalFileHeader *> *files,
 	if ( lfh && lfh->id && strcmp ( lfh->id, id ) == 0 ) {
 
 		// This one is a match and should be flagged for removal
-		removableids->PutData ( files->id );		
+		removableids->push_back ( files->key );		
 
 	}
 
@@ -223,12 +223,12 @@ void BglCloseZipFile ( char *id )
 	// deleting the data and removing it from the full btree
 	//
 
-	for ( int i = 0; i < removableids.Size (); ++i ) {
+	for ( int i = 0; i < removableids.size (); ++i ) {
 		
-		char *filename = removableids.GetData (i);
+		char *filename = removableids.at (i);
 		assert (filename);
 		
-		LocalFileHeader *lfi = files.GetData (filename);
+		LocalFileHeader *lfi = files.at (filename);
 		assert (lfi);
 
 		files.RemoveData ( filename );
@@ -251,7 +251,7 @@ bool BglExtractFile ( char *filename, char *target )
 	strcpy ( filenamecopy, filename );
 	BglSlashify ( filenamecopy );
 
-	LocalFileHeader *lfh = files.GetData ( filenamecopy );
+	LocalFileHeader *lfh = files.at ( filenamecopy );
 
 	delete [] filenamecopy;
 
@@ -357,12 +357,12 @@ DArray <char *> *BglListFiles ( char *path, char *directory, char *filter )
     sprintf ( dirCopy, "%s%s", path, directory );
     BglSlashify ( dirCopy );
 
-    DArray <char *> *result = files.ConvertIndexToDArray();
+    DArray <char *> *result = files.MapKeysToDArray();
 
-    for ( int i = 0; i < result->Size(); ++i ) {
+    for ( int i = 0; i < result->size(); ++i ) {
         if ( result->ValidIndex(i) ) {
         
-            char *fullPath = result->GetData(i);
+            char *fullPath = result->at(i);
             char thisDir[256];
             strncpy( thisDir, fullPath, strlen(dirCopy) );
             thisDir[strlen(dirCopy)] = '\x0';
@@ -373,7 +373,7 @@ DArray <char *> *BglListFiles ( char *path, char *directory, char *filter )
             if ( strstr ( fullPath, filter ) == NULL )      removeMe = true;
 
             if ( removeMe )
-                result->RemoveData( i );
+                result->erase( i );
 
         }
     }
@@ -399,7 +399,7 @@ void BglCloseAllFiles( BTree<LocalFileHeader *> *files )
 		delete lfi;
 	}
 
-	files->Empty();
+	files->clear();
 }
 
 void BglCloseAllFiles()

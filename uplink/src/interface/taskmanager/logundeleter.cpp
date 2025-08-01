@@ -309,7 +309,7 @@ void LogUnDeleter::Tick ( int n )
 
 					// Un-delete the log	
 					//source->logs.PutData ( source->internallogs.GetData (sourceindex), sourceindex );
-					source->logs.GetData ( sourceindex )->SetProperties ( source->internallogs.GetData (sourceindex) );
+					source->logs.at ( sourceindex )->SetProperties ( source->internallogs.at (sourceindex) );
 
 					// Finished 
 					status = LOGUNDELETER_FINISHED;

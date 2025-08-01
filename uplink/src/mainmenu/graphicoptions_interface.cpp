@@ -369,15 +369,15 @@ void GraphicOptionsInterface::SetOptionTYPE ( char *newtype )
 	UplinkSnprintf ( title, sizeof ( title ), "%s options", optionTYPE );
 	RegisterButton ( screenw - 210, screenh - 40, 200, 15, title, "Close this options screen", "graphic_title" );
 	EclRegisterButtonCallback ( "graphic_title", ReturnToMainMenuClick );
-	EclRegisterMovement ( "graphic_title", screenw - 210, screenh - 100 - options->Size () * 20, 500 );
+	EclRegisterMovement ( "graphic_title", screenw - 210, screenh - 100 - options->size () * 20, 500 );
 
 	//
 	// Create Each option name and text edit box
 	//
 
-	for ( int i = 0; i < options->Size (); ++i ) {
+	for ( int i = 0; i < options->size (); ++i ) {
 	
-		Option *option = options->GetData (i);
+		Option *option = options->at (i);
 		UplinkAssert (option);
 
 		char name1 [64];
@@ -409,7 +409,7 @@ void GraphicOptionsInterface::SetOptionTYPE ( char *newtype )
 
 		}
 
-		int timems = (int) ( 500 * ((float) (i + 1) / (float) options->Size ()) );
+		int timems = (int) ( 500 * ((float) (i + 1) / (float) options->size ()) );
 		EclRegisterMovement ( name1, screenw - 210, screenh - 90 - i * 20, timems );
 		EclRegisterMovement ( name2, screenw - 60, screenh - 90 - i * 20, timems );
 
@@ -464,9 +464,9 @@ void GraphicOptionsInterface::Create ()
 			int vert_offset = 30;
 			char cap[48];
 			char nm[48];
-			for ( int i = 0; i < modes->Size(); ++i ) {
+			for ( int i = 0; i < modes->size(); ++i ) {
 				if ( modes->ValidIndex( i ) ) {
-					GciScreenMode *mode = modes->GetData( i );
+					GciScreenMode *mode = modes->at( i );
 					if ( mode != NULL ) {
 						UplinkSnprintf( cap, sizeof ( cap ), "%dx%d", mode->w, mode->h );
 						UplinkSnprintf( nm, sizeof ( nm ), "graphic 1 %d %d", mode->w, mode->h );

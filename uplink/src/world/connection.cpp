@@ -62,7 +62,7 @@ void Connection::AddVLocation ( char *ip )
 	UplinkAssert ( strlen (ip) < SIZE_VLOCATION_IP );
 	UplinkStrncpy ( newip, ip, newipsize );
 
-	vlocations.PutDataAtEnd ( newip );
+	vlocations.push_back ( newip );
 
 }
 
@@ -72,10 +72,10 @@ void Connection::AddOrRemoveVLocation ( char *ip )
 
 	// Cannot remove the first location
 
-	for ( int i = 1; i < vlocations.Size (); ++i )
-		if ( strcmp ( vlocations.GetData (i), ip ) == 0 ) {
-			delete [] vlocations.GetData (i);
-			vlocations.RemoveData ( i );
+	for ( int i = 1; i < vlocations.size (); ++i )
+		if ( strcmp ( vlocations.at (i), ip ) == 0 ) {
+			delete [] vlocations.at (i);
+			vlocations.erase ( i );
 			return;
 		}
 
@@ -87,8 +87,8 @@ void Connection::AddOrRemoveVLocation ( char *ip )
 void Connection::RemoveLastLocation ()
 {
 	
-    char *lastIP = vlocations.GetData ( vlocations.Size () - 1 );
-    vlocations.RemoveData ( vlocations.Size () - 1 );
+    char *lastIP = vlocations.at ( vlocations.size () - 1 );
+    vlocations.erase ( vlocations.size () - 1 );
     delete [] lastIP;
 
 }
@@ -96,8 +96,8 @@ void Connection::RemoveLastLocation ()
 bool Connection::LocationIncluded ( char *ip )
 {
 
-	for ( int i = 0; i < vlocations.Size (); ++i )
-		if ( strcmp ( vlocations.GetData (i), ip ) == 0 )
+	for ( int i = 0; i < vlocations.size (); ++i )
+		if ( strcmp ( vlocations.at (i), ip ) == 0 )
 			return true;
 
 	return false;
@@ -108,7 +108,7 @@ char *Connection::GetSource ()
 {
 
 	if ( vlocations.ValidIndex ( 0 ) )
-		return vlocations.GetData ( 0 );
+		return vlocations.at ( 0 );
 
 	else
 		return NULL;
@@ -119,7 +119,7 @@ char *Connection::GetTarget ()
 {
 
 	if ( vlocations.ValidIndex ( 0 ) )
-		return vlocations.GetData ( vlocations.Size () - 1 );
+		return vlocations.at ( vlocations.size () - 1 );
 
 	else
 		return NULL;
@@ -129,8 +129,8 @@ char *Connection::GetTarget ()
 char *Connection::GetGhost ()
 {
 
-	if ( vlocations.Size () > 1 )						// Must be at least 1 entry
-		return vlocations.GetData ( vlocations.Size () - 2 );
+	if ( vlocations.size () > 1 )						// Must be at least 1 entry
+		return vlocations.at ( vlocations.size () - 2 );
 
 	else
 		return NULL;
@@ -151,7 +151,7 @@ Person *Connection::GetOwner ()
 int Connection::GetSize ()
 {
 
-	return vlocations.Size ();
+	return vlocations.size ();
 
 }
 
@@ -224,20 +224,20 @@ void Connection::Connect ()
 	// Log this action on each node in the connection
 	//
 
-	for ( int i = 0; i < vlocations.Size (); ++i ) {
+	for ( int i = 0; i < vlocations.size (); ++i ) {
 
-		VLocation *vl = game->GetWorld ()->GetVLocation ( vlocations.GetData (i) );
+		VLocation *vl = game->GetWorld ()->GetVLocation ( vlocations.at (i) );
 		UplinkAssert (vl);
 
 		Computer *bouncecomp = vl->GetComputer ();
 
 		if ( bouncecomp ) {
 
-			if ( i == vlocations.Size () - 1 ) {
+			if ( i == vlocations.size () - 1 ) {
 
 				// Previous -> This (ie connection opened)
 				AccessLog *log = new AccessLog ();
-				log->SetProperties ( &(game->GetWorld ()->date), vlocations.GetData (i-1), owner, 
+				log->SetProperties ( &(game->GetWorld ()->date), vlocations.at (i-1), owner, 
 										LOG_NOTSUSPICIOUS, LOG_TYPE_CONNECTIONOPENED );
 				bouncecomp->logbank.AddLog ( log );
 
@@ -248,11 +248,11 @@ void Connection::Connect ()
 				AccessLog *log = new AccessLog ();
 			
 				int logtype = ( i == 0 ) ? LOG_TYPE_BOUNCEBEGIN : LOG_TYPE_BOUNCE;
-				char *fromip = ( i == 0 ) ? (char *) "LOCAL" : vlocations.GetData (i-1);
+				char *fromip = ( i == 0 ) ? (char *) "LOCAL" : vlocations.at (i-1);
 
 				log->SetProperties ( &(game->GetWorld ()->date), fromip, owner,
 									  LOG_NOTSUSPICIOUS, logtype );
-				log->SetData1 ( vlocations.GetData (i+1) );
+				log->SetData1 ( vlocations.at (i+1) );
 
 				bouncecomp->logbank.AddLog ( log );
 
@@ -286,7 +286,7 @@ void Connection::Disconnect ()
 
 	AccessLog *log1 = new AccessLog ();
 	log1->SetProperties ( &(game->GetWorld ()->date), 
-						  vlocations.GetData ( vlocations.Size () - 2 ), owner,
+						  vlocations.at ( vlocations.size () - 2 ), owner,
 						  LOG_NOTSUSPICIOUS, LOG_TYPE_CONNECTIONCLOSED );
 
 	/*
@@ -307,10 +307,10 @@ void Connection::Disconnect ()
 
 		bool found = false;
 
-		for ( int i = comp->logbank.logs.Size (); i >= 0; --i ) {
+		for ( int i = comp->logbank.logs.size (); i >= 0; --i ) {
 			if ( comp->logbank.logs.ValidIndex (i) ) {
 
-				AccessLog *al = comp->logbank.logs.GetData (i);
+				AccessLog *al = comp->logbank.logs.at (i);
 				UplinkAssert (al);
 
 				Date testdate;
@@ -326,7 +326,7 @@ void Connection::Disconnect ()
 					al->SetSuspicious ( LOG_SUSPICIOUS );
 
 					if ( comp->logbank.internallogs.ValidIndex (i) )
-						comp->logbank.internallogs.GetData (i)->SetSuspicious ( LOG_SUSPICIOUS );
+						comp->logbank.internallogs.at (i)->SetSuspicious ( LOG_SUSPICIOUS );
 
 					// Add in the connection closed log, not suspicious
 					comp->logbank.AddLog ( log1 );
@@ -370,7 +370,7 @@ void Connection::Disconnect ()
 
             for ( int i = rumbledindex; i >= 0; --i ) {
 
-                char *rumbledIP = vlocations.GetData (GetSize () - i - 1);
+                char *rumbledIP = vlocations.at (GetSize () - i - 1);
                 UplinkAssert (rumbledIP);
 
                 if ( game->GetWorld ()->GetPlayer ()->HasAccount (rumbledIP) != -1 ) {
@@ -402,7 +402,7 @@ void Connection::Reset ()
 {
 	
 	DeleteLListData ( &vlocations );
-    vlocations.Empty ();
+    vlocations.clear ();
 
     AddVLocation ( GetOwner ()->localhost );
 

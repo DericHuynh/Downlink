@@ -52,7 +52,7 @@ void DialogScreen::AddWidget ( char *name, int WIDGETTYPE, int x, int y, int wid
 	dsw->SetCaption ( caption );
 	dsw->SetTooltip ( tooltip );
 
-	widgets.PutData ( dsw );
+	widgets.push_back ( dsw );
 
 }
 
@@ -72,16 +72,16 @@ void DialogScreen::AddWidget ( char *name, int WIDGETTYPE, int x, int y, int wid
 	dsw->SetData ( data1, data2 );
 	dsw->SetStringData ( stringdata1, stringdata2 );
 
-	widgets.PutData ( dsw );
+	widgets.push_back ( dsw );
 
 }
 
 void DialogScreen::RemoveWidget ( char *name )
 {
 
-	for ( int i = 0; i < widgets.Size (); ++i ) {
+	for ( int i = 0; i < widgets.size (); ++i ) {
 		
-		DialogScreenWidget *dsw = widgets.GetData (i);
+		DialogScreenWidget *dsw = widgets.at (i);
 		UplinkAssert (dsw);
 
 		if ( strcmp ( dsw->GetName (), name ) == 0 ) {
@@ -91,7 +91,7 @@ void DialogScreen::RemoveWidget ( char *name )
 			if ( cs == this )
 				DialogScreenInterface::RemoveWidget ( dsw, GetComputer () );
 
-			widgets.RemoveData (i);
+			widgets.erase (i);
             delete dsw;
 			return;
 		}

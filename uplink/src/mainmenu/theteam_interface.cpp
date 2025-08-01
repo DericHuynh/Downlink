@@ -152,10 +152,10 @@ void TheTeamInterface::TextDraw ( Button *button, bool highlighted, bool clicked
 	LList <char *> *wrappedText = wordwraptext ( button->caption, button->width );
 	UplinkAssert (wrappedText);
 
-	for ( int line = 0; line < wrappedText->Size (); ++line ) {
+	for ( int line = 0; line < wrappedText->size (); ++line ) {
 
 		int ypos = button->y + 5 + line * 12;
-		char *thisLine = wrappedText->GetData (line);
+		char *thisLine = wrappedText->at (line);
 		UplinkAssert (thisLine);
 
 		for ( size_t i = 0; i < strlen(thisLine); ++i ) {
@@ -166,8 +166,8 @@ void TheTeamInterface::TextDraw ( Button *button, bool highlighted, bool clicked
 
 	}
 
-	if ( wrappedText->ValidIndex (0) && wrappedText->GetData (0) )
-		delete [] wrappedText->GetData (0);				// Only delete first entry - since there is only one string really
+	if ( wrappedText->ValidIndex (0) && wrappedText->at (0) )
+		delete [] wrappedText->at (0);				// Only delete first entry - since there is only one string really
 	delete wrappedText;
 
 	glDisable ( GL_SCISSOR_TEST );

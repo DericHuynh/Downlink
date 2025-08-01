@@ -25,10 +25,10 @@ void Security::AddSystem ( SecuritySystem *newsystem, int index )
 {
 
 	if ( index == -1 )
-		systems.PutData (newsystem);
+		systems.push_back (newsystem);
 
 	else
-		systems.PutData (newsystem, index);
+		systems.insert(index, newsystem);
 
 }
 
@@ -47,7 +47,7 @@ void Security::AddSystem ( int TYPE, int level, int index )
 void Security::RemoveAllSystems ()
 {
 
-    systems.Empty ();
+    systems.clear ();
 
 }
 
@@ -55,7 +55,7 @@ SecuritySystem *Security::GetSystem (int index)
 {
 
 	if ( systems.ValidIndex (index) )
-		return systems.GetData (index);
+		return systems.at (index);
 
 	else
 		return NULL;
@@ -65,7 +65,7 @@ SecuritySystem *Security::GetSystem (int index)
 int Security::NumSystems ()
 {
 
-	return systems.Size ();
+	return systems.size ();
 
 }
 
@@ -74,10 +74,10 @@ int Security::NumRunningSystems ()
 
 	int numsystems = 0;
 
-	for ( int i = 0; i < systems.Size (); ++i )
+	for ( int i = 0; i < systems.size (); ++i )
 		if ( systems.ValidIndex (i) )
-			if ( systems.GetData (i)->enabled &&
-				!systems.GetData (i)->bypassed )
+			if ( systems.at (i)->enabled &&
+				!systems.at (i)->bypassed )
 				++numsystems;
 
 	return numsystems;
@@ -87,12 +87,12 @@ int Security::NumRunningSystems ()
 bool Security::IsRunning ( int TYPE )
 {
 
-	for ( int i = 0; i < systems.Size (); ++i ) 
+	for ( int i = 0; i < systems.size (); ++i ) 
 		if ( systems.ValidIndex (i) )
-			if ( systems.GetData (i) )
-				if ( systems.GetData (i)->TYPE == TYPE )
-					if ( systems.GetData (i)->enabled && 
-						!systems.GetData (i)->bypassed )
+			if ( systems.at (i) )
+				if ( systems.at (i)->TYPE == TYPE )
+					if ( systems.at (i)->enabled && 
+						!systems.at (i)->bypassed )
 						return true;
 
 	return false;
@@ -130,10 +130,10 @@ bool Security::IsRunning_Monitor ()
 bool Security::IsAnythingEnabled ()
 {
 
-	for ( int i = 0; i < systems.Size (); ++i ) 
+	for ( int i = 0; i < systems.size (); ++i ) 
 		if ( systems.ValidIndex (i) )
-			if ( systems.GetData (i) )
-				if ( systems.GetData (i)->enabled == true )
+			if ( systems.at (i) )
+				if ( systems.at (i)->enabled == true )
 					return true;
 
 	return false;
@@ -143,10 +143,10 @@ bool Security::IsAnythingEnabled ()
 bool Security::IsAnythingDisabled ()
 {
 
-	for ( int i = 0; i < systems.Size (); ++i ) 
+	for ( int i = 0; i < systems.size (); ++i ) 
 		if ( systems.ValidIndex (i) )
-			if ( systems.GetData (i) )
-				if ( systems.GetData (i)->enabled == false )
+			if ( systems.at (i) )
+				if ( systems.at (i)->enabled == false )
 					return true;
 
 	return false;

@@ -138,7 +138,7 @@ Computer *VLocation::GetComputer ()
      
     while(tree)
     {
-        tree = tree->LookupTree( computer );
+        tree = tree->find( computer );
 
         if( tree )
         {

@@ -56,7 +56,7 @@ void EmailInterface::EmailReply ( Button *button )
 
 	// Get the mission at the supposed index
 
-	Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.GetData (em->index);
+	Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.at (em->index);
 
 	// Check it matches (ie the player hasn't lost the email
 
@@ -96,16 +96,16 @@ void EmailInterface::EmailDelete ( Button *button )
 
 	// Get the mission at the supposed index
 
-	Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.GetData (em->index);
+	Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.at (em->index);
 
 	// Check it matches (ie the player hasn't lost the email
 
 	if ( em->message == realmessage ) {
 
-		Message *m = game->GetWorld ()->GetPlayer ()->messages.GetData (em->index);
+		Message *m = game->GetWorld ()->GetPlayer ()->messages.at (em->index);
 		if (m) {
 			delete m;
-			game->GetWorld ()->GetPlayer ()->messages.RemoveData ( em->index );
+			game->GetWorld ()->GetPlayer ()->messages.erase ( em->index );
 		}
 
 	}
@@ -132,7 +132,7 @@ void EmailInterface::SetMessage ( int newindex )
 {
 
 	index = newindex;
-	message = game->GetWorld ()->GetPlayer ()->messages.GetData (index);
+	message = game->GetWorld ()->GetPlayer ()->messages.at (index);
 	UplinkAssert (message);
 
 }
@@ -171,17 +171,17 @@ void EmailInterface::Create ()
 
 		// Concatenate any links onto the end of the message
 
-		if ( message->links.Size () > 0 ) {
+		if ( message->links.size () > 0 ) {
 			
 			body << "\n\nLinks included : \n";
 
-			for ( int i = 0; i < message->links.Size (); ++i ) {
+			for ( int i = 0; i < message->links.size (); ++i ) {
 				
-				VLocation *vl = game->GetWorld ()->GetVLocation ( message->links.GetData (i) );				
+				VLocation *vl = game->GetWorld ()->GetVLocation ( message->links.at (i) );				
 
 				if ( !vl ) {
 
-					body << "- " << message->links.GetData (i) << "(Invalid)\n";
+					body << "- " << message->links.at (i) << "(Invalid)\n";
 
 				}
 				else {
@@ -189,7 +189,7 @@ void EmailInterface::Create ()
 					Computer *computer = game->GetWorld ()->GetComputer ( vl->computer );
 
 					if ( !computer )
-						body << "- " << message->links.GetData (i) << "(Invalid)\n";
+						body << "- " << message->links.at (i) << "(Invalid)\n";
 
 					else 
 						body << "- " << computer->name << "\n";					
@@ -202,22 +202,22 @@ void EmailInterface::Create ()
 
 		// Concatenate any codes onto the end of the message
 
-		if ( message->codes.Size () > 0 ) {
+		if ( message->codes.size () > 0 ) {
 			
-			DArray <char *> *darray = message->codes.ConvertToDArray ();
-			DArray <char *> *darray_index = message->codes.ConvertIndexToDArray ();
+			DArray <char *> *darray = message->codes.MapDataToDArray ();
+			DArray <char *> *darray_index = message->codes.MapKeysToDArray ();
 
 			body << "\n\nCodes included : \n";
 
-			for ( int i = 0; i < darray->Size (); ++i ) {
+			for ( int i = 0; i < darray->size (); ++i ) {
 				
 				UplinkAssert ( darray->ValidIndex ( i ) );
 
-				VLocation *vl = game->GetWorld ()->GetVLocation ( darray_index->GetData (i) );				
+				VLocation *vl = game->GetWorld ()->GetVLocation ( darray_index->at (i) );				
 
 				if ( !vl ) {
 					
-					body << "[" << message->links.GetData (i) << "(Invalid)]\n";					
+					body << "[" << message->links.at (i) << "(Invalid)]\n";					
 
 				}
 				else {
@@ -225,14 +225,14 @@ void EmailInterface::Create ()
 					Computer *computer = game->GetWorld ()->GetComputer ( vl->computer );
 
 					if ( !computer ) 
-						body << "[" << message->links.GetData (i) << "(Invalid)]\n";					
+						body << "[" << message->links.at (i) << "(Invalid)]\n";					
 					
 					else 
 						body << "[" << computer->name << "]\n";
 											
 				}
 
-				body << "- " << darray->GetData (i) << "\n";
+				body << "- " << darray->at (i) << "\n";
 
 			}
 
@@ -332,7 +332,7 @@ void EmailInterface::Update ()
 
 		// Get the mission at the supposed index
 
-		Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.GetData (index);
+		Message *realmessage = game->GetWorld ()->GetPlayer ()->messages.at (index);
 
 		// Check it matches (ie the player hasn't lost the email
 

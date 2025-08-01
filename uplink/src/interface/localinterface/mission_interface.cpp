@@ -81,7 +81,7 @@ void MissionInterface::AbandonClick ( Button *button )
 
 		// Get the mission at the supposed indexd
 
-		Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.GetData ( mi->index );
+		Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.at ( mi->index );
 
 		// Ensure they are the same
 		// ie Player has not lost this mission
@@ -93,7 +93,7 @@ void MissionInterface::AbandonClick ( Button *button )
 			// Remove the mission
 			if ( mi->mission ) delete mi->mission;
 			mi->mission = NULL;
-			game->GetWorld ()->GetPlayer ()->missions.RemoveData ( mi->index );
+			game->GetWorld ()->GetPlayer ()->missions.erase ( mi->index );
 			
 		}
 
@@ -119,7 +119,7 @@ void MissionInterface::ReplyClick ( Button *button )
 
 	// Get the mission at the supposed indexd
 
-	Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.GetData ( mi->index );
+	Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.at ( mi->index );
 
 	// Ensure they are the same
 	// ie Player has not lost this mission
@@ -155,7 +155,7 @@ void MissionInterface::SetMission ( int newindex )
 {
 
 	index = newindex;
-	mission = game->GetWorld ()->GetPlayer ()->missions.GetData ( index );
+	mission = game->GetWorld ()->GetPlayer ()->missions.at ( index );
 	UplinkAssert (mission);
 
 }
@@ -192,17 +192,17 @@ void MissionInterface::Create ()
 
 		// Concatenate any links onto the end of the mission
 
-		if ( mission->links.Size () > 0 ) {
+		if ( mission->links.size () > 0 ) {
 			
 			details << "\n\nLinks included : \n";
 
-			for ( int i = 0; i < mission->links.Size (); ++i ) {
+			for ( int i = 0; i < mission->links.size (); ++i ) {
 				
-				VLocation *vl = game->GetWorld ()->GetVLocation ( mission->links.GetData (i) );				
+				VLocation *vl = game->GetWorld ()->GetVLocation ( mission->links.at (i) );				
 
 				if ( !vl ) {
 
-					details << "- " << mission->links.GetData (i) << "(Invalid)\n";
+					details << "- " << mission->links.at (i) << "(Invalid)\n";
 
 				}
 				else {
@@ -210,7 +210,7 @@ void MissionInterface::Create ()
 					Computer *computer = game->GetWorld ()->GetComputer ( vl->computer );
 
 					if ( !computer )
-						details << "- " << mission->links.GetData (i) << "(Invalid)\n";
+						details << "- " << mission->links.at (i) << "(Invalid)\n";
 
 					else 
 						details << "- " << computer->name << "\n";					
@@ -223,24 +223,24 @@ void MissionInterface::Create ()
 
 		// Concatenate any codes onto the end of the mission
 
-		if ( mission->codes.Size () > 0 ) {
+		if ( mission->codes.size () > 0 ) {
 			
-			DArray <char *> *darray = mission->codes.ConvertToDArray ();
-			DArray <char *> *darray_index = mission->codes.ConvertIndexToDArray ();
+			DArray <char *> *darray = mission->codes.MapDataToDArray ();
+			DArray <char *> *darray_index = mission->codes.MapKeysToDArray ();
 
 			details << "\n\nCodes included : \n";
 
-			for ( int i = 0; i < darray->Size (); ++i ) {
+			for ( int i = 0; i < darray->size (); ++i ) {
 				
 				UplinkAssert ( darray->ValidIndex ( i ) );
 
-				VLocation *vl = game->GetWorld ()->GetVLocation ( darray_index->GetData (i) );				
+				VLocation *vl = game->GetWorld ()->GetVLocation ( darray_index->at (i) );				
 
 				//char thislink [64];
 
 				if ( !vl ) {
 					
-					details << "[" << mission->links.GetData (i) << "(Invalid)]\n";					
+					details << "[" << mission->links.at (i) << "(Invalid)]\n";					
 
 				}
 				else {
@@ -248,14 +248,14 @@ void MissionInterface::Create ()
 					Computer *computer = game->GetWorld ()->GetComputer ( vl->computer );
 
 					if ( !computer ) 
-						details << "[" << mission->links.GetData (i) << "(Invalid)]\n";					
+						details << "[" << mission->links.at (i) << "(Invalid)]\n";					
 					
 					else 
 						details << "[" << computer->name << "]\n";
 											
 				}
 
-				details << "- " << darray->GetData (i) << "\n";
+				details << "- " << darray->at (i) << "\n";
 
 			}
 
@@ -344,7 +344,7 @@ void MissionInterface::Update ()
 
 		// Get the mission at the supposed indexd
 
-		Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.GetData ( index );
+		Mission *realmission = game->GetWorld ()->GetPlayer ()->missions.at ( index );
 
 		// Ensure they are the same
 		// ie Player has not lost this mission

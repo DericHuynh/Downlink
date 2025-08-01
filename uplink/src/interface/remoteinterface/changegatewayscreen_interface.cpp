@@ -59,7 +59,7 @@ void ChangeGatewayScreenInterface::GatewayButtonDraw ( Button *button, bool high
 
 	GatewayDef *gd = NULL;
 	if ( game->GetWorld ()->gatewaydefs.ValidIndex ( index ) )
-		gd = game->GetWorld ()->gatewaydefs.GetData ( index );
+		gd = game->GetWorld ()->gatewaydefs.at ( index );
 	if ( !gd ) {
 		clear_draw ( button->x, button->y, button->width, button->height );
 		return;
@@ -178,7 +178,7 @@ void ChangeGatewayScreenInterface::BuyClick ( Button *button )
 	ChangeGatewayScreenInterface *thisint = (ChangeGatewayScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
 
-	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( thisint->currentselect ) || !game->GetWorld ()->gatewaydefs.GetData ( thisint->currentselect ) )
+	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( thisint->currentselect ) || !game->GetWorld ()->gatewaydefs.at ( thisint->currentselect ) )
 		return;
 
 	int price = thisint->GetGatewayPrice(thisint->currentselect);
@@ -216,7 +216,7 @@ void ChangeGatewayScreenInterface::BuyConfirmClick ( Button *button )
 	ChangeGatewayScreenInterface *thisint = (ChangeGatewayScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
 
-	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( thisint->currentselect ) || !game->GetWorld ()->gatewaydefs.GetData ( thisint->currentselect ) )
+	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( thisint->currentselect ) || !game->GetWorld ()->gatewaydefs.at ( thisint->currentselect ) )
 		return;
 
 	// Take the money and run
@@ -237,7 +237,7 @@ void ChangeGatewayScreenInterface::BuyConfirmClick ( Button *button )
 
 	ChangeGatewayEvent *cge = new ChangeGatewayEvent ();
 	cge->SetRunDate ( &rundate );
-	cge->SetNewGateway ( game->GetWorld ()->gatewaydefs.GetData ( thisint->currentselect ) );
+	cge->SetNewGateway ( game->GetWorld ()->gatewaydefs.at ( thisint->currentselect ) );
 	game->GetWorld ()->scheduler.ScheduleEvent ( cge );
 
 	// Send a confirmation email to the player
@@ -332,7 +332,7 @@ void ChangeGatewayScreenInterface::ShowGateway ( int index )
 
 	GatewayDef *gd = NULL;
 	if ( game->GetWorld ()->gatewaydefs.ValidIndex ( currentselect ) )
-		gd = game->GetWorld ()->gatewaydefs.GetData ( currentselect );
+		gd = game->GetWorld ()->gatewaydefs.at ( currentselect );
 
     if ( gd ) {
 
@@ -368,7 +368,7 @@ int ChangeGatewayScreenInterface::GetGatewayPrice ( int index )
 
 	GatewayDef *newgateway = NULL;
 	if ( game->GetWorld ()->gatewaydefs.ValidIndex ( index ) )
-		newgateway = game->GetWorld ()->gatewaydefs.GetData ( index );
+		newgateway = game->GetWorld ()->gatewaydefs.at ( index );
 
 	if ( newgateway )
 		return newgateway->cost - (int)(oldgateway->cost * GATEWAY_PARTEXCHANGEVALUE );
@@ -407,7 +407,7 @@ void ChangeGatewayScreenInterface::Create ( ComputerScreen *newcs )
 
 			GatewayDef *gd = NULL;
 			if ( game->GetWorld ()->gatewaydefs.ValidIndex ( i ) )
-				gd = game->GetWorld ()->gatewaydefs.GetData ( i );
+				gd = game->GetWorld ()->gatewaydefs.at ( i );
 
 			char bname [64];
 			UplinkSnprintf ( bname, sizeof ( bname ), "changegateway_title %d", i );
@@ -423,7 +423,7 @@ void ChangeGatewayScreenInterface::Create ( ComputerScreen *newcs )
 
         // Scroll bar baby yeah
 
-        int numItems = game->GetWorld ()->gatewaydefs.Size ();
+        int numItems = game->GetWorld ()->gatewaydefs.size ();
         if ( numItems > numRows )
             ScrollBox::CreateScrollBox( "changegatewayscroll", 5, 140, 15, numRows * 20, numItems, 10, baseOffset, ScrollChange );
 
@@ -461,10 +461,10 @@ void ChangeGatewayScreenInterface::Create ( ComputerScreen *newcs )
         GatewayDef *gd = game->GetWorld ()->GetPlayer ()->gateway.curgatewaydef;
 		UplinkAssert( gd );
 
-		int sizegatewaydefs = game->GetWorld ()->gatewaydefs.Size ();
+		int sizegatewaydefs = game->GetWorld ()->gatewaydefs.size ();
 		for ( int ii = 0; ii < sizegatewaydefs; ii++ )
 			if ( game->GetWorld ()->gatewaydefs.ValidIndex ( ii ) )
-				if ( strcmp ( game->GetWorld ()->gatewaydefs.GetData ( ii )->name, gd->name ) == 0 ) {
+				if ( strcmp ( game->GetWorld ()->gatewaydefs.at ( ii )->name, gd->name ) == 0 ) {
 					ShowGateway ( ii );
 					break;
 				}
@@ -476,7 +476,7 @@ void ChangeGatewayScreenInterface::Create ( ComputerScreen *newcs )
 void ChangeGatewayScreenInterface::CreateAreYouSure ()
 {
 
-	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( currentselect ) || !game->GetWorld ()->gatewaydefs.GetData ( currentselect ) )
+	if ( !game->GetWorld ()->gatewaydefs.ValidIndex ( currentselect ) || !game->GetWorld ()->gatewaydefs.at ( currentselect ) )
 		return;
 
 	// Titles
@@ -502,7 +502,7 @@ void ChangeGatewayScreenInterface::CreateAreYouSure ()
 	GatewayDef *oldgateway = game->GetWorld ()->GetPlayer ()->gateway.curgatewaydef;
 	UplinkAssert (oldgateway);
 
-	GatewayDef *newgateway = game->GetWorld ()->gatewaydefs.GetData ( currentselect );
+	GatewayDef *newgateway = game->GetWorld ()->gatewaydefs.at ( currentselect );
 	UplinkAssert (newgateway);
 
 	int price = GetGatewayPrice(currentselect);

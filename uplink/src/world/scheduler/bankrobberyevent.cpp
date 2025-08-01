@@ -54,11 +54,11 @@ void BankRobberyEvent::Run ()
     BankAccount *source = BankAccount::GetAccount ( source_ip, source_accno );
 
     if ( source ) {
-        for ( int i = 0; i < source->log.internallogs.Size (); ++i ) {
+        for ( int i = 0; i < source->log.internallogs.size (); ++i ) {
 
 			if ( source->log.internallogs.ValidIndex ( i ) ) {
 
-				AccessLog *al = source->log.internallogs.GetData (i);
+				AccessLog *al = source->log.internallogs.at (i);
 
 				if ( al && al->TYPE == LOG_TYPE_TRANSFERTO ) {
 
@@ -91,11 +91,11 @@ void BankRobberyEvent::Run ()
 
         if ( target ) {
 
-            for ( int i = 0; i < target->log.internallogs.Size (); ++i ) {
+            for ( int i = 0; i < target->log.internallogs.size (); ++i ) {
 
 				if ( target->log.internallogs.ValidIndex ( i ) ) {
 
-					AccessLog *al = target->log.internallogs.GetData (i);
+					AccessLog *al = target->log.internallogs.at (i);
 
 					if ( al && al->TYPE == LOG_TYPE_TRANSFERFROM ) {
 

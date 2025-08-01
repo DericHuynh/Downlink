@@ -24,11 +24,11 @@ local int nextpid = 0;
 void SvbReset ()
 {
 
-	for ( int i = 0; i < tasklist.Size (); i++ )
-		if ( tasklist.ValidIndex ( i ) && tasklist.GetData ( i ) )
-			SvbRemoveTask ( tasklist.GetData ( i )->task );
+	for ( int i = 0; i < tasklist.size (); i++ )
+		if ( tasklist.ValidIndex ( i ) && tasklist.at ( i ) )
+			SvbRemoveTask ( tasklist.at ( i )->task );
 
-	tasklist.Empty ();
+	tasklist.clear ();
 	nextpid = 0;
 
 	Svb_initialise_interface ();
@@ -45,7 +45,7 @@ int SvbRegisterTask ( char *name, Task *task )
 	newtw->SetName ( name );
 	newtw->SetTask ( task );
 	newtw->SetPriority ( 0.0 );	
-	tasklist.PutData ( newtw );
+	tasklist.push_back ( newtw );
 
 	SvbCalculatePriorities_Add ();	
 	SvbUpdateInterface ();
@@ -77,7 +77,7 @@ void SvbRemoveTask ( int pid )
 		}
 
 		removedpriority = taskwrapper->priority;
-		tasklist.RemoveData ( index );
+		tasklist.erase ( index );
 
 		delete taskwrapper;
 
@@ -101,7 +101,7 @@ void SvbRemoveTask ( Task *task )
 int SvbNumTasks ()
 {
 
-	return tasklist.Size ();
+	return tasklist.size ();
 
 }
 
@@ -116,11 +116,11 @@ int SvbGenerateUniquePID ()
 void SvbCalculatePriorities ()
 {
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
-		tw->SetPriority ( 1.0 / (double) tasklist.Size () );
+		tw->SetPriority ( 1.0 / (double) tasklist.size () );
 
 	}
 
@@ -131,18 +131,18 @@ void SvbCalculatePriorities ()
 void SvbCalculatePriorities_Add ()
 {
 
-	if ( tasklist.Size () <= 0 )
+	if ( tasklist.size () <= 0 )
 		return;
 
-	double newpriority = 1.0 / (double) tasklist.Size ();
+	double newpriority = 1.0 / (double) tasklist.size ();
 
-	for ( int i = 0; i < tasklist.Size () - 1; ++i ) {
+	for ( int i = 0; i < tasklist.size () - 1; ++i ) {
 		assert ( tasklist [i] );
 		SvbChangePriority ( i, tasklist [i]->priority * -newpriority, true );
 	}
 	
-	assert ( tasklist [tasklist.Size () - 1] );
-	SvbChangePriority ( tasklist.Size () - 1, newpriority, true );
+	assert ( tasklist [tasklist.size () - 1] );
+	SvbChangePriority ( tasklist.size () - 1, newpriority, true );
 
 	SvbCompensatePriorities ();
 
@@ -151,12 +151,12 @@ void SvbCalculatePriorities_Add ()
 void SvbCalculatePriorities_Remove ( double removedpriority )
 {
 
-	if ( tasklist.Size () <= 0 )
+	if ( tasklist.size () <= 0 )
 		return;
 
-	double dP = double ( tasklist.Size () + 1 ) / double ( tasklist.Size () );	
+	double dP = double ( tasklist.size () + 1 ) / double ( tasklist.size () );	
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 		assert ( tasklist [i] );
 		SvbChangePriority ( i, tasklist [i]->priority * removedpriority * dP, true );
 	}
@@ -194,10 +194,10 @@ void SvbChangePriority ( int index, double amount, bool locked )
 
 			// Change all other task priorities the other direction
 
-			for ( int i = 0; i < tasklist.Size (); ++i ) {
+			for ( int i = 0; i < tasklist.size (); ++i ) {
 
 				assert ( tasklist [i] );
-				double dP = double ( tasklist.Size () ) / double ( tasklist.Size () - 1 );	
+				double dP = double ( tasklist.size () ) / double ( tasklist.size () - 1 );	
 
 				if ( i != index ) SvbChangePriority ( i, tasklist [i]->priority * (double) actualamount * -dP, true );
 
@@ -212,14 +212,14 @@ void SvbChangePriority ( int index, double amount, bool locked )
 void SvbCompensatePriorities ()
 {
 
-	if ( tasklist.Size () <= 0 )
+	if ( tasklist.size () <= 0 )
 		return;
 
 	// Calculate the total priority
 
 	double total = 0.0;
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		assert ( tasklist [i] );
 		total += tasklist [i]->priority;
@@ -234,7 +234,7 @@ void SvbCompensatePriorities ()
 
 	if ( error > 0.05 ) {
 
-		for ( int i = 0; i < tasklist.Size (); ++i ) {
+		for ( int i = 0; i < tasklist.size (); ++i ) {
 			
 			assert ( tasklist [i] );
 			SvbChangePriority ( i, tasklist [i]->priority * error, true );
@@ -255,7 +255,7 @@ void SvbCycle ()
 void SvbCycle ( int n )
 {
 
-	for ( int t = 0; t < tasklist.Size (); ++t ) {
+	for ( int t = 0; t < tasklist.size (); ++t ) {
 
 		TaskWrapper *tw = tasklist [t];
 		assert (tw);
@@ -277,7 +277,7 @@ void SvbCycle ( int n )
 int SvbLookupIndex ( int pid )
 {
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
@@ -294,7 +294,7 @@ int SvbLookupIndex ( int pid )
 int SvbLookupPID ( Task *task )
 {
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
@@ -311,7 +311,7 @@ int SvbLookupPID ( Task *task )
 Task *SvbGetTask ( int pid )
 {
 	
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
@@ -328,7 +328,7 @@ Task *SvbGetTask ( int pid )
 Task *SvbGetTask ( char *name )
 {
 
-    for ( int i = 0; i < tasklist.Size (); ++i ) {
+    for ( int i = 0; i < tasklist.size (); ++i ) {
 
         TaskWrapper *tw = tasklist [i];
         assert (tw);
@@ -345,7 +345,7 @@ Task *SvbGetTask ( char *name )
 TaskWrapper *SvbGetTaskWrapper ( int pid )
 {
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
@@ -362,7 +362,7 @@ TaskWrapper *SvbGetTaskWrapper ( int pid )
 TaskWrapper *SvbGetTaskWrapperAtIndex ( int index )
 {
 	
-	if ( index < tasklist.Size () ) 
+	if ( index < tasklist.size () ) 
 		return tasklist [index];
 
 	else
@@ -459,7 +459,7 @@ void SvbHideTask ( int pid )
 void SvbShowAllTasks ()
 {
 
-	for ( int i = 0; i < tasklist.Size (); ++i ) {
+	for ( int i = 0; i < tasklist.size (); ++i ) {
 
 		TaskWrapper *tw = tasklist [i];
 		assert ( tw );
@@ -532,8 +532,8 @@ void SvbDebugPrint ()
 
 	printf ( "numregisteredbuttons:%d, xpos:%d, ypos:%d, nextpid:%d\n", numregisteredbuttons, xpos, ypos, nextpid );
 
-	for ( int i = 0; i < tasklist.Size (); ++i )
-		tasklist.GetData (i)->DebugPrint ();
+	for ( int i = 0; i < tasklist.size (); ++i )
+		tasklist.at (i)->DebugPrint ();
 
 	printf ( "============== E N D  O F  V A N  B A K E L ================\n" );
 

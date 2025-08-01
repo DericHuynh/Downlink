@@ -561,7 +561,7 @@ GciScreenModeList *GciListScreenModes() {
 			GciScreenMode *newMode = new GciScreenMode;
 			newMode->w = modes[i]->w;
 			newMode->h = modes[i]->h;
-			resolutions->PutData( newMode );
+			resolutions->push_back( newMode );
 		}
 	}
 
@@ -606,11 +606,11 @@ void GciDeleteScreenModeArrayData(GciScreenModeList *modes) {
 
 	if (modes == NULL) return;
 
-	for ( int i = 0; i < modes->Size(); ++i )
+	for ( int i = 0; i < modes->size(); ++i )
 		if ( modes->ValidIndex( i ) )
-			if ( modes->GetData( i ) )
-				delete modes->GetData( i );
-	modes->Empty();
+			if ( modes->at( i ) )
+				delete modes->at( i );
+	modes->clear();
 }
 
 void GciSaveScreenshot( const char * file ) {

@@ -263,10 +263,10 @@ void RadioTransmitterScreenInterface::Connect ()
 
         LanComputer *lc = (LanComputer *) comp;
         
-        for ( int i = 0; i < lc->systems.Size(); ++i ) {
+        for ( int i = 0; i < lc->systems.size(); ++i ) {
             if ( lc->systems.ValidIndex(i) ) {
 
-                LanComputerSystem *lcs = lc->systems.GetData(i);
+                LanComputerSystem *lcs = lc->systems.at(i);
                 UplinkAssert (lcs);
 
                 if ( lcs->TYPE == LANSYSTEM_RADIORECEIVER &&
@@ -283,7 +283,7 @@ void RadioTransmitterScreenInterface::Connect ()
 
 			        if ( lc->systems.ValidIndex(i) ) {
 
-				        LanComputerSystem *system = lc->systems.GetData(i);
+				        LanComputerSystem *system = lc->systems.at(i);
 				        if ( system->screenIndex != -1 ) {
 					        game->GetInterface()->GetRemoteInterface()->RunScreen( system->screenIndex, lc );
 					        game->GetInterface()->GetLocalInterface()->RunScreen( SCREEN_NONE );

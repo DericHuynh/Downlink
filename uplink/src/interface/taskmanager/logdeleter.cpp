@@ -100,7 +100,7 @@ void LogDeleter::SetTarget ( UplinkObject *uo, char *uos, int uoi )
 			// If the log is _blank_ in between of valid logs, delete it
 			// Else return 
 
-			if ( !((LogBank *) uo)->logs.ValidIndex (uoi) || !((LogBank *) uo)->logs.GetData (uoi) ) { 
+			if ( !((LogBank *) uo)->logs.ValidIndex (uoi) || !((LogBank *) uo)->logs.at (uoi) ) { 
 
 				int indexBefore = -1, indexAfter = -1; 
 
@@ -108,8 +108,8 @@ void LogDeleter::SetTarget ( UplinkObject *uo, char *uos, int uoi )
 
 				if ( version == 4.0 ) { 
 					DArray<class AccessLog *> *logs = &((LogBank *) uo)->logs;
-					for ( int i = 0; i < logs->Size(); i++ )
-						if ( logs->ValidIndex ( i ) && logs->GetData ( i ) ) {
+					for ( int i = 0; i < logs->size(); i++ )
+						if ( logs->ValidIndex ( i ) && logs->at ( i ) ) {
 							if ( i < uoi )
 								indexBefore = i;
 							else if ( i > uoi )
@@ -294,7 +294,7 @@ void LogDeleter::Tick ( int n )
 
 				if ( source ) {
 
-					if ( source->logs.ValidIndex ( sourceindex ) && source->logs.GetData ( sourceindex ) ) {
+					if ( source->logs.ValidIndex ( sourceindex ) && source->logs.at ( sourceindex ) ) {
 
 						// A new source file has been specified - start downloading it
 						status = LOGDELETER_INPROGRESS;
@@ -350,21 +350,21 @@ void LogDeleter::Tick ( int n )
 					// We must keep the date the same (logs are in date order)
 					Date logdate;
 					if ( source->logs.ValidIndex ( sourceindex ) )
-						logdate.SetDate ( &(source->logs.GetData (sourceindex)->date) );
+						logdate.SetDate ( &(source->logs.at (sourceindex)->date) );
 
 					if ( version == 1.0 ) {
 
 						if ( source->logs.ValidIndex ( sourceindex ) ) {
 
 							// Delete the log	
-							delete source->logs.GetData (sourceindex);
-							source->logs.RemoveData (sourceindex);
+							delete source->logs.at (sourceindex);
+							source->logs.erase (sourceindex);
 
 							// Replace it with a "Deleted" marker
 							AccessLog *al = new AccessLog ();
 							al->SetProperties ( &logdate, "Unknown", " ",
 												LOG_NOTSUSPICIOUS, LOG_TYPE_DELETED );
-							source->logs.PutData ( al, sourceindex );
+							source->logs.insert( sourceindex, al);
 
 						}
 
@@ -380,14 +380,14 @@ void LogDeleter::Tick ( int n )
 						if ( source->logs.ValidIndex ( sourceindex ) ) {
 
 							// Delete the log	
-							delete source->logs.GetData (sourceindex);
-							source->logs.RemoveData (sourceindex);
+							delete source->logs.at (sourceindex);
+							source->logs.erase (sourceindex);
 
 							// Replace it with a "Deleted" marker
 							AccessLog *al = new AccessLog ();
 							al->SetProperties ( &logdate, " ", " ",
 												LOG_NOTSUSPICIOUS, LOG_TYPE_DELETED);
-							source->logs.PutData ( al, sourceindex );
+							source->logs.insert( sourceindex, al);
 
 						}
 
@@ -403,22 +403,22 @@ void LogDeleter::Tick ( int n )
 						if ( source->logs.ValidIndex ( sourceindex ) ) {
 
 							// Delete the log
-							delete source->logs.GetData (sourceindex);
-							source->logs.RemoveData (sourceindex);
+							delete source->logs.at (sourceindex);
+							source->logs.erase (sourceindex);
 							bool overwritten = false;
 
 							// Look for a valid log to put in the blank place
-							for ( int i = 0; i < source->logs.Size (); ++i ) {
+							for ( int i = 0; i < source->logs.size (); ++i ) {
 								if ( source->logs.ValidIndex (i) ) {
-									if ( strcmp ( source->logs.GetData (i)->fromip, IP_LOCALHOST ) != 0 ) {
+									if ( strcmp ( source->logs.at (i)->fromip, IP_LOCALHOST ) != 0 ) {
 										
-										AccessLog *copyme = source->logs.GetData (i);
+										AccessLog *copyme = source->logs.at (i);
 										// This log was made by someone else
 										AccessLog *al = new AccessLog ();
 										al->SetProperties ( copyme );
 										al->date.SetDate ( &logdate );
 										al->SetSuspicious ( LOG_NOTSUSPICIOUS );
-										source->logs.PutData ( al, sourceindex );
+										source->logs.insert( sourceindex, al);
 										overwritten = true;
 										break;
 
@@ -435,7 +435,7 @@ void LogDeleter::Tick ( int n )
 								al->SetProperties ( &logdate, WorldGenerator::GetRandomLocation ()->ip, " ",
 													LOG_NOTSUSPICIOUS, LOG_TYPE_TEXT );
 								al->SetData1 ( "Accessed File" );
-								source->logs.PutData ( al, sourceindex );
+								source->logs.insert( sourceindex, al);
 
 							}
 
@@ -451,8 +451,8 @@ void LogDeleter::Tick ( int n )
 
 						// Delete the log
 						if ( source->logs.ValidIndex ( sourceindex ) ) {
-							delete source->logs.GetData (sourceindex);
-							source->logs.RemoveData ( sourceindex );
+							delete source->logs.at (sourceindex);
+							source->logs.erase ( sourceindex );
 						}
 
 						// Start moving all logs below this one upwards
@@ -497,11 +497,11 @@ void LogDeleter::Tick ( int n )
 
 					// Check to see if we have finished
 
-					if ( currentreplaceindex >= source->logs.Size () - 1 ) {
+					if ( currentreplaceindex >= source->logs.size () - 1 ) {
 
 						// Remove the gap from the end permenantly
-						source->logs.SetSize ( source->logs.Size () - 1 );
-						source->internallogs.SetSize ( source->logs.Size () );
+						source->logs.resize ( source->logs.size () - 1 );
+						source->internallogs.resize ( source->logs.size () );
 
 						status = LOGDELETER_FINISHED;											
 
@@ -514,17 +514,17 @@ void LogDeleter::Tick ( int n )
 
 						if ( source->logs.ValidIndex ( currentreplaceindex + 1 ) ) {
 							
-							AccessLog *al = source->logs.GetData ( currentreplaceindex + 1 );
-							source->logs.PutData ( al, currentreplaceindex );
-							source->logs.RemoveData ( currentreplaceindex + 1 );
+							AccessLog *al = source->logs.at ( currentreplaceindex + 1 );
+							source->logs.insert( currentreplaceindex, al);
+							source->logs.erase ( currentreplaceindex + 1 );
 
 							// Move the backups up as well
 
 							if ( source->internallogs.ValidIndex ( currentreplaceindex + 1 ) ) {
 
-								AccessLog *al2 = source->internallogs.GetData ( currentreplaceindex + 1 );
-								source->internallogs.PutData ( al2, currentreplaceindex );
-								source->internallogs.RemoveData ( currentreplaceindex + 1 );
+								AccessLog *al2 = source->internallogs.at ( currentreplaceindex + 1 );
+								source->internallogs.insert( currentreplaceindex, al2);
+								source->internallogs.erase ( currentreplaceindex + 1 );
 
 							}
 
@@ -540,7 +540,7 @@ void LogDeleter::Tick ( int n )
 						}
 
 						++currentreplaceindex;
-						int percentagedone = 100 * (currentreplaceindex - sourceindex) / (source->logs.Size () - sourceindex);
+						int percentagedone = 100 * (currentreplaceindex - sourceindex) / (source->logs.size () - sourceindex);
 						char caption [128];
 						UplinkSnprintf ( caption, sizeof ( caption ), "Shifting logs...(%d%%)", percentagedone ); 
 						EclRegisterCaptionChange ( sprogress, caption, 0 );

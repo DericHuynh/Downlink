@@ -129,9 +129,9 @@ bool DialogScreenInterface::ReturnKeyPressed ()
 
 	if ( returnkeybutton ) {
 
-		for ( int i = 0; i < ds->widgets.Size (); ++i ) {
+		for ( int i = 0; i < ds->widgets.size (); ++i ) {
 
-			DialogScreenWidget *dsw = ds->widgets.GetData (i);
+			DialogScreenWidget *dsw = ds->widgets.at (i);
 			UplinkAssert (dsw);
 
 			if ( strcmp ( dsw->GetName (), returnkeybutton ) == 0 ) {
@@ -165,9 +165,9 @@ bool DialogScreenInterface::EscapeKeyPressed ()
 
 	if ( escapekeybutton ) {
 
-		for ( int i = 0; i < ds->widgets.Size (); ++i ) {
+		for ( int i = 0; i < ds->widgets.size (); ++i ) {
 
-			DialogScreenWidget *dsw = ds->widgets.GetData (i);
+			DialogScreenWidget *dsw = ds->widgets.at (i);
 			UplinkAssert (dsw);
 
 			if ( strcmp ( dsw->GetName (), escapekeybutton ) == 0 ) {
@@ -224,9 +224,9 @@ void DialogScreenInterface::Create ( ComputerScreen *newcs )
 
 		Computer *comp = ds->GetComputer ();
 
-		for ( int i = 0; i < ds->widgets.Size (); ++i ) {
+		for ( int i = 0; i < ds->widgets.size (); ++i ) {
 
-			DialogScreenWidget *dsw = ds->widgets.GetData (i);
+			DialogScreenWidget *dsw = ds->widgets.at (i);
 			UplinkAssert (dsw);
 
 			char name [64];
@@ -312,9 +312,9 @@ void DialogScreenInterface::Remove ()
 
 		Computer *comp = ds->GetComputer ();
 
-		for ( int i = 0; i < ds->widgets.Size (); ++i ) {
+		for ( int i = 0; i < ds->widgets.size (); ++i ) {
 
-			DialogScreenWidget *dsw = ds->widgets.GetData (i);
+			DialogScreenWidget *dsw = ds->widgets.at (i);
 
 			RemoveWidget ( dsw, comp );
 

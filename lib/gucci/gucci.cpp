@@ -102,8 +102,8 @@ bool GciUnregisterTrueTypeFont( const char *filename )
 
 static FTFace * RegisterFace( const char *familyname, const char *filename )
 {
-    if (faces.GetData(familyname))
-        return faces.GetData(familyname);
+    if (faces.at(familyname))
+        return faces.at(familyname);
     
     FTFace *face;
 #ifdef USE_GLTT
@@ -120,13 +120,13 @@ static FTFace * RegisterFace( const char *familyname, const char *filename )
         return NULL;
     }
 #endif // USE_GLTT
-    faces.PutData(familyname, face);
+    faces.insert(familyname, face);
     return face;
 }
 
 static void UnregisterFace( const char *familyname )
 {
-    FTFace *face = faces.GetData(familyname);
+    FTFace *face = faces.at(familyname);
     if (face) {
         faces.RemoveData(familyname);
         delete face;
@@ -241,12 +241,12 @@ void GciDeleteAllTrueTypeFonts ()
 #endif
     // Delete all the frickin' faces
 
-    DArray <FTFace *> *thefaces = faces.ConvertToDArray ();
+    DArray <FTFace *> *thefaces = faces.MapDataToDArray ();
     
-    for ( int id = 0; id < thefaces->Size (); ++id ) {
+    for ( int id = 0; id < thefaces->size (); ++id ) {
         if ( thefaces->ValidIndex (id) ) {
 
-            FTFace *theface = thefaces->GetData (id);
+            FTFace *theface = thefaces->at (id);
             delete theface;
 
         }
@@ -255,7 +255,7 @@ void GciDeleteAllTrueTypeFonts ()
     // Delete the structures
 
     delete thefaces;
-    faces.Empty ();
+    faces.clear ();
     fonts.clear ();
 
 #ifdef USE_GLTT

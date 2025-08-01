@@ -62,10 +62,10 @@ void DemoPlotGenerator::MoveNewMissionToRandomLocation ( Mission *mission )
 
     // Remove the mission from the list first
 
-    for ( int i = 0; i < cu->missions.Size (); ++i ) {
-        if ( cu->missions.GetData (i) == mission ) {
+    for ( int i = 0; i < cu->missions.size (); ++i ) {
+        if ( cu->missions.at (i) == mission ) {
 
-            cu->missions.RemoveData (i);
+            cu->missions.erase (i);
             break;
 
         }
@@ -74,10 +74,10 @@ void DemoPlotGenerator::MoveNewMissionToRandomLocation ( Mission *mission )
     // Re-insert at a random spot
 
     int position = 3 + NumberGenerator::RandomNumber (9);
-    Mission *prevmission = cu->missions.GetData (position-1);
+    Mission *prevmission = cu->missions.at (position-1);
     UplinkAssert (prevmission);
     mission->SetCreateDate ( &(prevmission->createdate) );
-    cu->missions.PutDataAtIndex ( mission, position );
+    cu->missions.insert( position, mission);
 
 }
 
@@ -90,11 +90,11 @@ bool DemoPlotGenerator::NumAvailableMissions ( int missiontype )
     int found = 0;
 
     // "available" now means "in the first 10" as well
-    int maxmission = cu->missions.Size () < 10 ? cu->missions.Size () : 10;
+    int maxmission = cu->missions.size () < 10 ? cu->missions.size () : 10;
 
     for ( int i = 0; i < maxmission; ++i ) {
 
-        Mission *m = cu->missions.GetData (i);
+        Mission *m = cu->missions.at (i);
         UplinkAssert (m);
 
         if ( m->TYPE == missiontype &&
